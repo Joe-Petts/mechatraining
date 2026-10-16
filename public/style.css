@@ -65,3 +65,6 @@
 
 /* Pneumatik: Modulübersicht */
 #pneuModules{display:grid;gap:12px;margin-top:20px}#pneuModules .exercise-card{min-height:100px}#pneuModules .exercise-card:hover{border-color:#f9b340}
+
+/* Interaktive AP1-Pneumatik-Simulation */
+.pneu-simulator{margin:14px 0 18px;padding:16px;background:#0c1924;border:1px solid #426079;border-radius:12px}.pneu-simulator>p:first-child{font-size:13px;color:#b4c7d5}.pneu-simulator svg{display:block;width:100%;max-width:560px;height:auto;margin:auto;color:#e4eef6}.pneu-controls{display:flex;gap:9px;flex-wrap:wrap}.pneu-controls button{background:#31536b;color:#fff;font-size:13px;padding:10px 12px}.pneu-state{font-size:13px;color:#f9b340;min-height:20px}
