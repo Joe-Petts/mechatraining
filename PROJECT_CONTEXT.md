@@ -121,3 +121,8 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Im Formeltraining klettert ein animierter Fuchs nach jeweils fünf unmittelbar aufeinanderfolgenden richtigen Antworten eine Leiterstufe höher.
 - Falsche Antwort setzt nur die aktuelle Fünferserie zurück; bereits erreichte Stufen bleiben für die laufende Runde bestehen. Neue Runde setzt Serie und Leiter zurück.
 - Nur clientseitige Motivation ohne XP, persistente Daten oder Änderungen bestehender Aufgaben.
+
+
+## Dezente Formel-Levelanzeige und Startseitenlogo (2026-10-16)
+- Formel-Modus: links am Fragenbereich eine schmale Fortschrittsschiene mit Fuchskopf. Pro richtiger Antwort steigt die Position innerhalb der Fünferserie; bei fünf richtigen Antworten wird das Level erhöht und pro dauerhaft erreichtem Level ein grüner Balken angezeigt. Bei Fehlern fällt nur der Serienfortschritt auf null zurück.
+- Das Headerlogo verlinkt auf die Startseite (`./`).
