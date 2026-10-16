@@ -560,6 +560,770 @@
           "explanation": "Die Rückbewegung muss zuverlässig und sicher erfolgen."
         }
       ]
+    },
+    {
+      "id": "symbole",
+      "title": "Pneumatische Schaltzeichen",
+      "questions": [
+        {
+          "id": "ap1-pneu-symbole-001",
+          "prompt": "Was kennzeichnet einen doppeltwirkenden Zylinder?",
+          "options": [
+            "Ein Federsymbol",
+            "Zwei Druckluftanschlüsse",
+            "Ein Rückschlagventil",
+            "Nur einen Anschluss"
+          ],
+          "correct": 1,
+          "explanation": "Zwei Druckluftanschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-002",
+          "prompt": "Was bedeutet die erste Zahl bei 5/2?",
+          "options": [
+            "Fünf Schaltstellungen",
+            "Fünf Anschlüsse",
+            "Fünf Zylinder",
+            "Fünf Betätigungen"
+          ],
+          "correct": 1,
+          "explanation": "Fünf Anschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-003",
+          "prompt": "Was bedeutet die zweite Zahl bei 5/2?",
+          "options": [
+            "Zwei Abluftleitungen",
+            "Zwei Schaltstellungen",
+            "Zwei Druckregler",
+            "Zwei Zylinder"
+          ],
+          "correct": 1,
+          "explanation": "Zwei Schaltstellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-004",
+          "prompt": "Was bedeutet 3/2-Wegeventil?",
+          "options": [
+            "Drei Stellungen, zwei Anschlüsse",
+            "Drei Anschlüsse, zwei Stellungen",
+            "Drei Steuerleitungen, zwei Federn",
+            "Drei Zylinder, zwei Ventile"
+          ],
+          "correct": 1,
+          "explanation": "Drei Anschlüsse, zwei Stellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-005",
+          "prompt": "Welches Zeichen stellt eine Federbetätigung dar?",
+          "options": [
+            "Dreieck an Leitung",
+            "Zickzacklinie am Ventil",
+            "Schwarzer Verbindungspunkt",
+            "Kreis mit Punkt"
+          ],
+          "correct": 1,
+          "explanation": "Zickzacklinie am Ventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-006",
+          "prompt": "Wie wird pneumatische Vorsteuerung am Wegeventil symbolisiert?",
+          "options": [
+            "Elektrische Spule",
+            "Leeres Dreieck am Ventilende",
+            "Federmarkierung",
+            "Rollenstößel"
+          ],
+          "correct": 1,
+          "explanation": "Leeres Dreieck am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-007",
+          "prompt": "Woran erkennt man einen Handtaster im Ventilsymbol?",
+          "options": [
+            "Drosselpfeil im Kreis",
+            "Manuelles Betätigungselement am Ventilende",
+            "Filterraute",
+            "Kolbenstange"
+          ],
+          "correct": 1,
+          "explanation": "Manuelles Betätigungselement am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-008",
+          "prompt": "Wofür steht ein schwarzer Punkt an einer Leitungsverzweigung?",
+          "options": [
+            "Nicht verbundene Kreuzung",
+            "Verbundenes Leitungsnetz",
+            "Entlüftung",
+            "Druckverlust"
+          ],
+          "correct": 1,
+          "explanation": "Verbundenes Leitungsnetz. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-009",
+          "prompt": "Was bedeutet eine gestrichelte Steuerleitung?",
+          "options": [
+            "Druckluftbehälter",
+            "Signal- oder Steuerleitung",
+            "Mechanischer Anschlag",
+            "Kolbenstange"
+          ],
+          "correct": 1,
+          "explanation": "Signal- oder Steuerleitung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-010",
+          "prompt": "Was zeigt ein Pfeil innerhalb eines Wegeventil-Kästchens?",
+          "options": [
+            "Druckhöhe in bar",
+            "Durchflussweg in der betreffenden Stellung",
+            "Länge der Leitung",
+            "Bewegungsgeschwindigkeit des Zylinders"
+          ],
+          "correct": 1,
+          "explanation": "Durchflussweg in der betreffenden Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-011",
+          "prompt": "Was stellt ein gesperrter Anschluss im Ventilsymbol dar?",
+          "options": [
+            "Ein durchgehender Pfeil",
+            "Ein T-förmiger Abschluss",
+            "Eine Druckanzeige",
+            "Eine Feder"
+          ],
+          "correct": 1,
+          "explanation": "Ein T-förmiger Abschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-012",
+          "prompt": "Wie viele Kästchen hat das Symbol eines 5/2-Wegeventils?",
+          "options": [
+            "Drei",
+            "Zwei",
+            "Eins",
+            "Fünf"
+          ],
+          "correct": 1,
+          "explanation": "Zwei. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-013",
+          "prompt": "Wofür steht das Symbol eines Rollenstößels?",
+          "options": [
+            "Elektrische Ansteuerung",
+            "Mechanische Betätigung durch Kontakt",
+            "Druckregelung",
+            "Pneumatischer Druckanschluss"
+          ],
+          "correct": 1,
+          "explanation": "Mechanische Betätigung durch Kontakt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-014",
+          "prompt": "Woran erkennt man einen einfachwirkenden Zylinder mit Federrückstellung?",
+          "options": [
+            "Zylinder mit zwei Arbeitsanschlüssen ohne Feder",
+            "Zylinder mit Feder und einem Druckanschluss",
+            "Doppelte Kolbenstange",
+            "5/2-Ventil"
+          ],
+          "correct": 1,
+          "explanation": "Zylinder mit Feder und einem Druckanschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-symbole-015",
+          "prompt": "Was bedeutet die Ruhestellung bei federbetätigten Ventilen?",
+          "options": [
+            "Immer die linke Symbolhälfte",
+            "Die durch die Feder gehaltene Schaltstellung",
+            "Die Stellung bei maximalem Druck",
+            "Immer vollständig offene Anschlüsse"
+          ],
+          "correct": 1,
+          "explanation": "Die durch die Feder gehaltene Schaltstellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        }
+      ]
+    },
+    {
+      "id": "anschluesse",
+      "title": "Wegeventile und Anschlüsse",
+      "questions": [
+        {
+          "id": "ap1-pneu-anschluesse-001",
+          "prompt": "Welche Kennzahl bezeichnet die Druckluftversorgung?",
+          "options": [
+            "2 (B)",
+            "1 (P)",
+            "5 (R)",
+            "3 (S)"
+          ],
+          "correct": 1,
+          "explanation": "1 (P). Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-002",
+          "prompt": "Welche Anschlüsse führen zum Zylinder?",
+          "options": [
+            "1 und 3",
+            "2 und 4",
+            "12 und 14",
+            "3 und 5"
+          ],
+          "correct": 1,
+          "explanation": "2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-003",
+          "prompt": "Welche Kennzahlen stehen für Entlüftung?",
+          "options": [
+            "1 und 2",
+            "3 und 5",
+            "12 und 14",
+            "2 und 4"
+          ],
+          "correct": 1,
+          "explanation": "3 und 5. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-004",
+          "prompt": "Welche Anschlüsse dienen zur pneumatischen Vorsteuerung?",
+          "options": [
+            "1 und 2",
+            "12 und 14",
+            "2 und 4",
+            "3 und 5"
+          ],
+          "correct": 1,
+          "explanation": "12 und 14. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-005",
+          "prompt": "Was bedeutet Anschluss 4 (A)?",
+          "options": [
+            "Entlüftung",
+            "Arbeitsanschluss",
+            "Elektrische Masse",
+            "Versorgung"
+          ],
+          "correct": 1,
+          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-006",
+          "prompt": "Was bedeutet Anschluss 2 (B)?",
+          "options": [
+            "Druckluftquelle",
+            "Arbeitsanschluss",
+            "Schalldämpfer",
+            "Steuersignal"
+          ],
+          "correct": 1,
+          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-007",
+          "prompt": "Welche Bezeichnung gehört zu Anschluss 1?",
+          "options": [
+            "R",
+            "P",
+            "Z",
+            "S"
+          ],
+          "correct": 1,
+          "explanation": "P. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-008",
+          "prompt": "Welche Bezeichnung gehört zu Anschluss 3?",
+          "options": [
+            "P",
+            "S",
+            "Z",
+            "A"
+          ],
+          "correct": 1,
+          "explanation": "S. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-009",
+          "prompt": "Welche Bezeichnung gehört zu Anschluss 5?",
+          "options": [
+            "P",
+            "R",
+            "Y",
+            "B"
+          ],
+          "correct": 1,
+          "explanation": "R. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-010",
+          "prompt": "Welche Bezeichnung gehört zu Anschluss 12?",
+          "options": [
+            "Versorgungsanschluss",
+            "Steueranschluss",
+            "Abluftanschluss",
+            "Arbeitsanschluss"
+          ],
+          "correct": 1,
+          "explanation": "Steueranschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-011",
+          "prompt": "Was geschieht, wenn 1 mit 4 und 2 mit 3 verbunden wird?",
+          "options": [
+            "Beide Arbeitsanschlüsse werden versorgt",
+            "4 wird versorgt und 2 entlüftet",
+            "Die Versorgung wird entlüftet",
+            "Beide Arbeitsanschlüsse sind gesperrt"
+          ],
+          "correct": 1,
+          "explanation": "4 wird versorgt und 2 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-012",
+          "prompt": "Was geschieht, wenn 1 mit 2 und 4 mit 5 verbunden wird?",
+          "options": [
+            "4 wird versorgt und 2 entlüftet",
+            "2 wird versorgt und 4 entlüftet",
+            "Beide werden gesperrt",
+            "Beide werden versorgt"
+          ],
+          "correct": 1,
+          "explanation": "2 wird versorgt und 4 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-013",
+          "prompt": "Wozu dienen die Anschlüsse 3 und 5 am 5/2-Ventil?",
+          "options": [
+            "Zur Versorgung beider Zylinderseiten",
+            "Zum Abführen der Abluft aus den Arbeitskammern",
+            "Zur Einstellung der Hublänge",
+            "Zur elektrischen Ansteuerung"
+          ],
+          "correct": 1,
+          "explanation": "Zum Abführen der Abluft aus den Arbeitskammern. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-014",
+          "prompt": "Warum darf Anschluss 1 nicht mit Anschluss 12 verwechselt werden?",
+          "options": [
+            "Beide sind Abluft",
+            "1 ist Versorgung, 12 ist Vorsteuersignal",
+            "1 ist nur ein Messpunkt",
+            "12 ist der Kolbenstangenanschluss"
+          ],
+          "correct": 1,
+          "explanation": "1 ist Versorgung, 12 ist Vorsteuersignal. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        },
+        {
+          "id": "ap1-pneu-anschluesse-015",
+          "prompt": "Welche Leitungen werden am doppeltwirkenden Zylinder angeschlossen?",
+          "options": [
+            "Die Abluftleitungen 3 und 5",
+            "Die beiden Arbeitsleitungen 2 und 4",
+            "Die Steueranschlüsse 12 und 14",
+            "Nur die Versorgung 1"
+          ],
+          "correct": 1,
+          "explanation": "Die beiden Arbeitsleitungen 2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+        }
+      ]
+    },
+    {
+      "id": "kennzeichnung",
+      "title": "Bauteilkennzeichnungen",
+      "questions": [
+        {
+          "id": "ap1-pneu-kennzeichnung-001",
+          "prompt": "Welche Baugruppe ist das Arbeitselement?",
+          "options": [
+            "5/2-Wegeventil",
+            "Doppeltwirkender Zylinder",
+            "Wartungseinheit",
+            "3/2-Handtaster"
+          ],
+          "correct": 1,
+          "explanation": "Doppeltwirkender Zylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-002",
+          "prompt": "Welche Baugruppe ist das Stellglied?",
+          "options": [
+            "Zylinder",
+            "5/2-Wegeventil",
+            "Endlagensensor",
+            "Druckluftquelle"
+          ],
+          "correct": 1,
+          "explanation": "5/2-Wegeventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-003",
+          "prompt": "Welche Baugruppe erzeugt ein manuelles Eingangssignal?",
+          "options": [
+            "Zylinder",
+            "3/2-Handtaster",
+            "Schalldämpfer",
+            "Druckregler"
+          ],
+          "correct": 1,
+          "explanation": "3/2-Handtaster. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-004",
+          "prompt": "Welche Baugruppe erkennt eine mechanische Endlage?",
+          "options": [
+            "5/2-Wegeventil",
+            "3/2-Rollenstößelventil",
+            "Druckluftspeicher",
+            "Wartungseinheit"
+          ],
+          "correct": 1,
+          "explanation": "3/2-Rollenstößelventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-005",
+          "prompt": "Welche Baugruppe übernimmt die Druckluftversorgung und -aufbereitung?",
+          "options": [
+            "Arbeitszylinder",
+            "Wartungseinheit",
+            "Abluftdrossel",
+            "Signalventil"
+          ],
+          "correct": 1,
+          "explanation": "Wartungseinheit. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-006",
+          "prompt": "Was beschreibt die Kennzeichnung 1A im Plan?",
+          "options": [
+            "Den ersten Druckanschluss",
+            "Den Arbeitszylinder",
+            "Die erste Abluftleitung",
+            "Das Ventil 1"
+          ],
+          "correct": 1,
+          "explanation": "Den Arbeitszylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-007",
+          "prompt": "Was kennzeichnet 1S1 typischerweise?",
+          "options": [
+            "Den Zylinderkolben",
+            "Ein Signal- bzw. Betätigungselement",
+            "Die Abluft",
+            "Den Druckluftbehälter"
+          ],
+          "correct": 1,
+          "explanation": "Ein Signal- bzw. Betätigungselement. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-008",
+          "prompt": "Was bedeutet die Gruppe Signaleingabeelement?",
+          "options": [
+            "Bauteil, das mechanische Arbeit verrichtet",
+            "Bauteil, das ein Steuersignal erzeugt",
+            "Bauteil, das die Abluft filtert",
+            "Bauteil, das Druckluft speichert"
+          ],
+          "correct": 1,
+          "explanation": "Bauteil, das ein Steuersignal erzeugt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-009",
+          "prompt": "Warum besitzt ein pneumatisch beidseitig betätigtes 5/2-Ventil eine Speicherwirkung?",
+          "options": [
+            "Es hat eine Feder in beiden Stellungen",
+            "Es bleibt ohne neues Gegensignal in der zuletzt geschalteten Stellung",
+            "Es schaltet automatisch jede Sekunde",
+            "Es speichert Druckluft im Kolben"
+          ],
+          "correct": 1,
+          "explanation": "Es bleibt ohne neues Gegensignal in der zuletzt geschalteten Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        },
+        {
+          "id": "ap1-pneu-kennzeichnung-010",
+          "prompt": "Wozu dient die Bauteilkennzeichnung im Schaltplan?",
+          "options": [
+            "Zur Anzeige des Luftdrucks",
+            "Zur eindeutigen Zuordnung von Komponenten",
+            "Zur Messung des Kolbenhubs",
+            "Zur Festlegung des Rohrdurchmessers"
+          ],
+          "correct": 1,
+          "explanation": "Zur eindeutigen Zuordnung von Komponenten. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+        }
+      ]
+    },
+    {
+      "id": "schaltplaene",
+      "title": "Interaktive pneumatische Schaltpläne",
+      "questions": [
+        {
+          "id": "ap1-pneu-schaltplaene-001",
+          "prompt": "Linkes 3/2-Signal betätigt Anschluss 14: Welche Bewegung folgt bei Anschluss 4 an der Kolbenseite?",
+          "options": [
+            "Der Zylinder fährt ein",
+            "Beide Kammern sind drucklos",
+            "Der Zylinder fährt aus",
+            "Der Zylinder dreht sich"
+          ],
+          "correct": 2,
+          "explanation": "Der Zylinder fährt aus. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-002",
+          "prompt": "Rechtes 3/2-Signal betätigt Anschluss 12: Was geschieht bei Druck auf Anschluss 2 (Stangenseite)?",
+          "options": [
+            "Der Zylinder fährt aus",
+            "Der Zylinder stoppt mechanisch",
+            "Der Zylinder fährt ein",
+            "Beide Kammern werden versorgt"
+          ],
+          "correct": 2,
+          "explanation": "Der Zylinder fährt ein. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-003",
+          "prompt": "Ein beidseitig pneumatisch betätigtes 5/2-Ventil erhält nach einem Schaltimpuls kein weiteres Signal. Was passiert?",
+          "options": [
+            "Es schaltet in die Mittelstellung",
+            "Es schließt alle Anschlüsse",
+            "Es behält seine letzte Stellung",
+            "Es entlüftet beide Arbeitsleitungen"
+          ],
+          "correct": 2,
+          "explanation": "Es behält seine letzte Stellung. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-004",
+          "prompt": "Beim Ausfahren wird die Kolbenseite über Anschluss 4 versorgt. Was muss mit der Stangenseite geschehen?",
+          "options": [
+            "Ebenfalls mit Druck versorgen",
+            "Beide Anschlüsse sperren",
+            "Über Anschluss 2 entlüften",
+            "Mit Anschluss 14 verbinden"
+          ],
+          "correct": 2,
+          "explanation": "Über Anschluss 2 entlüften. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-005",
+          "prompt": "Ein Rollenstößel wird durch den ausgefahrenen Zylinder betätigt und steuert Anschluss 12. Was folgt?",
+          "options": [
+            "Druckluftversorgung wird abgeschaltet",
+            "Der Zylinder fährt weiter aus",
+            "Umschaltung zum Einfahren",
+            "Die Wartungseinheit schaltet ab"
+          ],
+          "correct": 2,
+          "explanation": "Umschaltung zum Einfahren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-006",
+          "prompt": "Der Zylinder ist eingefahren. Ein kurzer Startimpuls steuert Anschluss 14 an. Was passiert?",
+          "options": [
+            "Er bleibt eingefahren",
+            "Er fährt sofort ein",
+            "Der Zylinder beginnt auszufahren",
+            "Beide Arbeitsleitungen werden gesperrt"
+          ],
+          "correct": 2,
+          "explanation": "Der Zylinder beginnt auszufahren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-007",
+          "prompt": "Wozu dient das 3/2-Handventil in einer indirekten Steuerung?",
+          "options": [
+            "Es ersetzt den Arbeitszylinder",
+            "Es speichert Druckluft im Tank",
+            "Es liefert ein pneumatisches Steuersignal",
+            "Es misst den Hub"
+          ],
+          "correct": 2,
+          "explanation": "Es liefert ein pneumatisches Steuersignal. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-008",
+          "prompt": "Warum wird ein 5/2-Ventil für einen doppeltwirkenden Zylinder verwendet?",
+          "options": [
+            "Es besitzt fünf Schaltstellungen",
+            "Es misst den Druck in beiden Kammern",
+            "Es versorgt abwechselnd eine Kammer und entlüftet die andere",
+            "Es regelt die elektrische Spannung"
+          ],
+          "correct": 2,
+          "explanation": "Es versorgt abwechselnd eine Kammer und entlüftet die andere. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-009",
+          "prompt": "Der Rollenstößel ist nur am ausgefahrenen Anschlag betätigt. Was löst seine Betätigung aus?",
+          "options": [
+            "Ein neues Startsignal zum Ausfahren",
+            "Eine mechanische Verriegelung",
+            "Ein Rückfahrsignal",
+            "Einen Druckanstieg im Kompressor"
+          ],
+          "correct": 2,
+          "explanation": "Ein Rückfahrsignal. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-010",
+          "prompt": "Beide Vorsteueranschlüsse 12 und 14 erhalten gleichzeitig Druck. Was ist fachlich richtig?",
+          "options": [
+            "Der Zylinder fährt garantiert aus",
+            "Der Zylinder fährt garantiert ein",
+            "Das Verhalten ist ventilabhängig und muss vermieden werden",
+            "Das Ventil hat automatisch Mittelstellung"
+          ],
+          "correct": 2,
+          "explanation": "Das Verhalten ist ventilabhängig und muss vermieden werden. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-011",
+          "prompt": "Was ist ohne Druckluftversorgung am Anschluss 1 möglich?",
+          "options": [
+            "Garantiertes Ausfahren",
+            "Garantiertes Einfahren",
+            "Keine zuverlässige pneumatische Bewegung",
+            "Automatische Endlagenfahrt"
+          ],
+          "correct": 2,
+          "explanation": "Keine zuverlässige pneumatische Bewegung. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-012",
+          "prompt": "Welche Verbindung bewirkt bei Kolbenstange rechts den Rückhub?",
+          "options": [
+            "1 nach 4 und 2 nach 3",
+            "1 nach 3 und 2 nach 4",
+            "1 nach 2 und 4 nach 5",
+            "12 nach 14"
+          ],
+          "correct": 2,
+          "explanation": "1 nach 2 und 4 nach 5. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-013",
+          "prompt": "Welche Verbindung bewirkt bei Kolbenstange rechts den Vorhub?",
+          "options": [
+            "1 nach 2 und 4 nach 5",
+            "1 nach 5 und 2 nach 3",
+            "1 nach 4 und 2 nach 3",
+            "12 nach 14"
+          ],
+          "correct": 2,
+          "explanation": "1 nach 4 und 2 nach 3. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-014",
+          "prompt": "Das Ventil schaltet hörbar, aber der Zylinder fährt nicht. Was sollte zuerst geprüft werden?",
+          "options": [
+            "Die Schriftgröße des Plans",
+            "Die Farbe des Ventils",
+            "Versorgung und Arbeitsleitungen",
+            "Die XP-Anzeige"
+          ],
+          "correct": 2,
+          "explanation": "Versorgung und Arbeitsleitungen. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-015",
+          "prompt": "Warum wird ein Rollenstößelventil mechanisch an der Endlage angebracht?",
+          "options": [
+            "Damit die Luft trocknet",
+            "Damit die Kolbenkraft verdoppelt wird",
+            "Damit die Kolbenbewegung ein Rückmeldesignal auslöst",
+            "Damit das 5/2-Ventil entfällt"
+          ],
+          "correct": 2,
+          "explanation": "Damit die Kolbenbewegung ein Rückmeldesignal auslöst. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-016",
+          "prompt": "Nach Loslassen des Starttasters fährt der Zylinder weiter. Warum?",
+          "options": [
+            "Der Starttaster speichert Druck dauerhaft",
+            "Die Feder im Zylinder zieht ihn",
+            "Das bistabile Wegeventil bleibt umgeschaltet",
+            "Der Kompressor schaltet die Richtung"
+          ],
+          "correct": 2,
+          "explanation": "Das bistabile Wegeventil bleibt umgeschaltet. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-017",
+          "prompt": "Ein 3/2-Ventil ist federrückgestellt und in Ruhe gesperrt. Was gilt für Anschluss 1?",
+          "options": [
+            "Er ist immer mit 2 verbunden",
+            "Er ist mit 12 verbunden",
+            "Er ist in Ruhe vom Ausgang 2 getrennt",
+            "Er wird zum Zylinderanschluss"
+          ],
+          "correct": 2,
+          "explanation": "Er ist in Ruhe vom Ausgang 2 getrennt. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-018",
+          "prompt": "Wie unterscheidet sich die Vorsteuerleitung von der Arbeitsleitung?",
+          "options": [
+            "Sie muss immer elektrisch sein",
+            "Sie verbindet nur Abluft",
+            "Sie überträgt ein Schaltsignal statt den Hauptvolumenstrom",
+            "Sie ist die Kolbenstange"
+          ],
+          "correct": 2,
+          "explanation": "Sie überträgt ein Schaltsignal statt den Hauptvolumenstrom. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-019",
+          "prompt": "Der Zylinder erreicht den Rollenstößel nicht. Welche Folge ist bei automatischer Rückfahrt zu erwarten?",
+          "options": [
+            "Das Ventil schaltet garantiert zurück",
+            "Der Zylinder fährt schneller zurück",
+            "Das Rückfahrsignal bleibt aus",
+            "Die Wartungseinheit entlüftet"
+          ],
+          "correct": 2,
+          "explanation": "Das Rückfahrsignal bleibt aus. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        },
+        {
+          "id": "ap1-pneu-schaltplaene-020",
+          "prompt": "Was ist vor Inbetriebnahme einer pneumatischen Übungsschaltung wichtig?",
+          "options": [
+            "Beide Vorsteueranschlüsse dauerhaft beaufschlagen",
+            "Abluftanschlüsse verschließen",
+            "Leitungen und Bewegungsbereich kontrollieren",
+            "Schläuche unter Druck abziehen"
+          ],
+          "correct": 2,
+          "explanation": "Leitungen und Bewegungsbereich kontrollieren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
+          "diagram": true
+        }
+      ]
     }
   ]
 }
