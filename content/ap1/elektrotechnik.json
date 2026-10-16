@@ -1,0 +1,67 @@
+{
+  "id": "ap1-electro-basics",
+  "title": "Elektrotechnik – Grundlagen",
+  "priority": 1,
+  "questions": [
+    {
+      "id": "ap1-elektro-001",
+      "prompt": "An 12 V liegt ein Widerstand von 4 Ω. Wie groß ist der Strom?",
+      "options": [
+        "3 A",
+        "48 A",
+        "0,33 A",
+        "16 A"
+      ],
+      "correct": 0,
+      "explanation": "I = U / R = 12 V / 4 Ω = 3 A."
+    },
+    {
+      "id": "ap1-elektro-002",
+      "prompt": "Ein Verbraucher benötigt 2 A bei 24 V. Wie groß ist die Leistung?",
+      "options": [
+        "12 W",
+        "48 W",
+        "26 W",
+        "22 W"
+      ],
+      "correct": 1,
+      "explanation": "P = U · I = 24 V · 2 A = 48 W."
+    },
+    {
+      "id": "ap1-elektro-003",
+      "prompt": "Ein Widerstand hat 20 Ω. Wie groß ist sein Leitwert?",
+      "options": [
+        "20 S",
+        "0,5 S",
+        "0,05 S",
+        "400 S"
+      ],
+      "correct": 2,
+      "explanation": "G = 1 / R = 1 / 20 Ω = 0,05 S."
+    },
+    {
+      "id": "ap1-elektro-004",
+      "prompt": "Zwei Widerstände 10 Ω und 15 Ω liegen in Reihe. Wie groß ist der Gesamtwiderstand?",
+      "options": [
+        "6 Ω",
+        "25 Ω",
+        "150 Ω",
+        "5 Ω"
+      ],
+      "correct": 1,
+      "explanation": "Reihenschaltung: Rges = R1 + R2 = 25 Ω."
+    },
+    {
+      "id": "ap1-elektro-005",
+      "prompt": "Zwei Widerstände mit jeweils 10 Ω liegen parallel. Wie groß ist Rges?",
+      "options": [
+        "20 Ω",
+        "10 Ω",
+        "5 Ω",
+        "100 Ω"
+      ],
+      "correct": 2,
+      "explanation": "1/Rges = 1/10 + 1/10 → Rges = 5 Ω."
+    }
+  ]
+}
