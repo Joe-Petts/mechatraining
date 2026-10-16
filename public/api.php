@@ -64,8 +64,8 @@ if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
 }
 if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
-    $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrotechnik.json'),true);
-    $found=null; foreach($questions['questions'] as $q) if($q['id']===($data['question_id']??'')) {$found=$q;break;}
+    $questionSets=[dirname(__DIR__).'/content/ap1/elektrotechnik.json',dirname(__DIR__).'/content/ap1/pneumatik.json'];
+    $found=null; foreach($questionSets as $path) { $set=json_decode(file_get_contents($path),true); $modules=isset($set['modules'])?$set['modules']:[$set]; foreach($modules as $module) foreach($module['questions'] as $q) if($q['id']===($data['question_id']??'')) {$found=$q;break 3;} }
     if(!$found || !is_int($data['answer']??null) || !array_key_exists($data['answer'],$found['options'])) json_response(['error'=>'Ungültige Antwort.'],422);
     $correct=(int)($data['answer']===$found['correct']);
     $stmt=$pdo->prepare('INSERT INTO progress(user_id,question_id,correct,attempts) VALUES(?,?,?,1) ON CONFLICT(user_id,question_id) DO UPDATE SET correct=MAX(correct,excluded.correct),attempts=attempts+1,updated_at=CURRENT_TIMESTAMP');
