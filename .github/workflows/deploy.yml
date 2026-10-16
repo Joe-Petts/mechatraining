@@ -34,6 +34,17 @@ jobs:
       - name: Install FTPS client
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      - name: Prepare optional one-time setup key
+        env:
+          SETUP_KEY: ${{ secrets.SETUP_KEY }}
+        run: |
+          if [ -n "$SETUP_KEY" ]; then
+            if [ ${#SETUP_KEY} -lt 32 ]; then echo '::error::SETUP_KEY must contain at least 32 characters'; exit 1; fi
+            mkdir -p .deploy-private
+            printf '%s' "$SETUP_KEY" > .deploy-private/setup.key
+            chmod 600 .deploy-private/setup.key
+          fi
+
       - name: Deploy application (never delete server files)
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
@@ -55,6 +66,7 @@ jobs:
           mirror --reverse --verbose=1 --parallel=2 \
             --exclude-glob .git/ \
             --exclude-glob .github/ \
+            --exclude-glob .deploy-private/ \
             --exclude-glob .gitignore \
             --exclude-glob .env \
             --exclude-glob storage/ \
@@ -63,3 +75,13 @@ jobs:
             ./ "$FTP_REMOTE_DIR"
           bye
           EOF
+          if [ -f .deploy-private/setup.key ]; then
+            lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" <<EOF
+          set cmd:fail-exit yes
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          put -O "$FTP_REMOTE_DIR/storage/" .deploy-private/setup.key
+          bye
+          EOF
+          fi
