@@ -33,7 +33,7 @@ if ($action==='create_user' && $_SERVER['REQUEST_METHOD']==='POST') {
 }
 if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
     $stmt=$pdo->prepare('SELECT question_id,correct,attempts FROM progress WHERE user_id=?');
-    $stmt->execute([$_SESSION['uid']]); json_response(['progress'=>$stmt->fetchAll()]);
+    $stmt->execute([$_SESSION['uid']]); $rows=$stmt->fetchAll(); $count=0; foreach($rows as $row) if ((int)$row['correct']===1) $count++; json_response(['progress'=>$rows,'xp'=>$count*10]);
 }
 if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
