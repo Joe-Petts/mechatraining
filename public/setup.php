@@ -46,7 +46,8 @@ function h(string $s): string { return htmlspecialchars($s, ENT_QUOTES | ENT_SUB
 <?php if ($notice): ?><p role="alert"><?=h($notice)?></p><?php endif; ?>
 <form method="post" autocomplete="off"><input type="hidden" name="csrf" value="<?=h($_SESSION['setup_csrf'])?>">
 <label>Einrichtungsschlüssel<input type="password" name="setup_key" required minlength="32"></label>
-<label>Administrator-Benutzername<input name="username" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_-]+"></label>
+<label>Administrator-Benutzername<input name="username" value="<?=h($username ?? '')?>" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_-]+"></label>
 <label>Neues Passwort<input type="password" name="password" required minlength="12" maxlength="256" autocomplete="new-password"></label>
 <button type="submit">Administrator erstellen</button></form>
+<?php if ($notice): ?><p role="alert" style="margin-top:18px;padding:16px;border:2px solid #f9b340;border-radius:8px"><?=h($notice)?></p><?php endif; ?>
 <?php endif; ?></section></main></body></html>
