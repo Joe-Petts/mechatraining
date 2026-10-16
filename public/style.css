@@ -13,3 +13,21 @@
 
 /* Notizverwaltung */
 .notes-panel .notes-title{max-width:none;margin:7px 0 17px}.notes-panel .notes-label{margin-top:13px}.notes-buttons{display:flex;gap:8px}.notes-panel #notesSave{background:#f9b340;color:#17202a;border-color:#f9b340}.notes-list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0}.notes-list-head h3{margin:0;font-size:17px}.notes-list-head button{padding:10px;font-size:12px}.notes-item{border:1px solid #3a5062;background:#172735;border-radius:10px;padding:12px;margin:10px 0}.notes-item strong{display:block;overflow-wrap:anywhere}.notes-item p{color:#9db0c0;font-size:12px;margin:7px 0}.notes-item-actions{display:flex;gap:8px}.notes-item-actions button{padding:8px 12px;font-size:12px}.notes-item-actions .notes-delete{color:#ffb4a5}.notes-empty{color:#9db0c0;font-size:14px}.notes-panel .notes-text{min-height:38vh}
+
+/* Farbpalette der kompakten Werkzeug-Tabs – zentral anpassbar */
+:root{
+ --tool-calculator-bg:#2c5878;
+ --tool-calculator-fg:#f3f8fc;
+ --tool-calculator-border:#477a9c;
+ --tool-notes-bg:#ffffff;
+ --tool-notes-fg:#243749;
+ --tool-notes-border:#cbd5df;
+ --tool-tab-shadow:0 5px 16px #0005;
+ --tool-tab-size:46px;
+ --tool-tab-gap:8px;
+}
+.calc-toggle,.notes-toggle{width:var(--tool-tab-size);height:var(--tool-tab-size);min-width:var(--tool-tab-size);min-height:var(--tool-tab-size);padding:0;display:flex;align-items:center;justify-content:center;writing-mode:horizontal-tb;letter-spacing:normal;border-radius:9px 0 0 9px;box-shadow:var(--tool-tab-shadow);transition:background-color .2s ease,filter .2s ease}
+.calc-toggle{top:42%;background:var(--tool-calculator-bg);color:var(--tool-calculator-fg);border:1px solid var(--tool-calculator-border);border-right:0}
+.notes-toggle{top:calc(42% + var(--tool-tab-size) + var(--tool-tab-gap));background:var(--tool-notes-bg);color:var(--tool-notes-fg);border:1px solid var(--tool-notes-border);border-right:0}
+.calc-toggle svg,.notes-toggle svg{display:block;flex:none}
+@media(max-width:600px){.calc-toggle{top:auto;bottom:calc(20% + var(--tool-tab-size) + var(--tool-tab-gap))}.notes-toggle{top:auto;bottom:20%}}
