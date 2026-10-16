@@ -91,3 +91,12 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Die Schaltplanaufgaben enthalten eine vereinfachte, bedienbare SVG-Simulation für Signal 12/14 mit Aus- und Einfahrbewegung; dies ist kein vollständiger Pneumatiksimulator.
 - Fortschritt und Antworten weiterhin serverseitig über vorhandene API, eindeutige IDs; keine Migration und kein Zurücksetzen.
 - Futter-Herkunft vorläufig hier dokumentiert; Admin-Futter-Verwaltung weiterhin offen.
+
+
+## Futter – implementiert (2026-10-16)
+- Admin-only-Verwaltung mit Suche, Statusfilter, Lösungen, Quellen und Zeitstempeln. Aufruf im Adminbereich unterhalb der Lernbereiche.
+- Jede Bestandsaufgabe erhielt `created_at` (ISO 8601) und `source`; der Zeitstempel ist ein dokumentierter Bestandsimport am 16.10.2026 und kein nachweisbarer individueller Entstehungszeitpunkt.
+- Neue Aufgaben müssen ihren tatsächlichen Erstellzeitpunkt mit Zeitzone erhalten.
+- Status active / disabled / archived in additiver SQLite-Tabelle futter_status; Ereignisprotokoll futter_events mit Änderungszeitpunkten in UTC.
+- Deaktivierte und archivierte Aufgaben werden im Lernmodul ausgeblendet und serverseitig bei Antwortversuchen abgelehnt. Fortschrittsdaten und XP bleiben erhalten. Reaktivierung jederzeit möglich.
+- Kein endgültiges Löschen und keine Wiederverwendung von IDs; Quellaufgaben bleiben versioniert in GitHub.
