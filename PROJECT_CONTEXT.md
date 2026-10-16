@@ -60,7 +60,7 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Datenbankmigrationen additiv und rückwärtskompatibel; vor destruktiven Änderungen Backup-Konzept.
 - Ersteinrichtung nach erfolgreicher Anlage eines Benutzers gesperrt lassen.
 
-## Noch offen
+## Wissenschaftlicher Taschenrechner\n- Ausklappbare Sidebar mit lokalem wissenschaftlichem Rechner (DEG/RAD, Trigonometrie, Logarithmen, Potenzen, Wurzeln, Fakultät, Speicher, Verlauf). Keine Fremd-CDNs oder Markenabbildungen.\n\n## Noch offen
 - Umfangreiches AP1-Dashboard und Fachgebiete, modulare Lernspiele.
 - Adminverwaltung für Spiele, Prioritäten, Aufgabensätze und Benutzerpflege.
 - Verbesserte XP-Regeln bei wachsender Aufgabenbibliothek.
