@@ -66,3 +66,11 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Verbesserte XP-Regeln bei wachsender Aufgabenbibliothek.
 - Testabdeckung, Login-Rate-Limiting, Backups, Offline-Funktion, AP2.
 - Dokumentation bei jeder wesentlichen Architektur- oder Workflow-Änderung aktualisieren.
+
+## Geplanter Workflow „Futter“ (Entscheidung 2026-10-16)
+- Keine zusätzliche kostenpflichtige OpenAI-API-Anbindung. Fotos von Schul-/Werkstattarbeitsblättern werden in einem dedizierten Chat hochgeladen und dort durch ChatGPT analysiert.
+- ChatGPT schlägt vor, ob vorhandene Themen/Aufgaben erweitert oder neue Themen, Aufgaben und Übungsformen erstellt werden sollten. Nach Zustimmung des Betreibers werden die Inhalte über den normalen GitHub-Workflow umgesetzt.
+- „Futter“ wird ein **Admin-only-Verlaufs- und Verwaltungsbereich** in MechaTraining, keine KI-Warteschlange und keine direkte ChatGPT-Rückkommunikation über die Website.
+- Dort sollen neu angelegte Inhalte mit Datum, Thema, Aufgabentyp und Herkunft/Arbeitsblatt-Referenz nachvollziehbar sein; Admin kann einzelne Aufgaben prüfen, deaktivieren, reaktivieren und aus der aktiven Ansicht entfernen.
+- Standardmäßig **archivieren statt endgültig löschen**: Aufgaben-IDs niemals wiederverwenden, historische Lernfortschritte/XP und Datenbankintegrität bewahren. Bei Bedarf sichere gesonderte endgültige Löschfunktion erst nach bewusster Bestätigung und Prüfung der Auswirkungen.
+- Umsetzung der Oberfläche und Datenhaltung ist noch offen; diese Passage dokumentiert zunächst die vereinbarte Produktentscheidung.
