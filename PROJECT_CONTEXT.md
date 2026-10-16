@@ -100,3 +100,11 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Status active / disabled / archived in additiver SQLite-Tabelle futter_status; Ereignisprotokoll futter_events mit Änderungszeitpunkten in UTC.
 - Deaktivierte und archivierte Aufgaben werden im Lernmodul ausgeblendet und serverseitig bei Antwortversuchen abgelehnt. Fortschrittsdaten und XP bleiben erhalten. Reaktivierung jederzeit möglich.
 - Kein endgültiges Löschen und keine Wiederverwendung von IDs; Quellaufgaben bleiben versioniert in GitHub.
+
+
+## Formel-Modus (2026-10-16)
+- Separater Modus auf dem Dashboard für AP1-Formeltraining, unabhängig von normalen Quiz-Aufgaben und XP.
+- Inhalte in content/ap1/formeln.json: 11 Elektrotechnik- und 6 Pneumatikformeln mit Fachgebiet und Varianten.
+- Zwei Übungsarten: Formel erkennen (drei Antworten) und Formel selbst eingeben (zeichenbasierter Vergleich, nur begrenzte Schreibweisen-Normalisierung).
+- Gemischte oder fachspezifische Runden, zufällige Reihenfolge, direkte Rückmeldung und Rundenergebnis.
+- Kein Datenbankeingriff, keine Änderung bestehender Aufgaben-IDs oder Fortschritte. Weitere Formelgebiete können in der JSON-Sammlung ergänzt werden.
