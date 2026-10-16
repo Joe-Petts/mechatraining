@@ -1,0 +1,12 @@
+# MechaTraining – Entwicklungsregeln
+- Vor Änderungen README.md und AGENTS.md lesen.
+- PHP 8.1+, SQLite via PDO, Vanilla JS/CSS; keine externen CDNs.
+- Webroot ist ausschließlich `public/`; `storage/` und `src/` niemals öffentlich ausliefern.
+- Keine Geheimnisse, Benutzerdateien, SQLite-Datenbanken oder Backups committen.
+- Datenbankmigrationen additiv; bestehende Benutzer, Aufgaben-IDs und Fortschritte erhalten.
+- Aufgaben-IDs sind stabil und eindeutig; neue Fragen erhalten neue IDs.
+- Keine öffentlichen Registrierungen. Passwörter nur mit password_hash/password_verify.
+- SQL immer mit Prepared Statements; HTML-Ausgabe escapen; CSRF bei Änderungen; sichere Sessions.
+- AP1 zuerst, AP2 strukturell vorbereitet. Mobilgeräte und Tastaturbedienung berücksichtigen.
+- Jede neue Spielart registriert sich über eine eindeutige ID; Priorität 1–10.
+- Keine behaupteten Testergebnisse ohne tatsächliche Ausführung.
