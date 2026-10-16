@@ -31,6 +31,33 @@ if ($action==='create_user' && $_SERVER['REQUEST_METHOD']==='POST') {
     catch(PDOException $e) { json_response(['error'=>'Benutzername bereits vergeben oder Datenbankfehler.'],409); }
     json_response(['ok'=>true],201);
 }
+if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
+    try { migrate_notes($pdo); } catch(Throwable $e) { json_response(['error'=>'Notizspeicher nicht verfügbar.'],503); }
+    $uid=(int)$_SESSION['uid'];
+    if ($action==='notes_list' && $_SERVER['REQUEST_METHOD']==='GET') {
+        $stmt=$pdo->prepare('SELECT id,title,body,created_at,updated_at FROM notes WHERE user_id=? ORDER BY updated_at DESC,id DESC');
+        $stmt->execute([$uid]);json_response(['notes'=>$stmt->fetchAll()]);
+    }
+    if ($action==='notes_save' && $_SERVER['REQUEST_METHOD']==='POST') {
+        $data=json_decode(file_get_contents('php://input'),true) ?: [];
+        $id=$data['id']??null;$title=trim((string)($data['title']??''));$body=(string)($data['body']??'');
+        if ($title==='' || mb_strlen($title)>120 || mb_strlen($body)>50000) json_response(['error'=>'Titel erforderlich (max. 120 Zeichen), Notiz maximal 50.000 Zeichen.'],422);
+        if ($id===null) {
+            $stmt=$pdo->prepare('INSERT INTO notes(user_id,title,body) VALUES(?,?,?)');$stmt->execute([$uid,$title,$body]);
+            json_response(['ok'=>true,'id'=>(int)$pdo->lastInsertId()],201);
+        }
+        if (!is_int($id) || $id<1) json_response(['error'=>'Ungültige Notiz.'],422);
+        $stmt=$pdo->prepare('UPDATE notes SET title=?,body=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND user_id=?');$stmt->execute([$title,$body,$id,$uid]);
+        if (!$stmt->rowCount()) { $check=$pdo->prepare('SELECT 1 FROM notes WHERE id=? AND user_id=?');$check->execute([$id,$uid]);if(!$check->fetchColumn())json_response(['error'=>'Notiz nicht gefunden.'],404); }
+        json_response(['ok'=>true,'id'=>$id]);
+    }
+    if ($action==='notes_delete' && $_SERVER['REQUEST_METHOD']==='POST') {
+        $data=json_decode(file_get_contents('php://input'),true) ?: [];$id=$data['id']??null;
+        if (!is_int($id)||$id<1)json_response(['error'=>'Ungültige Notiz.'],422);
+        $stmt=$pdo->prepare('DELETE FROM notes WHERE id=? AND user_id=?');$stmt->execute([$id,$uid]);json_response(['ok'=>true]);
+    }
+    json_response(['error'=>'Methode nicht erlaubt.'],405);
+}
 if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
     $stmt=$pdo->prepare('SELECT question_id,correct,attempts FROM progress WHERE user_id=?');
     $stmt->execute([$_SESSION['uid']]); $rows=$stmt->fetchAll(); $count=0; foreach($rows as $row) if ((int)$row['correct']===1) $count++; json_response(['progress'=>$rows,'xp'=>$count*10]);
