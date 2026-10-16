@@ -13,7 +13,9 @@
         "16 A"
       ],
       "correct": 0,
-      "explanation": "I = U / R = 12 V / 4 Ω = 3 A."
+      "explanation": "I = U / R = 12 V / 4 Ω = 3 A.",
+      "created_at": "2026-10-16T22:44:00+02:00",
+      "source": "AP1 Elektrotechnik Grundlagen"
     },
     {
       "id": "ap1-elektro-002",
@@ -25,7 +27,9 @@
         "22 W"
       ],
       "correct": 1,
-      "explanation": "P = U · I = 24 V · 2 A = 48 W."
+      "explanation": "P = U · I = 24 V · 2 A = 48 W.",
+      "created_at": "2026-10-16T22:44:00+02:00",
+      "source": "AP1 Elektrotechnik Grundlagen"
     },
     {
       "id": "ap1-elektro-003",
@@ -37,7 +41,9 @@
         "400 S"
       ],
       "correct": 2,
-      "explanation": "G = 1 / R = 1 / 20 Ω = 0,05 S."
+      "explanation": "G = 1 / R = 1 / 20 Ω = 0,05 S.",
+      "created_at": "2026-10-16T22:44:00+02:00",
+      "source": "AP1 Elektrotechnik Grundlagen"
     },
     {
       "id": "ap1-elektro-004",
@@ -49,7 +55,9 @@
         "5 Ω"
       ],
       "correct": 1,
-      "explanation": "Reihenschaltung: Rges = R1 + R2 = 25 Ω."
+      "explanation": "Reihenschaltung: Rges = R1 + R2 = 25 Ω.",
+      "created_at": "2026-10-16T22:44:00+02:00",
+      "source": "AP1 Elektrotechnik Grundlagen"
     },
     {
       "id": "ap1-elektro-005",
@@ -61,7 +69,9 @@
         "100 Ω"
       ],
       "correct": 2,
-      "explanation": "1/Rges = 1/10 + 1/10 → Rges = 5 Ω."
+      "explanation": "1/Rges = 1/10 + 1/10 → Rges = 5 Ω.",
+      "created_at": "2026-10-16T22:44:00+02:00",
+      "source": "AP1 Elektrotechnik Grundlagen"
     }
   ]
 }
