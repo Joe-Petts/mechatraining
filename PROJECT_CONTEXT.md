@@ -126,3 +126,9 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 ## Dezente Formel-Levelanzeige und Startseitenlogo (2026-10-16)
 - Formel-Modus: links am Fragenbereich eine schmale Fortschrittsschiene mit Fuchskopf. Pro richtiger Antwort steigt die Position innerhalb der Fünferserie; bei fünf richtigen Antworten wird das Level erhöht und pro dauerhaft erreichtem Level ein grüner Balken angezeigt. Bei Fehlern fällt nur der Serienfortschritt auf null zurück.
 - Das Headerlogo verlinkt auf die Startseite (`./`).
+
+
+## Kompakte Formel-Modus-Oberfläche (2026-10-16)
+- Formel-Level-Fuchs als feste schmale Anzeige links auf Bildschirmmitte, auch beim Scrollen sichtbar.
+- Im Formel-Modus eigenständiger dunkler grünlicher Seitenhintergrund; ein Icon oben rechts führt zurück zu den Lernbereichen.
+- Überflüssige Titel und Beschreibung entfernt, kompakte Fachgebiet-/Übungsart-Auswahl und runder Neustart-Button unten rechts.
