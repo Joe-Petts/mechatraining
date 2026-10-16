@@ -1,0 +1,565 @@
+{
+  "id": "ap1-pneumatik",
+  "title": "Pneumatik",
+  "source": "Arbeitsblatt Bereitstellungsanlage / Kraftbestimmung / Zylindervergleich",
+  "modules": [
+    {
+      "id": "steuerung",
+      "title": "Pneumatische Steuerungen",
+      "questions": [
+        {
+          "id": "ap1-pneu-steuerung-001",
+          "prompt": "Welcher Zylindertyp besitzt zwei Druckluftanschlüsse?",
+          "options": [
+            "Membranzylinder",
+            "Federzylinder",
+            "Doppeltwirkender Zylinder",
+            "Einfachwirkender Zylinder"
+          ],
+          "correct": 2,
+          "explanation": "Doppeltwirkender Zylinder."
+        },
+        {
+          "id": "ap1-pneu-steuerung-002",
+          "prompt": "Welches Ventil steuert einen doppeltwirkenden Zylinder typisch?",
+          "options": [
+            "Drosselrückschlagventil",
+            "Druckregler",
+            "5/2-Wegeventil",
+            "2/2-Wegeventil"
+          ],
+          "correct": 2,
+          "explanation": "5/2-Wegeventil."
+        },
+        {
+          "id": "ap1-pneu-steuerung-003",
+          "prompt": "Wofür steht die 5 bei einem 5/2-Wegeventil?",
+          "options": [
+            "Fünf Schaltstellungen",
+            "Fünf Zylinder",
+            "Fünf Bar",
+            "Fünf Anschlüsse"
+          ],
+          "correct": 3,
+          "explanation": "Fünf Anschlüsse."
+        },
+        {
+          "id": "ap1-pneu-steuerung-004",
+          "prompt": "Wofür steht die 2 bei einem 5/2-Wegeventil?",
+          "options": [
+            "Zwei Zylinder",
+            "Zwei Schaltstellungen",
+            "Zwei Ausgänge",
+            "Zwei Druckstufen"
+          ],
+          "correct": 1,
+          "explanation": "Zwei Schaltstellungen."
+        },
+        {
+          "id": "ap1-pneu-steuerung-005",
+          "prompt": "Welche Anschlüsse führen beim 5/2-Ventil zum Zylinder?",
+          "options": [
+            "2 und 4",
+            "1 und 3",
+            "3 und 5",
+            "1 und 5"
+          ],
+          "correct": 0,
+          "explanation": "2 und 4."
+        },
+        {
+          "id": "ap1-pneu-steuerung-006",
+          "prompt": "Welcher Anschluss ist üblicherweise die Druckluftversorgung?",
+          "options": [
+            "1 (P)",
+            "2 (A)",
+            "3 (R)",
+            "4 (B)"
+          ],
+          "correct": 0,
+          "explanation": "1 (P)."
+        },
+        {
+          "id": "ap1-pneu-steuerung-007",
+          "prompt": "Welche Anschlüsse dienen üblicherweise der Entlüftung?",
+          "options": [
+            "3 und 5",
+            "1 und 2",
+            "2 und 4",
+            "1 und 4"
+          ],
+          "correct": 0,
+          "explanation": "3 und 5."
+        },
+        {
+          "id": "ap1-pneu-steuerung-008",
+          "prompt": "Was ermöglicht ein bistabiles 5/2-Wegeventil?",
+          "options": [
+            "Der Zylinder fährt nur mit Feder ein",
+            "Der Druck wird verdoppelt",
+            "Nur eine Schaltstellung ist möglich",
+            "Die Stellung bleibt ohne Dauersignal erhalten"
+          ],
+          "correct": 3,
+          "explanation": "Die Stellung bleibt ohne Dauersignal erhalten."
+        },
+        {
+          "id": "ap1-pneu-steuerung-009",
+          "prompt": "Was ist für getrennte Ausfahr- und Einfahrtaster sinnvoll?",
+          "options": [
+            "Ein dauerhaft geöffnetes 2/2-Ventil",
+            "Nur ein Druckminderer",
+            "Eine Rückschlagklappe ohne Ventil",
+            "Zwei Steuersignale für ein bistabiles Wegeventil"
+          ],
+          "correct": 3,
+          "explanation": "Zwei Steuersignale für ein bistabiles Wegeventil."
+        },
+        {
+          "id": "ap1-pneu-steuerung-010",
+          "prompt": "Was bewirkt das Signal zum Ausfahren?",
+          "options": [
+            "Die Kolbenstange wird entlüftet und blockiert",
+            "Druckluft strömt zur Kolbenseite",
+            "Beide Zylinderkammern werden gesperrt",
+            "Die Druckluftversorgung wird abgeschaltet"
+          ],
+          "correct": 1,
+          "explanation": "Druckluft strömt zur Kolbenseite."
+        },
+        {
+          "id": "ap1-pneu-steuerung-011",
+          "prompt": "Warum muss beim Ausfahren die Stangenseite entlüftet werden?",
+          "options": [
+            "Damit die Kolbenfläche größer wird",
+            "Damit der Druck immer 10 bar beträgt",
+            "Damit die Feder spannt",
+            "Damit die verdrängte Luft entweichen kann"
+          ],
+          "correct": 3,
+          "explanation": "Damit die verdrängte Luft entweichen kann."
+        },
+        {
+          "id": "ap1-pneu-steuerung-012",
+          "prompt": "Was bedeutet 3/2-Wegeventil?",
+          "options": [
+            "Drei Zylinder und zwei Taster",
+            "Drei bar bei zwei Anschlüssen",
+            "Drei Anschlüsse und zwei Schaltstellungen",
+            "Drei Stellungen und zwei Anschlüsse"
+          ],
+          "correct": 2,
+          "explanation": "Drei Anschlüsse und zwei Schaltstellungen."
+        },
+        {
+          "id": "ap1-pneu-steuerung-013",
+          "prompt": "Was schützt die Anlage vor zu hohem Betriebsdruck?",
+          "options": [
+            "Ein Schalldämpfer allein",
+            "Geeignete Druckregelung und Überdruckschutz",
+            "Ein größerer Taster",
+            "Ein längerer Schlauch"
+          ],
+          "correct": 1,
+          "explanation": "Geeignete Druckregelung und Überdruckschutz."
+        },
+        {
+          "id": "ap1-pneu-steuerung-014",
+          "prompt": "Wozu dient ein Drosselrückschlagventil am Zylinder?",
+          "options": [
+            "Speichern der Kolbenposition",
+            "Messen der Lufttemperatur",
+            "Einstellen der Bewegungsgeschwindigkeit",
+            "Verdoppeln der Kolbenkraft"
+          ],
+          "correct": 2,
+          "explanation": "Einstellen der Bewegungsgeschwindigkeit."
+        },
+        {
+          "id": "ap1-pneu-steuerung-015",
+          "prompt": "Welche Prüfung ist vor dem Einschalten wichtig?",
+          "options": [
+            "Kolbenstange mit der Hand festhalten",
+            "Druck sofort auf Maximum stellen",
+            "Beide Taster dauerhaft betätigen",
+            "Schläuche, Anschlüsse und sichere Bewegungszone kontrollieren"
+          ],
+          "correct": 3,
+          "explanation": "Schläuche, Anschlüsse und sichere Bewegungszone kontrollieren."
+        }
+      ]
+    },
+    {
+      "id": "kraefte",
+      "title": "Zylinderkräfte berechnen",
+      "questions": [
+        {
+          "id": "ap1-pneu-kraefte-001",
+          "prompt": "Kolbenfläche bestimmen: Zylinder Ø 25 mm, Stange Ø 10 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "491 mm²",
+            "245 mm²",
+            "614 mm²",
+            "859 mm²"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 491 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-002",
+          "prompt": "Ringfläche bestimmen: Zylinder Ø 25 mm, Stange Ø 10 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "412 mm²",
+            "206 mm²",
+            "515 mm²",
+            "722 mm²"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 412 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-003",
+          "prompt": "Ausfahrkraft bestimmen: Zylinder Ø 25 mm, Stange Ø 10 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "295 N",
+            "147 N",
+            "368 N",
+            "515 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 295 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-004",
+          "prompt": "Einfahrkraft bestimmen: Zylinder Ø 25 mm, Stange Ø 10 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "247 N",
+            "124 N",
+            "309 N",
+            "433 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 247 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-005",
+          "prompt": "Kolbenfläche bestimmen: Zylinder Ø 32 mm, Stange Ø 12 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "1005 mm²",
+            "1407 mm²",
+            "804 mm²",
+            "402 mm²"
+          ],
+          "correct": 2,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 804 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-006",
+          "prompt": "Ringfläche bestimmen: Zylinder Ø 32 mm, Stange Ø 12 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "346 mm²",
+            "864 mm²",
+            "1210 mm²",
+            "691 mm²"
+          ],
+          "correct": 3,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 691 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-007",
+          "prompt": "Ausfahrkraft bestimmen: Zylinder Ø 32 mm, Stange Ø 12 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "483 N",
+            "241 N",
+            "603 N",
+            "844 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 483 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-008",
+          "prompt": "Einfahrkraft bestimmen: Zylinder Ø 32 mm, Stange Ø 12 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "415 N",
+            "207 N",
+            "518 N",
+            "726 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 415 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-009",
+          "prompt": "Ausfahrkraft bestimmen: Zylinder Ø 20 mm, Stange Ø 8 mm, Druck 5 bar. Reibung vernachlässigen.",
+          "options": [
+            "275 N",
+            "157 N",
+            "79 N",
+            "196 N"
+          ],
+          "correct": 1,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 157 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-010",
+          "prompt": "Einfahrkraft bestimmen: Zylinder Ø 20 mm, Stange Ø 8 mm, Druck 5 bar. Reibung vernachlässigen.",
+          "options": [
+            "231 N",
+            "132 N",
+            "66 N",
+            "165 N"
+          ],
+          "correct": 1,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 132 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-011",
+          "prompt": "Ausfahrkraft bestimmen: Zylinder Ø 40 mm, Stange Ø 16 mm, Druck 4 bar. Reibung vernachlässigen.",
+          "options": [
+            "503 N",
+            "251 N",
+            "628 N",
+            "880 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 503 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-012",
+          "prompt": "Einfahrkraft bestimmen: Zylinder Ø 40 mm, Stange Ø 16 mm, Druck 4 bar. Reibung vernachlässigen.",
+          "options": [
+            "422 N",
+            "211 N",
+            "528 N",
+            "739 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 422 N."
+        },
+        {
+          "id": "ap1-pneu-kraefte-013",
+          "prompt": "Kolbenfläche bestimmen: Zylinder Ø 40 mm, Stange Ø 16 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "2199 mm²",
+            "1257 mm²",
+            "628 mm²",
+            "1571 mm²"
+          ],
+          "correct": 1,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1257 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-014",
+          "prompt": "Ringfläche bestimmen: Zylinder Ø 40 mm, Stange Ø 16 mm, Druck 6 bar. Reibung vernachlässigen.",
+          "options": [
+            "1847 mm²",
+            "1056 mm²",
+            "528 mm²",
+            "1319 mm²"
+          ],
+          "correct": 1,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1056 mm²."
+        },
+        {
+          "id": "ap1-pneu-kraefte-015",
+          "prompt": "Ausfahrkraft bestimmen: Zylinder Ø 25 mm, Stange Ø 10 mm, Druck 8 bar. Reibung vernachlässigen.",
+          "options": [
+            "393 N",
+            "196 N",
+            "491 N",
+            "687 N"
+          ],
+          "correct": 0,
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 393 N."
+        }
+      ]
+    },
+    {
+      "id": "vergleich",
+      "title": "Zylinderarten vergleichen",
+      "questions": [
+        {
+          "id": "ap1-pneu-vergleich-001",
+          "prompt": "Was kennzeichnet einen einfachwirkenden Zylinder mit Federrückstellung?",
+          "options": [
+            "Er besitzt immer zwei Kolbenstangen",
+            "Er benötigt immer ein 5/3-Ventil",
+            "Druckluft bewegt ihn in eine Richtung, die Feder zurück",
+            "Druckluft bewegt ihn in beide Richtungen"
+          ],
+          "correct": 2,
+          "explanation": "Druckluft bewegt ihn in eine Richtung, die Feder zurück."
+        },
+        {
+          "id": "ap1-pneu-vergleich-002",
+          "prompt": "Welcher Vorteil ist bei einfachwirkenden Zylindern möglich?",
+          "options": [
+            "Nur eine Bewegungsrichtung benötigt Druckluft",
+            "Unbegrenzte Hublänge",
+            "Immer höhere Kraft als doppeltwirkend",
+            "Keine Druckluftversorgung erforderlich"
+          ],
+          "correct": 0,
+          "explanation": "Nur eine Bewegungsrichtung benötigt Druckluft."
+        },
+        {
+          "id": "ap1-pneu-vergleich-003",
+          "prompt": "Welcher Nachteil entsteht durch die Rückstellfeder?",
+          "options": [
+            "Der Kolben braucht keine Führung",
+            "Die Federkraft vermindert die nutzbare Arbeitskraft",
+            "Die Kolbenfläche wird größer",
+            "Die Luft wird elektrisch erwärmt"
+          ],
+          "correct": 1,
+          "explanation": "Die Federkraft vermindert die nutzbare Arbeitskraft."
+        },
+        {
+          "id": "ap1-pneu-vergleich-004",
+          "prompt": "Was begrenzt häufig den Hub eines einfachwirkenden Federzylinders?",
+          "options": [
+            "Die Spannung der SPS",
+            "Bauraum und Federweg",
+            "Nur die Farbe des Gehäuses",
+            "Die Anzahl der Taster"
+          ],
+          "correct": 1,
+          "explanation": "Bauraum und Federweg."
+        },
+        {
+          "id": "ap1-pneu-vergleich-005",
+          "prompt": "Welcher Zylinder eignet sich eher für kontrollierte Arbeit in beide Richtungen?",
+          "options": [
+            "Stoßdämpfer",
+            "Vakuumsauger",
+            "Doppeltwirkender Zylinder",
+            "Einfachwirkender Federzylinder"
+          ],
+          "correct": 2,
+          "explanation": "Doppeltwirkender Zylinder."
+        },
+        {
+          "id": "ap1-pneu-vergleich-006",
+          "prompt": "Welche Ventilart wird oft für einfachwirkende Zylinder verwendet?",
+          "options": [
+            "3/2-Wegeventil",
+            "5/3-Wegeventil zwingend",
+            "Druckschalter ohne Ventil",
+            "4/4-Wegeventil"
+          ],
+          "correct": 0,
+          "explanation": "3/2-Wegeventil."
+        },
+        {
+          "id": "ap1-pneu-vergleich-007",
+          "prompt": "Was geschieht bei Druckausfall beim einfachwirkenden Federzylinder typischerweise?",
+          "options": [
+            "Der Zylinder fährt immer weiter aus",
+            "Die Kraft steigt unbegrenzt",
+            "Das Ventil erzeugt Druck",
+            "Die Feder fährt in die Grundstellung zurück"
+          ],
+          "correct": 3,
+          "explanation": "Die Feder fährt in die Grundstellung zurück."
+        },
+        {
+          "id": "ap1-pneu-vergleich-008",
+          "prompt": "Warum spart ein Federzylinder nicht zwangsläufig insgesamt Energie?",
+          "options": [
+            "Die Feder muss beim Arbeitshub gespannt werden",
+            "Druckluft ist immer kostenlos",
+            "Er braucht zwei Druckkammern",
+            "Er hat immer doppelte Reibung"
+          ],
+          "correct": 0,
+          "explanation": "Die Feder muss beim Arbeitshub gespannt werden."
+        },
+        {
+          "id": "ap1-pneu-vergleich-009",
+          "prompt": "Welche Angabe ist für die Auswahl aus einem Herstellerkatalog entscheidend?",
+          "options": [
+            "Nur das Gewicht des Tasters",
+            "Nur die Länge des Druckluftschlauchs",
+            "Erforderlicher Hub und verfügbare Kraft",
+            "Nur die Gehäusefarbe"
+          ],
+          "correct": 2,
+          "explanation": "Erforderlicher Hub und verfügbare Kraft."
+        },
+        {
+          "id": "ap1-pneu-vergleich-010",
+          "prompt": "Welche weitere Größe ist bei einem Zylindervergleich wichtig?",
+          "options": [
+            "Taktzahl und Luftverbrauch pro Zyklus",
+            "Anzahl der Beschriftungen",
+            "Farbe der Dichtung",
+            "Position des Firmenlogos"
+          ],
+          "correct": 0,
+          "explanation": "Taktzahl und Luftverbrauch pro Zyklus."
+        },
+        {
+          "id": "ap1-pneu-vergleich-011",
+          "prompt": "Welche Aussage zur Einfahrkraft eines doppeltwirkenden Zylinders ist richtig?",
+          "options": [
+            "Sie hängt nie vom Durchmesser ab",
+            "Sie ist bei gleichem Druck wegen der Kolbenstange kleiner",
+            "Sie ist immer gleich der Ausfahrkraft",
+            "Sie ist immer doppelt so groß"
+          ],
+          "correct": 1,
+          "explanation": "Sie ist bei gleichem Druck wegen der Kolbenstange kleiner."
+        },
+        {
+          "id": "ap1-pneu-vergleich-012",
+          "prompt": "Wodurch kann sich ein einfachwirkender Zylinder bei hoher Last als ungeeignet erweisen?",
+          "options": [
+            "Er benötigt keinen Hub",
+            "Sein Druckanschluss ist zu groß",
+            "Er hat keine Kolbenfläche",
+            "Die Feder kann die Last nicht zuverlässig zurückstellen"
+          ],
+          "correct": 3,
+          "explanation": "Die Feder kann die Last nicht zuverlässig zurückstellen."
+        },
+        {
+          "id": "ap1-pneu-vergleich-013",
+          "prompt": "Was sollte vor einem Austausch des Zylindertyps geprüft werden?",
+          "options": [
+            "Nur die Lackierung",
+            "Nur der Tasterabstand",
+            "Sicherheitsfunktion, Hub, Kraft und Einbaumaße",
+            "Nur der Kaufpreis"
+          ],
+          "correct": 2,
+          "explanation": "Sicherheitsfunktion, Hub, Kraft und Einbaumaße."
+        },
+        {
+          "id": "ap1-pneu-vergleich-014",
+          "prompt": "Welche Aussage zum Luftverbrauch ist grundsätzlich korrekt?",
+          "options": [
+            "Die Zylinderart hat keinen Einfluss",
+            "Ein doppeltwirkender Zylinder wird in beiden Richtungen mit Druckluft beaufschlagt",
+            "Ein einfachwirkender benötigt immer mehr Luft",
+            "Ein doppeltwirkender verbraucht nie Druckluft"
+          ],
+          "correct": 1,
+          "explanation": "Ein doppeltwirkender Zylinder wird in beiden Richtungen mit Druckluft beaufschlagt."
+        },
+        {
+          "id": "ap1-pneu-vergleich-015",
+          "prompt": "Was ist bei einer Bereitstellungsanlage mit kontrolliertem Einfahren besonders wichtig?",
+          "options": [
+            "Die Rückbewegung muss zuverlässig und sicher erfolgen",
+            "Die Feder darf niemals geprüft werden",
+            "Die Einfahrkraft ist immer null",
+            "Ein Taster kann das Ventil ersetzen"
+          ],
+          "correct": 0,
+          "explanation": "Die Rückbewegung muss zuverlässig und sicher erfolgen."
+        }
+      ]
+    }
+  ]
+}
