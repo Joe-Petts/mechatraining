@@ -1,6 +1,6 @@
 const questions=JSON.parse(document.getElementById('questions').textContent);
 let csrf='',solved=new Set();
-const storageKey='mechatraining-demo-progress-v1';
+
 const $=id=>document.getElementById(id);
 async function api(action,data){
  const response=await fetch('api.php?action='+encodeURIComponent(action),{method:data?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:data?JSON.stringify(data):undefined});
@@ -20,14 +20,17 @@ function render(){
     options.querySelectorAll('button').forEach(b=>b.disabled=true);
     try{const r=await api('answer',{question_id:q.id,answer:index});
      feedback.textContent=(r.correct?'✓ Richtig! ':'✕ Noch nicht richtig. ')+r.explanation;
-     if(r.correct){solved.add(q.id);localStorage.setItem(storageKey,JSON.stringify([...solved]));progress();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
+     if(r.correct){solved.add(q.id);progress();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
     }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
    });options.append(button);
   });section.append(options,feedback);root.append(section);
  });
  progress();
 }
-async function signedIn(user,token){csrf=token;$('loginPanel').classList.add('hidden');$('appPanel').classList.remove('hidden');try{solved=new Set(JSON.parse(localStorage.getItem(storageKey)||'[]'));}catch{solved=new Set();}render();}
-$('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const form=new FormData(e.currentTarget);try{const r=await api('login',{password:form.get('password')});await signedIn(r.user,r.csrf);}catch(err){$('loginError').textContent=err.message;}});
+async function signedIn(user,token){csrf=token;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('appPanel').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();if(user.role==='admin'){$('adminPanel').classList.remove('hidden');await loadUsers();}}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const form=new FormData(e.currentTarget);try{const r=await api('login',{username:form.get('username'),password:form.get('password')});await signedIn(r.user,r.csrf);}catch(err){$('loginError').textContent=err.message;}});
 $('logout').addEventListener('click',async()=>{try{await api('logout',{});location.reload();}catch(e){alert(e.message);}});
 api('session').then(r=>{if(r.user)return signedIn(r.user,r.csrf);}).catch(e=>{$('loginError').textContent=e.message;});
+
+async function loadUsers(){const data=await api('users');const list=$('usersList');list.replaceChildren();data.users.forEach(user=>{const li=document.createElement('li');li.textContent=user.username+' ('+(user.role==='admin'?'Administrator':'Lernender')+')';list.append(li);});}
+$('createUserForm').addEventListener('submit',async e=>{e.preventDefault();const form=new FormData(e.currentTarget);$('adminMessage').textContent='';try{await api('create_user',{username:form.get('username'),password:form.get('password')});$('adminMessage').textContent='Benutzer erfolgreich angelegt.';e.currentTarget.reset();await loadUsers();}catch(err){$('adminMessage').textContent=err.message;}});
