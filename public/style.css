@@ -77,3 +77,6 @@
 
 /* Kompakte Adminnavigation */
 .admin-toggle{width:38px;height:38px;display:grid;place-items:center;padding:0;border:1px solid #405668;border-radius:9px;background:#203343;color:#eaf0f5;font-size:20px;flex-shrink:0}.admin-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.admin-nav button{flex:1;min-width:190px}.futter-item details details{margin:12px 0 12px 16px;border-left:2px solid #344b5f;padding:6px 12px}.futter-item details summary{cursor:pointer}
+
+/* Eindeutige Futter-Statusanzeige */
+.futter-status{display:inline-flex;align-items:center;border:1px solid #637a8e;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:750;letter-spacing:.2px;background:#263849;color:#e4edf4;margin:0 0 8px}.futter-status--active{border-color:#397b63;background:#173d32;color:#baf3d5}.futter-status--disabled{border-color:#99773a;background:#47361b;color:#ffdfa0}.futter-status--archived{border-color:#667383;background:#29313a;color:#c1cbd6}.futter-status--mixed{border-color:#6487ad;background:#1c364f;color:#c3dfff}.futter-actions .futter-action-current,.futter-actions .futter-action-current:disabled{opacity:1;background:#355d51;color:#e0fff0;border:1px solid #6ab69b;cursor:default}.futter-actions .futter-action-current::before{content:'✓ ';font-weight:900}.futter-actions button.secondary{background:#283b4b;color:#e3edf5}
