@@ -115,3 +115,9 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Futter zeigt gruppierte Arbeitsblatt-Importe (Pneumatik Arbeitsblatt 1 und 2 sowie getrennten Elektrotechnik-Bestand) statt einzelne Fragen auf oberster Ebene. Fragen/Lösungen bleiben in aufklappbaren Details verfügbar.
 - Ganze Blöcke können aktiviert, deaktiviert und archiviert werden. Die aktuelle Umsetzung führt die vorhandene statusgeschützte Einzelaufgaben-API sequenziell aus; bei Netzwerkfehlern können Teiländerungen auftreten. Status und Fortschritte bleiben in SQLite erhalten.
 - Für zukünftige Arbeitsblatt-Importe eine eindeutige dauerhafte Block-ID und einen tatsächlichen Zeitstempel vergeben.
+
+
+## Formel-Modus: Erfolgsleiter (2026-10-16)
+- Im Formeltraining klettert ein animierter Fuchs nach jeweils fünf unmittelbar aufeinanderfolgenden richtigen Antworten eine Leiterstufe höher.
+- Falsche Antwort setzt nur die aktuelle Fünferserie zurück; bereits erreichte Stufen bleiben für die laufende Runde bestehen. Neue Runde setzt Serie und Leiter zurück.
+- Nur clientseitige Motivation ohne XP, persistente Daten oder Änderungen bestehender Aufgaben.
