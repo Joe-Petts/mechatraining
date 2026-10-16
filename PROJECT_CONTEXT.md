@@ -83,3 +83,11 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Vorhandene Antwort-API validiert neue IDs serverseitig und speichert Fortschritt in der bestehenden Tabelle, ohne Datenmigration.
 - Die 45 Aufgaben sind derzeit Auswahlfragen; ein interaktiver Symbolik-Schaltplan-Editor ist noch nicht umgesetzt.
 - „Futter“-Admin-Verlauf ist weiterhin geplant, nicht implementiert.
+
+
+## Pneumatik – zweites freigegebenes Arbeitsblatt (2026-10-16)
+- Vorlage: „Ansteuerung eines doppelt wirkenden Zylinders“ (DIN ISO 1219-1, 3/2- und 5/2-Wegeventile, Anschlüsse, pneumatische Vorsteuerung, Rollenstößel, Bauteilkennzeichnungen).
+- 60 neue Aufgaben in vier Modulen: Schaltzeichen (15), Wegeventile und Anschlüsse (15), interaktive Schaltpläne (20), Bauteilkennzeichnungen (10).
+- Die Schaltplanaufgaben enthalten eine vereinfachte, bedienbare SVG-Simulation für Signal 12/14 mit Aus- und Einfahrbewegung; dies ist kein vollständiger Pneumatiksimulator.
+- Fortschritt und Antworten weiterhin serverseitig über vorhandene API, eindeutige IDs; keine Migration und kein Zurücksetzen.
+- Futter-Herkunft vorläufig hier dokumentiert; Admin-Futter-Verwaltung weiterhin offen.
