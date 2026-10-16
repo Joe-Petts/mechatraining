@@ -68,3 +68,6 @@
 
 /* Interaktive AP1-Pneumatik-Simulation */
 .pneu-simulator{margin:14px 0 18px;padding:16px;background:#0c1924;border:1px solid #426079;border-radius:12px}.pneu-simulator>p:first-child{font-size:13px;color:#b4c7d5}.pneu-simulator svg{display:block;width:100%;max-width:560px;height:auto;margin:auto;color:#e4eef6}.pneu-controls{display:flex;gap:9px;flex-wrap:wrap}.pneu-controls button{background:#31536b;color:#fff;font-size:13px;padding:10px 12px}.pneu-state{font-size:13px;color:#f9b340;min-height:20px}
+
+/* Futter Admin */
+.futter-filters{display:flex;gap:12px;flex-wrap:wrap}.futter-filters input{margin:0;flex:1;min-width:210px}.futter-filters select{background:#0b141d;color:white;border:1px solid #405668;border-radius:8px;padding:12px}.futter-item{border-top:1px solid #344a5d;padding:18px 0}.futter-item h3{font-size:16px;margin:0 0 8px}.futter-meta{color:#a6b7c5;font-size:12px;overflow-wrap:anywhere}.futter-item details{margin:12px 0}.futter-item summary{cursor:pointer;color:#f9b340}.futter-actions{display:flex;gap:8px;flex-wrap:wrap}.futter-actions button{font-size:12px;padding:9px 12px}
