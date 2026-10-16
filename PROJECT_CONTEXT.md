@@ -74,3 +74,12 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Dort sollen neu angelegte Inhalte mit Datum, Thema, Aufgabentyp und Herkunft/Arbeitsblatt-Referenz nachvollziehbar sein; Admin kann einzelne Aufgaben prüfen, deaktivieren, reaktivieren und aus der aktiven Ansicht entfernen.
 - Standardmäßig **archivieren statt endgültig löschen**: Aufgaben-IDs niemals wiederverwenden, historische Lernfortschritte/XP und Datenbankintegrität bewahren. Bei Bedarf sichere gesonderte endgültige Löschfunktion erst nach bewusster Bestätigung und Prüfung der Auswirkungen.
 - Umsetzung der Oberfläche und Datenhaltung ist noch offen; diese Passage dokumentiert zunächst die vereinbarte Produktentscheidung.
+
+## Pneumatik – erster freigegebener Arbeitszettel (2026-10-16)
+- Neuer dritter Hauptbereich „Pneumatik“ im Dashboard.
+- Datei `content/ap1/pneumatik.json` mit drei Modulen und je 15 Aufgaben: Pneumatische Steuerungen, Zylinderkräfte berechnen, Zylinderarten vergleichen.
+- Grundlage: fotografierter Arbeitszettel „Funktionssteuerung der Bereitstellungsanlage / Kraftbestimmung am Pneumatikkolben“, doppeltwirkender Zylinder Ø25 mm, Stange Ø10 mm, Hub 100 mm, 6 bar Betrieb, 2–10 bar zulässig.
+- Berechnungen sind theoretische Werte ohne Reibung; für einfachwirkende Zylinder sind konkrete Herstellerdaten nötig.
+- Vorhandene Antwort-API validiert neue IDs serverseitig und speichert Fortschritt in der bestehenden Tabelle, ohne Datenmigration.
+- Die 45 Aufgaben sind derzeit Auswahlfragen; ein interaktiver Symbolik-Schaltplan-Editor ist noch nicht umgesetzt.
+- „Futter“-Admin-Verlauf ist weiterhin geplant, nicht implementiert.
