@@ -15,9 +15,9 @@ $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrot
 <aside id="notesPanel" class="calc-panel notes-panel" aria-label="Notizblock" aria-hidden="true" inert>
  <div class="calc-heading"><div><strong>Mein Notizblock</strong><small>Notizen für deine Übungen</small></div><button id="notesClose" class="calc-close" type="button" aria-label="Notizblock schließen">×</button></div>
  <p class="notes-description">Formeln, Rechenwege und Merksätze festhalten.</p>
- <label for="notesText" class="notes-label">Notizen</label><textarea id="notesText" class="notes-text" spellcheck="true" maxlength="50000" placeholder="Hier kannst du deine Notizen eingeben …"></textarea>
- <div class="notes-actions"><span id="notesStatus" role="status">Lokal auf diesem Gerät gespeichert</span><button type="button" id="notesExport">Als TXT speichern</button></div>
- <p class="notes-warning">Die Notizen werden nur in diesem Browser gespeichert und nicht zwischen Geräten synchronisiert.</p>
+ <div id="notesEditor"><label for="notesTitle" class="notes-label">Titel</label><input id="notesTitle" class="notes-title" maxlength="120" placeholder="z. B. Ohmsches Gesetz"><label for="notesText" class="notes-label">Notiz</label><textarea id="notesText" class="notes-text" spellcheck="true" maxlength="50000" placeholder="Hier kannst du deine Notizen eingeben …"></textarea>
+ <div class="notes-actions"><span id="notesStatus" role="status"></span><div class="notes-buttons"><button type="button" id="notesSave">Speichern</button><button type="button" id="notesOverview">Übersicht</button></div></div></div><div id="notesListView" class="hidden"><div class="notes-list-head"><h3>Meine Notizen</h3><button type="button" id="notesNew">+ Neue Notiz</button></div><div id="notesList"></div></div>
+ <p class="notes-warning">Notizen werden deinem Benutzerkonto zugeordnet und auf dem Server gespeichert.</p>
 </aside>
 <div id="calcBackdrop" class="calc-backdrop hidden"></div>
 <aside id="calcPanel" class="calc-panel" aria-label="Wissenschaftlicher Taschenrechner" aria-hidden="true" inert>
