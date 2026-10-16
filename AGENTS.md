@@ -1,5 +1,5 @@
 # MechaTraining – Entwicklungsregeln
-- Vor Änderungen README.md und AGENTS.md lesen.
+- Vor Änderungen README.md, AGENTS.md und PROJECT_CONTEXT.md vollständig lesen; PROJECT_CONTEXT.md dokumentiert den tatsächlichen Hosting- und Entwicklungsworkflow.
 - PHP 8.1+, SQLite via PDO, Vanilla JS/CSS; keine externen CDNs.
 - Webroot ist ausschließlich `public/`; `storage/` und `src/` niemals öffentlich ausliefern.
 - Keine Geheimnisse, Benutzerdateien, SQLite-Datenbanken oder Backups committen.
@@ -10,3 +10,11 @@
 - AP1 zuerst, AP2 strukturell vorbereitet. Mobilgeräte und Tastaturbedienung berücksichtigen.
 - Jede neue Spielart registriert sich über eine eindeutige ID; Priorität 1–10.
 - Keine behaupteten Testergebnisse ohne tatsächliche Ausführung.
+
+## Zusammenarbeit und Deployment
+- Nutzer möchte Änderungen ausschließlich per Prompt beauftragen; Code direkt im verbundenen GitHub-Repository `Joe-Petts/mechatraining` ändern.
+- Push auf `main` startet GitHub Actions FTPS-Deployment auf ALL-INKL. Kein manuelles Hochladen oder ReRun vom Nutzer verlangen, außer bei tatsächlichem Fehler.
+- Antworten knapp halten: erledigte Änderung und ggf. genau ein nächster Schritt. Keine langen Schritt-für-Schritt-Anleitungen ohne Bedarf.
+- Kein neues Setup oder Zurücksetzen bestehender Konten: Administrator und weitere Benutzer sind bereits angelegt.
+- XP/Level nur dezent im Header; erwachsene Zielgruppe und seriöses Industrial-Design beachten.
+- Dokumentation in PROJECT_CONTEXT.md bei Architektur- oder Workflow-Änderungen aktuell halten.
