@@ -36,6 +36,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
  }
  $('futterSearch').addEventListener('input',draw);$('futterFilter').addEventListener('change',draw);
+ let visibilityLoaded=false;
+ const visibilityTimer=setInterval(async()=>{
+  if($('dashboard').classList.contains('hidden')||visibilityLoaded)return;
+  visibilityLoaded=true;clearInterval(visibilityTimer);
+  try{
+   const result=await request('futter_public');const hidden=new Set(result.hidden);
+   for(const module of pneumaticModules)module.questions.splice(0,module.questions.length,...module.questions.filter(q=>!hidden.has(q.id)));
+   electroQuestions.splice(0,electroQuestions.length,...electroQuestions.filter(q=>!hidden.has(q.id)));
+   document.querySelectorAll('#pneuModules .exercise-card').forEach((button,i)=>{
+    const small=button.querySelector('small');if(small&&pneumaticModules[i])small.textContent=pneumaticModules[i].questions.length+' aktive Aufgaben · Gespeicherter Fortschritt';
+   });
+  }catch(e){console.error('Aufgabenstatus konnte nicht geladen werden',e);}
+ },100);
  const timer=setInterval(async()=>{
   if(!$('adminPanel').classList.contains('hidden')){
    clearInterval(timer);$('futterPanel').classList.remove('hidden');try{await refresh();}catch(e){$('futterMessage').textContent=e.message;}
