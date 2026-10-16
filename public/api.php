@@ -58,6 +58,42 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     }
     json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
+
+if (in_array($action,['futter_list','futter_status','futter_public'],true)) {
+ migrate_futter($pdo);
+ $files=['elektrotechnik.json','pneumatik.json'];$catalog=[];
+ foreach($files as $file) {
+  $set=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/'.$file),true);
+  foreach(($set['modules']??[$set]) as $module) foreach($module['questions'] as $q) {
+   $q['topic']=$set['title'];$q['module']=$module['title'];$catalog[$q['id']]=$q;
+  }
+ }
+ $statuses=$pdo->query('SELECT question_id,status FROM futter_status')->fetchAll(PDO::FETCH_KEY_PAIR);
+ if ($action==='futter_public' && $_SERVER['REQUEST_METHOD']==='GET') {
+  json_response(['hidden'=>array_keys(array_filter($statuses,fn($v)=>$v!=='active'))]);
+ }
+ if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
+ if ($action==='futter_list' && $_SERVER['REQUEST_METHOD']==='GET') {
+  $items=[];foreach($catalog as $id=>$q) {
+   $q['status']=$statuses[$id]??'active';$items[]=$q;
+  }
+  $events=$pdo->query('SELECT question_id,action,changed_at FROM futter_events ORDER BY id DESC LIMIT 100')->fetchAll();
+  json_response(['items'=>$items,'events'=>$events]);
+ }
+ if ($action==='futter_status' && $_SERVER['REQUEST_METHOD']==='POST') {
+  $data=json_decode(file_get_contents('php://input'),true)?:[];
+  $id=$data['question_id']??null;$status=$data['status']??null;
+  if(!is_string($id)||!isset($catalog[$id])||!in_array($status,['active','disabled','archived'],true))json_response(['error'=>'Ungültiger Status.'],422);
+  $pdo->beginTransaction();
+  try {
+   $stmt=$pdo->prepare('INSERT INTO futter_status(question_id,status) VALUES(?,?) ON CONFLICT(question_id) DO UPDATE SET status=excluded.status,updated_at=CURRENT_TIMESTAMP');$stmt->execute([$id,$status]);
+   $stmt=$pdo->prepare('INSERT INTO futter_events(question_id,action) VALUES(?,?)');$stmt->execute([$id,$status]);
+   $pdo->commit();
+  }catch(Throwable $e){$pdo->rollBack();json_response(['error'=>'Speichern fehlgeschlagen.'],500);}
+  json_response(['ok'=>true]);
+ }
+ json_response(['error'=>'Methode nicht erlaubt.'],405);
+}
 if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
     $stmt=$pdo->prepare('SELECT question_id,correct,attempts FROM progress WHERE user_id=?');
     $stmt->execute([$_SESSION['uid']]); $rows=$stmt->fetchAll(); $count=0; foreach($rows as $row) if ((int)$row['correct']===1) $count++; json_response(['progress'=>$rows,'xp'=>$count*10]);
@@ -66,6 +102,7 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
     $questionSets=[dirname(__DIR__).'/content/ap1/elektrotechnik.json',dirname(__DIR__).'/content/ap1/pneumatik.json'];
     $found=null; foreach($questionSets as $path) { $set=json_decode(file_get_contents($path),true); $modules=isset($set['modules'])?$set['modules']:[$set]; foreach($modules as $module) foreach($module['questions'] as $q) if($q['id']===($data['question_id']??'')) {$found=$q;break 3;} }
+    if($found){migrate_futter($pdo);$check=$pdo->prepare('SELECT status FROM futter_status WHERE question_id=?');$check->execute([$found['id']]);if(($check->fetchColumn()?:'active')!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
     if(!$found || !is_int($data['answer']??null) || !array_key_exists($data['answer'],$found['options'])) json_response(['error'=>'Ungültige Antwort.'],422);
     $correct=(int)($data['answer']===$found['correct']);
     $stmt=$pdo->prepare('INSERT INTO progress(user_id,question_id,correct,attempts) VALUES(?,?,?,1) ON CONFLICT(user_id,question_id) DO UPDATE SET correct=MAX(correct,excluded.correct),attempts=attempts+1,updated_at=CURRENT_TIMESTAMP');
