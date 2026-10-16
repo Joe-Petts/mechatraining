@@ -13,6 +13,19 @@ async function refreshXP(){const data=await api('progress');updateXP(Number(data
 function progress(){const count=questions.filter(q=>solved.has(q.id)).length;$('progress').textContent=count;$('bar').style.width=(100*count/questions.length)+'%'; }
 function openExercise(module,back){questions=module.questions;returnView=back;document.querySelector('#appPanel h2').textContent=module.title;document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='pneuPanel'?'PNEUMATIK · AP1':'ELEKTROTECHNIK · AP1';document.querySelector('#appPanel .toolbar p + h2');document.querySelector('#appPanel .toolbar + p').replaceChildren(document.createTextNode('Angemeldet als '));const line=document.querySelector('#appPanel .toolbar + p');const user=document.createElement('strong');user.id='username';user.textContent=loggedName;const count=document.createElement('span');count.id='progress';line.append(user,document.createTextNode(' · '),count,document.createTextNode(' von '+questions.length+' Aufgaben richtig gelöst'));$('exerciseBack').textContent=back==='pneuPanel'?'← Pneumatik':'← Elektrotechnik';render();showLearningView('appPanel');}
 let loggedName='';
+function pneumaticDiagram(section){
+ const wrap=document.createElement('div');wrap.className='pneu-simulator';
+ const title=document.createElement('p');title.textContent='Schaltung erkunden: Steuersignal 14 / 12 betätigen';wrap.append(title);
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 500 190');svg.setAttribute('role','img');svg.setAttribute('aria-label','Vereinfachter doppeltwirkender Zylinder mit 5/2-Wegeventil und Leitungen');
+ svg.innerHTML='<rect x="165" y="15" width="170" height="52" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><line x1="200" y1="15" x2="200" y2="67" stroke="currentColor" stroke-width="5"/><line x1="200" y1="40" x2="392" y2="40" stroke="currentColor" stroke-width="8"/><path d="M185 67 V103 H210 V125 M315 67 V103 H290 V125" fill="none" stroke="#83bdd8" stroke-width="3"/><rect x="200" y="125" width="100" height="42" fill="none" stroke="currentColor" stroke-width="3"/><line x1="250" y1="125" x2="250" y2="167" stroke="currentColor"/><path d="M250 167 V185 M210 167 V185 M290 167 V185" stroke="currentColor" stroke-width="3"/><text x="173" y="10" fill="currentColor" font-size="13">1A</text><text x="210" y="120" fill="currentColor" font-size="12">4</text><text x="280" y="120" fill="currentColor" font-size="12">2</text><text x="255" y="180" fill="currentColor" font-size="12">1</text>';
+ const piston=svg.querySelector('line[stroke-width="5"]');const rod=svg.querySelector('line[stroke-width="8"]');
+ const state=document.createElement('p');state.className='pneu-state';state.setAttribute('aria-live','polite');
+ const controls=document.createElement('div');controls.className='pneu-controls';
+ function set(side){const extend=side==='14';piston.setAttribute('x1',extend?'310':'200');piston.setAttribute('x2',extend?'310':'200');rod.setAttribute('x1',extend?'310':'200');state.textContent=extend?'Signal 14 → 1–4 / 2–3 · Zylinder fährt aus':'Signal 12 → 1–2 / 4–5 · Zylinder fährt ein';}
+ for(const [signal,label] of [['14','Signal 14 · Ausfahren'],['12','Signal 12 · Einfahren']]){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>set(signal));controls.append(b);}
+ wrap.append(svg,controls,state);set('12');section.append(wrap);
+}
+
 function render(){
  const root=$('quiz');root.replaceChildren();
  questions.forEach((q,i)=>{
@@ -29,7 +42,7 @@ function render(){
      if(r.correct){solved.add(q.id);progress();await refreshXP();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
     }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
    });options.append(button);
-  });section.append(options,feedback);root.append(section);
+  });if(q.diagram)pneumaticDiagram(section);section.append(options,feedback);root.append(section);
  });
  progress();
 }
