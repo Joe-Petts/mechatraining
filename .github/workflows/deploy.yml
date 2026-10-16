@@ -84,7 +84,6 @@ jobs:
           set ftp:ssl-force true
           set ftp:ssl-protect-data true
           set ssl:verify-certificate yes
-          mkdir -p "$FTP_REMOTE_DIR/storage"
           put -O "$FTP_REMOTE_DIR/storage/" .deploy-private/setup.key
           bye
           EOF
