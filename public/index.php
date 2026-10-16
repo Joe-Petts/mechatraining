@@ -10,6 +10,15 @@ $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrot
 <section id="adminPanel" class="panel hidden"><h2>Benutzerverwaltung</h2><p>Nur Administratoren können neue Benutzer anlegen.</p><form id="createUserForm"><label>Neuer Benutzername<input name="username" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_-]+"></label><label>Startpasswort (mindestens 12 Zeichen)<input name="password" type="password" required minlength="12" autocomplete="new-password"></label><button>Benutzer anlegen</button><p id="adminMessage" role="status"></p></form><h3>Vorhandene Benutzer</h3><ul id="usersList"></ul></section><footer>MechaTraining · Version 0.1 · AP2 in Vorbereitung</footer></main>
 
 <button id="calcToggle" class="calc-toggle" type="button" aria-controls="calcPanel" aria-expanded="false" title="Wissenschaftlichen Taschenrechner öffnen">∑ <span>Rechner</span></button>
+<button id="notesToggle" class="notes-toggle" type="button" aria-controls="notesPanel" aria-expanded="false" title="Notizblock öffnen">▤ <span>Notizen</span></button>
+<div id="notesBackdrop" class="calc-backdrop hidden"></div>
+<aside id="notesPanel" class="calc-panel notes-panel" aria-label="Notizblock" aria-hidden="true" inert>
+ <div class="calc-heading"><div><strong>Mein Notizblock</strong><small>Notizen für deine Übungen</small></div><button id="notesClose" class="calc-close" type="button" aria-label="Notizblock schließen">×</button></div>
+ <p class="notes-description">Formeln, Rechenwege und Merksätze festhalten.</p>
+ <label for="notesText" class="notes-label">Notizen</label><textarea id="notesText" class="notes-text" spellcheck="true" maxlength="50000" placeholder="Hier kannst du deine Notizen eingeben …"></textarea>
+ <div class="notes-actions"><span id="notesStatus" role="status">Lokal auf diesem Gerät gespeichert</span><button type="button" id="notesExport">Als TXT speichern</button></div>
+ <p class="notes-warning">Die Notizen werden nur in diesem Browser gespeichert und nicht zwischen Geräten synchronisiert.</p>
+</aside>
 <div id="calcBackdrop" class="calc-backdrop hidden"></div>
 <aside id="calcPanel" class="calc-panel" aria-label="Wissenschaftlicher Taschenrechner" aria-hidden="true" inert>
  <div class="calc-heading"><div><strong>Wissenschaftlicher Rechner</strong><small>MechaTraining · Scientific</small></div><button id="calcClose" class="calc-close" type="button" aria-label="Rechner schließen">×</button></div>
@@ -26,4 +35,6 @@ $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrot
  </div><p class="calc-hint">Tastatur: Zahlen, Operatoren, Enter, Rücktaste, Esc · Dezimalpunkt oder Komma</p>
  <div class="calc-history-head"><strong>Verlauf</strong><button type="button" id="calcClearHistory">Löschen</button></div><div id="calcHistory" class="calc-history"></div>
 </aside>
-<script src="calculator.js" defer></script>\n<script id="questions" type="application/json"><?=json_encode($questions['questions'],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script src="app.js" defer></script></body></html>
+<script src="calculator.js" defer></script>
+<script src="notes.js" defer></script>
+<script id="questions" type="application/json"><?=json_encode($questions['questions'],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script src="app.js" defer></script></body></html>
