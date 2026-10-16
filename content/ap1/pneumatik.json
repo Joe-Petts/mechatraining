@@ -17,7 +17,9 @@
             "Einfachwirkender Zylinder"
           ],
           "correct": 2,
-          "explanation": "Doppeltwirkender Zylinder."
+          "explanation": "Doppeltwirkender Zylinder.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-002",
@@ -29,7 +31,9 @@
             "2/2-Wegeventil"
           ],
           "correct": 2,
-          "explanation": "5/2-Wegeventil."
+          "explanation": "5/2-Wegeventil.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-003",
@@ -41,7 +45,9 @@
             "Fünf Anschlüsse"
           ],
           "correct": 3,
-          "explanation": "Fünf Anschlüsse."
+          "explanation": "Fünf Anschlüsse.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-004",
@@ -53,7 +59,9 @@
             "Zwei Druckstufen"
           ],
           "correct": 1,
-          "explanation": "Zwei Schaltstellungen."
+          "explanation": "Zwei Schaltstellungen.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-005",
@@ -65,7 +73,9 @@
             "1 und 5"
           ],
           "correct": 0,
-          "explanation": "2 und 4."
+          "explanation": "2 und 4.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-006",
@@ -77,7 +87,9 @@
             "4 (B)"
           ],
           "correct": 0,
-          "explanation": "1 (P)."
+          "explanation": "1 (P).",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-007",
@@ -89,7 +101,9 @@
             "1 und 4"
           ],
           "correct": 0,
-          "explanation": "3 und 5."
+          "explanation": "3 und 5.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-008",
@@ -101,7 +115,9 @@
             "Die Stellung bleibt ohne Dauersignal erhalten"
           ],
           "correct": 3,
-          "explanation": "Die Stellung bleibt ohne Dauersignal erhalten."
+          "explanation": "Die Stellung bleibt ohne Dauersignal erhalten.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-009",
@@ -113,7 +129,9 @@
             "Zwei Steuersignale für ein bistabiles Wegeventil"
           ],
           "correct": 3,
-          "explanation": "Zwei Steuersignale für ein bistabiles Wegeventil."
+          "explanation": "Zwei Steuersignale für ein bistabiles Wegeventil.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-010",
@@ -125,7 +143,9 @@
             "Die Druckluftversorgung wird abgeschaltet"
           ],
           "correct": 1,
-          "explanation": "Druckluft strömt zur Kolbenseite."
+          "explanation": "Druckluft strömt zur Kolbenseite.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-011",
@@ -137,7 +157,9 @@
             "Damit die verdrängte Luft entweichen kann"
           ],
           "correct": 3,
-          "explanation": "Damit die verdrängte Luft entweichen kann."
+          "explanation": "Damit die verdrängte Luft entweichen kann.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-012",
@@ -149,7 +171,9 @@
             "Drei Stellungen und zwei Anschlüsse"
           ],
           "correct": 2,
-          "explanation": "Drei Anschlüsse und zwei Schaltstellungen."
+          "explanation": "Drei Anschlüsse und zwei Schaltstellungen.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-013",
@@ -161,7 +185,9 @@
             "Ein längerer Schlauch"
           ],
           "correct": 1,
-          "explanation": "Geeignete Druckregelung und Überdruckschutz."
+          "explanation": "Geeignete Druckregelung und Überdruckschutz.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-014",
@@ -173,7 +199,9 @@
             "Verdoppeln der Kolbenkraft"
           ],
           "correct": 2,
-          "explanation": "Einstellen der Bewegungsgeschwindigkeit."
+          "explanation": "Einstellen der Bewegungsgeschwindigkeit.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-steuerung-015",
@@ -185,7 +213,9 @@
             "Schläuche, Anschlüsse und sichere Bewegungszone kontrollieren"
           ],
           "correct": 3,
-          "explanation": "Schläuche, Anschlüsse und sichere Bewegungszone kontrollieren."
+          "explanation": "Schläuche, Anschlüsse und sichere Bewegungszone kontrollieren.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         }
       ]
     },
@@ -203,7 +233,9 @@
             "859 mm²"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 491 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 491 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-002",
@@ -215,7 +247,9 @@
             "722 mm²"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 412 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 412 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-003",
@@ -227,7 +261,9 @@
             "515 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 295 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 295 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-004",
@@ -239,7 +275,9 @@
             "433 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 247 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 247 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-005",
@@ -251,7 +289,9 @@
             "402 mm²"
           ],
           "correct": 2,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 804 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 804 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-006",
@@ -263,7 +303,9 @@
             "691 mm²"
           ],
           "correct": 3,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 691 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 691 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-007",
@@ -275,7 +317,9 @@
             "844 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 483 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 483 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-008",
@@ -287,7 +331,9 @@
             "726 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 415 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 415 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-009",
@@ -299,7 +345,9 @@
             "196 N"
           ],
           "correct": 1,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 157 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 157 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-010",
@@ -311,7 +359,9 @@
             "165 N"
           ],
           "correct": 1,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 132 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 132 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-011",
@@ -323,7 +373,9 @@
             "880 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 503 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 503 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-012",
@@ -335,7 +387,9 @@
             "739 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 422 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 422 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-013",
@@ -347,7 +401,9 @@
             "1571 mm²"
           ],
           "correct": 1,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1257 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1257 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-014",
@@ -359,7 +415,9 @@
             "1319 mm²"
           ],
           "correct": 1,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1056 mm²."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 1056 mm².",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-kraefte-015",
@@ -371,7 +429,9 @@
             "687 N"
           ],
           "correct": 0,
-          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 393 N."
+          "explanation": "A = π·d²/4, A_Ring = π·(d²−s²)/4; F = p·A mit 1 bar = 0,1 N/mm². Ergebnis ≈ 393 N.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         }
       ]
     },
@@ -389,7 +449,9 @@
             "Druckluft bewegt ihn in beide Richtungen"
           ],
           "correct": 2,
-          "explanation": "Druckluft bewegt ihn in eine Richtung, die Feder zurück."
+          "explanation": "Druckluft bewegt ihn in eine Richtung, die Feder zurück.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-002",
@@ -401,7 +463,9 @@
             "Keine Druckluftversorgung erforderlich"
           ],
           "correct": 0,
-          "explanation": "Nur eine Bewegungsrichtung benötigt Druckluft."
+          "explanation": "Nur eine Bewegungsrichtung benötigt Druckluft.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-003",
@@ -413,7 +477,9 @@
             "Die Luft wird elektrisch erwärmt"
           ],
           "correct": 1,
-          "explanation": "Die Federkraft vermindert die nutzbare Arbeitskraft."
+          "explanation": "Die Federkraft vermindert die nutzbare Arbeitskraft.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-004",
@@ -425,7 +491,9 @@
             "Die Anzahl der Taster"
           ],
           "correct": 1,
-          "explanation": "Bauraum und Federweg."
+          "explanation": "Bauraum und Federweg.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-005",
@@ -437,7 +505,9 @@
             "Einfachwirkender Federzylinder"
           ],
           "correct": 2,
-          "explanation": "Doppeltwirkender Zylinder."
+          "explanation": "Doppeltwirkender Zylinder.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-006",
@@ -449,7 +519,9 @@
             "4/4-Wegeventil"
           ],
           "correct": 0,
-          "explanation": "3/2-Wegeventil."
+          "explanation": "3/2-Wegeventil.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-007",
@@ -461,7 +533,9 @@
             "Die Feder fährt in die Grundstellung zurück"
           ],
           "correct": 3,
-          "explanation": "Die Feder fährt in die Grundstellung zurück."
+          "explanation": "Die Feder fährt in die Grundstellung zurück.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-008",
@@ -473,7 +547,9 @@
             "Er hat immer doppelte Reibung"
           ],
           "correct": 0,
-          "explanation": "Die Feder muss beim Arbeitshub gespannt werden."
+          "explanation": "Die Feder muss beim Arbeitshub gespannt werden.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-009",
@@ -485,7 +561,9 @@
             "Nur die Gehäusefarbe"
           ],
           "correct": 2,
-          "explanation": "Erforderlicher Hub und verfügbare Kraft."
+          "explanation": "Erforderlicher Hub und verfügbare Kraft.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-010",
@@ -497,7 +575,9 @@
             "Position des Firmenlogos"
           ],
           "correct": 0,
-          "explanation": "Taktzahl und Luftverbrauch pro Zyklus."
+          "explanation": "Taktzahl und Luftverbrauch pro Zyklus.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-011",
@@ -509,7 +589,9 @@
             "Sie ist immer doppelt so groß"
           ],
           "correct": 1,
-          "explanation": "Sie ist bei gleichem Druck wegen der Kolbenstange kleiner."
+          "explanation": "Sie ist bei gleichem Druck wegen der Kolbenstange kleiner.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-012",
@@ -521,7 +603,9 @@
             "Die Feder kann die Last nicht zuverlässig zurückstellen"
           ],
           "correct": 3,
-          "explanation": "Die Feder kann die Last nicht zuverlässig zurückstellen."
+          "explanation": "Die Feder kann die Last nicht zuverlässig zurückstellen.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-013",
@@ -533,7 +617,9 @@
             "Nur der Kaufpreis"
           ],
           "correct": 2,
-          "explanation": "Sicherheitsfunktion, Hub, Kraft und Einbaumaße."
+          "explanation": "Sicherheitsfunktion, Hub, Kraft und Einbaumaße.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-014",
@@ -545,7 +631,9 @@
             "Ein doppeltwirkender verbraucht nie Druckluft"
           ],
           "correct": 1,
-          "explanation": "Ein doppeltwirkender Zylinder wird in beiden Richtungen mit Druckluft beaufschlagt."
+          "explanation": "Ein doppeltwirkender Zylinder wird in beiden Richtungen mit Druckluft beaufschlagt.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         },
         {
           "id": "ap1-pneu-vergleich-015",
@@ -557,7 +645,9 @@
             "Ein Taster kann das Ventil ersetzen"
           ],
           "correct": 0,
-          "explanation": "Die Rückbewegung muss zuverlässig und sicher erfolgen."
+          "explanation": "Die Rückbewegung muss zuverlässig und sicher erfolgen.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Bereitstellungsanlage / Zylinderkräfte"
         }
       ]
     },
@@ -575,7 +665,9 @@
             "Nur einen Anschluss"
           ],
           "correct": 1,
-          "explanation": "Zwei Druckluftanschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zwei Druckluftanschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-002",
@@ -587,7 +679,9 @@
             "Fünf Betätigungen"
           ],
           "correct": 1,
-          "explanation": "Fünf Anschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Fünf Anschlüsse. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-003",
@@ -599,7 +693,9 @@
             "Zwei Zylinder"
           ],
           "correct": 1,
-          "explanation": "Zwei Schaltstellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zwei Schaltstellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-004",
@@ -611,7 +707,9 @@
             "Drei Zylinder, zwei Ventile"
           ],
           "correct": 1,
-          "explanation": "Drei Anschlüsse, zwei Stellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Drei Anschlüsse, zwei Stellungen. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-005",
@@ -623,7 +721,9 @@
             "Kreis mit Punkt"
           ],
           "correct": 1,
-          "explanation": "Zickzacklinie am Ventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zickzacklinie am Ventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-006",
@@ -635,7 +735,9 @@
             "Rollenstößel"
           ],
           "correct": 1,
-          "explanation": "Leeres Dreieck am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Leeres Dreieck am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-007",
@@ -647,7 +749,9 @@
             "Kolbenstange"
           ],
           "correct": 1,
-          "explanation": "Manuelles Betätigungselement am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Manuelles Betätigungselement am Ventilende. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-008",
@@ -659,7 +763,9 @@
             "Druckverlust"
           ],
           "correct": 1,
-          "explanation": "Verbundenes Leitungsnetz. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Verbundenes Leitungsnetz. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-009",
@@ -671,7 +777,9 @@
             "Kolbenstange"
           ],
           "correct": 1,
-          "explanation": "Signal- oder Steuerleitung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Signal- oder Steuerleitung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-010",
@@ -683,7 +791,9 @@
             "Bewegungsgeschwindigkeit des Zylinders"
           ],
           "correct": 1,
-          "explanation": "Durchflussweg in der betreffenden Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Durchflussweg in der betreffenden Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-011",
@@ -695,7 +805,9 @@
             "Eine Feder"
           ],
           "correct": 1,
-          "explanation": "Ein T-förmiger Abschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Ein T-förmiger Abschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-012",
@@ -707,7 +819,9 @@
             "Fünf"
           ],
           "correct": 1,
-          "explanation": "Zwei. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zwei. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-013",
@@ -719,7 +833,9 @@
             "Pneumatischer Druckanschluss"
           ],
           "correct": 1,
-          "explanation": "Mechanische Betätigung durch Kontakt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Mechanische Betätigung durch Kontakt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-014",
@@ -731,7 +847,9 @@
             "5/2-Ventil"
           ],
           "correct": 1,
-          "explanation": "Zylinder mit Feder und einem Druckanschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zylinder mit Feder und einem Druckanschluss. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-symbole-015",
@@ -743,7 +861,9 @@
             "Immer vollständig offene Anschlüsse"
           ],
           "correct": 1,
-          "explanation": "Die durch die Feder gehaltene Schaltstellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Die durch die Feder gehaltene Schaltstellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         }
       ]
     },
@@ -761,7 +881,9 @@
             "3 (S)"
           ],
           "correct": 1,
-          "explanation": "1 (P). Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "1 (P). Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-002",
@@ -773,7 +895,9 @@
             "3 und 5"
           ],
           "correct": 1,
-          "explanation": "2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-003",
@@ -785,7 +909,9 @@
             "2 und 4"
           ],
           "correct": 1,
-          "explanation": "3 und 5. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "3 und 5. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-004",
@@ -797,7 +923,9 @@
             "3 und 5"
           ],
           "correct": 1,
-          "explanation": "12 und 14. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "12 und 14. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-005",
@@ -809,7 +937,9 @@
             "Versorgung"
           ],
           "correct": 1,
-          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-006",
@@ -821,7 +951,9 @@
             "Steuersignal"
           ],
           "correct": 1,
-          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "Arbeitsanschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-007",
@@ -833,7 +965,9 @@
             "S"
           ],
           "correct": 1,
-          "explanation": "P. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "P. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-008",
@@ -845,7 +979,9 @@
             "A"
           ],
           "correct": 1,
-          "explanation": "S. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "S. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-009",
@@ -857,7 +993,9 @@
             "B"
           ],
           "correct": 1,
-          "explanation": "R. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "R. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-010",
@@ -869,7 +1007,9 @@
             "Arbeitsanschluss"
           ],
           "correct": 1,
-          "explanation": "Steueranschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "Steueranschluss. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-011",
@@ -881,7 +1021,9 @@
             "Beide Arbeitsanschlüsse sind gesperrt"
           ],
           "correct": 1,
-          "explanation": "4 wird versorgt und 2 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "4 wird versorgt und 2 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-012",
@@ -893,7 +1035,9 @@
             "Beide werden versorgt"
           ],
           "correct": 1,
-          "explanation": "2 wird versorgt und 4 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "2 wird versorgt und 4 entlüftet. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-013",
@@ -905,7 +1049,9 @@
             "Zur elektrischen Ansteuerung"
           ],
           "correct": 1,
-          "explanation": "Zum Abführen der Abluft aus den Arbeitskammern. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "Zum Abführen der Abluft aus den Arbeitskammern. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-014",
@@ -917,7 +1063,9 @@
             "12 ist der Kolbenstangenanschluss"
           ],
           "correct": 1,
-          "explanation": "1 ist Versorgung, 12 ist Vorsteuersignal. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "1 ist Versorgung, 12 ist Vorsteuersignal. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-anschluesse-015",
@@ -929,7 +1077,9 @@
             "Nur die Versorgung 1"
           ],
           "correct": 1,
-          "explanation": "Die beiden Arbeitsleitungen 2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung."
+          "explanation": "Die beiden Arbeitsleitungen 2 und 4. Die Anschlussnummern folgen der pneumatischen Normkennzeichnung.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         }
       ]
     },
@@ -947,7 +1097,9 @@
             "3/2-Handtaster"
           ],
           "correct": 1,
-          "explanation": "Doppeltwirkender Zylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Doppeltwirkender Zylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-002",
@@ -959,7 +1111,9 @@
             "Druckluftquelle"
           ],
           "correct": 1,
-          "explanation": "5/2-Wegeventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "5/2-Wegeventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-003",
@@ -971,7 +1125,9 @@
             "Druckregler"
           ],
           "correct": 1,
-          "explanation": "3/2-Handtaster. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "3/2-Handtaster. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-004",
@@ -983,7 +1139,9 @@
             "Wartungseinheit"
           ],
           "correct": 1,
-          "explanation": "3/2-Rollenstößelventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "3/2-Rollenstößelventil. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-005",
@@ -995,7 +1153,9 @@
             "Signalventil"
           ],
           "correct": 1,
-          "explanation": "Wartungseinheit. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Wartungseinheit. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-006",
@@ -1007,7 +1167,9 @@
             "Das Ventil 1"
           ],
           "correct": 1,
-          "explanation": "Den Arbeitszylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Den Arbeitszylinder. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-007",
@@ -1019,7 +1181,9 @@
             "Den Druckluftbehälter"
           ],
           "correct": 1,
-          "explanation": "Ein Signal- bzw. Betätigungselement. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Ein Signal- bzw. Betätigungselement. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-008",
@@ -1031,7 +1195,9 @@
             "Bauteil, das Druckluft speichert"
           ],
           "correct": 1,
-          "explanation": "Bauteil, das ein Steuersignal erzeugt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Bauteil, das ein Steuersignal erzeugt. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-009",
@@ -1043,7 +1209,9 @@
             "Es speichert Druckluft im Kolben"
           ],
           "correct": 1,
-          "explanation": "Es bleibt ohne neues Gegensignal in der zuletzt geschalteten Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Es bleibt ohne neues Gegensignal in der zuletzt geschalteten Stellung. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-kennzeichnung-010",
@@ -1055,7 +1223,9 @@
             "Zur Festlegung des Rohrdurchmessers"
           ],
           "correct": 1,
-          "explanation": "Zur eindeutigen Zuordnung von Komponenten. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils."
+          "explanation": "Zur eindeutigen Zuordnung von Komponenten. Das Symbol bzw. die Kennzeichnung beschreibt die Funktion des Bauteils.",
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         }
       ]
     },
@@ -1074,7 +1244,9 @@
           ],
           "correct": 2,
           "explanation": "Der Zylinder fährt aus. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-002",
@@ -1087,7 +1259,9 @@
           ],
           "correct": 2,
           "explanation": "Der Zylinder fährt ein. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-003",
@@ -1100,7 +1274,9 @@
           ],
           "correct": 2,
           "explanation": "Es behält seine letzte Stellung. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-004",
@@ -1113,7 +1289,9 @@
           ],
           "correct": 2,
           "explanation": "Über Anschluss 2 entlüften. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-005",
@@ -1126,7 +1304,9 @@
           ],
           "correct": 2,
           "explanation": "Umschaltung zum Einfahren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-006",
@@ -1139,7 +1319,9 @@
           ],
           "correct": 2,
           "explanation": "Der Zylinder beginnt auszufahren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-007",
@@ -1152,7 +1334,9 @@
           ],
           "correct": 2,
           "explanation": "Es liefert ein pneumatisches Steuersignal. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-008",
@@ -1165,7 +1349,9 @@
           ],
           "correct": 2,
           "explanation": "Es versorgt abwechselnd eine Kammer und entlüftet die andere. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-009",
@@ -1178,7 +1364,9 @@
           ],
           "correct": 2,
           "explanation": "Ein Rückfahrsignal. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-010",
@@ -1191,7 +1379,9 @@
           ],
           "correct": 2,
           "explanation": "Das Verhalten ist ventilabhängig und muss vermieden werden. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-011",
@@ -1204,7 +1394,9 @@
           ],
           "correct": 2,
           "explanation": "Keine zuverlässige pneumatische Bewegung. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-012",
@@ -1217,7 +1409,9 @@
           ],
           "correct": 2,
           "explanation": "1 nach 2 und 4 nach 5. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-013",
@@ -1230,7 +1424,9 @@
           ],
           "correct": 2,
           "explanation": "1 nach 4 und 2 nach 3. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-014",
@@ -1243,7 +1439,9 @@
           ],
           "correct": 2,
           "explanation": "Versorgung und Arbeitsleitungen. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-015",
@@ -1256,7 +1454,9 @@
           ],
           "correct": 2,
           "explanation": "Damit die Kolbenbewegung ein Rückmeldesignal auslöst. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-016",
@@ -1269,7 +1469,9 @@
           ],
           "correct": 2,
           "explanation": "Das bistabile Wegeventil bleibt umgeschaltet. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-017",
@@ -1282,7 +1484,9 @@
           ],
           "correct": 2,
           "explanation": "Er ist in Ruhe vom Ausgang 2 getrennt. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-018",
@@ -1295,7 +1499,9 @@
           ],
           "correct": 2,
           "explanation": "Sie überträgt ein Schaltsignal statt den Hauptvolumenstrom. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-019",
@@ -1308,7 +1514,9 @@
           ],
           "correct": 2,
           "explanation": "Das Rückfahrsignal bleibt aus. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         },
         {
           "id": "ap1-pneu-schaltplaene-020",
@@ -1321,7 +1529,9 @@
           ],
           "correct": 2,
           "explanation": "Leitungen und Bewegungsbereich kontrollieren. Die Visualisierung zeigt die vereinfachte Funktion eines bistabilen 5/2-Ventils.",
-          "diagram": true
+          "diagram": true,
+          "created_at": "2026-10-16T22:44:00+02:00",
+          "source": "Arbeitsblatt Ansteuerung eines doppelt wirkenden Zylinders"
         }
       ]
     }
