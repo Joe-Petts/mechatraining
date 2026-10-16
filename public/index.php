@@ -2,7 +2,7 @@
 declare(strict_types=1);
 $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrotechnik.json'),true);
 ?><!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101820"><title>MechaTraining</title><link rel="stylesheet" href="style.css"></head>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101820"><title>MechaTraining</title><link rel="stylesheet" href="style.css?v=4"></head>
 <body><header><div class="brand">⚙ <span>MECHA<span class="accent">TRAINING</span></span></div><div class="header-right"><div id="xpWidget" class="xp-widget hidden" aria-label="Erfahrungspunkte"><div class="xp-top"><span id="xpLevel">Level 1</span><span id="xpText">0 / 100 XP</span></div><div class="xp-track" role="progressbar" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="xpTrack"><div id="xpFill"></div></div></div></div></header>
 <main>
 <section id="loginPanel" class="panel hidden"><h2>Anmelden</h2><p>Noch kein Administrator eingerichtet? <a href="setup.php">Ersteinrichtung</a></p><form id="loginForm"><label>Benutzername<input name="username" autocomplete="username" required></label><label>Passwort<input name="password" type="password" autocomplete="current-password" required></label><button>Anmelden</button><p id="loginError" role="alert"></p></form></section>
@@ -37,4 +37,4 @@ $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrot
 </aside>
 <script src="calculator.js" defer></script>
 <script src="notes.js" defer></script>
-<script id="questions" type="application/json"><?=json_encode($questions['questions'],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script id="pneumatics" type="application/json"><?=json_encode(json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/pneumatik.json'),true),JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script src="app.js?v=3" defer></script></body></html>
+<script id="questions" type="application/json"><?=json_encode($questions['questions'],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script id="pneumatics" type="application/json"><?=json_encode(json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/pneumatik.json'),true),JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE)?></script><script src="app.js?v=4" defer></script></body></html>
