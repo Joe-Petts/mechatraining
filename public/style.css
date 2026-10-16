@@ -31,3 +31,31 @@
 .notes-toggle{top:calc(42% + var(--tool-tab-size) + var(--tool-tab-gap));background:var(--tool-notes-bg);color:var(--tool-notes-fg);border:1px solid var(--tool-notes-border);border-right:0}
 .calc-toggle svg,.notes-toggle svg{display:block;flex:none}
 @media(max-width:600px){.calc-toggle{top:auto;bottom:calc(20% + var(--tool-tab-size) + var(--tool-tab-gap))}.notes-toggle{top:auto;bottom:20%}}
+
+/* Unterschiedliche Farbschemata für die ausgeklappten Werkzeugbereiche */
+:root{
+ --tool-calculator-panel-bg:#17354b;
+ --tool-calculator-panel-border:#477a9c;
+ --tool-calculator-panel-text:#eef6fc;
+ --tool-calculator-panel-muted:#b1c8d9;
+ --tool-notes-panel-bg:#ffffff;
+ --tool-notes-panel-border:#d9e1e8;
+ --tool-notes-panel-text:#243749;
+ --tool-notes-panel-muted:#617487;
+ --tool-notes-input-bg:#f5f8fb;
+ --tool-notes-card-bg:#f1f5f9;
+ --tool-notes-control-bg:#e7eef4;
+ --tool-notes-control-border:#cbd7e2;
+}
+#calcPanel{background:var(--tool-calculator-panel-bg);border-left-color:var(--tool-calculator-panel-border);color:var(--tool-calculator-panel-text)}
+#calcPanel .calc-heading small,#calcPanel .calc-hint,#calcPanel .calc-history small{color:var(--tool-calculator-panel-muted)}
+#notesPanel{background:var(--tool-notes-panel-bg);border-left-color:var(--tool-notes-panel-border);color:var(--tool-notes-panel-text);color-scheme:light}
+#notesPanel .calc-heading small,#notesPanel .notes-description,#notesPanel .notes-warning,#notesPanel .notes-empty,#notesPanel .notes-actions span,#notesPanel .notes-item p{color:var(--tool-notes-panel-muted)}
+#notesPanel .notes-label{color:var(--tool-notes-panel-text)}
+#notesPanel .notes-title,#notesPanel .notes-text{background:var(--tool-notes-input-bg);color:var(--tool-notes-panel-text);border:1px solid var(--tool-notes-control-border)}
+#notesPanel .notes-title::placeholder,#notesPanel .notes-text::placeholder{color:var(--tool-notes-panel-muted)}
+#notesPanel button{background:var(--tool-notes-control-bg);color:var(--tool-notes-panel-text);border-color:var(--tool-notes-control-border)}
+#notesPanel .calc-close{background:var(--tool-notes-control-bg);color:var(--tool-notes-panel-text)}
+#notesPanel .notes-item{background:var(--tool-notes-card-bg);border-color:var(--tool-notes-control-border)}
+#notesPanel .notes-item-actions .notes-delete{color:#a33434}
+#notesPanel .notes-actions #notesSave{background:#f9b340;color:#17202a;border-color:#f9b340}
