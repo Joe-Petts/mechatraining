@@ -65,7 +65,7 @@ if (in_array($action,['futter_list','futter_status','futter_public'],true)) {
  foreach($files as $file) {
   $set=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/'.$file),true);
   foreach(($set['modules']??[$set]) as $module) foreach($module['questions'] as $q) {
-   $q['topic']=$set['title'];$q['module']=$module['title'];$catalog[$q['id']]=$q;
+   $q['topic']=$set['title'];$q['module']=$module['title'];$q['batch_id']=($file==='elektrotechnik.json'?'elektro-bestand':(preg_match('/^ap1-pneu-(symbole|anschluesse|schaltplaene|kennzeichnung)-/',$q['id'])?'pneu-zylindersteuerung':'pneu-grundlagen'));$catalog[$q['id']]=$q;
   }
  }
  $statuses=$pdo->query('SELECT question_id,status FROM futter_status')->fetchAll(PDO::FETCH_KEY_PAIR);
