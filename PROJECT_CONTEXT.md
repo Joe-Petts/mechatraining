@@ -108,3 +108,10 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Zwei Übungsarten: Formel erkennen (drei Antworten) und Formel selbst eingeben (zeichenbasierter Vergleich, nur begrenzte Schreibweisen-Normalisierung).
 - Gemischte oder fachspezifische Runden, zufällige Reihenfolge, direkte Rückmeldung und Rundenergebnis.
 - Kein Datenbankeingriff, keine Änderung bestehender Aufgaben-IDs oder Fortschritte. Weitere Formelgebiete können in der JSON-Sammlung ergänzt werden.
+
+
+## Admin-Navigation und Futter-Blöcke (2026-10-16)
+- Adminzugang nur für Administratoren über kleines Zahnrad im Header. Admin-Startansicht mit Futter und Benutzerverwaltung; keine Adminlisten auf dem Lerndashboard.
+- Futter zeigt gruppierte Arbeitsblatt-Importe (Pneumatik Arbeitsblatt 1 und 2 sowie getrennten Elektrotechnik-Bestand) statt einzelne Fragen auf oberster Ebene. Fragen/Lösungen bleiben in aufklappbaren Details verfügbar.
+- Ganze Blöcke können aktiviert, deaktiviert und archiviert werden. Die aktuelle Umsetzung führt die vorhandene statusgeschützte Einzelaufgaben-API sequenziell aus; bei Netzwerkfehlern können Teiländerungen auftreten. Status und Fortschritte bleiben in SQLite erhalten.
+- Für zukünftige Arbeitsblatt-Importe eine eindeutige dauerhafte Block-ID und einen tatsächlichen Zeitstempel vergeben.
