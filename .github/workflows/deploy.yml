@@ -1,0 +1,65 @@
+name: Deploy MechaTraining to ALL-INKL
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: mechatraining-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Check required deployment settings
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          for name in FTP_HOST FTP_USER FTP_PASS FTP_REMOTE_DIR; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing GitHub Actions secret: $name"
+              exit 1
+            fi
+          done
+
+      - name: Install FTPS client
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Deploy application (never delete server files)
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        run: |
+          set -euo pipefail
+          # FTPS with TLS certificate verification. Never turn verification off.
+          # Upload the repository into the project root (NOT the public directory).
+          # Exclude runtime data and deployment metadata. No --delete option.
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" <<EOF
+          set cmd:fail-exit yes
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set net:max-retries 2
+          set net:timeout 25
+          mirror --reverse --verbose=1 --parallel=2 \
+            --exclude-glob .git/ \
+            --exclude-glob .github/ \
+            --exclude-glob .gitignore \
+            --exclude-glob .env \
+            --exclude-glob storage/ \
+            --exclude-glob '*.sqlite' \
+            --exclude-glob '*.sqlite-*' \
+            ./ "$FTP_REMOTE_DIR"
+          bye
+          EOF
