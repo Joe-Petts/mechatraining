@@ -29,3 +29,8 @@ function json_response(array $payload, int $status=200): never {
     http_response_code($status); header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store'); echo json_encode($payload, JSON_UNESCAPED_UNICODE); exit;
 }
+
+function migrate_futter(PDO $db): void {
+ $db->exec("CREATE TABLE IF NOT EXISTS futter_status (question_id TEXT PRIMARY KEY, status TEXT NOT NULL DEFAULT 'active', updated_at TEXT DEFAULT CURRENT_TIMESTAMP)");
+ $db->exec("CREATE TABLE IF NOT EXISTS futter_events (id INTEGER PRIMARY KEY AUTOINCREMENT, question_id TEXT, action TEXT, changed_at TEXT DEFAULT CURRENT_TIMESTAMP)");
+}
