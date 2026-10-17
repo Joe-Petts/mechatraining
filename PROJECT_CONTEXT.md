@@ -132,3 +132,8 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Formel-Level-Fuchs als feste schmale Anzeige links auf Bildschirmmitte, auch beim Scrollen sichtbar.
 - Im Formel-Modus eigenständiger dunkler grünlicher Seitenhintergrund; ein Icon oben rechts führt zurück zu den Lernbereichen.
 - Überflüssige Titel und Beschreibung entfernt, kompakte Fachgebiet-/Übungsart-Auswahl und runder Neustart-Button unten rechts.
+
+## Wiederaufnahme nach Browser-Neuladen (2026-10-17)
+- Die zuletzt geöffnete Lernansicht wird pro Browser-Tab in sessionStorage gespeichert und nach erfolgreicher Sessionprüfung wiederhergestellt (Dashboard, Fachgebiet, Modul, Formelmodus).
+- Formelmodus merkt sich Rundenreihenfolge, Fragenposition, Trefferzahl und gewählte Filter; Ctrl+F5 startet daher nicht automatisch auf der Startseite. Neue Runde setzt den Rundenzustand zurück.
+- Benutzerwechsel/Logout entfernt die gespeicherte Ansicht. Die serverseitige Anmeldung bleibt unverändert; kein zusätzlicher Tracking-Cookie.
