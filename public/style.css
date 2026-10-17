@@ -93,3 +93,28 @@ body:has(#formulaPanel:not(.hidden)){background:#111f26;background-image:linear-
 
 /* Optionales Formelzeichen-Lexikon */
 .formula-card{position:relative}.formula-info{position:absolute;top:18px;right:18px;z-index:3}.formula-info summary{list-style:none;cursor:pointer;width:29px;height:29px;display:grid;place-items:center;border:1px solid #69828b;border-radius:50%;color:#c4d5dc;background:#1b3440;font-size:19px;font-weight:500;line-height:1}.formula-info summary::-webkit-details-marker{display:none}.formula-info summary:focus-visible{outline:2px solid #80c9f0;outline-offset:3px}.formula-info dl{position:absolute;top:35px;right:0;width:min(300px,70vw);max-height:55vh;overflow-y:auto;display:grid;grid-template-columns:auto 1fr;gap:9px 12px;margin:0;padding:16px;border:1px solid #4c7281;border-radius:12px;background:#152a35;color:#e6f0f4;box-shadow:0 12px 32px #0009;font-size:13px;line-height:1.4}.formula-info dt{font-weight:800;color:#ffbe51}.formula-info dd{margin:0}.formula-info[open] summary{background:#315566}
+
+/* Formeltraining 2.0: eine klare Ebene und horizontale Fortschrittsanzeige */
+body:has(#formulaPanel:not(.hidden)) main{max-width:1040px}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;box-shadow:none;border-radius:0;padding:58px 20px 112px;min-height:70vh}
+#formulaPanel .formula-settings,#formulaPanel #formulaProgress,#formulaPanel #formulaQuestion,#formulaPanel #formulaFeedback,#formulaPanel #formulaNext{max-width:720px;margin-left:auto;margin-right:auto}
+#formulaPanel .formula-card{background:transparent;border:0;border-radius:0;box-shadow:none;margin:10px 0;padding:10px 0}
+#formulaPanel .formula-card>p{margin:0 0 10px;font-size:14px}
+#formulaPanel .formula-card h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 22px;font-size:clamp(23px,3.4vw,30px);line-height:1.35}
+#formulaPanel .formula-options{gap:10px}
+#formulaPanel .formula-options button{border-radius:9px;padding:16px 18px;min-height:56px}
+#formulaPanel .formula-climb{position:fixed;top:auto;bottom:0;left:50%;right:auto;transform:translateX(-50%);display:grid;grid-template-columns:72px minmax(80px,1fr) auto;align-items:center;gap:14px;width:min(650px,100%);height:76px;margin:0;padding:9px 18px;background:#11252c;border:1px solid #34545b;border-bottom:0;border-radius:13px 13px 0 0;z-index:8;text-align:left}
+#formulaPanel .formula-climb-top{display:flex;flex-direction:column;align-items:flex-start;gap:1px;font-size:12px;white-space:nowrap}
+#formulaPanel .formula-climb-track{position:relative;width:100%;height:36px;margin:0}
+#formulaPanel .formula-climb-bar{position:absolute;left:0;right:0;top:50%;bottom:auto;transform:translateY(-50%);width:auto;height:5px}
+#formulaPanel .formula-climber{position:absolute;left:8%;top:50%;bottom:auto;transform:translate(-50%,-50%);transition:left .3s ease;font-size:26px}
+#formulaPanel .formula-level-bars{display:flex;flex-direction:row;flex-wrap:wrap;gap:3px;align-content:center;max-width:90px;max-height:46px;overflow:hidden}
+#formulaPanel .formula-level-mark{width:5px;height:18px}
+#formulaPanel #formulaClimbMessage{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);width:max-content;max-width:80vw;background:#11252c;padding:5px 9px;border-radius:6px;font-size:12px}
+#formulaPanel .formula-restart{bottom:90px}
+#formulaPanel .formula-info{position:relative;left:auto;right:auto;top:auto;display:inline-block;flex:none;font-size:initial}
+#formulaPanel .formula-info summary{width:26px;height:26px;font-size:16px;background:transparent}
+#formulaPanel .formula-info dl{position:absolute;top:34px;left:auto;right:0;width:min(315px,calc(100vw - 54px));max-height:50vh;overflow:auto;grid-template-columns:minmax(35px,auto) minmax(0,1fr);padding:13px;z-index:20;font-size:13px}
+#formulaPanel .formula-info dd{overflow-wrap:anywhere}
+@media(max-width:540px){body:has(#formulaPanel:not(.hidden)) #formulaPanel{padding:54px 14px 110px}#formulaPanel .formula-climb{top:auto;left:50%;bottom:0;width:100%;height:70px;grid-template-columns:62px minmax(60px,1fr) auto;padding:8px 12px;gap:9px;border-radius:0;border-left:0;border-right:0}#formulaPanel .formula-climb-top{font-size:11px}#formulaPanel .formula-restart{bottom:82px}#formulaPanel .formula-info dl{right:-12px}}
+@media(prefers-reduced-motion:reduce){#formulaPanel .formula-climber{transition:none}}
