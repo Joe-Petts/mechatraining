@@ -2,6 +2,11 @@ const electroQuestions=JSON.parse(document.getElementById('questions').textConte
 const pneumaticModules=JSON.parse(document.getElementById('pneumatics').textContent).modules;
 let questions=electroQuestions, returnView='topicPanel';
 let csrf='',solved=new Set();
+const viewKey='mechatraining-view';
+function rememberView(view,moduleId){try{sessionStorage.setItem(viewKey,JSON.stringify({view,moduleId:moduleId||null,user:loggedName}));}catch(e){}}
+function savedView(){try{return JSON.parse(sessionStorage.getItem(viewKey)||'null');}catch(e){return null;}}
+function clearView(){try{sessionStorage.removeItem(viewKey);}catch(e){}}
+
 
 const $=id=>document.getElementById(id);
 async function api(action,data){
@@ -11,7 +16,7 @@ async function api(action,data){
 function updateXP(xp){const level=Math.floor(xp/100)+1;const current=xp%100;$('xpLevel').textContent='Level '+level;$('xpText').textContent=current+' / 100 XP';$('xpFill').style.width=current+'%';$('xpTrack').setAttribute('aria-valuenow',String(current));}
 async function refreshXP(){const data=await api('progress');updateXP(Number(data.xp)||0);}
 function progress(){const count=questions.filter(q=>solved.has(q.id)).length;$('progress').textContent=count;$('bar').style.width=(100*count/questions.length)+'%'; }
-function openExercise(module,back){questions=module.questions;returnView=back;document.querySelector('#appPanel h2').textContent=module.title;document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='pneuPanel'?'PNEUMATIK · AP1':'ELEKTROTECHNIK · AP1';document.querySelector('#appPanel .toolbar p + h2');document.querySelector('#appPanel .toolbar + p').replaceChildren(document.createTextNode('Angemeldet als '));const line=document.querySelector('#appPanel .toolbar + p');const user=document.createElement('strong');user.id='username';user.textContent=loggedName;const count=document.createElement('span');count.id='progress';line.append(user,document.createTextNode(' · '),count,document.createTextNode(' von '+questions.length+' Aufgaben richtig gelöst'));$('exerciseBack').textContent=back==='pneuPanel'?'← Pneumatik':'← Elektrotechnik';render();showLearningView('appPanel');}
+function openExercise(module,back){questions=module.questions;returnView=back;document.querySelector('#appPanel h2').textContent=module.title;document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='pneuPanel'?'PNEUMATIK · AP1':'ELEKTROTECHNIK · AP1';document.querySelector('#appPanel .toolbar p + h2');document.querySelector('#appPanel .toolbar + p').replaceChildren(document.createTextNode('Angemeldet als '));const line=document.querySelector('#appPanel .toolbar + p');const user=document.createElement('strong');user.id='username';user.textContent=loggedName;const count=document.createElement('span');count.id='progress';line.append(user,document.createTextNode(' · '),count,document.createTextNode(' von '+questions.length+' Aufgaben richtig gelöst'));$('exerciseBack').textContent=back==='pneuPanel'?'← Pneumatik':'← Elektrotechnik';render();showLearningView('appPanel');rememberView('appPanel',module.id||'electro');}
 let loggedName='';
 function pneumaticDiagram(section){
  const wrap=document.createElement('div');wrap.className='pneu-simulator';
@@ -46,19 +51,19 @@ function render(){
  });
  progress();
 }
-async function signedIn(user,token){csrf=token;loggedName=user.name;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();updateXP(Number(data.xp)||0);$('xpWidget').classList.remove('hidden');if(user.role==='admin'){$('adminToggle').classList.remove('hidden');await loadUsers();}}
+async function signedIn(user,token){csrf=token;loggedName=user.name;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();updateXP(Number(data.xp)||0);$('xpWidget').classList.remove('hidden');if(user.role==='admin'){$('adminToggle').classList.remove('hidden');await loadUsers();}const previous=savedView();if(previous&&previous.user===user.name){if(previous.view==='formulaPanel'){$('formulaOpen').click();}else if(previous.view==='appPanel'){const module=pneumaticModules.find(m=>m.id===previous.moduleId);if(module)openExercise(module,'pneuPanel');else if(previous.moduleId==='electro')openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel');}else if(['dashboard','topicPanel','metalPanel','pneuPanel'].includes(previous.view))showLearningView(previous.view);}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const form=new FormData(e.currentTarget);try{const r=await api('login',{username:form.get('username'),password:form.get('password')});await signedIn(r.user,r.csrf);}catch(err){$('loginError').textContent=err.message;}});
-$('logout').addEventListener('click',async()=>{try{await api('logout',{});location.reload();}catch(e){alert(e.message);}});
+$('logout').addEventListener('click',async()=>{try{await api('logout',{});clearView();location.reload();}catch(e){alert(e.message);}});
 api('session').then(r=>{if(r.user)return signedIn(r.user,r.csrf);$('loginPanel').classList.remove('hidden');}).catch(e=>{$('loginPanel').classList.remove('hidden');$('loginError').textContent=e.message;});
 
 async function loadUsers(){const data=await api('users');const list=$('usersList');list.replaceChildren();data.users.forEach(user=>{const li=document.createElement('li');li.textContent=user.username+' ('+(user.role==='admin'?'Administrator':'Lernender')+')';list.append(li);});}
 $('createUserForm').addEventListener('submit',async e=>{e.preventDefault();const form=new FormData(e.currentTarget);$('adminMessage').textContent='';try{await api('create_user',{username:form.get('username'),password:form.get('password')});$('adminMessage').textContent='Benutzer erfolgreich angelegt.';e.currentTarget.reset();await loadUsers();}catch(err){$('adminMessage').textContent=err.message;}});
 
 // Navigation: Lernbereiche → Themenübungen → Aufgabe
-function showLearningView(view){['dashboard','topicPanel','metalPanel','pneuPanel','appPanel'].forEach(id=>$(id).classList.toggle('hidden',id!==view));}
+function showLearningView(view){['dashboard','topicPanel','metalPanel','pneuPanel','appPanel'].forEach(id=>$(id).classList.toggle('hidden',id!==view));if(view!=='appPanel')rememberView(view);}
 document.querySelector('[data-topic="elektro"]').addEventListener('click',()=>showLearningView('topicPanel'));
 $('topicBack').addEventListener('click',()=>showLearningView('dashboard'));
-$('openBasics').addEventListener('click',()=>openExercise({title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel'));
+$('openBasics').addEventListener('click',()=>openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel'));
 $('exerciseBack').addEventListener('click',()=>showLearningView(returnView));
 
 document.querySelector('[data-topic="metall"]').addEventListener('click',()=>showLearningView('metalPanel'));
