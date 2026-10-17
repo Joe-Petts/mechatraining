@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "created_at": "2026-10-16T23:00:00+02:00",
   "topics": [
     {
@@ -163,6 +163,93 @@
             "V = A · s",
             "V = A / s",
             "V = s / A"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "metall",
+      "title": "Metallbau · Schweißtechnik",
+      "formulas": [
+        [
+          "Kehlnaht – idealisierter Querschnitt bei wirksamer Nahtdicke a",
+          "Aₛ = a²",
+          [
+            "Aₛ = a²",
+            "Aₛ = a / 2",
+            "Aₛ = π · a² / 4"
+          ]
+        ],
+        [
+          "Kehlnaht – Schenkellänge z (90°)",
+          "Aₛ = z² / 2",
+          [
+            "Aₛ = z² / 2",
+            "Aₛ = z²",
+            "Aₛ = z / 2"
+          ]
+        ],
+        [
+          "Schweißnahtvolumen",
+          "Vₛ = Aₛ · Lₛ",
+          [
+            "Vₛ = Aₛ · Lₛ",
+            "Vₛ = Aₛ / Lₛ",
+            "Vₛ = Lₛ / Aₛ"
+          ]
+        ],
+        [
+          "V-Naht – idealisierter Dreiecksquerschnitt",
+          "Aₛ = a² · tan(α / 2)",
+          [
+            "Aₛ = a² · tan(α / 2)",
+            "Aₛ = a² / tan(α / 2)",
+            "Aₛ = 2a² · tan(α)"
+          ]
+        ],
+        [
+          "V-Naht – Öffnungsbreite",
+          "b = 2a · tan(α / 2)",
+          [
+            "b = 2a · tan(α / 2)",
+            "b = a · tan(α)",
+            "b = a / tan(α / 2)"
+          ]
+        ],
+        [
+          "Elektrodenkern – Kreisquerschnitt",
+          "Aₑ = π · d² / 4",
+          [
+            "Aₑ = π · d² / 4",
+            "Aₑ = π · d / 4",
+            "Aₑ = π · d²"
+          ]
+        ],
+        [
+          "Elektrodenkern – Volumen",
+          "Vₑ = Aₑ · lₑ",
+          [
+            "Vₑ = Aₑ · lₑ",
+            "Vₑ = Aₑ / lₑ",
+            "Vₑ = Aₑ + lₑ"
+          ]
+        ],
+        [
+          "Elektrodenzahl – theoretisch",
+          "Zₑ = Vₛ / Vₑ",
+          [
+            "Zₑ = Vₛ / Vₑ",
+            "Zₑ = Vₑ / Vₛ",
+            "Zₑ = Vₛ · Vₑ"
+          ]
+        ],
+        [
+          "Elektrodenzahl – mit nutzbarem Anteil η",
+          "Zₑ = Vₛ / (η · Vₑ)",
+          [
+            "Zₑ = Vₛ / (η · Vₑ)",
+            "Zₑ = η · Vₛ / Vₑ",
+            "Zₑ = Vₑ / Vₛ"
           ]
         ]
       ]
