@@ -137,3 +137,12 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Die zuletzt geöffnete Lernansicht wird pro Browser-Tab in sessionStorage gespeichert und nach erfolgreicher Sessionprüfung wiederhergestellt (Dashboard, Fachgebiet, Modul, Formelmodus).
 - Formelmodus merkt sich Rundenreihenfolge, Fragenposition, Trefferzahl und gewählte Filter; Ctrl+F5 startet daher nicht automatisch auf der Startseite. Neue Runde setzt den Rundenzustand zurück.
 - Benutzerwechsel/Logout entfernt die gespeicherte Ansicht. Die serverseitige Anmeldung bleibt unverändert; kein zusätzlicher Tracking-Cookie.
+
+
+## Metallbau – Schweißtechnik (freigegeben 2026-10-17)
+- Quelle: fotografiertes Arbeitsblatt „Schweißnaht, -querschnitt, Elektrodenverbrauch, Kehlnaht / V-Naht“.
+- `content/ap1/metallbau.json`: vier neue Module mit jeweils 10 Fragen und stabilen IDs `ap1-metall-schweissen-*`: Formeln, idealisierter Kehlnahtquerschnitt, Schweißgutvolumen, theoretischer Elektrodenverbrauch.
+- Die Aufgaben nutzen nachvollziehbare Lösungen und wechselnde Zahlen; Kehlnaht-Schenkellänge z und wirksame Nahtdicke a werden ausdrücklich unterschieden. Idealisiertes V-Naht-Modell ohne Steg/Überhöhung; Elektrodenverbrauch ist theoretisch, nutzbarer Anteil wird bei Bedarf vorgegeben.
+- `content/ap1/formeln.json`: neues Fachgebiet Metallbau mit 9 Formeln; auswählbar im Formel-Modus.
+- Serverseitige Antwortprüfung und Futter-Adminverwaltung um `metallbau.json` erweitert; Futter-Block-ID `metall-schweissnaht-20261017`.
+- Vorhandene Konten, Fortschritts-IDs, XP und SQLite bleiben unverändert.
