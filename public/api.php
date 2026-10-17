@@ -61,11 +61,11 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
 
 if (in_array($action,['futter_list','futter_status','futter_public'],true)) {
  migrate_futter($pdo);
- $files=['elektrotechnik.json','pneumatik.json'];$catalog=[];
+ $files=['elektrotechnik.json','pneumatik.json','metallbau.json'];$catalog=[];
  foreach($files as $file) {
   $set=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/'.$file),true);
   foreach(($set['modules']??[$set]) as $module) foreach($module['questions'] as $q) {
-   $q['topic']=$set['title'];$q['module']=$module['title'];$q['batch_id']=($file==='elektrotechnik.json'?'elektro-bestand':(preg_match('/^ap1-pneu-(symbole|anschluesse|schaltplaene|kennzeichnung)-/',$q['id'])?'pneu-zylindersteuerung':'pneu-grundlagen'));$catalog[$q['id']]=$q;
+   $q['topic']=$set['title'];$q['module']=$module['title'];$q['batch_id']=$q['batch_id']??($file==='elektrotechnik.json'?'elektro-bestand':(preg_match('/^ap1-pneu-(symbole|anschluesse|schaltplaene|kennzeichnung)-/',$q['id'])?'pneu-zylindersteuerung':'pneu-grundlagen'));$catalog[$q['id']]=$q;
   }
  }
  $statuses=$pdo->query('SELECT question_id,status FROM futter_status')->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -100,7 +100,7 @@ if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
 }
 if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
-    $questionSets=[dirname(__DIR__).'/content/ap1/elektrotechnik.json',dirname(__DIR__).'/content/ap1/pneumatik.json'];
+    $questionSets=[dirname(__DIR__).'/content/ap1/elektrotechnik.json',dirname(__DIR__).'/content/ap1/pneumatik.json',dirname(__DIR__).'/content/ap1/metallbau.json'];
     $found=null; foreach($questionSets as $path) { $set=json_decode(file_get_contents($path),true); $modules=isset($set['modules'])?$set['modules']:[$set]; foreach($modules as $module) foreach($module['questions'] as $q) if($q['id']===($data['question_id']??'')) {$found=$q;break 3;} }
     if($found){migrate_futter($pdo);$check=$pdo->prepare('SELECT status FROM futter_status WHERE question_id=?');$check->execute([$found['id']]);if(($check->fetchColumn()?:'active')!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
     if(!$found || !is_int($data['answer']??null) || !array_key_exists($data['answer'],$found['options'])) json_response(['error'=>'Ungültige Antwort.'],422);
