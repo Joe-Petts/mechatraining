@@ -2,7 +2,7 @@
 declare(strict_types=1);
 $questions=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/elektrotechnik.json'),true);
 ?><!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101820"><title>MechaTraining</title><link rel="stylesheet" href="style.css?v=13"></head>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101820"><title>MechaTraining</title><link rel="stylesheet" href="style.css?v=14"></head>
 <body><header><a class="brand brand-link" href="./" aria-label="MechaTraining – Startseite">⚙ <span>MECHA<span class="accent">TRAINING</span></span></a><div class="header-right"><div id="xpWidget" class="xp-widget hidden" aria-label="Erfahrungspunkte"><div class="xp-top"><span id="xpLevel">Level 1</span><span id="xpText">0 / 100 XP</span></div><div class="xp-track" role="progressbar" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="xpTrack"><div id="xpFill"></div></div></div><button id="adminToggle" class="admin-toggle hidden" type="button" aria-label="Administration öffnen" title="Administration" aria-expanded="false">⚙</button></div></header>
 <main>
 <section id="loginPanel" class="panel hidden"><h2>Anmelden</h2><p>Noch kein Administrator eingerichtet? <a href="setup.php">Ersteinrichtung</a></p><form id="loginForm"><label>Benutzername<input name="username" autocomplete="username" required></label><label>Passwort<input name="password" type="password" autocomplete="current-password" required></label><button>Anmelden</button><p id="loginError" role="alert"></p></form></section>
