@@ -1,0 +1,631 @@
+{
+  "id": "ap1-metallbau",
+  "title": "Metallbau",
+  "source": "Fotografiertes Arbeitsblatt Schweißnahtquerschnitt / Elektrodenverbrauch, 17.10.2026",
+  "modules": [
+    {
+      "id": "schweissen-formeln",
+      "title": "Schweißtechnik – Formeln zuordnen",
+      "questions": [
+        {
+          "id": "ap1-metall-schweissen-formel-001",
+          "prompt": "Welche Formel passt? Kehlnaht mit Schenkellänge a: Querschnittsfläche",
+          "options": [
+            "Aₛ = a² / 2",
+            "Aₛ = a²",
+            "Aₛ = 2a²",
+            "Aₛ = πa² / 4"
+          ],
+          "correct": 0,
+          "explanation": "Bei einer gleichschenkligen rechtwinkligen Dreiecksfläche ist Aₛ = a² / 2. Achtung: In der Schweißtechnik bezeichnet a häufig die Nahtdicke, nicht die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-002",
+          "prompt": "Welche Formel passt? Kehlnaht mit wirksamer Nahtdicke a: Querschnittsfläche",
+          "options": [
+            "Aₛ = a / 2",
+            "Aₛ = πa²",
+            "Aₛ = 2a",
+            "Aₛ = a²"
+          ],
+          "correct": 3,
+          "explanation": "Die Fläche hängt von der Nahtgeometrie ab. Aₛ = a² gilt nicht allgemein für eine Kehlnaht; bei der gleichschenkligen Kehlnaht mit wirksamer Nahtdicke a und 90° Öffnungswinkel beträgt die Dreiecksfläche a².",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-003",
+          "prompt": "Welche Formel passt? Volumen einer gleichförmigen Schweißnaht",
+          "options": [
+            "Vₛ = Lₛ / Aₛ",
+            "Vₛ = Aₛ + Lₛ",
+            "Vₛ = Aₛ · Lₛ",
+            "Vₛ = Aₛ / Lₛ"
+          ],
+          "correct": 2,
+          "explanation": "Querschnittsfläche mal Nahtlänge ergibt das Schweißgutvolumen.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-004",
+          "prompt": "Welche Formel passt? Schweißnahtlänge aus Volumen und Querschnitt",
+          "options": [
+            "Lₛ = Vₛ + Aₛ",
+            "Lₛ = Vₛ / Aₛ",
+            "Lₛ = Vₛ · Aₛ",
+            "Lₛ = Aₛ / Vₛ"
+          ],
+          "correct": 1,
+          "explanation": "Vₛ = Aₛ · Lₛ nach Lₛ umstellen.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-005",
+          "prompt": "Welche Formel passt? Elektrodenquerschnitt aus Durchmesser d",
+          "options": [
+            "Aₑ = π · d² / 4",
+            "Aₑ = π · d / 4",
+            "Aₑ = π · d²",
+            "Aₑ = d² / π"
+          ],
+          "correct": 0,
+          "explanation": "Kreisfläche mit Radius d/2: π(d/2)².",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-006",
+          "prompt": "Welche Formel passt? Elektrodenvolumen aus Querschnitt und Länge",
+          "options": [
+            "Vₑ = Aₑ / lₑ",
+            "Vₑ = lₑ / Aₑ",
+            "Vₑ = Aₑ + lₑ",
+            "Vₑ = Aₑ · lₑ"
+          ],
+          "correct": 3,
+          "explanation": "Volumen des zylindrischen Elektrodenkerns; nutzbare Länge und Verluste beachten.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-007",
+          "prompt": "Welche Formel passt? Theoretische Elektrodenzahl ohne Verluste",
+          "options": [
+            "Zₑ = Vₛ · Vₑ",
+            "Zₑ = Vₛ + Vₑ",
+            "Zₑ = Vₛ / Vₑ",
+            "Zₑ = Vₑ / Vₛ"
+          ],
+          "correct": 2,
+          "explanation": "Volumenbedarf durch nutzbares Volumen je Elektrode teilen; auf ganze Elektroden aufrunden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-008",
+          "prompt": "Welche Formel passt? V-Naht: Dreiecksfläche mit Tiefe a und Winkel α",
+          "options": [
+            "Aₛ = πa² / 4",
+            "Aₛ = a² · tan(α / 2)",
+            "Aₛ = a² / tan(α / 2)",
+            "Aₛ = 2a² · tan(α)"
+          ],
+          "correct": 1,
+          "explanation": "Für eine idealisierte symmetrische V-Fuge ohne Steg und Überhöhung: Breite 2a·tan(α/2), Fläche ½·Breite·a.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-009",
+          "prompt": "Welche Formel passt? V-Naht: Öffnungsbreite bei Tiefe a und Winkel α",
+          "options": [
+            "b = 2a · tan(α / 2)",
+            "b = a · tan(α)",
+            "b = a / tan(α / 2)",
+            "b = 2a / tan(α)"
+          ],
+          "correct": 0,
+          "explanation": "Die halbe Öffnungsbreite ist a·tan(α/2).",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-formel-010",
+          "prompt": "Welche Formel passt? Schweißgutbedarf mit nutzbarem Abschmelzgrad η",
+          "options": [
+            "Zₑ = η · Vₛ / Vₑ",
+            "Zₑ = Vₑ / (η · Vₛ)",
+            "Zₑ = Vₛ · η · Vₑ",
+            "Zₑ = Vₛ / (η · Vₑ)"
+          ],
+          "correct": 3,
+          "explanation": "η ist der nutzbare Volumenanteil des Elektrodenkerns. In der Praxis sind weitere Verluste und Herstellerangaben relevant.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        }
+      ]
+    },
+    {
+      "id": "schweissen-querschnitt",
+      "title": "Schweißtechnik – Nahtquerschnitt",
+      "questions": [
+        {
+          "id": "ap1-metall-schweissen-querschnitt-001",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 3 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "4,5 mm²",
+            "9 mm²",
+            "6 mm²",
+            "2,25 mm²"
+          ],
+          "correct": 0,
+          "explanation": "Aₛ = a² / 2 = 3² / 2 = 4,5 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-002",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 4 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "16 mm²",
+            "8 mm²",
+            "4 mm²",
+            "8 mm²"
+          ],
+          "correct": 1,
+          "explanation": "Aₛ = a² / 2 = 4² / 2 = 8 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-003",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 5 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "10 mm²",
+            "6,25 mm²",
+            "12,5 mm²",
+            "25 mm²"
+          ],
+          "correct": 2,
+          "explanation": "Aₛ = a² / 2 = 5² / 2 = 12,5 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-004",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 6 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "9 mm²",
+            "18 mm²",
+            "36 mm²",
+            "12 mm²"
+          ],
+          "correct": 1,
+          "explanation": "Aₛ = a² / 2 = 6² / 2 = 18 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-005",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 7 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "24,5 mm²",
+            "49 mm²",
+            "14 mm²",
+            "12,25 mm²"
+          ],
+          "correct": 0,
+          "explanation": "Aₛ = a² / 2 = 7² / 2 = 24,5 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-006",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 8 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "64 mm²",
+            "16 mm²",
+            "16 mm²",
+            "32 mm²"
+          ],
+          "correct": 3,
+          "explanation": "Aₛ = a² / 2 = 8² / 2 = 32 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-007",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 9 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "18 mm²",
+            "20,25 mm²",
+            "40,5 mm²",
+            "81 mm²"
+          ],
+          "correct": 2,
+          "explanation": "Aₛ = a² / 2 = 9² / 2 = 40,5 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-008",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 10 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "25 mm²",
+            "50 mm²",
+            "100 mm²",
+            "20 mm²"
+          ],
+          "correct": 1,
+          "explanation": "Aₛ = a² / 2 = 10² / 2 = 50 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-009",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 12 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "72 mm²",
+            "144 mm²",
+            "24 mm²",
+            "36 mm²"
+          ],
+          "correct": 0,
+          "explanation": "Aₛ = a² / 2 = 12² / 2 = 72 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-querschnitt-010",
+          "prompt": "Eine gleichschenklige Kehlnaht hat zwei Schenkellängen von jeweils 14 mm. Wie groß ist die idealisierte dreieckige Querschnittsfläche?",
+          "options": [
+            "196 mm²",
+            "28 mm²",
+            "49 mm²",
+            "98 mm²"
+          ],
+          "correct": 3,
+          "explanation": "Aₛ = a² / 2 = 14² / 2 = 98 mm². Hier ist a ausdrücklich die Schenkellänge.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        }
+      ]
+    },
+    {
+      "id": "schweissen-volumen",
+      "title": "Schweißtechnik – Schweißgutvolumen",
+      "questions": [
+        {
+          "id": "ap1-metall-schweissen-volumen-001",
+          "prompt": "Eine Schweißnaht hat 6 mm² Querschnitt und 40 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "240 mm³",
+            "46 mm³",
+            "24 mm³",
+            "480 mm³"
+          ],
+          "correct": 0,
+          "explanation": "Vₛ = Aₛ · Lₛ = 6 mm² · 40 mm = 240 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-002",
+          "prompt": "Eine Schweißnaht hat 8 mm² Querschnitt und 60 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "68 mm³",
+            "48 mm³",
+            "960 mm³",
+            "480 mm³"
+          ],
+          "correct": 3,
+          "explanation": "Vₛ = Aₛ · Lₛ = 8 mm² · 60 mm = 480 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-003",
+          "prompt": "Eine Schweißnaht hat 10 mm² Querschnitt und 80 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "80 mm³",
+            "1600 mm³",
+            "800 mm³",
+            "90 mm³"
+          ],
+          "correct": 2,
+          "explanation": "Vₛ = Aₛ · Lₛ = 10 mm² · 80 mm = 800 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-004",
+          "prompt": "Eine Schweißnaht hat 12 mm² Querschnitt und 100 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "2400 mm³",
+            "1200 mm³",
+            "112 mm³",
+            "120 mm³"
+          ],
+          "correct": 1,
+          "explanation": "Vₛ = Aₛ · Lₛ = 12 mm² · 100 mm = 1200 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-005",
+          "prompt": "Eine Schweißnaht hat 15 mm² Querschnitt und 120 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "1800 mm³",
+            "135 mm³",
+            "180 mm³",
+            "3600 mm³"
+          ],
+          "correct": 0,
+          "explanation": "Vₛ = Aₛ · Lₛ = 15 mm² · 120 mm = 1800 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-006",
+          "prompt": "Eine Schweißnaht hat 18 mm² Querschnitt und 150 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "168 mm³",
+            "270 mm³",
+            "5400 mm³",
+            "2700 mm³"
+          ],
+          "correct": 3,
+          "explanation": "Vₛ = Aₛ · Lₛ = 18 mm² · 150 mm = 2700 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-007",
+          "prompt": "Eine Schweißnaht hat 20 mm² Querschnitt und 200 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "400 mm³",
+            "8000 mm³",
+            "4000 mm³",
+            "220 mm³"
+          ],
+          "correct": 2,
+          "explanation": "Vₛ = Aₛ · Lₛ = 20 mm² · 200 mm = 4000 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-008",
+          "prompt": "Eine Schweißnaht hat 24 mm² Querschnitt und 250 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "12000 mm³",
+            "6000 mm³",
+            "274 mm³",
+            "600 mm³"
+          ],
+          "correct": 1,
+          "explanation": "Vₛ = Aₛ · Lₛ = 24 mm² · 250 mm = 6000 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-009",
+          "prompt": "Eine Schweißnaht hat 25 mm² Querschnitt und 300 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "7500 mm³",
+            "325 mm³",
+            "750 mm³",
+            "15000 mm³"
+          ],
+          "correct": 0,
+          "explanation": "Vₛ = Aₛ · Lₛ = 25 mm² · 300 mm = 7500 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-volumen-010",
+          "prompt": "Eine Schweißnaht hat 30 mm² Querschnitt und 400 mm Länge. Welches theoretische Schweißgutvolumen wird benötigt?",
+          "options": [
+            "430 mm³",
+            "1200 mm³",
+            "24000 mm³",
+            "12000 mm³"
+          ],
+          "correct": 3,
+          "explanation": "Vₛ = Aₛ · Lₛ = 30 mm² · 400 mm = 12000 mm³.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        }
+      ]
+    },
+    {
+      "id": "schweissen-elektroden",
+      "title": "Schweißtechnik – Elektrodenverbrauch",
+      "questions": [
+        {
+          "id": "ap1-metall-schweissen-elektroden-001",
+          "prompt": "Für eine Schweißarbeit werden 1200 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 300 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "4 Elektroden",
+            "5 Elektroden",
+            "3 Elektroden",
+            "8 Elektroden"
+          ],
+          "correct": 0,
+          "explanation": "Zₑ = Vₛ / Vₑ = 1200 / 300 = 4. Ergebnis auf ganze Elektroden aufrunden: 4 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-002",
+          "prompt": "Für eine Schweißarbeit werden 1800 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 300 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "7 Elektroden",
+            "5 Elektroden",
+            "12 Elektroden",
+            "6 Elektroden"
+          ],
+          "correct": 3,
+          "explanation": "Zₑ = Vₛ / Vₑ = 1800 / 300 = 6. Ergebnis auf ganze Elektroden aufrunden: 6 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-003",
+          "prompt": "Für eine Schweißarbeit werden 2400 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 400 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "5 Elektroden",
+            "12 Elektroden",
+            "6 Elektroden",
+            "7 Elektroden"
+          ],
+          "correct": 2,
+          "explanation": "Zₑ = Vₛ / Vₑ = 2400 / 400 = 6. Ergebnis auf ganze Elektroden aufrunden: 6 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-004",
+          "prompt": "Für eine Schweißarbeit werden 3000 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 500 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "12 Elektroden",
+            "6 Elektroden",
+            "7 Elektroden",
+            "5 Elektroden"
+          ],
+          "correct": 1,
+          "explanation": "Zₑ = Vₛ / Vₑ = 3000 / 500 = 6. Ergebnis auf ganze Elektroden aufrunden: 6 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-005",
+          "prompt": "Für eine Schweißarbeit werden 3600 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 450 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "8 Elektroden",
+            "9 Elektroden",
+            "7 Elektroden",
+            "16 Elektroden"
+          ],
+          "correct": 0,
+          "explanation": "Zₑ = Vₛ / Vₑ = 3600 / 450 = 8. Ergebnis auf ganze Elektroden aufrunden: 8 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-006",
+          "prompt": "Für eine Schweißarbeit werden 4200 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 600 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "8 Elektroden",
+            "6 Elektroden",
+            "14 Elektroden",
+            "7 Elektroden"
+          ],
+          "correct": 3,
+          "explanation": "Zₑ = Vₛ / Vₑ = 4200 / 600 = 7. Ergebnis auf ganze Elektroden aufrunden: 7 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-007",
+          "prompt": "Für eine Schweißarbeit werden 4800 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 600 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "7 Elektroden",
+            "16 Elektroden",
+            "8 Elektroden",
+            "9 Elektroden"
+          ],
+          "correct": 2,
+          "explanation": "Zₑ = Vₛ / Vₑ = 4800 / 600 = 8. Ergebnis auf ganze Elektroden aufrunden: 8 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-008",
+          "prompt": "Für eine Schweißarbeit werden 5400 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 450 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "24 Elektroden",
+            "12 Elektroden",
+            "13 Elektroden",
+            "11 Elektroden"
+          ],
+          "correct": 1,
+          "explanation": "Zₑ = Vₛ / Vₑ = 5400 / 450 = 12. Ergebnis auf ganze Elektroden aufrunden: 12 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-009",
+          "prompt": "Für eine Schweißarbeit werden 6000 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 500 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "12 Elektroden",
+            "13 Elektroden",
+            "11 Elektroden",
+            "24 Elektroden"
+          ],
+          "correct": 0,
+          "explanation": "Zₑ = Vₛ / Vₑ = 6000 / 500 = 12. Ergebnis auf ganze Elektroden aufrunden: 12 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        },
+        {
+          "id": "ap1-metall-schweissen-elektroden-010",
+          "prompt": "Für eine Schweißarbeit werden 7200 mm³ Schweißgut benötigt. Pro Elektrode stehen unter Berücksichtigung der angegebenen Verluste 600 mm³ nutzbares Schweißgut zur Verfügung. Wie viele ganze Elektroden sind mindestens erforderlich?",
+          "options": [
+            "13 Elektroden",
+            "11 Elektroden",
+            "24 Elektroden",
+            "12 Elektroden"
+          ],
+          "correct": 3,
+          "explanation": "Zₑ = Vₛ / Vₑ = 7200 / 600 = 12. Ergebnis auf ganze Elektroden aufrunden: 12 Elektroden.",
+          "created_at": "2026-10-17T14:20:00+02:00",
+          "source": "Arbeitsblatt Schweißnahtquerschnitt und Elektrodenverbrauch (Foto, 17.10.2026)",
+          "batch_id": "metall-schweissnaht-20261017"
+        }
+      ]
+    }
+  ]
+}
