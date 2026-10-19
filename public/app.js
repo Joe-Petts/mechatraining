@@ -100,7 +100,7 @@ function render(){
      if(!alreadySolved){solved.add(q.id);progress();await refreshXP();}
      quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);
     }else{
-     document.dispatchEvent(new Event('mechatraining:wrong'));
+     document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Richtige Antwort: '+q.options[q.correct]+'. '+(result.explanation||q.explanation||''),onConfirm:()=>{quizIndex=(quizIndex+1)%questions.length;render();}}}));
      button.classList.add('quiz-answer-wrong');
      options.querySelectorAll('button')[q.correct]?.classList.add('quiz-answer-correct');
      next.hidden=false;
