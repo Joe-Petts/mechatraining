@@ -136,3 +136,6 @@ body.formula-info-open{overflow:hidden}
 
 /* Entfernen eines Futter-Blocks als bewusste Admin-Aktion */
 .futter-actions .futter-remove{background:transparent;color:#f0a6a6;border:1px solid #915459}.futter-actions .futter-remove:hover{background:#572b31;color:#fff}.futter-actions .futter-remove:focus-visible{outline:2px solid #ffb7b7;outline-offset:3px}
+
+/* Bereichsauswahl für die Fragen */
+.quiz-area-filter{border:1px solid #345064;border-radius:10px;padding:12px 15px;margin:16px 0 22px;background:#132431}.quiz-area-filter legend{font-size:13px;font-weight:700;color:#d9e9f3;padding:0 7px}.quiz-area-options{display:flex;flex-wrap:wrap;gap:7px 16px}.quiz-area-choice{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#d7e3ed;line-height:1.35;padding:6px 0}.quiz-area-choice input{accent-color:#56b89a;width:17px;height:17px;flex-shrink:0;cursor:pointer}.quiz-area-choice input:disabled{cursor:not-allowed}#quizAreaHint{font-size:12px;color:#9db2c0;margin:8px 0 0}@media(max-width:600px){.quiz-area-options{display:grid;grid-template-columns:1fr;gap:3px}.quiz-area-filter{padding:10px 12px}}
