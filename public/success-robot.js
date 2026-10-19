@@ -12,7 +12,11 @@
  img.height=220;
  plate.append(img);popup.append(plate);
  document.body.append(popup);
- document.addEventListener('mechatraining:correct',()=>{
+ document.addEventListener('mechatraining:correct',()=>showRobot(false));
+ document.addEventListener('mechatraining:wrong',()=>showRobot(true));
+ function showRobot(wrong){
+   img.src=wrong?'img/roboter-fehler-popup.png':'img/roboter-bleistiftskizze-popup.png';
+   popup.classList.toggle('is-wrong',wrong);
    clearTimeout(timer);
    popup.classList.remove('is-visible');
    void popup.offsetWidth;
