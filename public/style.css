@@ -133,3 +133,6 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border
 #formulaPanel .formula-info-dialog dt{font-weight:800;color:#ffbe51}
 #formulaPanel .formula-info-dialog dd{margin:0;overflow-wrap:anywhere}
 body.formula-info-open{overflow:hidden}
+
+/* Entfernen eines Futter-Blocks als bewusste Admin-Aktion */
+.futter-actions .futter-remove{background:transparent;color:#f0a6a6;border:1px solid #915459}.futter-actions .futter-remove:hover{background:#572b31;color:#fff}.futter-actions .futter-remove:focus-visible{outline:2px solid #ffb7b7;outline-offset:3px}
