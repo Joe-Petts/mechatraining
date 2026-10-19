@@ -158,3 +158,9 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - `public/index.php` enthält über den Quizfragen eine kompakte Mehrfachauswahl der Übungsbereiche.
 - `public/app.js` bildet die verfügbaren Bereiche aus den Modulen des aktuellen Fachgebiets (Elektrotechnik, Pneumatik, Metallbau). Beim Öffnen ist zunächst das gewählte Modul aktiviert; weitere Module können per Checkbox hinzugeschaltet oder abgewählt werden. Mindestens ein Modul bleibt ausgewählt.
 - Fragen, Zähler und Fortschrittsanzeige werden unmittelbar anhand der Auswahl aktualisiert; gespeicherte Aufgaben-IDs, Antworten und XP bleiben unverändert. Auswahl gilt für die aktuelle Übungsansicht.
+
+
+## Lernkarten-Design und gemeinsame Filter-Sidebar (2026-10-19)
+- Übungsansichten (Quiz und Formeln) nutzen eine helle, reduzierte Karteikartenoptik; Dashboard/Admin bleiben im Industrial-Dark-Design.
+- Fachbereichs-Checkboxfilter beider Modi befinden sich in einer gemeinsamen ausklappbaren linken Sidebar. Bestehende Filter-IDs und Logik bleiben unverändert; `public/notes.js` verwaltet die Sidebar und verschiebt die Filter-Elemente bei Ansichtswechsel.
+- Kein Einfluss auf XP, Nutzerkonten oder bestehende Fortschritte.
