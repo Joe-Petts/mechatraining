@@ -208,3 +208,36 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#ff
 .calc-panel button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
 .calc-panel .calc-equals{background:#e9f5ef!important;color:#245c4e;border-color:#b4d2c4}
 @media(max-width:600px){.topic-grid{grid-template-columns:1fr}.topic-card{min-height:74px}}
+
+/* Kontrastpalette: Weiß/Grau, Schwarz, Rotorange, Blau */
+:root{color-scheme:light;--ink:#111820;--muted:#394b59;--line:#a9bac7;--accent:#e34b22;--signal-blue:#145caa;--signal-orange:#e34b22;background:#f1f3f5;color:#111820}
+html,body{background:#f1f3f5;color:#111820}
+header{background:#fff;color:#111820;border-bottom:2px solid #145caa}
+.brand,.brand-link,.brand-link:hover{color:#111820}.accent{color:#e34b22}
+.panel{color:#111820}
+h1,h2,h3,.topic-card strong,.exercise-card strong{color:#111820}
+p,label,.quiz-area-choice,.topic-arrow,.exercise-card small{color:#283745}
+.eyebrow,.tag{color:#145caa}
+a{color:#145caa}
+button,.secondary{color:#145caa;border-bottom-color:#9bb7d3}
+button:hover,.topic-card:hover,.exercise-card:hover{color:#e34b22;background:#fff4ee;border-bottom-color:#e34b22}
+#formulaOpen,.formula-entry button{color:#e34b22;border-bottom-color:#e34b22}
+input,select,textarea{color:#111820;background:#fff;border-bottom-color:#8ea9bf}
+input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline-color:#145caa}
+.xp-top,.xp-top span:first-child{color:#111820}
+.xp-track,.meter{background:#d6e0e8}.xp-track>div,.meter div{background:#145caa}
+.topic-card,.exercise-card{border-bottom-color:#b2c4d0}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question,body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;color:#111820;border-color:#c0cdd6}
+.options button,#formulaPanel .formula-options button{color:#111820;border-bottom-color:#b4c6d3}
+.options button:hover,#formulaPanel .formula-options button:hover{color:#145caa;background:#eaf2fb;border-bottom-color:#145caa}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{color:#111820}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
+.formula-level-mark{background:#145caa}
+#formulaPanel .formula-restart{color:#e34b22}
+.admin-toggle,.calc-toggle,.notes-toggle,.area-sidebar-toggle{color:#145caa;border-color:#9bb7d3}
+.area-sidebar,.calc-panel,.notes-panel{background:#fff;color:#111820}
+.area-sidebar .quiz-area-choice,.area-sidebar .quiz-area-filter legend{color:#111820}
+.area-sidebar #quizAreaHint,.area-sidebar #formulaAreaHint{color:#394b59}
+.calc-panel button{color:#111820;border-bottom-color:#b4c6d3}
+.calc-panel .calc-equals{background:#145caa!important;color:#fff;border-color:#145caa}
+.futter-actions .futter-remove{color:#b43727;border-color:#d6a8a1}
