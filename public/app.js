@@ -107,3 +107,6 @@ for(const module of pneumaticModules){const button=document.createElement('butto
 
 // Metallbau: vier Schweißtechnik-Module mit dauerhaft eindeutigen Aufgaben-IDs
 for(const module of metalModules){const button=document.createElement('button');button.className='exercise-card';button.type='button';const name=document.createElement('strong');name.textContent=module.title;const detail=document.createElement('small');detail.textContent=module.questions.length+' Aufgaben · Gespeicherter Fortschritt';const arrow=document.createElement('span');arrow.textContent='Öffnen →';button.append(name,detail,arrow);button.addEventListener('click',()=>openExercise(module,'metalPanel'));$('metalModules').append(button);}
+
+// Landing page shortcut to existing formula mode.
+document.getElementById('formulaTile')?.addEventListener('click',()=>document.getElementById('formulaOpen')?.click());
