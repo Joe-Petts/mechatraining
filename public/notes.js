@@ -3,6 +3,16 @@
  const $=id=>document.getElementById(id),panel=$('notesPanel'),toggle=$('notesToggle'),backdrop=$('notesBackdrop'),field=$('notesText'),title=$('notesTitle'),status=$('notesStatus');
  let id=null,notes=[],dirty=false,csrf='',lastFocus=null;
  const legacy='mechatraining.notes.v1';
+ // Wiederverwendbare Fachbereichs-Sidebar für Quiz und Formeltraining.
+ const filterButton=document.createElement('button');filterButton.id='areaSidebarToggle';filterButton.type='button';filterButton.className='area-sidebar-toggle';filterButton.textContent='☷';filterButton.title='Fragenfilter';filterButton.setAttribute('aria-label','Fragenfilter öffnen');filterButton.setAttribute('aria-expanded','false');
+ const filterPanel=document.createElement('aside');filterPanel.id='areaSidebar';filterPanel.className='area-sidebar';filterPanel.setAttribute('aria-label','Fragenfilter');filterPanel.setAttribute('aria-hidden','true');const filterHead=document.createElement('div');filterHead.className='area-sidebar-head';const filterTitle=document.createElement('strong');filterTitle.textContent='Fragenfilter';const filterClose=document.createElement('button');filterClose.type='button';filterClose.textContent='×';filterClose.setAttribute('aria-label','Fragenfilter schließen');filterHead.append(filterTitle,filterClose);filterPanel.append(filterHead);document.body.append(filterButton,filterPanel);
+ const filterSections=[['appPanel','quizAreaFilter'],['formulaPanel','formulaAreaFilter']];
+ const closeArea=()=>{filterPanel.classList.remove('open');filterPanel.setAttribute('aria-hidden','true');filterButton.setAttribute('aria-expanded','false');};
+ function updateArea(){const current=filterSections.find(([view])=>!$(view).classList.contains('hidden'));filterButton.classList.toggle('visible',Boolean(current));if(!current){closeArea();return;}const field=$(current[1]);if(field&&field.parentElement!==filterPanel){filterPanel.querySelectorAll('fieldset').forEach(el=>{el.hidden=true;});field.hidden=false;filterPanel.append(field);} }
+ filterButton.addEventListener('click',()=>{updateArea();const opening=!filterPanel.classList.contains('open');filterPanel.classList.toggle('open',opening);filterPanel.setAttribute('aria-hidden',String(!opening));filterButton.setAttribute('aria-expanded',String(opening));if(opening)filterClose.focus();});filterClose.addEventListener('click',()=>{closeArea();filterButton.focus();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&filterPanel.classList.contains('open'))closeArea();});
+ const areaObserver=new MutationObserver(()=>updateArea());filterSections.forEach(([view])=>areaObserver.observe($(view),{attributes:true,attributeFilter:['class']}));
+ updateArea();
+
  document.querySelector('.brand-link')?.addEventListener('click',()=>sessionStorage.removeItem('mechatraining-view'));
  async function request(action,data){const res=await fetch('api.php?action='+action,{method:data?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:data?JSON.stringify(data):undefined});const result=await res.json();if(!res.ok)throw Error(result.error||'Serverfehler');return result;}
  async function session(){const res=await request('session');if(!res.user)throw Error('Bitte zuerst anmelden.');csrf=res.csrf;}
