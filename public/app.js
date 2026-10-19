@@ -98,7 +98,7 @@ $('topicBack').addEventListener('click',()=>showLearningView('dashboard'));
 $('openBasics').addEventListener('click',()=>openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel'));
 $('exerciseBack').addEventListener('click',()=>showLearningView(returnView));
 
-document.querySelector('[data-topic="metall"]').addEventListener('click',()=>showLearningView('metalPanel'));
+document.querySelector('[data-topic="metall"]')?.addEventListener('click',()=>showLearningView('metalPanel'));
 $('metalBack').addEventListener('click',()=>showLearningView('dashboard'));
 
 document.querySelector('[data-topic="pneumatik"]').addEventListener('click',()=>showLearningView('pneuPanel'));
