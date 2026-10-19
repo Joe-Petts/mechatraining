@@ -146,3 +146,9 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - `content/ap1/formeln.json`: neues Fachgebiet Metallbau mit 9 Formeln; auswählbar im Formel-Modus.
 - Serverseitige Antwortprüfung und Futter-Adminverwaltung um `metallbau.json` erweitert; Futter-Block-ID `metall-schweissnaht-20261017`.
 - Vorhandene Konten, Fortschritts-IDs, XP und SQLite bleiben unverändert.
+
+
+## Futter: Arbeitsblatt-Blöcke sicher entfernen (2026-10-19)
+- Admin-Aktion „Block löschen“ mit Bestätigungsdialog; löscht nicht physisch, sondern archiviert alle enthaltenen Fragen und entfernt den Block dauerhaft aus der Futter-Verwaltungsansicht.
+- Additive SQLite-Tabelle `futter_deleted_batches` speichert entfernte Block-IDs; serverseitige Transaktion archiviert alle zugehörigen Aufgaben und protokolliert `deleted_block`-Ereignisse.
+- Öffentliche Status-API meldet entfernte Aufgaben als verborgen; Antwort-API lehnt archivierte Aufgaben ab. Quellfragen, stabile IDs, bestehende XP und Lernfortschritte bleiben erhalten.
