@@ -59,7 +59,7 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
 
-if (in_array($action,['futter_list','futter_status','futter_public'],true)) {
+if (in_array($action,['futter_list','futter_status','futter_public','futter_delete_block'],true)) {
  migrate_futter($pdo);
  $files=['elektrotechnik.json','pneumatik.json','metallbau.json'];$catalog=[];
  foreach($files as $file) {
@@ -69,16 +69,25 @@ if (in_array($action,['futter_list','futter_status','futter_public'],true)) {
   }
  }
  $statuses=$pdo->query('SELECT question_id,status FROM futter_status')->fetchAll(PDO::FETCH_KEY_PAIR);
+ $deletedBatches=$pdo->query('SELECT batch_id FROM futter_deleted_batches')->fetchAll(PDO::FETCH_COLUMN);
  if ($action==='futter_public' && $_SERVER['REQUEST_METHOD']==='GET') {
-  json_response(['hidden'=>array_keys(array_filter($statuses,fn($v)=>$v!=='active'))]);
+  $hidden=array_keys(array_filter($statuses,fn($v)=>$v!=='active'));foreach($catalog as $q)if(in_array($q['batch_id'],$deletedBatches,true))$hidden[]=$q['id'];json_response(['hidden'=>array_values(array_unique($hidden))]);
  }
  if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
  if ($action==='futter_list' && $_SERVER['REQUEST_METHOD']==='GET') {
-  $items=[];foreach($catalog as $id=>$q) {
+  $items=[];foreach($catalog as $id=>$q) {if(in_array($q['batch_id'],$deletedBatches,true))continue;
    $q['status']=$statuses[$id]??'active';$items[]=$q;
   }
   $events=$pdo->query('SELECT question_id,action,changed_at FROM futter_events ORDER BY id DESC LIMIT 100')->fetchAll();
   json_response(['items'=>$items,'events'=>$events]);
+ }
+ if ($action==='futter_delete_block' && $_SERVER['REQUEST_METHOD']==='POST') {
+  $data=json_decode(file_get_contents('php://input'),true)?:[];$batch=$data['batch_id']??null;
+  if(!is_string($batch)||$batch===''||in_array($batch,$deletedBatches,true))json_response(['error'=>'Ungültiger Block.'],422);
+  $ids=[];foreach($catalog as $q)if($q['batch_id']===$batch)$ids[]=$q['id'];
+  if(!$ids)json_response(['error'=>'Block nicht gefunden.'],404);
+  try{$pdo->beginTransaction();$stmt=$pdo->prepare("INSERT INTO futter_status(question_id,status) VALUES(?,'archived') ON CONFLICT(question_id) DO UPDATE SET status='archived',updated_at=CURRENT_TIMESTAMP");$event=$pdo->prepare("INSERT INTO futter_events(question_id,action) VALUES(?,'deleted_block')");foreach($ids as $id){$stmt->execute([$id]);$event->execute([$id]);}$pdo->prepare('INSERT INTO futter_deleted_batches(batch_id) VALUES(?)')->execute([$batch]);$pdo->commit();}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Block konnte nicht entfernt werden.'],500);}
+  json_response(['ok'=>true,'count'=>count($ids)]);
  }
  if ($action==='futter_status' && $_SERVER['REQUEST_METHOD']==='POST') {
   $data=json_decode(file_get_contents('php://input'),true)?:[];
