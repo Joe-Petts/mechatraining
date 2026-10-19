@@ -173,3 +173,38 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel #formulaProgress{color:#58708
 .area-sidebar .quiz-area-choice{padding:10px 0;border-bottom:1px solid #edf1f4}
 @media(max-width:600px){#appPanel #quiz{margin:18px auto}#appPanel #quiz>section{padding:19px}.area-sidebar-toggle{top:42%;width:36px;height:48px}}
 @media(prefers-reduced-motion:reduce){.area-sidebar{transition:none}}
+
+/* Globales helles Minimaldesign */
+:root{color-scheme:light;background:#f8fafb;color:#233440;--ink:#233440;--muted:#647986;--line:#dce5e9;--accent:#327d6b}
+html,body{background:#f8fafb;color:var(--ink)}
+header,body:has(#appPanel:not(.hidden)) header,body:has(#formulaPanel:not(.hidden)) header{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);box-shadow:none}
+.brand-link,.brand-link:hover{color:var(--ink);border:0}.accent{color:var(--accent)}
+.panel,body:has(#appPanel:not(.hidden)) #appPanel,body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--ink)}
+h1,h2,h3{color:#1e313d}.eyebrow,.tag,footer{color:var(--muted)}
+button,.secondary{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:10px 4px;font-weight:600}
+button:hover{background:#f0f7f4;color:var(--accent);border-bottom-color:var(--accent);filter:none}
+input,select,textarea{background:#fff;color:var(--ink);border:0;border-bottom:1px solid #b9cbd3;border-radius:0}
+label{color:var(--ink)}
+.xp-top,.xp-top span:first-child{color:var(--muted)}.xp-track,.meter{background:#e2eaed}.xp-track>div,.meter div{background:var(--accent)}
+.formula-entry{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+#formulaOpen{background:transparent;color:var(--accent);border:0;border-bottom:1px solid var(--accent);border-radius:0}
+.formula-entry span{color:var(--muted)}
+.topic-grid{gap:0}.topic-card,.exercise-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.topic-card:hover,.exercise-card:hover{background:#f0f7f4;box-shadow:none;transform:none}
+.topic-card strong,.exercise-card strong{color:var(--ink)}
+.topic-arrow,.exercise-card small,.exercise-card span{color:var(--muted)}
+.options button,#formulaPanel .formula-options button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.options button:hover,#formulaPanel .formula-options button:hover{background:#edf6f2;color:var(--accent)}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question,body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;box-shadow:none}
+#formulaPanel .formula-card h3,#formulaPanel .formula-card>p{color:var(--ink)}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{background:#fff;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:none}
+#formulaPanel .formula-info-trigger{color:var(--muted);background:transparent;border-color:var(--line)}
+#formulaPanel .formula-info-dialog{background:#fff;color:var(--ink);border-color:var(--line)}
+#formulaPanel .formula-info-close{background:transparent;color:var(--ink)}
+.admin-toggle,.calc-toggle,.notes-toggle,.area-sidebar-toggle{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.area-sidebar,.calc-panel,.notes-panel{background:#fff;color:var(--ink);border-color:var(--line)}
+.calc-screen{background:#f8fafb;color:var(--ink);border-color:var(--line)}
+.calc-panel button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
+.calc-panel .calc-equals{background:#e9f5ef!important;color:#245c4e;border-color:#b4d2c4}
+@media(max-width:600px){.topic-grid{grid-template-columns:1fr}.topic-card{min-height:74px}}
