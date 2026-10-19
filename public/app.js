@@ -17,7 +17,38 @@ async function api(action,data){
 function updateXP(xp){const level=Math.floor(xp/100)+1;const current=xp%100;$('xpLevel').textContent='Level '+level;$('xpText').textContent=current+' / 100 XP';$('xpFill').style.width=current+'%';$('xpTrack').setAttribute('aria-valuenow',String(current));}
 async function refreshXP(){const data=await api('progress');updateXP(Number(data.xp)||0);}
 function progress(){const count=questions.filter(q=>solved.has(q.id)).length;$('progress').textContent=count;$('bar').style.width=(100*count/questions.length)+'%'; }
-function openExercise(module,back){questions=module.questions;returnView=back;document.querySelector('#appPanel h2').textContent=module.title;document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='pneuPanel'?'PNEUMATIK · AP1':back==='metalPanel'?'METALLBAU · AP1':'ELEKTROTECHNIK · AP1';document.querySelector('#appPanel .toolbar p + h2');document.querySelector('#appPanel .toolbar + p').replaceChildren(document.createTextNode('Angemeldet als '));const line=document.querySelector('#appPanel .toolbar + p');const user=document.createElement('strong');user.id='username';user.textContent=loggedName;const count=document.createElement('span');count.id='progress';line.append(user,document.createTextNode(' · '),count,document.createTextNode(' von '+questions.length+' Aufgaben richtig gelöst'));$('exerciseBack').textContent=back==='pneuPanel'?'← Pneumatik':back==='metalPanel'?'← Metallbau':'← Elektrotechnik';render();showLearningView('appPanel');rememberView('appPanel',module.id||'electro');}
+let activeAreaIds=new Set(),availableAreas=[];
+function quizAreas(back){return back==='pneuPanel'?pneumaticModules:back==='metalPanel'?metalModules:[{id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions}];}
+function applyAreaFilter(){
+ const selected=availableAreas.filter(m=>activeAreaIds.has(m.id));
+ questions=selected.flatMap(m=>m.questions);
+ const options=$('quizAreaOptions');
+ options.querySelectorAll('input').forEach(input=>{input.disabled=activeAreaIds.size===1&&input.checked;});
+ $('quizAreaHint').textContent=questions.length+' Aufgaben ausgewählt';
+ const line=document.querySelector('#appPanel .toolbar + p');
+ const progressNode=$('progress');
+ if(progressNode){let next=progressNode.nextSibling;if(next)next.textContent=' von '+questions.length+' Aufgaben richtig gelöst';}
+ render();
+}
+function openExercise(module,back){
+ returnView=back;availableAreas=quizAreas(back);activeAreaIds=new Set([module.id]);
+ document.querySelector('#appPanel h2').textContent=module.title;
+ document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='pneuPanel'?'PNEUMATIK · AP1':back==='metalPanel'?'METALLBAU · AP1':'ELEKTROTECHNIK · AP1';
+ const line=document.querySelector('#appPanel .toolbar + p');line.replaceChildren(document.createTextNode('Angemeldet als '));
+ const user=document.createElement('strong');user.id='username';user.textContent=loggedName;
+ const count=document.createElement('span');count.id='progress';
+ line.append(user,document.createTextNode(' · '),count,document.createTextNode(' von 0 Aufgaben richtig gelöst'));
+ $('exerciseBack').textContent=back==='pneuPanel'?'← Pneumatik':back==='metalPanel'?'← Metallbau':'← Elektrotechnik';
+ const root=$('quizAreaOptions');root.replaceChildren();
+ availableAreas.forEach(area=>{
+  const label=document.createElement('label');label.className='quiz-area-choice';
+  const input=document.createElement('input');input.type='checkbox';input.value=area.id;input.checked=activeAreaIds.has(area.id);
+  const caption=document.createElement('span');caption.textContent=area.title+' ('+area.questions.length+')';
+  input.addEventListener('change',()=>{if(input.checked)activeAreaIds.add(area.id);else activeAreaIds.delete(area.id);applyAreaFilter();});
+  label.append(input,caption);root.append(label);
+ });
+ applyAreaFilter();showLearningView('appPanel');rememberView('appPanel',module.id||'electro');
+}
 let loggedName='';
 function pneumaticDiagram(section){
  const wrap=document.createElement('div');wrap.className='pneu-simulator';
