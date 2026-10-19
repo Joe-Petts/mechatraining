@@ -22,6 +22,7 @@ function quizAreas(back){if(back==='dashboard')return [{id:'electro',title:'Elek
 function applyAreaFilter(){
  const selected=availableAreas.filter(m=>activeAreaIds.has(m.id));
  questions=selected.flatMap(m=>m.questions);
+ quizIndex=0;
  const options=$('quizAreaOptions');
  options.querySelectorAll('input').forEach(input=>{input.disabled=activeAreaIds.size===1&&input.checked;});
  $('quizAreaHint').textContent=questions.length+' Aufgaben ausgewählt';
@@ -63,26 +64,51 @@ function pneumaticDiagram(section){
  wrap.append(svg,controls,state);set('12');section.append(wrap);
 }
 
+let quizIndex=0,quizTimer=null;
 function render(){
+ clearTimeout(quizTimer);
  const root=$('quiz');root.replaceChildren();
- questions.forEach((q,i)=>{
-  const section=document.createElement('section');section.className='question';
-  const title=document.createElement('h3');title.textContent=(i+1)+'. '+q.prompt;section.append(title);
-  const options=document.createElement('div');options.className='options';
-  const feedback=document.createElement('p');feedback.className='result';feedback.setAttribute('aria-live','polite');
-  q.options.forEach((answer,index)=>{
-   const button=document.createElement('button');button.textContent=answer;button.disabled=false;
-   button.addEventListener('click',async()=>{
-    if(solved.has(q.id)){const ok=index===q.correct;feedback.textContent=(ok?'✓ Richtig! ':'✕ Noch nicht richtig. ')+q.explanation;if(ok)document.dispatchEvent(new Event('mechatraining:correct'));return;}
-    options.querySelectorAll('button').forEach(b=>b.disabled=true);
-    try{const r=await api('answer',{question_id:q.id,answer:index});
-     feedback.textContent=(r.correct?'✓ Richtig! ':'✕ Noch nicht richtig. ')+r.explanation;
-     if(r.correct){document.dispatchEvent(new Event('mechatraining:correct'));solved.add(q.id);progress();await refreshXP();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
-    }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
-   });options.append(button);
-  });if(q.diagram)pneumaticDiagram(section);section.append(options,feedback);root.append(section);
+ if(!questions.length){root.textContent='Keine Aufgaben ausgewählt.';progress();return;}
+ quizIndex=Math.max(0,Math.min(quizIndex,questions.length-1));
+ const q=questions[quizIndex];
+ const section=document.createElement('section');section.className='question quiz-single-card';
+ const counter=document.createElement('p');counter.className='quiz-step';counter.textContent='AUFGABE '+(quizIndex+1)+' / '+questions.length;
+ const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);
+ const options=document.createElement('div');options.className='options';
+ const feedback=document.createElement('div');feedback.className='result quiz-answer-feedback';feedback.setAttribute('role','status');
+ const actions=document.createElement('div');actions.className='quiz-step-actions';
+ const next=document.createElement('button');next.type='button';next.className='quiz-next-button';next.textContent=quizIndex===questions.length-1?'Von vorn ↻':'Nächste Aufgabe →';next.hidden=true;
+ next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
+ actions.append(next);
+ let finished=false;
+ q.options.forEach((answer,index)=>{
+  const button=document.createElement('button');button.type='button';button.textContent=answer;
+  button.addEventListener('click',async()=>{
+   if(finished)return;
+   options.querySelectorAll('button').forEach(b=>b.disabled=true);
+   try{
+    const alreadySolved=solved.has(q.id);
+    const result=alreadySolved?{correct:index===q.correct,explanation:q.explanation}:await api('answer',{question_id:q.id,answer:index});
+    finished=true;
+    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
+    const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Die richtige Antwort ist: '+q.options[q.correct];
+    feedback.classList.toggle('quiz-feedback-wrong',!result.correct);
+    feedback.replaceChildren(heading,explanation);
+    if(result.correct){
+     button.classList.add('quiz-answer-correct');
+     document.dispatchEvent(new Event('mechatraining:correct'));
+     if(!alreadySolved){solved.add(q.id);progress();await refreshXP();}
+     quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);
+    }else{
+     button.classList.add('quiz-answer-wrong');
+     options.querySelectorAll('button')[q.correct]?.classList.add('quiz-answer-correct');
+     next.hidden=false;
+    }
+   }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
+  });options.append(button);
  });
- progress();
+ if(q.diagram)pneumaticDiagram(section);
+ section.append(options,feedback,actions);root.append(section);progress();
 }
 async function signedIn(user,token){csrf=token;loggedName=user.name;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();updateXP(Number(data.xp)||0);$('xpWidget').classList.remove('hidden');if(user.role==='admin'){$('adminToggle').classList.remove('hidden');await loadUsers();}const previous=savedView();if(previous&&previous.user===user.name){if(previous.view==='formulaPanel'){$('formulaOpen').click();}else if(previous.view==='appPanel'){const module=[...pneumaticModules,...metalModules].find(m=>m.id===previous.moduleId);if(module)openExercise(module,metalModules.includes(module)?'metalPanel':'pneuPanel');else if(previous.moduleId==='electro')openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel');}else if(['dashboard','topicPanel','metalPanel','pneuPanel'].includes(previous.view))showLearningView(previous.view);}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const form=new FormData(e.currentTarget);try{const r=await api('login',{username:form.get('username'),password:form.get('password')});await signedIn(r.user,r.csrf);}catch(err){$('loginError').textContent=err.message;}});
