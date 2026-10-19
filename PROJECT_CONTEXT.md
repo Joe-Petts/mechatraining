@@ -152,3 +152,9 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Admin-Aktion „Block löschen“ mit Bestätigungsdialog; löscht nicht physisch, sondern archiviert alle enthaltenen Fragen und entfernt den Block dauerhaft aus der Futter-Verwaltungsansicht.
 - Additive SQLite-Tabelle `futter_deleted_batches` speichert entfernte Block-IDs; serverseitige Transaktion archiviert alle zugehörigen Aufgaben und protokolliert `deleted_block`-Ereignisse.
 - Öffentliche Status-API meldet entfernte Aufgaben als verborgen; Antwort-API lehnt archivierte Aufgaben ab. Quellfragen, stabile IDs, bestehende XP und Lernfortschritte bleiben erhalten.
+
+
+## Checkbox-Fragenfilter nach Übungsbereichen (2026-10-19)
+- `public/index.php` enthält über den Quizfragen eine kompakte Mehrfachauswahl der Übungsbereiche.
+- `public/app.js` bildet die verfügbaren Bereiche aus den Modulen des aktuellen Fachgebiets (Elektrotechnik, Pneumatik, Metallbau). Beim Öffnen ist zunächst das gewählte Modul aktiviert; weitere Module können per Checkbox hinzugeschaltet oder abgewählt werden. Mindestens ein Modul bleibt ausgewählt.
+- Fragen, Zähler und Fortschrittsanzeige werden unmittelbar anhand der Auswahl aktualisiert; gespeicherte Aufgaben-IDs, Antworten und XP bleiben unverändert. Auswahl gilt für die aktuelle Übungsansicht.
