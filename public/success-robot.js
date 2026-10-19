@@ -22,5 +22,5 @@
    void popup.offsetWidth;
    popup.classList.add('is-visible');
    timer=setTimeout(()=>popup.classList.remove('is-visible'),1050);
- });
+ }
 })();
