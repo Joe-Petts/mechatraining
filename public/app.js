@@ -76,7 +76,7 @@ function render(){
     options.querySelectorAll('button').forEach(b=>b.disabled=true);
     try{const r=await api('answer',{question_id:q.id,answer:index});
      feedback.textContent=(r.correct?'✓ Richtig! ':'✕ Noch nicht richtig. ')+r.explanation;
-     if(r.correct){solved.add(q.id);progress();await refreshXP();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
+     if(r.correct){document.dispatchEvent(new Event('mechatraining:correct'));solved.add(q.id);progress();await refreshXP();}else{options.querySelectorAll('button').forEach(b=>b.disabled=false);}
     }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
    });options.append(button);
   });if(q.diagram)pneumaticDiagram(section);section.append(options,feedback);root.append(section);
