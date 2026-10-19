@@ -71,8 +71,9 @@ function render(){
   const options=document.createElement('div');options.className='options';
   const feedback=document.createElement('p');feedback.className='result';feedback.setAttribute('aria-live','polite');
   q.options.forEach((answer,index)=>{
-   const button=document.createElement('button');button.textContent=answer;button.disabled=solved.has(q.id);
+   const button=document.createElement('button');button.textContent=answer;button.disabled=false;
    button.addEventListener('click',async()=>{
+    if(solved.has(q.id)){const ok=index===q.correct;feedback.textContent=(ok?'✓ Richtig! ':'✕ Noch nicht richtig. ')+q.explanation;if(ok)document.dispatchEvent(new Event('mechatraining:correct'));return;}
     options.querySelectorAll('button').forEach(b=>b.disabled=true);
     try{const r=await api('answer',{question_id:q.id,answer:index});
      feedback.textContent=(r.correct?'✓ Richtig! ':'✕ Noch nicht richtig. ')+r.explanation;
