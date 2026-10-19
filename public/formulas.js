@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded',()=>{
  const $=id=>document.getElementById(id);
  const topics=JSON.parse($('formulaData').textContent).topics;
+ const filterKey=()=> 'mechatraining-formula-areas:'+($('username').textContent||'guest');
+ let selectedTopics=new Set(topics.map(t=>t.id));
+ function saveTopics(){try{localStorage.setItem(filterKey(),JSON.stringify([...selectedTopics]));}catch(e){}}
+ function loadTopics(){try{const saved=JSON.parse(localStorage.getItem(filterKey())||'null');if(Array.isArray(saved)){const valid=saved.filter(id=>topics.some(t=>t.id===id));if(valid.length)selectedTopics=new Set(valid);}}catch(e){}renderTopics();}
+ function renderTopics(){const root=$('formulaAreaOptions');root.replaceChildren();topics.forEach(t=>{const label=document.createElement('label');label.className='quiz-area-choice';const check=document.createElement('input');check.type='checkbox';check.value=t.id;check.checked=selectedTopics.has(t.id);check.disabled=selectedTopics.size===1&&check.checked;check.addEventListener('change',()=>{if(check.checked)selectedTopics.add(t.id);else selectedTopics.delete(t.id);saveTopics();renderTopics();start();});const name=document.createElement('span');name.textContent=t.title;label.append(check,name);root.append(label);});$('formulaAreaHint').textContent=selectedTopics.size+' von '+topics.length+' Bereichen ausgewählt';}
+
  let deck=[],index=0,correct=0,answered=false,streak=0,ladderLevel=0;
  const roundKey=()=> 'mechatraining-formula-round:'+($('username').textContent||'guest');
- function saveRound(){try{sessionStorage.setItem(roundKey(),JSON.stringify({deck,index,correct,answered,streak,ladderLevel,topic:$('formulaTopic').value,type:$('formulaType').value}));}catch(e){}}
- function restoreRound(){try{const v=JSON.parse(sessionStorage.getItem(roundKey())||'null');if(!v||!Array.isArray(v.deck)||!v.deck.length)return false;deck=v.deck;index=Math.min(deck.length,Math.max(0,Number(v.index)||0));correct=Number(v.correct)||0;answered=Boolean(v.answered);streak=Number(v.streak)||0;ladderLevel=Number(v.ladderLevel)||0;$('formulaTopic').value=v.topic||'all';$('formulaType').value=v.type||'choice';updateLadder();show();return true;}catch(e){return false;}}
+ function saveRound(){try{sessionStorage.setItem(roundKey(),JSON.stringify({deck,index,correct,answered,streak,ladderLevel,topic:$('formulaTopic').value,areas:[...selectedTopics],type:$('formulaType').value}));}catch(e){}}
+ function restoreRound(){try{const v=JSON.parse(sessionStorage.getItem(roundKey())||'null');if(!v||!Array.isArray(v.deck)||!v.deck.length)return false;deck=v.deck;if(Array.isArray(v.areas)&&v.areas.length){selectedTopics=new Set(v.areas.filter(id=>topics.some(t=>t.id===id)));if(!selectedTopics.size)selectedTopics=new Set(topics.map(t=>t.id));renderTopics();}index=Math.min(deck.length,Math.max(0,Number(v.index)||0));correct=Number(v.correct)||0;answered=Boolean(v.answered);streak=Number(v.streak)||0;ladderLevel=Number(v.ladderLevel)||0;$('formulaTopic').value=v.topic||'all';$('formulaType').value=v.type||'choice';updateLadder();show();return true;}catch(e){return false;}}
  const saveKey=()=> 'mechatraining-formula-level:'+($('username').textContent||'guest');
  function loadLevel(){try{const v=JSON.parse(localStorage.getItem(saveKey())||'{}');ladderLevel=Math.max(0,Number(v.level)||0);streak=Math.max(0,Math.min(4,Number(v.streak)||0));}catch(e){ladderLevel=0;streak=0;}}
  function saveLevel(){try{localStorage.setItem(saveKey(),JSON.stringify({level:ladderLevel,streak}));}catch(e){/* Browser-Speicher kann deaktiviert sein */}}
@@ -13,7 +19,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;};
  function start(){
   const topic=$('formulaTopic').value;
-  deck=shuffle(topics.filter(t=>topic==='all'||t.id===topic).flatMap(t=>t.formulas.map((f,i)=>({id:t.id+'-'+i,topic:t.title,name:f[0],answer:f[1],options:f[2]}))));
+  deck=shuffle(topics.filter(t=>selectedTopics.has(t.id)).flatMap(t=>t.formulas.map((f,i)=>({id:t.id+'-'+i,topic:t.title,name:f[0],answer:f[1],options:f[2]}))));
   index=0;correct=0;answered=false;loadLevel();$('formulaClimbMessage').textContent=' ';updateLadder();show();saveRound();
  }
  function updateLadder(){const el=$('formulaClimber');$('formulaClimbLevel').textContent='Level '+ladderLevel;$('formulaClimbStreak').textContent=streak+' / 5';el.style.left=(8+streak*21)+'%';const bars=$('formulaLevelBars');bars.replaceChildren();for(let i=0;i<ladderLevel;i++){const bar=document.createElement('span');bar.className='formula-level-mark';bars.append(bar);}bars.setAttribute('aria-label',ladderLevel+' erreichte Level');}
@@ -33,7 +39,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   root.append(card);saveRound();
  }
- $('formulaOpen').addEventListener('click',()=>{['dashboard','topicPanel','metalPanel','pneuPanel','appPanel'].forEach(id=>$(id).classList.add('hidden'));$('formulaPanel').classList.remove('hidden');try{sessionStorage.setItem('mechatraining-view',JSON.stringify({view:'formulaPanel',user:$('username').textContent}));}catch(e){}if(!restoreRound())start();});
+ $('formulaOpen').addEventListener('click',()=>{['dashboard','topicPanel','metalPanel','pneuPanel','appPanel'].forEach(id=>$(id).classList.add('hidden'));$('formulaPanel').classList.remove('hidden');try{sessionStorage.setItem('mechatraining-view',JSON.stringify({view:'formulaPanel',user:$('username').textContent}));}catch(e){}loadTopics();if(!restoreRound())start();});
  $('formulaBack').addEventListener('click',()=>{$('formulaPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');try{sessionStorage.setItem('mechatraining-view',JSON.stringify({view:'dashboard',user:$('username').textContent}));}catch(e){} });
  $('formulaStart').addEventListener('click',()=>{try{sessionStorage.removeItem(roundKey());}catch(e){}start();});
  $('formulaNext').addEventListener('click',()=>{index++;show();saveRound();});
