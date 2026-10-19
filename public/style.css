@@ -241,3 +241,6 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .calc-panel button{color:#111820;border-bottom-color:#b4c6d3}
 .calc-panel .calc-equals{background:#145caa!important;color:#fff;border-color:#145caa}
 .futter-actions .futter-remove{color:#b43727;border-color:#d6a8a1}
+
+/* Kategoriebilder: sachlich, bildbetont, mobil responsiv */
+.topic-card:has(.topic-cover){display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:9px;padding:0 0 16px;overflow:hidden}.topic-card .topic-cover{display:block;width:100%;height:clamp(140px,17vw,215px);aspect-ratio:16/9;object-fit:cover;border-radius:5px;background:#e2e7eb}.topic-card:has(.topic-cover)>strong,.topic-card:has(.topic-cover)>.topic-arrow{margin-inline:12px}.topic-card:has(.topic-cover)>strong{font-size:18px}.topic-card:has(.topic-cover):hover .topic-cover{filter:contrast(1.04)}@media(max-width:600px){.topic-card .topic-cover{height:auto;aspect-ratio:16/9}}
