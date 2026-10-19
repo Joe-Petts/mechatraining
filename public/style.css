@@ -139,3 +139,37 @@ body.formula-info-open{overflow:hidden}
 
 /* Bereichsauswahl für die Fragen */
 .quiz-area-filter{border:1px solid #345064;border-radius:10px;padding:12px 15px;margin:16px 0 22px;background:#132431}.quiz-area-filter legend{font-size:13px;font-weight:700;color:#d9e9f3;padding:0 7px}.quiz-area-options{display:flex;flex-wrap:wrap;gap:7px 16px}.quiz-area-choice{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#d7e3ed;line-height:1.35;padding:6px 0}.quiz-area-choice input{accent-color:#56b89a;width:17px;height:17px;flex-shrink:0;cursor:pointer}.quiz-area-choice input:disabled{cursor:not-allowed}#quizAreaHint{font-size:12px;color:#9db2c0;margin:8px 0 0}@media(max-width:600px){.quiz-area-options{display:grid;grid-template-columns:1fr;gap:3px}.quiz-area-filter{padding:10px 12px}}
+
+/* Lernkarten 2026: heller, konzentrierter Übungsmodus */
+body:has(#appPanel:not(.hidden)),body:has(#formulaPanel:not(.hidden)){background:#edf2f5;background-image:none;color:#243342}
+body:has(#appPanel:not(.hidden)) header,body:has(#formulaPanel:not(.hidden)) header{background:#172634;color:#f2f7fa}
+body:has(#appPanel:not(.hidden)) #appPanel,body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;box-shadow:none;color:#243342}
+#appPanel .toolbar{align-items:center}#appPanel .toolbar h2{font-size:clamp(18px,2vw,23px);margin:5px 0}#appPanel .toolbar .eyebrow{display:none}
+#appPanel>.meter{height:5px;background:#d7e1e7;border-radius:5px;overflow:hidden}#appPanel>.meter #bar{background:#5a9b81}
+#appPanel #quiz{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;max-width:780px;margin:26px auto}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question{background:#fff;border:1px solid #dce5eb;border-radius:15px;box-shadow:0 6px 24px #21394b0d;padding:clamp(20px,4vw,34px);color:#243342}
+#appPanel #quiz h3,#appPanel #quiz strong{color:#192f3f}
+#appPanel #quiz button:not(.secondary){border-radius:9px}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;border:1px solid #dce5eb;border-radius:15px;box-shadow:0 6px 24px #21394b0d;padding:clamp(24px,4vw,38px);color:#243342}
+#formulaPanel .formula-card h3,#formulaPanel .formula-card>p{color:#243342}
+#formulaPanel .formula-options button{background:#f5f8fa;color:#203748;border:1px solid #d1dfe7}
+#formulaPanel .formula-options button:hover{background:#e4f0f4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings{color:#243342}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{background:#fff;color:#243342;border:1px solid #bdcbd4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#fff;border-color:#d3dfe5;color:#243342;box-shadow:0 -5px 20px #21394b10}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-exit{color:#294454;border-color:#bdcbd4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel #formulaProgress{color:#587080}
+.area-sidebar-toggle{display:none;position:fixed;left:0;top:44%;z-index:60;width:42px;height:52px;border-radius:0 11px 11px 0;background:#fff;color:#263c4a;border:1px solid #d1dfe7;box-shadow:2px 4px 15px #172b3d24;font-size:23px;padding:0}
+.area-sidebar-toggle.visible{display:grid;place-items:center}
+.area-sidebar{position:fixed;left:0;top:0;bottom:0;z-index:90;width:min(350px,88vw);padding:20px;background:#fff;color:#243342;border-right:1px solid #d2dfe7;box-shadow:12px 0 35px #162b3c26;transform:translateX(-110%);transition:transform .2s ease;overflow:auto;visibility:hidden}
+.area-sidebar.open{transform:translateX(0);visibility:visible}
+.area-sidebar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;font-size:17px}
+.area-sidebar-head button{background:#edf2f5;color:#243342;border:0;border-radius:8px;padding:5px 12px;font-size:25px}
+.area-sidebar .quiz-area-filter{border:0;background:transparent;padding:0;margin:0;color:#243342}
+.area-sidebar .quiz-area-filter legend{color:#243342;font-size:14px}
+.area-sidebar .quiz-area-choice{color:#344b5a}
+.area-sidebar #quizAreaHint,.area-sidebar #formulaAreaHint{color:#627988}
+.area-sidebar .quiz-area-options{display:flex;flex-direction:column;align-items:stretch}
+.area-sidebar .quiz-area-choice{padding:10px 0;border-bottom:1px solid #edf1f4}
+@media(max-width:600px){#appPanel #quiz{margin:18px auto}#appPanel #quiz>section{padding:19px}.area-sidebar-toggle{top:42%;width:36px;height:48px}}
+@media(prefers-reduced-motion:reduce){.area-sidebar{transition:none}}
