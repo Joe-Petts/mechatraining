@@ -3,6 +3,7 @@
  const $=id=>document.getElementById(id),panel=$('notesPanel'),toggle=$('notesToggle'),backdrop=$('notesBackdrop'),field=$('notesText'),title=$('notesTitle'),status=$('notesStatus');
  let id=null,notes=[],dirty=false,csrf='',lastFocus=null;
  const legacy='mechatraining.notes.v1';
+ document.querySelector('.brand-link')?.addEventListener('click',()=>sessionStorage.removeItem('mechatraining-view'));
  async function request(action,data){const res=await fetch('api.php?action='+action,{method:data?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:data?JSON.stringify(data):undefined});const result=await res.json();if(!res.ok)throw Error(result.error||'Serverfehler');return result;}
  async function session(){const res=await request('session');if(!res.user)throw Error('Bitte zuerst anmelden.');csrf=res.csrf;}
  async function load(){await session();notes=(await request('notes_list')).notes;}
