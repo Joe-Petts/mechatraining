@@ -5,6 +5,7 @@ require dirname(__DIR__) . '/src/catalog.php';
 start_session();
 try { $pdo=db(); migrate($pdo); }
 catch(Throwable $e) { json_response(['error'=>'Datenbank nicht verfügbar.'],503); }
+reset_learning_content_once($pdo);
 $action=$_GET['action'] ?? '';
 if ($action==='session') json_response(['user'=>isset($_SESSION['uid'])?['name'=>$_SESSION['name'],'role'=>$_SESSION['role']]:null,'csrf'=>$_SESSION['csrf']??null]);
 if ($action==='login' && $_SERVER['REQUEST_METHOD']==='POST') {
