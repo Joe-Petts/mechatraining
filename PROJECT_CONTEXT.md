@@ -171,3 +171,6 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Futter-Block-ID `metall-gewindeschneiden-20261020`; Datum und Herkunft sind pro Aufgabe dokumentiert. Vorhandene Schweißtechnikmodule und Aufgaben-IDs bleiben erhalten.
 - Fachliche Korrektur des Tafelbildes: Kernloch-Näherung `dₖ ≈ d − P`, M8 × 1,25 ergibt 6,75 mm, üblicher Bohrer 6,8 mm. Kernlochtabelle für praktische Bohrerauswahl maßgeblich.
 - Eine Kernlochformel in `content/ap1/formeln.json` beim bestehenden Fachgebiet Metallbau ergänzt.
+
+## SQLite-Lernkatalog (20.10.2026)
+Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `learning_sources`, `learning_questions`, `question_options`, `question_assets`, `question_revisions`, `question_attempts`, `question_tags`. Die vorhandenen `users`, `progress`, `notes` und Futter-Tabellen bleiben erhalten. `import_legacy_catalog()` übernimmt die bisherigen JSON-Aufgaben idempotent per INSERT OR IGNORE, ohne bestehende Datensätze zu überschreiben. `public/index.php` bezieht Quizmodule aus SQLite; `public/api.php` prüft Quizantworten gegen SQLite. Die Formelsammlung und die ältere Futter-Verwaltungsansicht lesen noch JSON und müssen in einer Folgestufe auf den zentralen Katalog umgestellt werden. Ein Zurücksetzen der Inhalte/XP wurde ausdrücklich noch nicht ausgeführt.
