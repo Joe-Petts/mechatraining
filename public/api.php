@@ -18,6 +18,16 @@ if ($action==='login' && $_SERVER['REQUEST_METHOD']==='POST') {
 if (!isset($_SESSION['uid'])) json_response(['error'=>'Nicht angemeldet.'],401);
 if ($_SERVER['REQUEST_METHOD']==='POST' && !hash_equals($_SESSION['csrf']??'',$_SERVER['HTTP_X_CSRF_TOKEN']??'')) json_response(['error'=>'Ungültiges CSRF-Token.'],403);
 if ($action==='logout' && $_SERVER['REQUEST_METHOD']==='POST') { $_SESSION=[]; session_destroy(); json_response(['ok'=>true]); }
+if ($action==='change_password' && $_SERVER['REQUEST_METHOD']==='POST') {
+    $data=json_decode(file_get_contents('php://input'),true) ?: [];
+    $pass=$data['password']??null;
+    if (!is_string($pass) || strlen($pass)<4 || strlen($pass)>256) json_response(['error'=>'Passwort muss 4 bis 256 Zeichen enthalten.'],422);
+    $stmt=$pdo->prepare('UPDATE users SET password_hash=? WHERE id=?');
+    $stmt->execute([password_hash($pass,PASSWORD_DEFAULT),(int)$_SESSION['uid']]);
+    session_regenerate_id(true);
+    $_SESSION['csrf']=bin2hex(random_bytes(32));
+    json_response(['ok'=>true,'csrf'=>$_SESSION['csrf']]);
+}
 if ($action==='users' && $_SERVER['REQUEST_METHOD']==='GET') {
     if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
     json_response(['users'=>$pdo->query('SELECT id,username,role,created_at FROM users ORDER BY id')->fetchAll()]);
