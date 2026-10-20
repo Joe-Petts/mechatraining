@@ -626,6 +626,630 @@
           "batch_id": "metall-schweissnaht-20261017"
         }
       ]
+    },
+    {
+      "id": "gewinde-bezeichnung",
+      "title": "Gewindebezeichnungen verstehen",
+      "questions": [
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-001",
+          "prompt": "Was bedeutet M bei M8 × 1,25?",
+          "options": [
+            "Metrisches ISO-Gewinde",
+            "Mutterhöhe",
+            "Maschinenlänge",
+            "Materialdicke"
+          ],
+          "correct": 0,
+          "explanation": "M kennzeichnet ein metrisches ISO-Gewinde.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-002",
+          "prompt": "Wofür steht die 8 bei M8 × 1,25?",
+          "options": [
+            "Gewindetiefe 8 mm",
+            "Nenndurchmesser 8 mm",
+            "Steigung 8 mm",
+            "Kernloch 8 mm"
+          ],
+          "correct": 1,
+          "explanation": "Die Zahl nach M gibt den Nenndurchmesser in mm an.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-003",
+          "prompt": "Was bedeutet 1,25 bei M8 × 1,25?",
+          "options": [
+            "Schlüsselweite 1,25 mm",
+            "Gewindelänge 1,25 mm",
+            "Steigung 1,25 mm",
+            "Bohrtiefe 1,25 mm"
+          ],
+          "correct": 2,
+          "explanation": "P ist der axiale Abstand zweier benachbarter Gewindegänge.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-004",
+          "prompt": "Welche Steigung hat das M8-Regelgewinde?",
+          "options": [
+            "0,5 mm",
+            "1,0 mm",
+            "2,0 mm",
+            "1,25 mm"
+          ],
+          "correct": 3,
+          "explanation": "M8-Regelgewinde besitzt die Steigung 1,25 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-005",
+          "prompt": "Was unterscheidet M10 × 1,25 von M10-Regelgewinde?",
+          "options": [
+            "Kleinere Steigung",
+            "Größerer Nenndurchmesser",
+            "Kleinerer Nenndurchmesser",
+            "Automatisch Linksgewinde"
+          ],
+          "correct": 0,
+          "explanation": "M10-Regelgewinde hat 1,5 mm Steigung, M10 × 1,25 ist feiner.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-006",
+          "prompt": "In welcher Einheit wird P bei metrischen Gewinden angegeben?",
+          "options": [
+            "bar",
+            "mm",
+            "mm²",
+            "N"
+          ],
+          "correct": 1,
+          "explanation": "Die Steigung P ist eine Länge und wird in Millimetern angegeben.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-007",
+          "prompt": "Was ist der Nenndurchmesser bei M12?",
+          "options": [
+            "1,75 mm",
+            "12 cm",
+            "12 mm",
+            "10,2 mm"
+          ],
+          "correct": 2,
+          "explanation": "M12 bezeichnet einen Nenndurchmesser von 12 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bezeichnung-008",
+          "prompt": "Welche Angabe passt zu M6 × 1?",
+          "options": [
+            "d = 1 mm, P = 6 mm",
+            "d = 6 cm, P = 1 cm",
+            "d = 5 mm, P = 6 mm",
+            "d = 6 mm, P = 1 mm"
+          ],
+          "correct": 3,
+          "explanation": "Bei M6 × 1 ist der Nenndurchmesser 6 mm und die Steigung 1 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        }
+      ]
+    },
+    {
+      "id": "gewinde-kernloch",
+      "title": "Kernlochdurchmesser berechnen",
+      "questions": [
+        {
+          "id": "ap1-metall-gewinde-kernloch-001",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M3 × 0,5.",
+          "options": [
+            "3 mm",
+            "3,5 mm",
+            "2 mm",
+            "2,5 mm"
+          ],
+          "correct": 3,
+          "explanation": "Näherung dₖ ≈ d − P = 3 − 0,5 = 2,5 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-002",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M4 × 0,7.",
+          "options": [
+            "3,3 mm",
+            "4 mm",
+            "4,7 mm",
+            "2,6 mm"
+          ],
+          "correct": 0,
+          "explanation": "Näherung dₖ ≈ d − P = 4 − 0,7 = 3,3 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-003",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M5 × 0,8.",
+          "options": [
+            "3,4 mm",
+            "4,2 mm",
+            "5 mm",
+            "5,8 mm"
+          ],
+          "correct": 1,
+          "explanation": "Näherung dₖ ≈ d − P = 5 − 0,8 = 4,2 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-004",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M6 × 1.",
+          "options": [
+            "7 mm",
+            "4 mm",
+            "5 mm",
+            "6 mm"
+          ],
+          "correct": 2,
+          "explanation": "Näherung dₖ ≈ d − P = 6 − 1 = 5 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-005",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M8 × 1,25.",
+          "options": [
+            "8 mm",
+            "9,25 mm",
+            "5,5 mm",
+            "6,75 mm"
+          ],
+          "correct": 3,
+          "explanation": "Näherung dₖ ≈ d − P = 8 − 1,25 = 6,75 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-006",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M10 × 1,5.",
+          "options": [
+            "8,5 mm",
+            "10 mm",
+            "11,5 mm",
+            "7 mm"
+          ],
+          "correct": 0,
+          "explanation": "Näherung dₖ ≈ d − P = 10 − 1,5 = 8,5 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-007",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M12 × 1,75.",
+          "options": [
+            "8,5 mm",
+            "10,25 mm",
+            "12 mm",
+            "13,75 mm"
+          ],
+          "correct": 1,
+          "explanation": "Näherung dₖ ≈ d − P = 12 − 1,75 = 10,25 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-008",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M14 × 2.",
+          "options": [
+            "16 mm",
+            "10 mm",
+            "12 mm",
+            "14 mm"
+          ],
+          "correct": 2,
+          "explanation": "Näherung dₖ ≈ d − P = 14 − 2 = 12 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-009",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M16 × 2.",
+          "options": [
+            "16 mm",
+            "18 mm",
+            "12 mm",
+            "14 mm"
+          ],
+          "correct": 3,
+          "explanation": "Näherung dₖ ≈ d − P = 16 − 2 = 14 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-010",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M20 × 2,5.",
+          "options": [
+            "17,5 mm",
+            "20 mm",
+            "22,5 mm",
+            "15 mm"
+          ],
+          "correct": 0,
+          "explanation": "Näherung dₖ ≈ d − P = 20 − 2,5 = 17,5 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-011",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M10 × 1,25.",
+          "options": [
+            "7,5 mm",
+            "8,75 mm",
+            "10 mm",
+            "11,25 mm"
+          ],
+          "correct": 1,
+          "explanation": "Näherung dₖ ≈ d − P = 10 − 1,25 = 8,75 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-kernloch-012",
+          "prompt": "Berechne den näherungsweisen Kernlochdurchmesser für M12 × 1,5.",
+          "options": [
+            "13,5 mm",
+            "9 mm",
+            "10,5 mm",
+            "12 mm"
+          ],
+          "correct": 2,
+          "explanation": "Näherung dₖ ≈ d − P = 12 − 1,5 = 10,5 mm. Für die praktische Bohrerauswahl eine Kernlochtabelle verwenden.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        }
+      ]
+    },
+    {
+      "id": "gewinde-bohrer",
+      "title": "Kernlochbohrer auswählen",
+      "questions": [
+        {
+          "id": "ap1-metall-gewinde-bohrer-001",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M3-Regelgewinde?",
+          "options": [
+            "1,5 mm",
+            "3,2 mm",
+            "2,5 mm",
+            "3 mm"
+          ],
+          "correct": 2,
+          "explanation": "M3: d = 3 mm, P = 0,5 mm. Näherung d − P = 2,5 mm; üblicher Tabellenwert für den Kernlochbohrer: 2,5 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-002",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M4-Regelgewinde?",
+          "options": [
+            "4 mm",
+            "2,3 mm",
+            "4,8 mm",
+            "3,3 mm"
+          ],
+          "correct": 3,
+          "explanation": "M4: d = 4 mm, P = 0,7 mm. Näherung d − P = 3,3 mm; üblicher Tabellenwert für den Kernlochbohrer: 3,3 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-003",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M5-Regelgewinde?",
+          "options": [
+            "4,2 mm",
+            "5 mm",
+            "3,2 mm",
+            "4,9 mm"
+          ],
+          "correct": 0,
+          "explanation": "M5: d = 5 mm, P = 0,8 mm. Näherung d − P = 4,2 mm; üblicher Tabellenwert für den Kernlochbohrer: 4,2 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-004",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M6-Regelgewinde?",
+          "options": [
+            "5,7 mm",
+            "5 mm",
+            "6 mm",
+            "4 mm"
+          ],
+          "correct": 1,
+          "explanation": "M6: d = 6 mm, P = 1 mm. Näherung d − P = 5 mm; üblicher Tabellenwert für den Kernlochbohrer: 5 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-005",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M8-Regelgewinde?",
+          "options": [
+            "5,75 mm",
+            "7,45 mm",
+            "6,8 mm",
+            "8 mm"
+          ],
+          "correct": 2,
+          "explanation": "M8: d = 8 mm, P = 1,25 mm. Näherung d − P = 6,75 mm; üblicher Tabellenwert für den Kernlochbohrer: 6,8 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-006",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M10-Regelgewinde?",
+          "options": [
+            "10 mm",
+            "7,5 mm",
+            "9,2 mm",
+            "8,5 mm"
+          ],
+          "correct": 3,
+          "explanation": "M10: d = 10 mm, P = 1,5 mm. Näherung d − P = 8,5 mm; üblicher Tabellenwert für den Kernlochbohrer: 8,5 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-007",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M12-Regelgewinde?",
+          "options": [
+            "10,2 mm",
+            "12 mm",
+            "9,25 mm",
+            "10,95 mm"
+          ],
+          "correct": 0,
+          "explanation": "M12: d = 12 mm, P = 1,75 mm. Näherung d − P = 10,25 mm; üblicher Tabellenwert für den Kernlochbohrer: 10,2 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-008",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M14-Regelgewinde?",
+          "options": [
+            "12,7 mm",
+            "12 mm",
+            "14 mm",
+            "11 mm"
+          ],
+          "correct": 1,
+          "explanation": "M14: d = 14 mm, P = 2 mm. Näherung d − P = 12 mm; üblicher Tabellenwert für den Kernlochbohrer: 12 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-009",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M16-Regelgewinde?",
+          "options": [
+            "13 mm",
+            "14,7 mm",
+            "14 mm",
+            "16 mm"
+          ],
+          "correct": 2,
+          "explanation": "M16: d = 16 mm, P = 2 mm. Näherung d − P = 14 mm; üblicher Tabellenwert für den Kernlochbohrer: 14 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-bohrer-010",
+          "prompt": "Welchen üblichen Kernlochbohrer nutzt du für M20-Regelgewinde?",
+          "options": [
+            "20 mm",
+            "16,5 mm",
+            "18,2 mm",
+            "17,5 mm"
+          ],
+          "correct": 3,
+          "explanation": "M20: d = 20 mm, P = 2,5 mm. Näherung d − P = 17,5 mm; üblicher Tabellenwert für den Kernlochbohrer: 17,5 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        }
+      ]
+    },
+    {
+      "id": "gewinde-praxis",
+      "title": "Gewindeschneiden in der Werkstatt",
+      "questions": [
+        {
+          "id": "ap1-metall-gewinde-praxis-001",
+          "prompt": "Welche Arbeitsfolge ist für ein handgeschnittenes Innengewinde sinnvoll?",
+          "options": [
+            "Nur Gewindebohrer verwenden",
+            "Ankörnen → Kernloch bohren → ansenken → Gewinde schneiden",
+            "Gewinde schneiden → bohren → ankörnen",
+            "Ansenken → Gewinde schneiden → bohren"
+          ],
+          "correct": 1,
+          "explanation": "Das Kernloch wird zuerst gebohrt, anschließend leicht angesenkt und das Gewinde geschnitten.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-002",
+          "prompt": "Warum wird das Kernloch leicht angesenkt?",
+          "options": [
+            "Bohrung vollständig verschließen",
+            "Nenndurchmesser vergrößern",
+            "Entgraten und Gewindebohrer sauber ansetzen",
+            "Steigung verdoppeln"
+          ],
+          "correct": 2,
+          "explanation": "Die Ansenkung beseitigt Grat und erleichtert einen sauberen Gewindeanschnitt.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-003",
+          "prompt": "Wie setzt man einen Handgewindebohrer an?",
+          "options": [
+            "Absichtlich schräg",
+            "Mit Hammerschlägen",
+            "Ohne Kernloch",
+            "Möglichst senkrecht zur Oberfläche"
+          ],
+          "correct": 3,
+          "explanation": "Ein gerader Ansatz verhindert schiefe Gewinde und senkt das Bruchrisiko.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-004",
+          "prompt": "Wozu dient geeignetes Schneidmittel?",
+          "options": [
+            "Reibung und Werkzeugverschleiß reduzieren",
+            "Gewindesteigung vergrößern",
+            "Kernloch verschließen",
+            "Nenndurchmesser verkleinern"
+          ],
+          "correct": 0,
+          "explanation": "Passendes Schneidmittel kann Reibung und Verschleiß reduzieren; Werkstoffvorgaben beachten.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-005",
+          "prompt": "Was droht bei einem deutlich zu kleinen Kernloch?",
+          "options": [
+            "Größere Steigung",
+            "Zu hohes Drehmoment und Werkzeugbruch",
+            "Zu wenig Materialabtrag",
+            "Automatisch Feingewinde"
+          ],
+          "correct": 1,
+          "explanation": "Zu viel Material muss geschnitten werden. Das erhöht Schnittkraft und Bruchgefahr.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-006",
+          "prompt": "Was droht bei einem zu großen Kernloch?",
+          "options": [
+            "Steigung wird null",
+            "Gewindebohrer wird größer",
+            "Zu wenig tragfähige Gewindeflanke",
+            "Automatisch Linksgewinde"
+          ],
+          "correct": 2,
+          "explanation": "Die Gewindeflanken werden unvollständig; die Tragfähigkeit kann sinken.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-007",
+          "prompt": "Wie prüfst du ein Innengewinde maßhaltig?",
+          "options": [
+            "Mit Körner",
+            "Nur mit Außenmessschieber",
+            "Mit Zentrierbohrer",
+            "Mit passendem Gewinde-Grenzlehrdorn"
+          ],
+          "correct": 3,
+          "explanation": "Gut- und Ausschussseite eines passenden Gewindegrenzlehrdorns dienen der Maßprüfung.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-008",
+          "prompt": "Was ist beim Gewindeschneiden im Sackloch wichtig?",
+          "options": [
+            "Genug Bohrtiefe und Spanraum vorsehen",
+            "Nur exakt Gewindetiefe bohren",
+            "Bis zum Grund weiterdrehen",
+            "Bohrer schräg ansetzen"
+          ],
+          "correct": 0,
+          "explanation": "Zusätzlicher Raum ist für Gewindebohreranschnitt und Späne nötig.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-009",
+          "prompt": "Du schneidest M8-Regelgewinde: welcher Kernlochbohrer?",
+          "options": [
+            "10,0 mm",
+            "6,8 mm",
+            "8,0 mm",
+            "1,25 mm"
+          ],
+          "correct": 1,
+          "explanation": "M8: 8 − 1,25 = 6,75 mm; üblicher Kernlochbohrer 6,8 mm.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        },
+        {
+          "id": "ap1-metall-gewinde-praxis-010",
+          "prompt": "Was machst du bei einer unbekannten Sondersteigung?",
+          "options": [
+            "Immer 2 mm abziehen",
+            "Bohrdurchmesser schätzen",
+            "Steigung ermitteln und Kernlochtabelle prüfen",
+            "Immer Regelgewindebohrer verwenden"
+          ],
+          "correct": 2,
+          "explanation": "Näherung d − P ist eine Orientierung; die Tabelle zum Gewinde und Werkstoff ist maßgeblich.",
+          "created_at": "2026-10-20T12:27:00+02:00",
+          "source": "Tafelbild Gewindedurchmesser und Kernloch M8 × 1,25 (Foto, 20.10.2026)",
+          "batch_id": "metall-gewindeschneiden-20261020"
+        }
+      ]
     }
   ]
 }
