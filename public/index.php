@@ -4,7 +4,7 @@ require dirname(__DIR__).'/src/bootstrap.php';
 require dirname(__DIR__).'/src/catalog.php';
 $pdo=db();migrate($pdo);reset_learning_content_once($pdo);
 $catalog=catalog_modules($pdo);
-$questions=['questions'=>array_merge(...array_map(fn($m)=>$m['questions'],array_values(array_filter($catalog,fn($m)=>$m['subject']==='elektro'))))];
+$questions=['questions'=>array_merge([], ...array_map(fn($m)=>$m['questions'],array_values(array_filter($catalog,fn($m)=>$m['subject']==='elektro'))))];
 $metalworks=['modules'=>array_values(array_map(fn($m)=>['id'=>$m['id'],'title'=>$m['title'],'questions'=>$m['questions']],array_filter($catalog,fn($m)=>$m['subject']==='metall')))];
 $pneumatics=['modules'=>array_values(array_map(fn($m)=>['id'=>$m['id'],'title'=>$m['title'],'questions'=>$m['questions']],array_filter($catalog,fn($m)=>$m['subject']==='pneu')))];
 ?><!doctype html>
