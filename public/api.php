@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require dirname(__DIR__) . '/src/bootstrap.php';
+require dirname(__DIR__) . '/src/catalog.php';
 start_session();
 try { $pdo=db(); migrate($pdo); }
 catch(Throwable $e) { json_response(['error'=>'Datenbank nicht verfügbar.'],503); }
