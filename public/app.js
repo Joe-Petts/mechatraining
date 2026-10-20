@@ -111,7 +111,7 @@ function render(){
  if(q.diagram)pneumaticDiagram(section);
  section.append(options,feedback,actions);root.append(section);progress();
 }
-async function signedIn(user,token){csrf=token;loggedName=user.name;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();updateXP(Number(data.xp)||0);$('xpWidget').classList.remove('hidden');$('logout').classList.remove('hidden');if(user.role==='admin'){$('adminToggle').classList.remove('hidden');await loadUsers();}const previous=savedView();if(previous&&previous.user===user.name){if(previous.view==='formulaPanel'){$('formulaOpen').click();}else if(previous.view==='appPanel'){const module=[...pneumaticModules,...metalModules].find(m=>m.id===previous.moduleId);if(module)openExercise(module,metalModules.includes(module)?'metalPanel':'pneuPanel');else if(previous.moduleId==='electro')openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel');}else if(['dashboard','topicPanel','metalPanel','pneuPanel'].includes(previous.view))showLearningView(previous.view);}}
+async function signedIn(user,token){csrf=token;loggedName=user.name;$('username').textContent=user.name;$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');const data=await api('progress');solved=new Set(data.progress.filter(p=>Number(p.correct)===1).map(p=>p.question_id));render();updateXP(Number(data.xp)||0);$('xpWidget').classList.remove('hidden');$('logout').classList.remove('hidden');$('passwordToggle').classList.remove('hidden');if(user.role==='admin'){$('adminToggle').classList.remove('hidden');await loadUsers();}const previous=savedView();if(previous&&previous.user===user.name){if(previous.view==='formulaPanel'){$('formulaOpen').click();}else if(previous.view==='appPanel'){const module=[...pneumaticModules,...metalModules].find(m=>m.id===previous.moduleId);if(module)openExercise(module,metalModules.includes(module)?'metalPanel':'pneuPanel');else if(previous.moduleId==='electro')openExercise({id:'electro',title:'Elektrotechnik – Grundlagen',questions:electroQuestions},'topicPanel');}else if(['dashboard','topicPanel','metalPanel','pneuPanel'].includes(previous.view))showLearningView(previous.view);}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const form=new FormData(e.currentTarget);try{const r=await api('login',{username:form.get('username'),password:form.get('password')});await signedIn(r.user,r.csrf);}catch(err){$('loginError').textContent=err.message;}});
 $('logout').addEventListener('click',async()=>{try{await api('logout',{});clearView();location.reload();}catch(e){alert(e.message);}});
 api('session').then(r=>{if(r.user)return signedIn(r.user,r.csrf);$('loginPanel').classList.remove('hidden');}).catch(e=>{$('loginPanel').classList.remove('hidden');$('loginError').textContent=e.message;});
@@ -141,3 +141,21 @@ document.getElementById('formulaTile')?.addEventListener('click',()=>document.ge
 
 // Quiz entry: all subjects are available through the shared area filter.
 document.querySelector('[data-topic="elektro"]')?.addEventListener('click',e=>{e.stopImmediatePropagation();openExercise({id:'electro',title:'Mecha-Quiz',questions:electroQuestions},'dashboard');},true);
+
+// Passwortverwaltung für angemeldete Benutzer
+let passwordReturnView='dashboard';
+$('passwordToggle').addEventListener('click',()=>{
+ passwordReturnView=['dashboard','topicPanel','metalPanel','pneuPanel','appPanel','formulaPanel','adminHome','adminPanel','futterPanel'].find(id=>!$(id).classList.contains('hidden'))||'dashboard';
+ document.querySelectorAll('main > section').forEach(el=>{if(el.id!=='loginPanel')el.classList.add('hidden');});
+ $('passwordPanel').classList.remove('hidden');$('passwordMessage').textContent='';
+});
+$('passwordBack').addEventListener('click',()=>{
+ $('passwordPanel').classList.add('hidden');$(passwordReturnView).classList.remove('hidden');
+});
+$('passwordForm').addEventListener('submit',async e=>{
+ e.preventDefault();const form=e.currentTarget;const pass=form.elements.password.value;
+ const message=$('passwordMessage');message.textContent='';
+ if(pass!==form.elements.confirm.value){message.textContent='Die Passwörter stimmen nicht überein.';return;}
+ try{const result=await api('change_password',{password:pass});csrf=result.csrf;form.reset();message.textContent='Passwort erfolgreich geändert.';}
+ catch(err){message.textContent=err.message;}
+});
