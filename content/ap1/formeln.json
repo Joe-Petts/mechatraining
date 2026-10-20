@@ -251,6 +251,15 @@
             "Zₑ = η · Vₛ / Vₑ",
             "Zₑ = Vₑ / Vₛ"
           ]
+        ],
+        [
+          "Kernlochdurchmesser – Näherung beim Gewindebohren",
+          "dₖ = d − P",
+          [
+            "dₖ = d − P",
+            "dₖ = d + P",
+            "dₖ = d · P"
+          ]
         ]
       ]
     }
