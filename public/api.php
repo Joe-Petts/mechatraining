@@ -120,8 +120,10 @@ if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
 }
 if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
-    $questionSets=[dirname(__DIR__).'/content/ap1/elektrotechnik.json',dirname(__DIR__).'/content/ap1/pneumatik.json',dirname(__DIR__).'/content/ap1/metallbau.json'];
-    $found=null; foreach($questionSets as $path) { $set=json_decode(file_get_contents($path),true); $modules=isset($set['modules'])?$set['modules']:[$set]; foreach($modules as $module) foreach($module['questions'] as $q) if($q['id']===($data['question_id']??'')) {$found=$q;break 3;} }
+    import_legacy_catalog($pdo);
+    $stmt=$pdo->prepare("SELECT q.id,q.status,q.solution_explanation,o.option_index,o.text,o.is_correct FROM learning_questions q JOIN question_options o ON o.question_id=q.id WHERE q.id=? ORDER BY o.option_index");
+    $stmt->execute([(string)($data['question_id']??'')]);$rows=$stmt->fetchAll();$found=null;
+    if($rows){$found=['id'=>$rows[0]['id'],'options'=>[],'correct'=>0,'explanation'=>$rows[0]['solution_explanation']];foreach($rows as $r){$found['options'][]=$r['text'];if((int)$r['is_correct']===1)$found['correct']=(int)$r['option_index'];}if($rows[0]['status']!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
     if($found){migrate_futter($pdo);$check=$pdo->prepare('SELECT status FROM futter_status WHERE question_id=?');$check->execute([$found['id']]);if(($check->fetchColumn()?:'active')!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
     if(!$found || !is_int($data['answer']??null) || !array_key_exists($data['answer'],$found['options'])) json_response(['error'=>'Ungültige Antwort.'],422);
     $correct=(int)($data['answer']===$found['correct']);
