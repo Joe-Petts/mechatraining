@@ -19,6 +19,7 @@ function migrate_catalog(PDO $db): void {
 
 /** Idempotent initial import: existing records are never overwritten or resurrected. */
 function import_legacy_catalog(PDO $db): void {
+    return; // Legacy task files are retired.
     migrate_catalog($db);
     $files=['elektrotechnik.json'=>'elektro','metallbau.json'=>'metall','pneumatik.json'=>'pneu'];
     $db->beginTransaction();
