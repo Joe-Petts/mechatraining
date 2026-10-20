@@ -20,34 +20,8 @@ function migrate_catalog(PDO $db): void {
 /** Idempotent initial import: existing records are never overwritten or resurrected. */
 function import_legacy_catalog(PDO $db): void {
     migrate_catalog($db);
-    $files=['elektrotechnik.json'=>'elektro','metallbau.json'=>'metall','pneumatik.json'=>'pneu'];
-    $db->beginTransaction();
-    try {
-        $subject=$db->prepare('INSERT OR IGNORE INTO subjects(id,title,sort_order) VALUES(?,?,?)');
-        $module=$db->prepare('INSERT OR IGNORE INTO learning_modules(id,subject_id,title,sort_order) VALUES(?,?,?,?)');
-        $source=$db->prepare('INSERT OR IGNORE INTO learning_sources(id,title,origin) VALUES(?,?,?)');
-        $question=$db->prepare('INSERT OR IGNORE INTO learning_questions(id,module_id,source_id,prompt,solution_explanation,solution_data,config_json,created_at,status) VALUES(?,?,?,?,?,?,?,?,?)');
-        $option=$db->prepare('INSERT OR IGNORE INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
-        foreach($files as $file=>$subjectId) {
-            $path=dirname(__DIR__).'/content/ap1/'.$file;
-            if(!is_file($path))continue;
-            $set=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
-            $subject->execute([$subjectId,$set['title'],0]);
-            foreach(($set['modules']??[$set]) as $position=>$m) {
-                $moduleId=$subjectId==='elektro'?'electro':(string)$m['id'];
-                // Module IDs in the legacy JSON are only unique within a subject.
-                $storageId=$subjectId.':'.$moduleId;
-                $module->execute([$storageId,$subjectId,$m['title'],$position]);
-                foreach($m['questions'] as $q) {
-                    $batch=(string)($q['batch_id']??($q['source']??'legacy-'.$subjectId));
-                    $source->execute([$batch,$batch,(string)($q['source']??$file)]);
-                    $question->execute([$q['id'],$storageId,$batch,$q['prompt'],$q['explanation']??'',json_encode(['correct'=>$q['correct']],JSON_UNESCAPED_UNICODE),json_encode(['diagram'=>$q['diagram']??null],JSON_UNESCAPED_UNICODE),$q['created_at']??gmdate('Y-m-d H:i:s'),'active']);
-                    foreach($q['options'] as $i=>$answer)$option->execute([$q['id'],$i,(string)$answer,(int)($i===$q['correct'])]);
-                }
-            }
-        }
-        $db->commit();
-    } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
+    // The initial legacy import is permanently disabled after the approved clean reset.
+    // Future learning content is created in SQLite only.
 }
 
 function catalog_modules(PDO $db): array {
@@ -64,4 +38,20 @@ function catalog_modules(PDO $db): array {
         $out[$id]['questions'][]=$q;
     }
     return array_values($out);
+}
+
+/** One-time, transactional content reset. Never touches users, notes or passwords. */
+function reset_learning_content_once(PDO $db): void {
+    migrate_catalog($db);
+    $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
+    $done=$db->query("SELECT value FROM learning_system_state WHERE name='clean_reset_20261020'")->fetchColumn();
+    if($done!==false)return;
+    $db->beginTransaction();
+    try {
+        foreach(['question_attempts','question_tags','question_revisions','question_assets','question_options','learning_questions','learning_modules','subjects','learning_sources','progress','futter_status','futter_events','futter_deleted_batches'] as $table) {
+            $db->exec("DELETE FROM ".$table);
+        }
+        $db->exec("INSERT INTO learning_system_state(name,value) VALUES('clean_reset_20261020',CURRENT_TIMESTAMP)");
+        $db->commit();
+    }catch(Throwable $e){if($db->inTransaction())$db->rollBack();throw $e;}
 }
