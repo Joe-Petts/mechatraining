@@ -164,3 +164,10 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 - Übungsansichten (Quiz und Formeln) nutzen eine helle, reduzierte Karteikartenoptik; Dashboard/Admin bleiben im Industrial-Dark-Design.
 - Fachbereichs-Checkboxfilter beider Modi befinden sich in einer gemeinsamen ausklappbaren linken Sidebar. Bestehende Filter-IDs und Logik bleiben unverändert; `public/notes.js` verwaltet die Sidebar und verschiebt die Filter-Elemente bei Ansichtswechsel.
 - Kein Einfluss auf XP, Nutzerkonten oder bestehende Fortschritte.
+
+## Metallbau – Gewindeschneiden (freigegeben 2026-10-20)
+- Quelle: Foto eines Tafelbildes zu Gewindebezeichnung M8 × 1,25, Steigung und Kernlochdurchmesser (20.10.2026).
+- Vier neue Module in `content/ap1/metallbau.json`: Gewindebezeichnungen (8), Kernlochdurchmesser (12), Kernlochbohrer auswählen (10), Werkstattpraxis (10), insgesamt 40 Aufgaben mit IDs `ap1-metall-gewinde-*`.
+- Futter-Block-ID `metall-gewindeschneiden-20261020`; Datum und Herkunft sind pro Aufgabe dokumentiert. Vorhandene Schweißtechnikmodule und Aufgaben-IDs bleiben erhalten.
+- Fachliche Korrektur des Tafelbildes: Kernloch-Näherung `dₖ ≈ d − P`, M8 × 1,25 ergibt 6,75 mm, üblicher Bohrer 6,8 mm. Kernlochtabelle für praktische Bohrerauswahl maßgeblich.
+- Eine Kernlochformel in `content/ap1/formeln.json` beim bestehenden Fachgebiet Metallbau ergänzt.
