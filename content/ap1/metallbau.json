@@ -1250,6 +1250,474 @@
           "batch_id": "metall-gewindeschneiden-20261020"
         }
       ]
+    },
+    {
+      "id": "bohren-schnittgeschwindigkeit",
+      "title": "Bohren – Schnittgeschwindigkeit berechnen",
+      "questions": [
+        {
+          "id": "ap1-metall-bohren-vc-001",
+          "prompt": "Bohrer Ø10 mm, n = 800 U/min. Wie groß ist vc?",
+          "options": [
+            "25,13 m/min",
+            "2,51 m/min",
+            "251,3 m/min",
+            "80 m/min"
+          ],
+          "correct": 0,
+          "explanation": "vc = π · d · n / 1000 = π · 10 · 800 / 1000 ≈ 25,13 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-002",
+          "prompt": "Bohrer Ø8 mm, n = 1000 U/min. Wie groß ist vc?",
+          "options": [
+            "8 m/min",
+            "25,13 m/min",
+            "31,42 m/min",
+            "80 m/min"
+          ],
+          "correct": 1,
+          "explanation": "vc = π · 8 · 1000 / 1000 ≈ 25,13 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-003",
+          "prompt": "Welche Formel berechnet die Schnittgeschwindigkeit beim Bohren?",
+          "options": [
+            "vc = 1000 · n / (π · d)",
+            "vc = π · d / (1000 · n)",
+            "vc = π · d · n / 1000",
+            "vc = d · n · 1000"
+          ],
+          "correct": 2,
+          "explanation": "Bei d in mm und n in 1/min liefert π · d · n / 1000 die Schnittgeschwindigkeit in m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-004",
+          "prompt": "Bohrer Ø12 mm, n = 500 U/min. Wie groß ist vc?",
+          "options": [
+            "18,85 m/min",
+            "37,70 m/min",
+            "6,00 m/min",
+            "188,5 m/min"
+          ],
+          "correct": 0,
+          "explanation": "vc = π · 12 · 500 / 1000 ≈ 18,85 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-005",
+          "prompt": "Was passiert mit vc, wenn bei gleicher Drehzahl der Bohrerdurchmesser verdoppelt wird?",
+          "options": [
+            "Sie halbiert sich",
+            "Sie bleibt gleich",
+            "Sie vervierfacht sich",
+            "Sie verdoppelt sich"
+          ],
+          "correct": 3,
+          "explanation": "vc ist bei gleicher Drehzahl direkt proportional zum Durchmesser.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-006",
+          "prompt": "Bohrer Ø6 mm, n = 1500 U/min. Wie groß ist vc?",
+          "options": [
+            "9,42 m/min",
+            "28,27 m/min",
+            "56,55 m/min",
+            "282,7 m/min"
+          ],
+          "correct": 1,
+          "explanation": "vc = π · 6 · 1500 / 1000 ≈ 28,27 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-007",
+          "prompt": "Warum wird in der vc-Formel durch 1000 geteilt?",
+          "options": [
+            "Um Sekunden in Minuten umzurechnen",
+            "Wegen der Zahl der Schneiden",
+            "Um mm in m umzurechnen",
+            "Um U/min in U/s umzurechnen"
+          ],
+          "correct": 2,
+          "explanation": "π · d · n ergibt bei d in mm zunächst mm/min. Division durch 1000 ergibt m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-008",
+          "prompt": "Bohrer Ø20 mm, n = 400 U/min. Wie groß ist vc?",
+          "options": [
+            "25,13 m/min",
+            "12,57 m/min",
+            "40,00 m/min",
+            "125,7 m/min"
+          ],
+          "correct": 0,
+          "explanation": "vc = π · 20 · 400 / 1000 ≈ 25,13 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-009",
+          "prompt": "Woher erhältst du einen geeigneten vc-Richtwert für eine Bohrarbeit?",
+          "options": [
+            "Immer aus der Netzspannung",
+            "Aus Werkstoff- und Werkzeugtabellen",
+            "Aus dem Gewindedurchmesser allein",
+            "Immer pauschal 30 m/min"
+          ],
+          "correct": 1,
+          "explanation": "Schnittwerte hängen u. a. von Werkstoff, Werkzeugmaterial und Bearbeitungsbedingungen ab.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vc-010",
+          "prompt": "Bohrer Ø5 mm, n = 1200 U/min. Wie groß ist vc?",
+          "options": [
+            "6,00 m/min",
+            "12,00 m/min",
+            "37,70 m/min",
+            "18,85 m/min"
+          ],
+          "correct": 3,
+          "explanation": "vc = π · 5 · 1200 / 1000 ≈ 18,85 m/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        }
+      ]
+    },
+    {
+      "id": "bohren-drehzahl",
+      "title": "Bohren – Drehzahl berechnen",
+      "questions": [
+        {
+          "id": "ap1-metall-bohren-n-001",
+          "prompt": "d = 12 mm, vc = 30 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "796 U/min",
+            "1257 U/min",
+            "314 U/min",
+            "360 U/min"
+          ],
+          "correct": 0,
+          "explanation": "n = 1000 · vc / (π · d) = 30000 / (π · 12) ≈ 796 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-002",
+          "prompt": "Welche Formel ist nach n umgestellt?",
+          "options": [
+            "n = π · d · vc / 1000",
+            "n = 1000 · vc / (π · d)",
+            "n = 1000 · d / (π · vc)",
+            "n = vc / (1000 · π · d)"
+          ],
+          "correct": 1,
+          "explanation": "Aus vc = π · d · n / 1000 folgt n = 1000 · vc / (π · d).",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-003",
+          "prompt": "d = 10 mm, vc = 25 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "250 U/min",
+            "1257 U/min",
+            "796 U/min",
+            "318 U/min"
+          ],
+          "correct": 2,
+          "explanation": "n = 25000 / (π · 10) ≈ 796 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-004",
+          "prompt": "d = 8 mm, vc = 25 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "637 U/min",
+            "800 U/min",
+            "1250 U/min",
+            "995 U/min"
+          ],
+          "correct": 3,
+          "explanation": "n = 25000 / (π · 8) ≈ 995 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-005",
+          "prompt": "Was passiert bei gleicher gewünschter vc mit n, wenn d verdoppelt wird?",
+          "options": [
+            "n halbiert sich",
+            "n verdoppelt sich",
+            "n bleibt gleich",
+            "n vervierfacht sich"
+          ],
+          "correct": 0,
+          "explanation": "n ist bei fester Schnittgeschwindigkeit umgekehrt proportional zum Durchmesser.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-006",
+          "prompt": "d = 6 mm, vc = 20 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "637 U/min",
+            "1061 U/min",
+            "1885 U/min",
+            "333 U/min"
+          ],
+          "correct": 1,
+          "explanation": "n = 20000 / (π · 6) ≈ 1061 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-007",
+          "prompt": "In welcher Einheit wird die Drehzahl n angegeben?",
+          "options": [
+            "m/min",
+            "mm/U",
+            "1/min (U/min)",
+            "mm/min"
+          ],
+          "correct": 2,
+          "explanation": "Die Drehzahl ist die Anzahl der Umdrehungen pro Minute.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-008",
+          "prompt": "d = 20 mm, vc = 30 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "955 U/min",
+            "300 U/min",
+            "1500 U/min",
+            "477 U/min"
+          ],
+          "correct": 3,
+          "explanation": "n = 30000 / (π · 20) ≈ 477 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-009",
+          "prompt": "d = 5 mm, vc = 15 m/min. Welche Drehzahl ergibt sich?",
+          "options": [
+            "955 U/min",
+            "477 U/min",
+            "150 U/min",
+            "3000 U/min"
+          ],
+          "correct": 0,
+          "explanation": "n = 15000 / (π · 5) ≈ 955 U/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-n-010",
+          "prompt": "Was tust du, wenn die berechnete Drehzahl nicht exakt an der Maschine einstellbar ist?",
+          "options": [
+            "Immer auf die höchste Drehzahl stellen",
+            "Eine passende verfügbare Drehzahl unter Beachtung der Schnittwertvorgaben wählen",
+            "Bohrerdurchmesser ignorieren",
+            "Mit dem doppelten Vorschub arbeiten"
+          ],
+          "correct": 1,
+          "explanation": "Die Maschine bietet oft Drehzahlstufen. Die Wahl muss zu Werkzeug, Werkstoff und zulässigen Schnittwerten passen.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        }
+      ]
+    },
+    {
+      "id": "bohren-vorschub",
+      "title": "Bohren – Vorschub und Bohrzeit",
+      "questions": [
+        {
+          "id": "ap1-metall-bohren-vf-001",
+          "prompt": "n = 800 U/min, f = 0,15 mm/U. Wie groß ist vf?",
+          "options": [
+            "120 mm/min",
+            "12 mm/min",
+            "5333 mm/min",
+            "0,1875 mm/min"
+          ],
+          "correct": 0,
+          "explanation": "vf = f · n = 0,15 · 800 = 120 mm/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-002",
+          "prompt": "Welche Formel berechnet die Vorschubgeschwindigkeit?",
+          "options": [
+            "vf = n / f",
+            "vf = f · n",
+            "vf = f + n",
+            "vf = 1000 / (f · n)"
+          ],
+          "correct": 1,
+          "explanation": "Vorschub je Umdrehung mal Umdrehungen je Minute ergibt mm/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-003",
+          "prompt": "L = 30 mm, f = 0,15 mm/U, n = 800 U/min. Wie lange dauert der Vorschub?",
+          "options": [
+            "30 s",
+            "60 s",
+            "15 s",
+            "4 s"
+          ],
+          "correct": 2,
+          "explanation": "t = L / (f · n) = 30 / 120 = 0,25 min = 15 s.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-004",
+          "prompt": "n = 600 U/min, f = 0,20 mm/U. Wie groß ist vf?",
+          "options": [
+            "60 mm/min",
+            "3000 mm/min",
+            "30 mm/min",
+            "120 mm/min"
+          ],
+          "correct": 3,
+          "explanation": "vf = 0,20 · 600 = 120 mm/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-005",
+          "prompt": "Welche Einheit hat der Vorschub pro Umdrehung f?",
+          "options": [
+            "mm/U",
+            "m/min",
+            "U/min",
+            "mm²"
+          ],
+          "correct": 0,
+          "explanation": "f beschreibt den axialen Weg des Werkzeugs je Umdrehung.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-006",
+          "prompt": "L = 60 mm, vf = 120 mm/min. Wie groß ist t?",
+          "options": [
+            "15 s",
+            "30 s",
+            "60 s",
+            "120 s"
+          ],
+          "correct": 1,
+          "explanation": "t = 60 / 120 = 0,5 min = 30 s.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-007",
+          "prompt": "n = 1000 U/min, f = 0,10 mm/U. Wie groß ist vf?",
+          "options": [
+            "10 mm/min",
+            "1000 mm/min",
+            "100 mm/min",
+            "0,1 mm/min"
+          ],
+          "correct": 2,
+          "explanation": "vf = 0,10 · 1000 = 100 mm/min.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-008",
+          "prompt": "Was muss bei der Berechnung der tatsächlichen Bohrzeit zusätzlich zur Materialdicke ggf. berücksichtigt werden?",
+          "options": [
+            "Nur die Farbe des Werkstücks",
+            "Nur der Bohrertypname",
+            "Nur der Gewindedurchmesser",
+            "Anlauf- und Überlaufweg"
+          ],
+          "correct": 3,
+          "explanation": "Für t = L / vf ist der gesamte Vorschubweg L relevant, nicht immer nur die Werkstückdicke.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-009",
+          "prompt": "L = 50 mm, f = 0,25 mm/U, n = 400 U/min. Wie groß ist t?",
+          "options": [
+            "30 s",
+            "15 s",
+            "60 s",
+            "120 s"
+          ],
+          "correct": 0,
+          "explanation": "vf = 0,25 · 400 = 100 mm/min; t = 50/100 = 0,5 min = 30 s.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        },
+        {
+          "id": "ap1-metall-bohren-vf-010",
+          "prompt": "Bei gleichem Vorschub f wird die Drehzahl verdoppelt. Was passiert mit vf?",
+          "options": [
+            "Sie halbiert sich",
+            "Sie verdoppelt sich",
+            "Sie bleibt gleich",
+            "Sie wird viermal so groß"
+          ],
+          "correct": 1,
+          "explanation": "vf = f · n: bei konstantem f steigt vf proportional zur Drehzahl.",
+          "created_at": "2026-10-22T23:10:00+02:00",
+          "source": "Arbeitsblätter Grundlagen Metall (Fotos vom 22.10.2026); ergänzende Rechenübungen Schnittgeschwindigkeit, Drehzahl und Vorschub",
+          "batch_id": "metall-bohren-berechnungen-20261022"
+        }
+      ]
     }
   ]
 }
