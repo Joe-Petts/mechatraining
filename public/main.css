@@ -48,7 +48,7 @@
  --tool-notes-control-bg:#e7eef4;
  --tool-notes-control-border:#cbd7e2;
 }
-#calcPanel{color:#fff; background:var(--tool-calculator-panel-bg);border-left-color:var(--tool-calculator-panel-border);color:var(--tool-calculator-panel-text)}
+#calcPanel{background:var(--tool-calculator-panel-bg);border-left-color:var(--tool-calculator-panel-border);color:var(--tool-calculator-panel-text)}
 #calcPanel .calc-heading small,#calcPanel .calc-hint,#calcPanel .calc-history small{color:var(--tool-calculator-panel-muted)}
 #notesPanel{background:var(--tool-notes-panel-bg);border-left-color:var(--tool-notes-panel-border);color:var(--tool-notes-panel-text);color-scheme:light}
 #notesPanel .calc-heading small,#notesPanel .notes-description,#notesPanel .notes-warning,#notesPanel .notes-empty,#notesPanel .notes-actions span,#notesPanel .notes-item p{color:var(--tool-notes-panel-muted)}
@@ -206,7 +206,7 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#ff
 .admin-toggle,.calc-toggle,.notes-toggle,.area-sidebar-toggle{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
 .area-sidebar,.calc-panel,.notes-panel{background:#fff;color:var(--ink);border-color:var(--line)}
 .calc-screen{background:#f8fafb;color:var(--ink);border-color:var(--line)}
-.calc-panel button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
+.calc-panel button{background:transparent;color:#fff;border:0;border-bottom:1px solid var(--line);border-radius:0}
 .calc-panel .calc-equals{background:#e9f5ef!important;color:#245c4e;border-color:#b4d2c4}
 @media(max-width:600px){.topic-grid{grid-template-columns:1fr}.topic-card{min-height:74px}}
 
