@@ -79,17 +79,17 @@ function render(){
  const hints={...(q.config?.hints||{})};if(q.id==='ap1-metall-bohren-test-001'&&!hints.formula)hints.formula='n = (1000 × v_c) / (π × d)';const hintValues=[['symbols','Formelzeichen'],['text','Texttipp'],['book','Buchtipp'],['formula','Formel anzeigen']];
  if(hintValues.some(([key])=>String(hints[key]||'').trim())){
   const jokers=document.createElement('div');jokers.className='quiz-jokers';
-  for(const [key,label] of hintValues){if(!String(hints[key]||'').trim())continue;const details=document.createElement('details');details.className='quiz-joker quiz-joker--'+key;const summary=document.createElement('summary');summary.textContent='Joker: '+label;const content=document.createElement('p');content.textContent=hints[key];details.append(summary,content);jokers.append(details);}
+  for(const [key,label] of hintValues){if(!String(hints[key]||'').trim())continue;const details=document.createElement('details');details.className='quiz-joker quiz-joker--'+key;const summary=document.createElement('summary');summary.textContent='Joker: '+label;const content=document.createElement('p');content.textContent=hints[key];details.append(summary,content);details.addEventListener('toggle',()=>{if(details.open){details.classList.add('quiz-joker--used');try{const keyName='mechatraining:jokers:'+q.id;const used=JSON.parse(sessionStorage.getItem(keyName)||'[]');if(!used.includes(key)){used.push(key);sessionStorage.setItem(keyName,JSON.stringify(used));}}catch(e){/* Session storage may be unavailable */}}});try{if(JSON.parse(sessionStorage.getItem('mechatraining:jokers:'+q.id)||'[]').includes(key))details.classList.add('quiz-joker--used');}catch(e){}jokers.append(details);}
   section.append(jokers);
  }
  const options=document.createElement('div');options.className='options';
  const feedback=document.createElement('div');feedback.className='result quiz-answer-feedback';feedback.setAttribute('role','status');
  const actions=document.createElement('div');actions.className='quiz-step-actions';
  const skip=document.createElement('button');skip.type='button';skip.className='quiz-skip-button';skip.textContent='Überspringen';skip.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});actions.append(skip);
- const next=document.createElement('button');next.type='button';next.className='quiz-next-button';next.textContent=quizIndex===questions.length-1?'Von vorn ↻':'Nächste Aufgabe →';next.hidden=true;
+ const next=document.createElement('button');next.type='button';next.className='quiz-next-button';next.textContent='Überspringen →';next.hidden=true;
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
- let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;};
+ let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;next.textContent='Weiter →';};
  if(q.type==='numeric'||q.type==='text_input'){
   const form=document.createElement('form');form.className='quiz-input-form';
   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
