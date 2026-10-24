@@ -73,7 +73,15 @@ function render(){
  const q=questions[quizIndex];
  const section=document.createElement('section');section.className='question quiz-single-card';
  const counter=document.createElement('p');counter.className='quiz-step';counter.textContent='AUFGABE '+(quizIndex+1)+' / '+questions.length;
- const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);window.MechaQuestionImages?.append(section,q,'prompt');
+ const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);
+ if(window.mechaAdmin===true){const edit=document.createElement('button');edit.type='button';edit.className='quiz-question-edit';edit.dataset.editQuestion=q.id;edit.textContent='✎';edit.title='Aufgabe bearbeiten';edit.setAttribute('aria-label','Aufgabe bearbeiten');section.append(edit);}
+ window.MechaQuestionImages?.append(section,q,'prompt');
+ const hints=q.config?.hints||{};const hintValues=[['symbols','Formelzeichen'],['text','Texttipp'],['book','Buchtipp']];
+ if(hintValues.some(([key])=>String(hints[key]||'').trim())){
+  const jokers=document.createElement('div');jokers.className='quiz-jokers';
+  for(const [key,label] of hintValues){if(!String(hints[key]||'').trim())continue;const details=document.createElement('details');details.className='quiz-joker quiz-joker--'+key;const summary=document.createElement('summary');summary.textContent='Joker: '+label;const content=document.createElement('p');content.textContent=hints[key];details.append(summary,content);jokers.append(details);}
+  section.append(jokers);
+ }
  const options=document.createElement('div');options.className='options';
  const feedback=document.createElement('div');feedback.className='result quiz-answer-feedback';feedback.setAttribute('role','status');
  const actions=document.createElement('div');actions.className='quiz-step-actions';
