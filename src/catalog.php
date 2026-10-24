@@ -158,7 +158,7 @@ function import_pending_learning(PDO $db): void {
                 'explanation'=>'n = (1000 × v_c) / (π × d) = (1000 × 25) / (π × 10) ≈ 795,8 U/min. Gerundet: 796 U/min.',
                 'config'=>['unit'=>'U/min'],
                 'assets'=>[
-                    ['path'=>'assets/bohren/test-bohrer.svg','placement'=>'prompt','alt'=>'Spiralbohrer mit Durchmesser d und Drehbewegung','caption'=>'Gegeben: d = 10 mm und v_c = 25 m/min'],
+                    ['path'=>'assets/bohren/test-bohrer.svg','placement'=>'prompt','alt'=>'Spiralbohrer mit Durchmesser d und Drehbewegung','caption'=>''],
                     ['path'=>'assets/bohren/test-bohrer.svg','placement'=>'solution','alt'=>'Spiralbohrer als Bezug für die Drehzahlberechnung','caption'=>'Drehzahl: n = 1000 · v_c / (π · d) ≈ 796 U/min']
                 ]
             ]]
@@ -177,7 +177,7 @@ function catalog_modules(PDO $db): array {
         foreach($qopts as $o){$texts[]=$o['text'];if((int)$o['is_correct']===1)$correct=(int)$o['option_index'];}
         $config=json_decode($r['config_json'],true)?:[];
         $q=['id'=>$r['id'],'type'=>$r['type'],'prompt'=>$r['prompt'],'options'=>$texts,'correct'=>$correct,'explanation'=>$r['solution_explanation']];
-        if($r['type']==='numeric'||$r['type']==='text_input')$q['config']=$config;
+        $q['config']=$config;
         $q['assets']=$mediaByQuestion[$r['id']]??[];
         if(!empty($config['diagram']))$q['diagram']=$config['diagram'];
         $id=$r['module_id'];if(!isset($out[$id]))$out[$id]=['id'=>str_contains($id,':')?explode(':',$id,2)[1]:$id,'title'=>$r['module_title'],'subject'=>$r['subject_id'],'questions'=>[]];
