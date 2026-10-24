@@ -94,8 +94,8 @@ function render(){
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
     const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Bitte Lösung überprüfen.';
     feedback.replaceChildren(heading,explanation);window.MechaQuestionImages?.append(feedback,q,'solution');
-    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);}
-    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation||q.explanation||'Antwort nicht richtig.',onConfirm:()=>{quizIndex=(quizIndex+1)%questions.length;render();}}}));next.hidden=false;}
+    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}next.hidden=false;}
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation||q.explanation||'Antwort nicht richtig.',onConfirm:()=>{next.hidden=false;}}}));next.hidden=false;}
    }catch(error){feedback.textContent=error.message;submit.disabled=false;}
   });
  }
@@ -118,7 +118,7 @@ function render(){
      if(!alreadySolved){solved.add(q.id);progress();await refreshXP();}
      quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);
     }else{
-     document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Richtige Antwort: '+q.options[q.correct]+'. '+(result.explanation||q.explanation||''),onConfirm:()=>{quizIndex=(quizIndex+1)%questions.length;render();}}}));
+     document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Richtige Antwort: '+q.options[q.correct]+'. '+(result.explanation||q.explanation||''),onConfirm:()=>{next.hidden=false;}}}));
      button.classList.add('quiz-answer-wrong');
      options.querySelectorAll('button')[q.correct]?.classList.add('quiz-answer-correct');
      next.hidden=false;
