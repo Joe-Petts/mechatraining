@@ -140,8 +140,30 @@ function import_learning_batch(PDO $db,array $batch): int {
 
 /** Explicit approved imports only; never re-import the retired legacy catalog. */
 function import_pending_learning(PDO $db): void {
-    // New learning content is imported only after explicit approval.
-    // Old JSON files are not runtime sources and must not repopulate SQLite.
+    import_learning_batch($db,[
+        'id'=>'test-bohren-20261024',
+        'title'=>'Erste Testaufgabe – Bohren',
+        'origin'=>'Freigegebene technische Testaufgabe',
+        'subject'=>'metall',
+        'subject_title'=>'Metallbau',
+        'modules'=>[[
+            'id'=>'bohren-test',
+            'title'=>'Bohren – Testaufgabe',
+            'questions'=>[[
+                'id'=>'ap1-metall-bohren-test-001',
+                'type'=>'numeric',
+                'prompt'=>'Ein Spiralbohrer mit 10 mm Durchmesser soll mit einer Schnittgeschwindigkeit von 25 m/min arbeiten. Berechne die erforderliche Drehzahl n in U/min. Runde auf eine ganze Zahl.',
+                'difficulty'=>2,
+                'solution'=>['value'=>796,'tolerance'=>1],
+                'explanation'=>'n = (1000 × v_c) / (π × d) = (1000 × 25) / (π × 10) ≈ 795,8 U/min. Gerundet: 796 U/min.',
+                'config'=>['unit'=>'U/min'],
+                'assets'=>[
+                    ['path'=>'assets/bohren/test-bohrer.svg','placement'=>'prompt','alt'=>'Spiralbohrer mit Durchmesser d und Drehbewegung','caption'=>'Gegeben: d = 10 mm und v_c = 25 m/min'],
+                    ['path'=>'assets/bohren/test-bohrer.svg','placement'=>'solution','alt'=>'Spiralbohrer als Bezug für die Drehzahlberechnung','caption'=>'Drehzahl: n = 1000 · v_c / (π · d) ≈ 796 U/min']
+                ]
+            ]]
+        ]]
+    ]);
 }
 
 function catalog_modules(PDO $db): array {
