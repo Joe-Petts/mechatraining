@@ -97,6 +97,7 @@ function import_learning_batch(PDO $db,array $batch): int {
         $id=$q['id']??'';
         if(!is_string($id)||$id===''||isset($seen[$id])||empty($q['prompt'])||empty($q['type']))throw new InvalidArgumentException('Ungültige Aufgabe');
         $seen[$id]=true;
+        if(!in_array($q['type'],['multiple_choice','numeric','text_input'],true))throw new InvalidArgumentException('Unbekannter Aufgabentyp: '.$id);
         if($q['type']==='multiple_choice'&&(!isset($q['options'],$q['correct'])||count($q['options'])<2||!array_key_exists($q['correct'],$q['options'])))throw new InvalidArgumentException('Ungültige Auswahlfrage: '.$id);
     }
     $db->beginTransaction();
@@ -139,14 +140,15 @@ function import_pending_learning(PDO $db): void {
 }
 
 function catalog_modules(PDO $db): array {
-    $rows=$db->query("SELECT q.id,q.module_id,q.prompt,q.solution_explanation,q.config_json,m.title AS module_title,m.subject_id,s.title AS subject_title,m.sort_order FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id WHERE q.status='active' AND m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order,q.id")->fetchAll();
+    $rows=$db->query("SELECT q.id,q.module_id,q.type,q.solution_data,q.prompt,q.solution_explanation,q.config_json,m.title AS module_title,m.subject_id,s.title AS subject_title,m.sort_order FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id WHERE q.status='active' AND m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order,q.id")->fetchAll();
     $options=$db->query('SELECT question_id,option_index,text,is_correct FROM question_options ORDER BY question_id,option_index')->fetchAll();
     $byQuestion=[];foreach($options as $o)$byQuestion[$o['question_id']][]=$o;
     $out=[];foreach($rows as $r) {
         $qopts=$byQuestion[$r['id']]??[];$correct=0;$texts=[];
         foreach($qopts as $o){$texts[]=$o['text'];if((int)$o['is_correct']===1)$correct=(int)$o['option_index'];}
         $config=json_decode($r['config_json'],true)?:[];
-        $q=['id'=>$r['id'],'prompt'=>$r['prompt'],'options'=>$texts,'correct'=>$correct,'explanation'=>$r['solution_explanation']];
+        $q=['id'=>$r['id'],'type'=>$r['type'],'prompt'=>$r['prompt'],'options'=>$texts,'correct'=>$correct,'explanation'=>$r['solution_explanation']];
+        if($r['type']==='numeric'||$r['type']==='text_input')$q['config']=$config;
         if(!empty($config['diagram']))$q['diagram']=$config['diagram'];
         $id=$r['module_id'];if(!isset($out[$id]))$out[$id]=['id'=>str_contains($id,':')?explode(':',$id,2)[1]:$id,'title'=>$r['module_title'],'subject'=>$r['subject_id'],'questions'=>[]];
         $out[$id]['questions'][]=$q;
