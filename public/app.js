@@ -73,7 +73,7 @@ function render(){
  const q=questions[quizIndex];
  const section=document.createElement('section');section.className='question quiz-single-card';
  const counter=document.createElement('p');counter.className='quiz-step';counter.textContent='AUFGABE '+(quizIndex+1)+' / '+questions.length;
- const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);
+ const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);window.MechaQuestionImages?.append(section,q,'prompt');
  const options=document.createElement('div');options.className='options';
  const feedback=document.createElement('div');feedback.className='result quiz-answer-feedback';feedback.setAttribute('role','status');
  const actions=document.createElement('div');actions.className='quiz-step-actions';
@@ -93,7 +93,7 @@ function render(){
     finished=true;input.disabled=true;
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
     const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Bitte Lösung überprüfen.';
-    feedback.replaceChildren(heading,explanation);
+    feedback.replaceChildren(heading,explanation);window.MechaQuestionImages?.append(feedback,q,'solution');
     if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);}
     else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation||q.explanation||'Antwort nicht richtig.',onConfirm:()=>{quizIndex=(quizIndex+1)%questions.length;render();}}}));next.hidden=false;}
    }catch(error){feedback.textContent=error.message;submit.disabled=false;}
@@ -111,7 +111,7 @@ function render(){
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
     const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Die richtige Antwort ist: '+q.options[q.correct];
     feedback.classList.toggle('quiz-feedback-wrong',!result.correct);
-    feedback.replaceChildren(heading,explanation);
+    feedback.replaceChildren(heading,explanation);window.MechaQuestionImages?.append(feedback,q,'solution');
     if(result.correct){
      button.classList.add('quiz-answer-correct');
      document.dispatchEvent(new Event('mechatraining:correct'));
