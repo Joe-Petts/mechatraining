@@ -72,6 +72,7 @@
    const symbols=field(form,'Formelzeichen und Bedeutungen (z. B. d = Durchmesser (mm))',hints.symbols,3);
    const text=field(form,'Texttipp',hints.text,3);
    const book=field(form,'Buchtipp (nur mit überprüfter Seitenangabe)',hints.book,2);
+   const formula=field(form,'Formel-Joker (wird nur auf Wunsch eingeblendet)',hints.formula|| (q.id==='ap1-metall-bohren-test-001'?'n = (1000 × v_c) / (π × d)':''),3);
    const assetTitle=node('h3','','Bilder');form.append(assetTitle);
    const assetContainer=node('div','question-editor-assets');form.append(assetContainer);
    const readers=[];for(const asset of q.assets||[])readers.push(assetRow(assetContainer,asset));
@@ -85,7 +86,7 @@
     try{
      const assets=readers.map(read=>read()).filter(a=>a&&a.path);
      const solution=q.type==='multiple_choice'?{options:solutionInputs.options.map(input=>input.value),correct:Number(solutionInputs.correct.value)}:q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:null);
-     await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,solution,hints:{symbols:symbols.value,text:text.value,book:book.value},assets});
+     await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,solution,hints:{symbols:symbols.value,text:text.value,book:book.value,formula:formula.value},assets});
      dialog.close();location.reload();
     }catch(e){message.textContent=e.message;save.disabled=false;}
    });
