@@ -11,7 +11,7 @@ window.MechaQuestionImages={
    const link=document.createElement('a');link.href=path;link.target='_blank';link.rel='noopener noreferrer';link.title='Zeichnung vergrößern';
    const img=document.createElement('img');img.src=path;img.alt=item.alt||item.caption||'Technische Zeichnung';img.loading='lazy';
    link.append(img);figure.append(link);
-   if(item.caption){const caption=document.createElement('figcaption');caption.textContent=item.caption;figure.append(caption);}
+   if(item.caption && !/^Gegeben\s*:/i.test(item.caption)){const caption=document.createElement('figcaption');caption.textContent=item.caption;figure.append(caption);}
    gallery.append(figure);
   }
   if(gallery.childElementCount)target.append(gallery);
