@@ -77,7 +77,7 @@
    const readers=[];for(const asset of q.assets||[])readers.push(assetRow(assetContainer,asset));
    const add=node('button','question-editor-add','+ Bildpfad hinzufügen');add.type='button';add.addEventListener('click',()=>readers.push(assetRow(assetContainer)));
    form.append(add);
-   const note=node('p','question-editor-note','Bilder müssen bereits unter public/assets/ auf dem Server liegen. Der Bildpfad wird hier zugeordnet.');
+   const note=node('p','question-editor-note','PNG, JPG oder WebP bis 8 MB. Bild hochladen, Vorschau prüfen und anschließend Änderungen speichern.');
    form.append(note);
    const save=node('button','question-editor-save','Änderungen speichern');save.type='button';
    save.addEventListener('click',async()=>{
