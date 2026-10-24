@@ -89,7 +89,7 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
  $data=json_decode(file_get_contents('php://input'),true);
  if(!is_array($data))json_response(['error'=>'Ungültige Daten.'],422);
  $id=$data['id']??null;$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
- $version=$data['version']??null;$hints=$data['hints']??[];$assets=$data['assets']??[];
+ $version=$data['version']??null;$hints=$data['hints']??[];$assets=$data['assets']??[];$solutionInput=$data['solution']??null;
  if(!is_string($id)||!is_int($version)||$version<1||$prompt===''||mb_strlen($prompt)>5000||$explanation===''||mb_strlen($explanation)>10000||!is_array($hints)||!is_array($assets)||count($assets)>12)json_response(['error'=>'Aufgabe, Erklärung oder Medien ungültig.'],422);
  $allowedHints=['symbols','text','book'];
  foreach($hints as $key=>$value)if(!in_array($key,$allowedHints,true)||!is_string($value)||mb_strlen($value)>1500)json_response(['error'=>'Ungültiger Joker.'],422);
@@ -102,11 +102,23 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
   $stmt=$pdo->prepare('SELECT * FROM learning_questions WHERE id=?');$stmt->execute([$id]);$old=$stmt->fetch(PDO::FETCH_ASSOC);
   if(!$old){$pdo->rollBack();json_response(['error'=>'Aufgabe nicht gefunden.'],404);}
   if((int)$old['version']!==$version){$pdo->rollBack();json_response(['error'=>'Aufgabe wurde zwischenzeitlich geändert. Bitte neu laden.'],409);}
+  $solution=json_decode($old['solution_data'],true)?:[];
+  if($solutionInput!==null){
+   if(!is_array($solutionInput)){$pdo->rollBack();json_response(['error'=>'Ungültige Lösung.'],422);}
+   if($old['type']==='numeric'){
+    if(!isset($solutionInput['value'])||!is_numeric($solutionInput['value'])||!is_finite((float)$solutionInput['value'])||!isset($solutionInput['tolerance'])||!is_numeric($solutionInput['tolerance'])||(float)$solutionInput['tolerance']<0){$pdo->rollBack();json_response(['error'=>'Zahlenwert oder Toleranz ungültig.'],422);}
+    $solution['value']=(float)$solutionInput['value'];$solution['tolerance']=(float)$solutionInput['tolerance'];
+   }elseif($old['type']==='text_input'){
+    $accepted=$solutionInput['accepted']??null;
+    if(!is_array($accepted)||!count($accepted)||count($accepted)>30||count(array_filter($accepted,fn($v)=>!is_string($v)||trim($v)===''||mb_strlen($v)>200))){$pdo->rollBack();json_response(['error'=>'Textlösungen ungültig.'],422);}
+    $solution['accepted']=array_values($accepted);
+   }
+  }
   $config=json_decode($old['config_json'],true)?:[];
   $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??'')];
   $pdo->prepare('INSERT INTO question_revisions(question_id,version,snapshot_json) VALUES(?,?,?)')->execute([$id,$version,json_encode($old,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)]);
-  $stmt=$pdo->prepare('UPDATE learning_questions SET prompt=?,solution_explanation=?,config_json=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND version=?');
-  $stmt->execute([$prompt,$explanation,json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$id,$version]);
+  $stmt=$pdo->prepare('UPDATE learning_questions SET prompt=?,solution_explanation=?,config_json=?,solution_data=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND version=?');
+  $stmt->execute([$prompt,$explanation,json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),json_encode($solution,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$id,$version]);
   if($stmt->rowCount()!==1)throw new RuntimeException('Änderungskonflikt.');
   $pdo->prepare('DELETE FROM question_assets WHERE question_id=?')->execute([$id]);
   $insert=$pdo->prepare('INSERT INTO question_assets(question_id,asset_path,kind,alt_text,placement,caption,sort_order) VALUES(?,?,"image",?,?,?,?)');
