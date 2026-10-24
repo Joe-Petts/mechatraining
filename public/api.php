@@ -121,15 +121,42 @@ if ($action==='progress' && $_SERVER['REQUEST_METHOD']==='GET') {
 }
 if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
-    import_legacy_catalog($pdo);
-    $stmt=$pdo->prepare("SELECT q.id,q.status,q.solution_explanation,o.option_index,o.text,o.is_correct FROM learning_questions q JOIN question_options o ON o.question_id=q.id WHERE q.id=? ORDER BY o.option_index");
-    $stmt->execute([(string)($data['question_id']??'')]);$rows=$stmt->fetchAll();$found=null;
-    if($rows){$found=['id'=>$rows[0]['id'],'options'=>[],'correct'=>0,'explanation'=>$rows[0]['solution_explanation']];foreach($rows as $r){$found['options'][]=$r['text'];if((int)$r['is_correct']===1)$found['correct']=(int)$r['option_index'];}if($rows[0]['status']!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
-    if($found){migrate_futter($pdo);$check=$pdo->prepare('SELECT status FROM futter_status WHERE question_id=?');$check->execute([$found['id']]);if(($check->fetchColumn()?:'active')!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);}
-    if(!$found || !is_int($data['answer']??null) || !array_key_exists($data['answer'],$found['options'])) json_response(['error'=>'Ungültige Antwort.'],422);
-    $correct=(int)($data['answer']===$found['correct']);
+    $stmt=$pdo->prepare("SELECT id,type,status,solution_data,solution_explanation FROM learning_questions WHERE id=?");
+    $stmt->execute([(string)($data['question_id']??'')]);
+    $question=$stmt->fetch();
+    if(!$question||$question['status']!=='active')json_response(['error'=>'Aufgabe nicht aktiv oder unbekannt.'],404);
+    migrate_futter($pdo);
+    $check=$pdo->prepare('SELECT status FROM futter_status WHERE question_id=?');
+    $check->execute([$question['id']]);
+    if(($check->fetchColumn()?:'active')!=='active')json_response(['error'=>'Aufgabe nicht aktiv.'],403);
+    $solution=json_decode($question['solution_data'],true)?:[];
+    $answer=$data['answer']??null;
+    $correct=false;$correctIndex=null;
+    switch($question['type']){
+      case 'multiple_choice':
+        $options=$pdo->prepare('SELECT option_index,is_correct FROM question_options WHERE question_id=? ORDER BY option_index');
+        $options->execute([$question['id']]);$rows=$options->fetchAll();
+        if(!is_int($answer)||!in_array($answer,array_map(static fn($r)=>(int)$r['option_index'],$rows),true))json_response(['error'=>'Ungültige Antwort.'],422);
+        foreach($rows as $o)if((int)$o['is_correct']===1)$correctIndex=(int)$o['option_index'];
+        $correct=$answer===$correctIndex;
+        break;
+      case 'numeric':
+        if(!is_string($answer)&&!is_int($answer)&&!is_float($answer))json_response(['error'=>'Zahl erforderlich.'],422);
+        $raw=str_replace(',','.',trim((string)$answer));
+        if(!is_numeric($raw)||!is_finite((float)$raw)||!isset($solution['value']))json_response(['error'=>'Ungültiger Zahlenwert.'],422);
+        $correct=abs((float)$raw-(float)$solution['value'])<=(float)($solution['tolerance']??0.001);
+        break;
+      case 'text_input':
+        if(!is_string($answer)||mb_strlen($answer)>500)json_response(['error'=>'Textantwort erforderlich.'],422);
+        $normalize=static fn($s)=>mb_strtolower(trim(preg_replace('/\\s+/u',' ',(string)$s)));
+        $accepted=$solution['accepted']??[];
+        $correct=in_array($normalize($answer),array_map($normalize,$accepted),true);
+        break;
+      default:json_response(['error'=>'Aufgabentyp noch nicht unterstützt.'],422);
+    }
+    $found=['id'=>$question['id'],'explanation'=>$question['solution_explanation']];
     $stmt=$pdo->prepare('INSERT INTO progress(user_id,question_id,correct,attempts) VALUES(?,?,?,1) ON CONFLICT(user_id,question_id) DO UPDATE SET correct=MAX(correct,excluded.correct),attempts=attempts+1,updated_at=CURRENT_TIMESTAMP');
     $stmt->execute([$_SESSION['uid'],$found['id'],$correct]);
-    json_response(['correct'=>(bool)$correct,'correct_index'=>$found['correct'],'explanation'=>$found['explanation']]);
+    json_response(['correct'=>(bool)$correct,'correct_index'=>$correctIndex,'explanation'=>$found['explanation']]);
 }
 json_response(['error'=>'Unbekannte Aktion.'],404);
