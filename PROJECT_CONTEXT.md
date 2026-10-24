@@ -204,3 +204,11 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Neue bereichsspezifische Regeln mit eigenen IDs/Klassen kapseln, keine neuen Inline-Styles verwenden. `AGENTS.md` enthält die dauerhafte Regel.
 - Die eigenständige Backup-Seite nutzt `public/backup.css` und spezifische `.backup-page`-Selektoren statt eines Inline-Styleblocks.
 - `public/style.css` bleibt vorerst als Legacy-Datei im Repository; für die Hauptoberfläche ist `main.css` maßgeblich. Vor dem späteren Löschen Referenzen prüfen.
+
+
+## Admin-Aufgabeneditor und Joker (2026-10-24)
+- Einzelne SQLite-Aufgaben können im Adminbereich Futter oder direkt im Quiz über das Bleistiftsymbol bearbeitet werden; beide Wege verwenden `public/question-editor.js`.
+- Admin-API `admin_question_get` / `admin_question_save` ist rollen- und CSRF-geschützt. Aufgabenstellung, Erklärung, Zahlenlösung/Toleranz bzw. akzeptierte Textlösungen, zugeordnete Bildpfade samt Position/Alt-Text/Beschriftung sowie drei optionale Joker (Formelzeichen, Texttipp, Buchtipp) können geändert werden.
+- Bilder müssen bereits unter `public/assets/` existieren; ein Bild-Upload ist noch nicht implementiert. Seitenangaben bei Buchtipps werden nicht automatisch erfunden.
+- Joker werden im Quiz nur bei vorhandenen Inhalten als aufklappbare Hinweise angezeigt. Der bisherige Bilduntertitel `Gegeben:` wird im Quiz unterdrückt; Aufgabenstellung selbst bleibt vollständig.
+- Bestehende Aufgaben-IDs und Fortschritte bleiben erhalten; Änderungen erhöhen `version` und speichern eine Revision in `question_revisions`. Konflikte werden bei veralteter Version abgewiesen. Nach Speichern wird die Seite neu geladen.
