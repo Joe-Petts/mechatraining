@@ -310,7 +310,7 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .question-editor-form h2,.question-editor-form h3{margin:8px 0 0}
 .question-editor-field{display:flex;flex-direction:column;gap:5px}
 .question-editor-field span{font-size:14px;font-weight:600}
-.question-editor-field input,.question-editor-field textarea,.question-editor-asset select{width:100%;box-sizing:border-box;background:#f7fbfd;border:1px solid #a9c1d1;border-radius:6px;padding:9px;color:#142332;font:inherit}
+.question-editor-field input,.question-editor-field textarea,.question-editor-field select,.question-editor-asset select{width:100%;box-sizing:border-box;background:#f7fbfd;border:1px solid #a9c1d1;border-radius:6px;padding:9px;color:#142332;font:inherit}
 .question-editor-asset{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid #d2e0e9;border-radius:8px}
 .question-editor-form button{align-self:flex-start;padding:10px 15px;border:1px solid #9ab5c7;border-radius:6px;background:#eaf4fa;color:#123c57;cursor:pointer}
 .question-editor-form .question-editor-save{background:#097eab;color:#fff;border-color:#097eab}
