@@ -71,6 +71,27 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
 
+if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $id=(string)($_POST['question_id']??'');
+ $check=$pdo->prepare('SELECT 1 FROM learning_questions WHERE id=?');$check->execute([$id]);
+ if(!$check->fetchColumn())json_response(['error'=>'Aufgabe nicht gefunden.'],404);
+ $file=$_FILES['image']??null;
+ if(!is_array($file)||($file['error']??UPLOAD_ERR_NO_FILE)!==UPLOAD_ERR_OK||!is_uploaded_file($file['tmp_name']))json_response(['error'=>'Bild-Upload fehlgeschlagen.'],422);
+ if((int)$file['size']>8*1024*1024||$file['size']<1)json_response(['error'=>'Bild darf maximal 8 MB groß sein.'],422);
+ $mime=(new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
+ $types=['image/png'=>'png','image/jpeg'=>'jpg','image/webp'=>'webp'];
+ if(!isset($types[$mime]))json_response(['error'=>'Nur PNG, JPG oder WebP sind erlaubt.'],422);
+ $size=@getimagesize($file['tmp_name']);
+ if(!$size||$size[0]<1||$size[1]<1||$size[0]>8000||$size[1]>8000)json_response(['error'=>'Ungültige Bildabmessungen.'],422);
+ $dir=__DIR__.'/assets/uploads';
+ if(!is_dir($dir)&&!mkdir($dir,0755,true)&&!is_dir($dir))json_response(['error'=>'Upload-Verzeichnis nicht verfügbar.'],500);
+ $name='question-'.bin2hex(random_bytes(16)).'.'.$types[$mime];
+ $dest=$dir.'/'.$name;
+ if(!move_uploaded_file($file['tmp_name'],$dest))json_response(['error'=>'Bild konnte nicht gespeichert werden.'],500);
+ @chmod($dest,0644);
+ json_response(['ok'=>true,'path'=>'assets/uploads/'.$name]);
+}
 if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
  if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
  $id=(string)($_GET['id']??'');
