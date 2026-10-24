@@ -79,6 +79,8 @@ if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
  if(!$q)json_response(['error'=>'Aufgabe nicht gefunden.'],404);
  $stmt=$pdo->prepare('SELECT asset_path AS path,placement,alt_text AS alt,caption FROM question_assets WHERE question_id=? ORDER BY sort_order,id');
  $stmt->execute([$id]);$q['assets']=$stmt->fetchAll(PDO::FETCH_ASSOC);
+ $stmt=$pdo->prepare('SELECT option_index,text,is_correct FROM question_options WHERE question_id=? ORDER BY option_index');
+ $stmt->execute([$id]);$q['options']=$stmt->fetchAll(PDO::FETCH_ASSOC);
  $q['config']=json_decode($q['config_json'],true)?:[];
  $q['solution']=json_decode($q['solution_data'],true)?:[];
  unset($q['config_json'],$q['solution_data']);
@@ -113,6 +115,13 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
     if(!is_array($accepted)||!count($accepted)||count($accepted)>30||count(array_filter($accepted,fn($v)=>!is_string($v)||trim($v)===''||mb_strlen($v)>200))){$pdo->rollBack();json_response(['error'=>'Textlösungen ungültig.'],422);}
     $solution['accepted']=array_values($accepted);
    }
+  }
+  if($old['type']==='multiple_choice' && $solutionInput!==null){
+   $options=$solutionInput['options']??null;$correct=$solutionInput['correct']??null;
+   if(!is_array($options)||count($options)<2||count($options)>8||!is_int($correct)||$correct<0||$correct>=count($options)||count(array_filter($options,fn($v)=>!is_string($v)||trim($v)===''||mb_strlen($v)>500))){$pdo->rollBack();json_response(['error'=>'Antwortmöglichkeiten ungültig.'],422);}
+   $pdo->prepare('DELETE FROM question_options WHERE question_id=?')->execute([$id]);
+   $add=$pdo->prepare('INSERT INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
+   foreach(array_values($options) as $i=>$option)$add->execute([$id,$i,trim($option),$i===$correct?1:0]);
   }
   $config=json_decode($old['config_json'],true)?:[];
   $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??'')];
