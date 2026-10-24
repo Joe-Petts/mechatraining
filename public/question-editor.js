@@ -18,7 +18,7 @@
   const caption=field(row,'Bildunterschrift',asset.caption);
   const remove=node('button','question-editor-remove','Bild entfernen');remove.type='button';remove.addEventListener('click',()=>row.remove());
   row.prepend(placement);row.append(remove);parent.append(row);
-  return ()=>({placement:placement.value,path:path.value.trim(),alt:alt.value.trim(),caption:caption.value.trim()});
+  return ()=>row.isConnected?({placement:placement.value,path:path.value.trim(),alt:alt.value.trim(),caption:caption.value.trim()}):null;
  }
  async function open(id){
   if(dialog)dialog.remove();
@@ -49,7 +49,7 @@
    save.addEventListener('click',async()=>{
     save.disabled=true;message.textContent='Speichere …';
     try{
-     const assets=readers.map(read=>read()).filter(a=>a.path&&assetContainer.contains([...assetContainer.children].find(x=>x.querySelector('input')?.value.trim()===a.path)));
+     const assets=readers.map(read=>read()).filter(a=>a&&a.path);
      await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,hints:{symbols:symbols.value,text:text.value,book:book.value},assets});
      dialog.close();location.reload();
     }catch(e){message.textContent=e.message;save.disabled=false;}
