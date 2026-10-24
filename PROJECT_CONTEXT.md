@@ -183,3 +183,9 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - `import_pending_learning` überführt derzeit das ausdrücklich freigegebene Bohren-Paket aus der bisherigen Metallbau-Quelldatei. Der allgemeine Importer ist für weitere Aufgabentypen datenbankseitig vorbereitet; Anzeige und Auswertung weiterer Typen benötigen jeweils passende Renderer und serverseitige Validierung.
 - Das bisherige `import_legacy_catalog` bleibt deaktiviert. Keine pauschale Wiederherstellung früher gelöschter Aufgaben.
 - Produktionsimport/Deployment ist erst nach Liveprüfung bestätigt; keine produktive SQLite-Datei in GitHub.
+
+
+## Erweiterbare Aufgabenarten (2026-10-24)
+- SQLite-Katalog und Quiz-API unterstützen nun `multiple_choice`, `numeric` (solution.value, optionale tolerance) und `text_input` (solution.accepted als Liste). Antworten werden serverseitig ausgewertet; Client erhält keine Sollwerte für freie Eingaben.
+- `public/app.js` rendert Zahlen- und Texteingaben zusätzlich zur bestehenden Auswahloberfläche. Weitere Übungsarten brauchen einen eigenen Renderer und Validator.
+- Kein neuer Datenbank-Reset: Benutzerkonten und gespeicherte Daten wurden nicht absichtlich gelöscht.
