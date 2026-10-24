@@ -189,3 +189,11 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - SQLite-Katalog und Quiz-API unterstützen nun `multiple_choice`, `numeric` (solution.value, optionale tolerance) und `text_input` (solution.accepted als Liste). Antworten werden serverseitig ausgewertet; Client erhält keine Sollwerte für freie Eingaben.
 - `public/app.js` rendert Zahlen- und Texteingaben zusätzlich zur bestehenden Auswahloberfläche. Weitere Übungsarten brauchen einen eigenen Renderer und Validator.
 - Kein neuer Datenbank-Reset: Benutzerkonten und gespeicherte Daten wurden nicht absichtlich gelöscht.
+
+
+## Manuelles vollständiges Serverbackup (2026-10-24)
+- `backup.php` im Projekt-Hauptverzeichnis kopiert den Projektbestand nach `Backups/TTMMJJJJ/`; mehrere Sicherungen am selben Tag erhalten einen Uhrzeit-Zusatz.
+- Aufruf im Browser ausschließlich als eingeloggter Administrator unter `/backup.php` (Datei `public/backup.php`, POST mit Session-CSRF); Hauptskript außerhalb des Webroots und zusätzlich per CLI ausführbar.
+- SQLite wird mittels SQLite3-Online-Backup konsistent gesichert, nicht durch direktes Kopieren einer aktiven Datenbankdatei. WAL/SHM-Dateien werden ausgelassen.
+- `Backups/`, `.git/` und `.deploy-private/` werden nicht rekursiv mitgesichert. Symlinks werden ausgelassen; Backups bleiben außerhalb des Webroots und können per FTP heruntergeladen werden.
+- Fehlerhafte Sicherungen tragen `BACKUP_FAILED.txt`; Benutzerkonten und Produktivdaten werden nicht verändert.
