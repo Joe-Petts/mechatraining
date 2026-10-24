@@ -84,6 +84,60 @@ function import_approved_drilling(PDO $db): void {
     }
 }
 
+/** Import a reviewed content batch; SQLite remains the runtime source. */
+function import_learning_batch(PDO $db,array $batch): int {
+    migrate_catalog($db);
+    foreach(['id','subject','subject_title','modules'] as $field)if(empty($batch[$field]))throw new InvalidArgumentException('Importfeld fehlt: '.$field);
+    $db->exec("CREATE TABLE IF NOT EXISTS learning_imports (id TEXT PRIMARY KEY, imported_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, count INTEGER NOT NULL)");
+    $check=$db->prepare('SELECT 1 FROM learning_imports WHERE id=?');
+    $check->execute([$batch['id']]);
+    if($check->fetchColumn())return 0;
+    $seen=[];
+    foreach($batch['modules'] as $m)foreach($m['questions'] as $q) {
+        $id=$q['id']??'';
+        if(!is_string($id)||$id===''||isset($seen[$id])||empty($q['prompt'])||empty($q['type']))throw new InvalidArgumentException('Ungültige Aufgabe');
+        $seen[$id]=true;
+        if($q['type']==='multiple_choice'&&(!isset($q['options'],$q['correct'])||count($q['options'])<2||!array_key_exists($q['correct'],$q['options'])))throw new InvalidArgumentException('Ungültige Auswahlfrage: '.$id);
+    }
+    $db->beginTransaction();
+    try {
+        $db->prepare('INSERT OR IGNORE INTO subjects(id,title) VALUES(?,?)')->execute([$batch['subject'],$batch['subject_title']]);
+        $db->prepare('INSERT OR IGNORE INTO learning_sources(id,title,origin) VALUES(?,?,?)')->execute([$batch['id'],$batch['title']??$batch['id'],$batch['origin']??'']);
+        $mod=$db->prepare('INSERT OR IGNORE INTO learning_modules(id,subject_id,title,sort_order) VALUES(?,?,?,?)');
+        $qst=$db->prepare('INSERT OR IGNORE INTO learning_questions(id,module_id,source_id,type,prompt,difficulty,exam_part,solution_explanation,solution_data,config_json,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)');
+        $opt=$db->prepare('INSERT OR IGNORE INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
+        $count=0;
+        foreach($batch['modules'] as $position=>$m) {
+            $moduleId=$batch['subject'].':'.$m['id'];
+            $mod->execute([$moduleId,$batch['subject'],$m['title'],$position]);
+            foreach($m['questions'] as $q) {
+                $solution=$q['solution']??['correct'=>$q['correct']??null];
+                $config=$q['config']??[];
+                $qst->execute([$q['id'],$moduleId,$batch['id'],$q['type'],$q['prompt'],$q['difficulty']??2,$q['exam_part']??'AP1',$q['explanation']??'',json_encode($solution,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),json_encode($config,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),'active']);
+                if(!$qst->rowCount())continue;
+                foreach($q['options']??[] as $i=>$answer)$opt->execute([$q['id'],$i,(string)$answer,(int)($i===($q['correct']??-1))]);
+                $count++;
+            }
+        }
+        $db->prepare('INSERT INTO learning_imports(id,count) VALUES(?,?)')->execute([$batch['id'],$count]);
+        $db->commit();
+        return $count;
+    }catch(Throwable $e){if($db->inTransaction())$db->rollBack();throw $e;}
+}
+
+/** Explicit approved imports only; never re-import the retired legacy catalog. */
+function import_pending_learning(PDO $db): void {
+    $path=dirname(__DIR__).'/content/ap1/metallbau.json';
+    if(!is_file($path))return;
+    $data=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
+    $modules=[];
+    foreach($data['modules']??[] as $m) {
+        $questions=array_values(array_map(static function($q){$q['type']='multiple_choice';return $q;},array_filter($m['questions']??[],static fn($q)=>($q['batch_id']??'')==='metall-bohren-berechnungen-20261022')));
+        if($questions)$modules[]=['id'=>$m['id'],'title'=>$m['title'],'questions'=>$questions];
+    }
+    if($modules)import_learning_batch($db,['id'=>'metall-bohren-berechnungen-20261022','subject'=>'metall','subject_title'=>'Metallbau','title'=>'Bohren','origin'=>'Arbeitsblätter','modules'=>$modules]);
+}
+
 function catalog_modules(PDO $db): array {
     $rows=$db->query("SELECT q.id,q.module_id,q.prompt,q.solution_explanation,q.config_json,m.title AS module_title,m.subject_id,s.title AS subject_title,m.sort_order FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id WHERE q.status='active' AND m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order,q.id")->fetchAll();
     $options=$db->query('SELECT question_id,option_index,text,is_correct FROM question_options ORDER BY question_id,option_index')->fetchAll();
