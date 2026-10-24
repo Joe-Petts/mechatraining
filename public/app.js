@@ -93,7 +93,7 @@ function render(){
  if(q.type==='numeric'||q.type==='text_input'){
   const form=document.createElement('form');form.className='quiz-input-form';
   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
-  const submit=document.createElement('button');submit.type='button';submit.textContent='Prüfen';submit.addEventListener('click',()=>form.requestSubmit());
+  const submit=document.createElement('button');submit.type='button';submit.className='quiz-check-button';submit.textContent='Prüfen';submit.addEventListener('click',()=>form.requestSubmit());
   form.append(input);options.append(form);actions.prepend(submit);
   form.addEventListener('submit',async event=>{
    event.preventDefault();if(finished)return;submit.disabled=true;
