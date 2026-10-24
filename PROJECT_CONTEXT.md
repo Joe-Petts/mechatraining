@@ -174,3 +174,12 @@ Responsive, browserbasierte Lern- und Übungsplattform für erwachsene Mechatron
 
 ## SQLite-Lernkatalog (20.10.2026)
 Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `learning_sources`, `learning_questions`, `question_options`, `question_assets`, `question_revisions`, `question_attempts`, `question_tags`. Die vorhandenen `users`, `progress`, `notes` und Futter-Tabellen bleiben erhalten. `import_legacy_catalog()` übernimmt die bisherigen JSON-Aufgaben idempotent per INSERT OR IGNORE, ohne bestehende Datensätze zu überschreiben. `public/index.php` bezieht Quizmodule aus SQLite; `public/api.php` prüft Quizantworten gegen SQLite. Die Formelsammlung und die ältere Futter-Verwaltungsansicht lesen noch JSON und müssen in einer Folgestufe auf den zentralen Katalog umgestellt werden. Ein Zurücksetzen der Inhalte/XP wurde ausdrücklich noch nicht ausgeführt.
+
+
+## SQLite-Aufgabenimport (2026-10-24)
+- SQLite ist die aktive Laufzeitquelle des Quizkatalogs. Neue freigegebene Aufgabenpakete werden mit `import_learning_batch(PDO,array)` transaktional importiert.
+- Ein Paket enthält `id`, `subject`, `subject_title`, `modules`; jedes Modul enthält `id`, `title`, `questions`. Fragen haben `id`, `type`, `prompt`, optional `difficulty`, `exam_part`, `solution`, `config`, `explanation` und bei `multiple_choice` `options`/`correct`.
+- `learning_imports` dokumentiert erfolgreich abgeschlossene Pakete; Wiederholungen werden übersprungen, vorhandene Aufgaben-IDs nicht überschrieben. Fehler führen zum Rollback.
+- `import_pending_learning` überführt derzeit das ausdrücklich freigegebene Bohren-Paket aus der bisherigen Metallbau-Quelldatei. Der allgemeine Importer ist für weitere Aufgabentypen datenbankseitig vorbereitet; Anzeige und Auswertung weiterer Typen benötigen jeweils passende Renderer und serverseitige Validierung.
+- Das bisherige `import_legacy_catalog` bleibt deaktiviert. Keine pauschale Wiederherstellung früher gelöschter Aufgaben.
+- Produktionsimport/Deployment ist erst nach Liveprüfung bestätigt; keine produktive SQLite-Datei in GitHub.
