@@ -214,3 +214,8 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Bestehende Aufgaben-IDs und Fortschritte bleiben erhalten; Änderungen erhöhen `version` und speichern eine Revision in `question_revisions`. Konflikte werden bei veralteter Version abgewiesen. Nach Speichern wird die Seite neu geladen.
 
 - Admin-Bild-Upload (2026-10-24): Im gemeinsamen Aufgabeneditor kann der Administrator PNG/JPG/WebP (max. 8 MB, max. 8000 × 8000 px) über `admin_question_upload` hochladen und sofort als Vorschau sehen. Uploads werden unter `public/assets/uploads/` auf dem ALL-INKL-Webspace gespeichert, SQLite speichert nur die Pfade. Die Zuordnung wird mit „Änderungen speichern“ gesichert; der Upload allein erstellt keine neue Frage. Keine kostenpflichtige API. Upload-Verzeichnis muss bei Deployments erhalten bleiben.
+
+
+## Quiz-Ablauf und Formel-Joker (2026-10-24)
+- Aufgaben besitzen unten eine Aktionsleiste mit „Prüfen“ (bei Eingabefragen) und „Überspringen“. Überspringen erzeugt keine Antwort, keinen Fortschritt und keine XP. Nach einer Antwort wird nur über „Nächste Aufgabe“ gewechselt; auch Multiple-Choice wechselt nicht mehr automatisch.
+- Die Lösungserklärung und die Formel werden nach einer Antwort nicht automatisch im Roboter-Popup oder im Feedback ausgegeben. Stattdessen gibt es einen aufklappbaren Formel-Joker; die Bohrer-Testaufgabe hat als Standard `n = (1000 × v_c) / (π × d)`. Im Admin-Aufgabeneditor kann `hints.formula` gepflegt werden.
