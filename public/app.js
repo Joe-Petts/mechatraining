@@ -89,7 +89,7 @@ function render(){
  const next=document.createElement('button');next.type='button';next.className='quiz-next-button';next.textContent=quizIndex===questions.length-1?'Von vorn ↻':'Nächste Aufgabe →';next.hidden=true;
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
- let finished=false;const finishControls=()=>{skip.hidden=true;finishControls();};
+ let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;};
  if(q.type==='numeric'||q.type==='text_input'){
   const form=document.createElement('form');form.className='quiz-input-form';
   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
