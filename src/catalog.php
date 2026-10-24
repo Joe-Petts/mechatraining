@@ -51,6 +51,39 @@ function import_legacy_catalog(PDO $db): void {
     } catch(Throwable $e) {if($db->inTransaction())$db->rollBack();throw $e;}
 }
 
+/** Import only the approved drilling exercises into SQLite, without reviving old JSON content. */
+function import_approved_drilling(PDO $db): void {
+    migrate_catalog($db);
+    $path=dirname(__DIR__).'/content/ap1/metallbau.json';
+    if(!is_file($path))return;
+    $data=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
+    $batch='metall-bohren-berechnungen-20261022';
+    $db->beginTransaction();
+    try {
+        $subject=$db->prepare('INSERT OR IGNORE INTO subjects(id,title,sort_order) VALUES(?,?,?)');
+        $subject->execute(['metall','Metallbau',20]);
+        $source=$db->prepare('INSERT OR IGNORE INTO learning_sources(id,title,origin) VALUES(?,?,?)');
+        $source->execute([$batch,'Bohren – Rechenübungen','Arbeitsblätter Metallbau']);
+        $module=$db->prepare('INSERT OR IGNORE INTO learning_modules(id,subject_id,title,sort_order) VALUES(?,?,?,?)');
+        $question=$db->prepare('INSERT OR IGNORE INTO learning_questions(id,module_id,source_id,prompt,solution_explanation,solution_data,created_at,status) VALUES(?,?,?,?,?,?,?,?)');
+        $option=$db->prepare('INSERT OR IGNORE INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
+        foreach($data['modules']??[] as $position=>$m) {
+            $approved=array_values(array_filter($m['questions']??[],static fn($q)=>($q['batch_id']??'')===$batch));
+            if(!$approved)continue;
+            $moduleId='metall:'.$m['id'];
+            $module->execute([$moduleId,'metall',$m['title'],$position]);
+            foreach($approved as $q) {
+                $question->execute([$q['id'],$moduleId,$batch,$q['prompt'],$q['explanation']??'',json_encode(['correct'=>$q['correct']]),$q['created_at']??gmdate('c'),'active']);
+                foreach($q['options'] as $i=>$answer)$option->execute([$q['id'],$i,$answer,(int)($i===$q['correct'])]);
+            }
+        }
+        $db->commit();
+    } catch(Throwable $e) {
+        if($db->inTransaction())$db->rollBack();
+        throw $e;
+    }
+}
+
 function catalog_modules(PDO $db): array {
     $rows=$db->query("SELECT q.id,q.module_id,q.prompt,q.solution_explanation,q.config_json,m.title AS module_title,m.subject_id,s.title AS subject_title,m.sort_order FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id WHERE q.status='active' AND m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order,q.id")->fetchAll();
     $options=$db->query('SELECT question_id,option_index,text,is_correct FROM question_options ORDER BY question_id,option_index')->fetchAll();
