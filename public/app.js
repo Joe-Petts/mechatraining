@@ -158,7 +158,7 @@ for(const module of metalModules){const button=document.createElement('button');
 document.getElementById('formulaTile')?.addEventListener('click',()=>document.getElementById('formulaOpen')?.click());
 
 // Quiz entry: all subjects are available through the shared area filter.
-document.querySelector('[data-topic="elektro"]')?.addEventListener('click',e=>{e.stopImmediatePropagation();openExercise({id:'electro',title:'Mecha-Quiz',questions:electroQuestions},'dashboard');},true);
+document.querySelector('[data-topic="elektro"]')?.addEventListener('click',e=>{e.stopImmediatePropagation();openExercise({id:'all',title:'Mecha-Quiz',questions:[...electroQuestions,...metalModules.flatMap(m=>m.questions),...pneumaticModules.flatMap(m=>m.questions)]},'dashboard');},true);
 
 // Passwortverwaltung für angemeldete Benutzer
 let passwordReturnView='dashboard';
