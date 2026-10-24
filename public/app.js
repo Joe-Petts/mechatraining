@@ -32,7 +32,7 @@ function applyAreaFilter(){
  render();
 }
 function openExercise(module,back){
- returnView=back;availableAreas=quizAreas(back);activeAreaIds=new Set([module.id]);
+ returnView=back;availableAreas=quizAreas(back);activeAreaIds=module.id==='all'?new Set(availableAreas.map(m=>m.id)):new Set([module.id]);
  document.querySelector('#appPanel h2').textContent=module.title;
  document.querySelector('#appPanel .toolbar .eyebrow').textContent=back==='dashboard'?'MECHA-QUIZ · AP1':back==='pneuPanel'?'PNEUMATIK · AP1':back==='metalPanel'?'METALLBAU · AP1':'ELEKTROTECHNIK · AP1';
  const line=document.querySelector('#appPanel .toolbar + p');line.replaceChildren(document.createTextNode('Angemeldet als '));
