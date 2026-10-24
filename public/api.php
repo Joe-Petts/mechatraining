@@ -80,6 +80,19 @@ if (in_array($action,['futter_list','futter_status','futter_public','futter_dele
  if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
  if ($action==='futter_list' && $_SERVER['REQUEST_METHOD']==='GET') {
   $items=$pdo->query("SELECT q.id,q.prompt,q.status,q.created_at,q.source_id AS batch_id,m.title AS module,s.title AS topic,q.solution_explanation AS explanation FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id ORDER BY q.created_at DESC,q.id")->fetchAll();
+  $options=$pdo->query('SELECT question_id,option_index,text,is_correct FROM question_options ORDER BY question_id,option_index')->fetchAll();
+  $byQuestion=[];
+  foreach($options as $option) {
+   $id=$option['question_id'];
+   if(!isset($byQuestion[$id]))$byQuestion[$id]=['options'=>[],'correct'=>null];
+   $byQuestion[$id]['options'][]=$option['text'];
+   if((int)$option['is_correct']===1)$byQuestion[$id]['correct']=(int)$option['option_index'];
+  }
+  foreach($items as &$item) {
+   $item['options']=$byQuestion[$item['id']]['options']??[];
+   $item['correct']=$byQuestion[$item['id']]['correct']??null;
+  }
+  unset($item);
   $events=$pdo->query('SELECT question_id,action,changed_at FROM futter_events ORDER BY id DESC LIMIT 100')->fetchAll();
   json_response(['items'=>$items,'events'=>$events]);
  }
