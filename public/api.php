@@ -73,45 +73,32 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
 
 if (in_array($action,['futter_list','futter_status','futter_public','futter_delete_block'],true)) {
  migrate_futter($pdo);
- $files=['elektrotechnik.json','pneumatik.json','metallbau.json'];$catalog=[];
- foreach($files as $file) {
-  $set=json_decode(file_get_contents(dirname(__DIR__).'/content/ap1/'.$file),true);
-  foreach(($set['modules']??[$set]) as $module) foreach($module['questions'] as $q) {
-   $q['topic']=$set['title'];$q['module']=$module['title'];$q['batch_id']=$q['batch_id']??($file==='elektrotechnik.json'?'elektro-bestand':(preg_match('/^ap1-pneu-(symbole|anschluesse|schaltplaene|kennzeichnung)-/',$q['id'])?'pneu-zylindersteuerung':'pneu-grundlagen'));$catalog[$q['id']]=$q;
-  }
- }
- $statuses=$pdo->query('SELECT question_id,status FROM futter_status')->fetchAll(PDO::FETCH_KEY_PAIR);
- $deletedBatches=$pdo->query('SELECT batch_id FROM futter_deleted_batches')->fetchAll(PDO::FETCH_COLUMN);
  if ($action==='futter_public' && $_SERVER['REQUEST_METHOD']==='GET') {
-  $hidden=array_keys(array_filter($statuses,fn($v)=>$v!=='active'));foreach($catalog as $q)if(in_array($q['batch_id'],$deletedBatches,true))$hidden[]=$q['id'];json_response(['hidden'=>array_values(array_unique($hidden))]);
+  $hidden=$pdo->query("SELECT id FROM learning_questions WHERE status<>'active'")->fetchAll(PDO::FETCH_COLUMN);
+  json_response(['hidden'=>$hidden]);
  }
  if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
  if ($action==='futter_list' && $_SERVER['REQUEST_METHOD']==='GET') {
-  $items=[];foreach($catalog as $id=>$q) {if(in_array($q['batch_id'],$deletedBatches,true))continue;
-   $q['status']=$statuses[$id]??'active';$items[]=$q;
-  }
+  $items=$pdo->query("SELECT q.id,q.prompt,q.status,q.created_at,q.source_id AS batch_id,m.title AS module,s.title AS topic,q.solution_explanation AS explanation FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id ORDER BY q.created_at DESC,q.id")->fetchAll();
   $events=$pdo->query('SELECT question_id,action,changed_at FROM futter_events ORDER BY id DESC LIMIT 100')->fetchAll();
   json_response(['items'=>$items,'events'=>$events]);
- }
- if ($action==='futter_delete_block' && $_SERVER['REQUEST_METHOD']==='POST') {
-  $data=json_decode(file_get_contents('php://input'),true)?:[];$batch=$data['batch_id']??null;
-  if(!is_string($batch)||$batch===''||in_array($batch,$deletedBatches,true))json_response(['error'=>'Ungültiger Block.'],422);
-  $ids=[];foreach($catalog as $q)if($q['batch_id']===$batch)$ids[]=$q['id'];
-  if(!$ids)json_response(['error'=>'Block nicht gefunden.'],404);
-  try{$pdo->beginTransaction();$stmt=$pdo->prepare("INSERT INTO futter_status(question_id,status) VALUES(?,'archived') ON CONFLICT(question_id) DO UPDATE SET status='archived',updated_at=CURRENT_TIMESTAMP");$event=$pdo->prepare("INSERT INTO futter_events(question_id,action) VALUES(?,'deleted_block')");foreach($ids as $id){$stmt->execute([$id]);$event->execute([$id]);}$pdo->prepare('INSERT INTO futter_deleted_batches(batch_id) VALUES(?)')->execute([$batch]);$pdo->commit();}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Block konnte nicht entfernt werden.'],500);}
-  json_response(['ok'=>true,'count'=>count($ids)]);
  }
  if ($action==='futter_status' && $_SERVER['REQUEST_METHOD']==='POST') {
   $data=json_decode(file_get_contents('php://input'),true)?:[];
   $id=$data['question_id']??null;$status=$data['status']??null;
-  if(!is_string($id)||!isset($catalog[$id])||!in_array($status,['active','disabled','archived'],true))json_response(['error'=>'Ungültiger Status.'],422);
-  $pdo->beginTransaction();
-  try {
-   $stmt=$pdo->prepare('INSERT INTO futter_status(question_id,status) VALUES(?,?) ON CONFLICT(question_id) DO UPDATE SET status=excluded.status,updated_at=CURRENT_TIMESTAMP');$stmt->execute([$id,$status]);
-   $stmt=$pdo->prepare('INSERT INTO futter_events(question_id,action) VALUES(?,?)');$stmt->execute([$id,$status]);
-   $pdo->commit();
-  }catch(Throwable $e){$pdo->rollBack();json_response(['error'=>'Speichern fehlgeschlagen.'],500);}
+  if(!is_string($id)||!in_array($status,['active','disabled','archived'],true))json_response(['error'=>'Ungültiger Status.'],422);
+  $stmt=$pdo->prepare('UPDATE learning_questions SET status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?');
+  $stmt->execute([$status,$id]);
+  if(!$stmt->rowCount())json_response(['error'=>'Aufgabe nicht gefunden.'],404);
+  $pdo->prepare('INSERT INTO futter_events(question_id,action) VALUES(?,?)')->execute([$id,$status]);
   json_response(['ok'=>true]);
+ }
+ if ($action==='futter_delete_block' && $_SERVER['REQUEST_METHOD']==='POST') {
+  $data=json_decode(file_get_contents('php://input'),true)?:[];$batch=$data['batch_id']??null;
+  if(!is_string($batch)||$batch==='')json_response(['error'=>'Ungültiger Block.'],422);
+  $stmt=$pdo->prepare("UPDATE learning_questions SET status='archived',updated_at=CURRENT_TIMESTAMP WHERE source_id=? AND status<>'archived'");
+  $stmt->execute([$batch]);if(!$stmt->rowCount())json_response(['error'=>'Block nicht gefunden oder bereits archiviert.'],404);
+  json_response(['ok'=>true,'count'=>$stmt->rowCount()]);
  }
  json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
