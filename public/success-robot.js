@@ -7,7 +7,7 @@
  const explanation=document.createElement('div');explanation.className='robot-explanation';explanation.hidden=true;
  const heading=document.createElement('h3');heading.textContent='Noch nicht richtig';
  const detail=document.createElement('p');
- const ok=document.createElement('button');ok.type='button';ok.textContent='Erklärung gelesen – weiter';
+ const ok=document.createElement('button');ok.type='button';ok.textContent='Zur Aufgabe zurück';
  explanation.append(heading,detail,ok);plate.append(img,explanation);popup.append(plate);document.body.append(popup);
  function hide(){popup.classList.remove('is-visible','is-wrong','is-dialog');popup.setAttribute('aria-hidden','true');explanation.hidden=true;document.removeEventListener('keydown',trap);if(previousFocus?.isConnected)previousFocus.focus();}
  function trap(e){if(e.key==='Tab'){e.preventDefault();ok.focus();}}
