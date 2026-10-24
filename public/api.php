@@ -114,7 +114,7 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
  $id=$data['id']??null;$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
  $version=$data['version']??null;$hints=$data['hints']??[];$assets=$data['assets']??[];$solutionInput=$data['solution']??null;
  if(!is_string($id)||!is_int($version)||$version<1||$prompt===''||mb_strlen($prompt)>5000||$explanation===''||mb_strlen($explanation)>10000||!is_array($hints)||!is_array($assets)||count($assets)>12)json_response(['error'=>'Aufgabe, Erklärung oder Medien ungültig.'],422);
- $allowedHints=['symbols','text','book'];
+ $allowedHints=['symbols','text','book','formula'];
  foreach($hints as $key=>$value)if(!in_array($key,$allowedHints,true)||!is_string($value)||mb_strlen($value)>1500)json_response(['error'=>'Ungültiger Joker.'],422);
  foreach($assets as $asset) {
   if(!is_array($asset)||!in_array($asset['placement']??'', ['prompt','solution'],true)||!is_string($asset['path']??null)||!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg)$~',$asset['path'])||str_contains($asset['path'],'..')||mb_strlen((string)($asset['alt']??''))>250||mb_strlen((string)($asset['caption']??''))>500)json_response(['error'=>'Ungültiger Bildpfad oder Bildtext.'],422);
@@ -145,7 +145,7 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
    foreach(array_values($options) as $i=>$option)$add->execute([$id,$i,trim($option),$i===$correct?1:0]);
   }
   $config=json_decode($old['config_json'],true)?:[];
-  $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??'')];
+  $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??''),'formula'=>trim($hints['formula']??'')];
   $pdo->prepare('INSERT INTO question_revisions(question_id,version,snapshot_json) VALUES(?,?,?)')->execute([$id,$version,json_encode($old,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)]);
   $stmt=$pdo->prepare('UPDATE learning_questions SET prompt=?,solution_explanation=?,config_json=?,solution_data=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND version=?');
   $stmt->execute([$prompt,$explanation,json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),json_encode($solution,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$id,$version]);
