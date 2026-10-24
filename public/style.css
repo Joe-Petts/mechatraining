@@ -284,3 +284,7 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-single-card h3{font-size:clamp(18px,1.65vw,22px);line-height:1.6;font-weight:normal;letter-spacing:-.015em;margin-bottom:22px}
 #appPanel #quiz .quiz-single-card{padding:clamp(20px,3.5vw,38px)}
 @media(max-width:600px){#appPanel .quiz-single-card h3{font-size:18px;line-height:1.5}}
+
+/* Clearly highlighted answer entry in the quiz */
+#appPanel .quiz-input-form input{background-color:#e7f5ff;border:1px solid #4e86ff;border-radius:8px;padding:12px 14px;color:var(--ink,#172c3d);font-weight:400}
+#appPanel .quiz-input-form input:focus{border-color:#2d66df;outline:2px solid #4e86ff;outline-offset:2px}
