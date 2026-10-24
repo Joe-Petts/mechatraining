@@ -197,3 +197,10 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - SQLite wird mittels SQLite3-Online-Backup konsistent gesichert, nicht durch direktes Kopieren einer aktiven Datenbankdatei. WAL/SHM-Dateien werden ausgelassen.
 - `Backups/`, `.git/` und `.deploy-private/` werden nicht rekursiv mitgesichert. Symlinks werden ausgelassen; Backups bleiben außerhalb des Webroots und können per FTP heruntergeladen werden.
 - Fehlerhafte Sicherungen tragen `BACKUP_FAILED.txt`; Benutzerkonten und Produktivdaten werden nicht verändert.
+
+
+## CSS-Organisation (2026-10-24)
+- Die Lernplattform bindet `public/main.css` als zentrale, über GitHub editierbare CSS-Datei ein; der bisherige Stil wurde vollständig übernommen.
+- Neue bereichsspezifische Regeln mit eigenen IDs/Klassen kapseln, keine neuen Inline-Styles verwenden. `AGENTS.md` enthält die dauerhafte Regel.
+- Die eigenständige Backup-Seite nutzt `public/backup.css` und spezifische `.backup-page`-Selektoren statt eines Inline-Styleblocks.
+- `public/style.css` bleibt vorerst als Legacy-Datei im Repository; für die Hauptoberfläche ist `main.css` maßgeblich. Vor dem späteren Löschen Referenzen prüfen.
