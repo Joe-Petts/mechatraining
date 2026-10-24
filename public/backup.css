@@ -1,0 +1,5 @@
+/* Standalone backup administration page; intentionally scoped. */
+body.backup-page{font:16px system-ui,sans-serif;background:#edf2f5;color:#142332;max-width:650px;margin:10vh auto;padding:20px}
+.backup-page .backup-content{background:#fff;padding:32px;border-radius:14px}
+.backup-page .backup-action{padding:14px 20px;background:#142332;color:#fff;border:0;border-radius:8px;cursor:pointer}
+.backup-page p{line-height:1.6}
