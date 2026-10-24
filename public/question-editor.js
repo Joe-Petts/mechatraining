@@ -33,6 +33,13 @@
    message.textContent='Aufgaben-ID: '+q.id+' · Version '+q.version;
    const prompt=field(form,'Aufgabenstellung',q.prompt,5);
    const explanation=field(form,'Lösung und Erklärung',q.solution_explanation,5);
+   const solutionInputs={};
+   if(q.type==='numeric'){
+    solutionInputs.value=field(form,'Richtiger Zahlenwert',String(q.solution?.value??''));
+    solutionInputs.tolerance=field(form,'Zulässige Abweichung',String(q.solution?.tolerance??0));
+   }else if(q.type==='text_input'){
+    solutionInputs.accepted=field(form,'Akzeptierte Antworten (eine pro Zeile)',(q.solution?.accepted||[]).join('\\n'),3);
+   }
    const hintTitle=node('h3','','Joker (optional)');form.append(hintTitle);
    const hints=q.config?.hints||{};
    const symbols=field(form,'Formelzeichen und Bedeutungen (z. B. d = Durchmesser (mm))',hints.symbols,3);
@@ -50,7 +57,8 @@
     save.disabled=true;message.textContent='Speichere …';
     try{
      const assets=readers.map(read=>read()).filter(a=>a&&a.path);
-     await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,hints:{symbols:symbols.value,text:text.value,book:book.value},assets});
+     const solution=q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:null);
+     await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,solution,hints:{symbols:symbols.value,text:text.value,book:book.value},assets});
      dialog.close();location.reload();
     }catch(e){message.textContent=e.message;save.disabled=false;}
    });
