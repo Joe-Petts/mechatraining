@@ -34,7 +34,14 @@
    const prompt=field(form,'Aufgabenstellung',q.prompt,5);
    const explanation=field(form,'Lösung und Erklärung',q.solution_explanation,5);
    const solutionInputs={};
-   if(q.type==='numeric'){
+   if(q.type==='multiple_choice'){
+    solutionInputs.options=[];
+    for(const opt of q.options||[])solutionInputs.options.push(field(form,'Antwort '+(Number(opt.option_index)+1),opt.text));
+    const correctWrap=node('label','question-editor-field');correctWrap.append(node('span','','Richtige Antwort'));
+    const select=node('select');for(const opt of q.options||[]){const choice=node('option','',String(Number(opt.option_index)+1));choice.value=String(opt.option_index);select.append(choice);}
+    select.value=String((q.options||[]).find(o=>Number(o.is_correct)===1)?.option_index??0);
+    correctWrap.append(select);form.append(correctWrap);solutionInputs.correct=select;
+   }else if(q.type==='numeric'){
     solutionInputs.value=field(form,'Richtiger Zahlenwert',String(q.solution?.value??''));
     solutionInputs.tolerance=field(form,'Zulässige Abweichung',String(q.solution?.tolerance??0));
    }else if(q.type==='text_input'){
@@ -57,7 +64,7 @@
     save.disabled=true;message.textContent='Speichere …';
     try{
      const assets=readers.map(read=>read()).filter(a=>a&&a.path);
-     const solution=q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:null);
+     const solution=q.type==='multiple_choice'?{options:solutionInputs.options.map(input=>input.value),correct:Number(solutionInputs.correct.value)}:q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:null);
      await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,solution,hints:{symbols:symbols.value,text:text.value,book:book.value},assets});
      dialog.close();location.reload();
     }catch(e){message.textContent=e.message;save.disabled=false;}
