@@ -292,6 +292,6 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-input-form input:focus{border-color:#2d66df;outline:2px solid #4e86ff;outline-offset:2px}
 
 /* Quiz: primary answer check button, scoped to the numeric/text entry form */
-#appPanel .quiz-input-form button[type="submit"]{border:none;border-radius:0;background-color:#097eab;color:#fff;font-weight:bold;padding:10px 20px;cursor:pointer}
+#appPanel .quiz-input-form button[type="submit"]{border:none; margin-top:20px; border-radius:0 !important; background-color:#097eab;color:#fff;font-weight:bold;padding:10px 20px;cursor:pointer}
 #appPanel .quiz-input-form button[type="submit"]:focus-visible{outline:2px solid #097eab;outline-offset:3px}
 #appPanel .quiz-input-form button[type="submit"]:disabled{opacity:.6;cursor:default}
