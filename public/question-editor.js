@@ -13,7 +13,27 @@
  function assetRow(parent,asset={}){
   const row=node('div','question-editor-asset');
   const placement=node('select');for(const [v,t] of [['prompt','Aufgabe'],['solution','Lösung']]){const option=node('option','',t);option.value=v;placement.append(option);}placement.value=asset.placement||'prompt';
-  const path=field(row,'Bildpfad (public/assets/… ohne public/) ',asset.path);
+  const path=field(row,'Bildpfad',asset.path);
+  const preview=node('img','question-editor-preview');preview.alt='Bildvorschau';preview.loading='lazy';
+  function updatePreview(){const value=path.value.trim();if(/^assets\\/[a-zA-Z0-9/_-]+\\.(png|jpe?g|webp|svg)$/.test(value)){preview.src=value;preview.hidden=false;}else{preview.removeAttribute('src');preview.hidden=true;}}
+  path.addEventListener('input',updatePreview);updatePreview();row.append(preview);
+  const upload=node('input','question-editor-upload');upload.type='file';upload.accept='image/png,image/jpeg,image/webp';
+  const uploadButton=node('button','question-editor-upload-button','Bild hochladen');uploadButton.type='button';
+  uploadButton.addEventListener('click',()=>upload.click());
+  upload.addEventListener('change',async()=>{
+   const file=upload.files?.[0];if(!file)return;
+   uploadButton.disabled=true;uploadButton.textContent='Lade hoch …';
+   try{
+    const session=await fetch('api.php?action=session',{credentials:'same-origin'}).then(r=>r.json());
+    if(session.user?.role!=='admin')throw Error('Keine Berechtigung.');
+    const data=new FormData();data.append('question_id',window.currentEditedQuestionId);data.append('image',file);
+    const response=await fetch('api.php?action=admin_question_upload',{method:'POST',credentials:'same-origin',headers:{'X-CSRF-Token':session.csrf||''},body:data});
+    const result=await response.json();if(!response.ok)throw Error(result.error||'Upload fehlgeschlagen.');
+    path.value=result.path;updatePreview();
+   }catch(e){alert(e.message);}
+   finally{uploadButton.disabled=false;uploadButton.textContent='Bild hochladen';upload.value='';}
+  });
+  row.append(upload,uploadButton);
   const alt=field(row,'Alternativtext',asset.alt);
   const caption=field(row,'Bildunterschrift',asset.caption);
   const remove=node('button','question-editor-remove','Bild entfernen');remove.type='button';remove.addEventListener('click',()=>row.remove());
@@ -29,7 +49,7 @@
   const close=node('button','question-editor-close','Schließen');close.type='button';close.addEventListener('click',()=>dialog.close());
   form.append(heading,message,close);dialog.append(form);document.body.append(dialog);dialog.showModal();
   try{
-   const {question:q}=await request('admin_question_get',null,id);
+   const {question:q}=await request('admin_question_get',null,id);window.currentEditedQuestionId=q.id;
    message.textContent='Aufgaben-ID: '+q.id+' · Version '+q.version;
    const prompt=field(form,'Aufgabenstellung',q.prompt,5);
    const explanation=field(form,'Lösung und Erklärung',q.solution_explanation,5);
