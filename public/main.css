@@ -239,7 +239,7 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .area-sidebar,.calc-panel,.notes-panel{background:#fff;color:#111820}
 .area-sidebar .quiz-area-choice,.area-sidebar .quiz-area-filter legend{color:#111820}
 .area-sidebar #quizAreaHint,.area-sidebar #formulaAreaHint{color:#394b59}
-.calc-panel button{color:#111820;border-bottom-color:#b4c6d3}
+.calc-panel button{color:#fff;border-bottom-color:#b4c6d3}
 .calc-panel .calc-equals{background:#145caa!important;color:#fff;border-color:#145caa}
 .futter-actions .futter-remove{color:#b43727;border-color:#d6a8a1}
 
