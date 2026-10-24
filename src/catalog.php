@@ -168,6 +168,7 @@ function catalog_modules(PDO $db): array {
 function reset_learning_content_once(PDO $db): void {
     migrate_catalog($db);
     $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
+    $db->exec("CREATE TABLE IF NOT EXISTS learning_imports (id TEXT PRIMARY KEY, imported_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, count INTEGER NOT NULL)");
     $done=$db->query("SELECT value FROM learning_system_state WHERE name='clean_reset_20261024'")->fetchColumn();
     if($done!==false)return;
     $db->beginTransaction();
