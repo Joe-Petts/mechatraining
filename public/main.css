@@ -329,3 +329,10 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-step-actions .quiz-skip-button{background:#e8eef2;color:#234357;border:1px solid #b8c9d3}
 #appPanel .quiz-step-actions .quiz-next-button{background:#097eab;color:#fff}
 #appPanel .quiz-step-actions button[hidden]{display:none}
+
+/* Distinct skip action and used-joker state for future XP weighting */
+#appPanel .quiz-step-actions .quiz-skip-button{background:#f1f3f5;color:#526271;border:1px solid #c9d2d9}
+#appPanel .quiz-step-actions .quiz-skip-button:hover{background:#e3e8ec}
+#appPanel .quiz-joker.quiz-joker--used{background:#e8f0f5;border-color:#7997ab}
+#appPanel .quiz-joker.quiz-joker--used summary{color:#466478}
+#appPanel .quiz-joker.quiz-joker--used summary::after{content:' ✓ genutzt';font-size:.8em;font-weight:500;margin-left:8px}
