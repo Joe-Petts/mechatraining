@@ -9,6 +9,10 @@ function migrate_catalog(PDO $db): void {
     $db->exec("CREATE TABLE IF NOT EXISTS learning_questions (id TEXT PRIMARY KEY, module_id TEXT NOT NULL REFERENCES learning_modules(id), source_id TEXT REFERENCES learning_sources(id), type TEXT NOT NULL DEFAULT 'multiple_choice', title TEXT NOT NULL DEFAULT '', prompt TEXT NOT NULL, difficulty INTEGER NOT NULL DEFAULT 2 CHECK(difficulty BETWEEN 1 AND 5), exam_part TEXT NOT NULL DEFAULT 'AP1', solution_explanation TEXT NOT NULL DEFAULT '', solution_data TEXT NOT NULL DEFAULT '{}', config_json TEXT NOT NULL DEFAULT '{}', status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('draft','active','disabled','archived')), version INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $db->exec("CREATE TABLE IF NOT EXISTS question_options (question_id TEXT NOT NULL REFERENCES learning_questions(id), option_index INTEGER NOT NULL, text TEXT NOT NULL, is_correct INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(question_id,option_index))");
     $db->exec("CREATE TABLE IF NOT EXISTS question_assets (id INTEGER PRIMARY KEY AUTOINCREMENT, question_id TEXT NOT NULL REFERENCES learning_questions(id), asset_path TEXT NOT NULL, kind TEXT NOT NULL DEFAULT 'image', alt_text TEXT NOT NULL DEFAULT '')");
+    $columns=$db->query("PRAGMA table_info(question_assets)")->fetchAll(PDO::FETCH_COLUMN,1);
+    if(!in_array('placement',$columns,true))$db->exec("ALTER TABLE question_assets ADD COLUMN placement TEXT NOT NULL DEFAULT 'prompt'");
+    if(!in_array('caption',$columns,true))$db->exec("ALTER TABLE question_assets ADD COLUMN caption TEXT NOT NULL DEFAULT ''");
+    if(!in_array('sort_order',$columns,true))$db->exec("ALTER TABLE question_assets ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0");
     $db->exec("CREATE TABLE IF NOT EXISTS question_revisions (id INTEGER PRIMARY KEY AUTOINCREMENT, question_id TEXT NOT NULL REFERENCES learning_questions(id), version INTEGER NOT NULL, snapshot_json TEXT NOT NULL, changed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $db->exec("CREATE TABLE IF NOT EXISTS question_attempts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL REFERENCES users(id), question_id TEXT NOT NULL, answer_json TEXT NOT NULL, is_correct INTEGER NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $db->exec("CREATE TABLE IF NOT EXISTS question_tags (question_id TEXT NOT NULL REFERENCES learning_questions(id), tag TEXT NOT NULL, PRIMARY KEY(question_id,tag))");
@@ -107,6 +111,7 @@ function import_learning_batch(PDO $db,array $batch): int {
         $mod=$db->prepare('INSERT OR IGNORE INTO learning_modules(id,subject_id,title,sort_order) VALUES(?,?,?,?)');
         $qst=$db->prepare('INSERT OR IGNORE INTO learning_questions(id,module_id,source_id,type,prompt,difficulty,exam_part,solution_explanation,solution_data,config_json,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)');
         $opt=$db->prepare('INSERT OR IGNORE INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
+        $asset=$db->prepare('INSERT INTO question_assets(question_id,asset_path,kind,alt_text,placement,caption,sort_order) VALUES(?,?,?,?,?,?,?)');
         $count=0;
         foreach($batch['modules'] as $position=>$m) {
             $moduleId=$batch['subject'].':'.$m['id'];
@@ -117,6 +122,13 @@ function import_learning_batch(PDO $db,array $batch): int {
                 $qst->execute([$q['id'],$moduleId,$batch['id'],$q['type'],$q['prompt'],$q['difficulty']??2,$q['exam_part']??'AP1',$q['explanation']??'',json_encode($solution,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),json_encode($config,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE),'active']);
                 if(!$qst->rowCount())continue;
                 foreach($q['options']??[] as $i=>$answer)$opt->execute([$q['id'],$i,(string)$answer,(int)($i===($q['correct']??-1))]);
+                foreach($q['assets']??[] as $order=>$media) {
+                    $path=(string)($media['path']??'');
+                    if(!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg)$~',$path)||str_contains($path,'..'))throw new InvalidArgumentException('Ungültiger Bildpfad');
+                    $placement=$media['placement']??'prompt';
+                    if(!in_array($placement,['prompt','solution'],true))throw new InvalidArgumentException('Ungültige Bildposition');
+                    $asset->execute([$q['id'],$path,'image',$media['alt']??'',$placement,$media['caption']??'',$order]);
+                }
                 $count++;
             }
         }
@@ -142,6 +154,8 @@ function import_pending_learning(PDO $db): void {
 function catalog_modules(PDO $db): array {
     $rows=$db->query("SELECT q.id,q.module_id,q.type,q.solution_data,q.prompt,q.solution_explanation,q.config_json,m.title AS module_title,m.subject_id,s.title AS subject_title,m.sort_order FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id JOIN subjects s ON s.id=m.subject_id WHERE q.status='active' AND m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order,q.id")->fetchAll();
     $options=$db->query('SELECT question_id,option_index,text,is_correct FROM question_options ORDER BY question_id,option_index')->fetchAll();
+    $media=$db->query('SELECT question_id,asset_path,alt_text,placement,caption FROM question_assets ORDER BY sort_order,id')->fetchAll();
+    $mediaByQuestion=[];foreach($media as $item)$mediaByQuestion[$item['question_id']][]=['path'=>$item['asset_path'],'alt'=>$item['alt_text'],'placement'=>$item['placement'],'caption'=>$item['caption']];
     $byQuestion=[];foreach($options as $o)$byQuestion[$o['question_id']][]=$o;
     $out=[];foreach($rows as $r) {
         $qopts=$byQuestion[$r['id']]??[];$correct=0;$texts=[];
@@ -149,6 +163,7 @@ function catalog_modules(PDO $db): array {
         $config=json_decode($r['config_json'],true)?:[];
         $q=['id'=>$r['id'],'type'=>$r['type'],'prompt'=>$r['prompt'],'options'=>$texts,'correct'=>$correct,'explanation'=>$r['solution_explanation']];
         if($r['type']==='numeric'||$r['type']==='text_input')$q['config']=$config;
+        $q['assets']=$mediaByQuestion[$r['id']]??[];
         if(!empty($config['diagram']))$q['diagram']=$config['diagram'];
         $id=$r['module_id'];if(!isset($out[$id]))$out[$id]=['id'=>str_contains($id,':')?explode(':',$id,2)[1]:$id,'title'=>$r['module_title'],'subject'=>$r['subject_id'],'questions'=>[]];
         $out[$id]['questions'][]=$q;
