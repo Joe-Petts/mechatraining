@@ -76,7 +76,7 @@ function render(){
  const title=document.createElement('h3');title.textContent=q.prompt;section.append(counter,title);
  if(window.mechaAdmin===true){const edit=document.createElement('button');edit.type='button';edit.className='quiz-question-edit';edit.dataset.editQuestion=q.id;edit.textContent='✎';edit.title='Aufgabe bearbeiten';edit.setAttribute('aria-label','Aufgabe bearbeiten');section.append(edit);}
  window.MechaQuestionImages?.append(section,q,'prompt');
- const hints=q.config?.hints||{};const hintValues=[['symbols','Formelzeichen'],['text','Texttipp'],['book','Buchtipp']];
+ const hints={...(q.config?.hints||{})};if(q.id==='ap1-metall-bohren-test-001'&&!hints.formula)hints.formula='n = (1000 × v_c) / (π × d)';const hintValues=[['symbols','Formelzeichen'],['text','Texttipp'],['book','Buchtipp'],['formula','Formel anzeigen']];
  if(hintValues.some(([key])=>String(hints[key]||'').trim())){
   const jokers=document.createElement('div');jokers.className='quiz-jokers';
   for(const [key,label] of hintValues){if(!String(hints[key]||'').trim())continue;const details=document.createElement('details');details.className='quiz-joker quiz-joker--'+key;const summary=document.createElement('summary');summary.textContent='Joker: '+label;const content=document.createElement('p');content.textContent=hints[key];details.append(summary,content);jokers.append(details);}
@@ -85,25 +85,26 @@ function render(){
  const options=document.createElement('div');options.className='options';
  const feedback=document.createElement('div');feedback.className='result quiz-answer-feedback';feedback.setAttribute('role','status');
  const actions=document.createElement('div');actions.className='quiz-step-actions';
+ const skip=document.createElement('button');skip.type='button';skip.className='quiz-skip-button';skip.textContent='Überspringen';skip.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});actions.append(skip);
  const next=document.createElement('button');next.type='button';next.className='quiz-next-button';next.textContent=quizIndex===questions.length-1?'Von vorn ↻':'Nächste Aufgabe →';next.hidden=true;
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
- let finished=false;
+ let finished=false;const finishControls=()=>{skip.hidden=true;finishControls();};
  if(q.type==='numeric'||q.type==='text_input'){
   const form=document.createElement('form');form.className='quiz-input-form';
   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
   const submit=document.createElement('button');submit.type='submit';submit.textContent='Prüfen';
-  form.append(input,submit);options.append(form);
+  form.append(input);options.append(form);actions.prepend(submit);
   form.addEventListener('submit',async event=>{
    event.preventDefault();if(finished)return;submit.disabled=true;
    try{
     const result=await api('answer',{question_id:q.id,answer:input.value});
     finished=true;input.disabled=true;
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
-    const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Bitte Lösung überprüfen.';
-    feedback.replaceChildren(heading,explanation);window.MechaQuestionImages?.append(feedback,q,'solution');
-    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}next.hidden=false;}
-    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation||q.explanation||'Antwort nicht richtig.',onConfirm:()=>{next.hidden=false;}}}));next.hidden=false;}
+    const explanation=document.createElement('p');explanation.textContent=result.correct?'Antwort richtig. Du kannst zur nächsten Aufgabe wechseln.':'Antwort nicht richtig. Nutze bei Bedarf die Joker und versuche die nächste Aufgabe.';
+    feedback.replaceChildren(heading,explanation);
+    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}finishControls();}
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Noch nicht richtig. Über die Joker kannst du dir Hinweise anzeigen lassen.',onConfirm:()=>{finishControls();}}}));finishControls();}
    }catch(error){feedback.textContent=error.message;submit.disabled=false;}
   });
  }
@@ -117,19 +118,19 @@ function render(){
     const result=alreadySolved?{correct:index===q.correct,explanation:q.explanation}:await api('answer',{question_id:q.id,answer:index});
     finished=true;
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
-    const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Die richtige Antwort ist: '+q.options[q.correct];
+    const explanation=document.createElement('p');explanation.textContent=result.correct?'Antwort richtig.':'Antwort nicht richtig. Nutze bei Bedarf die Joker.';
     feedback.classList.toggle('quiz-feedback-wrong',!result.correct);
-    feedback.replaceChildren(heading,explanation);window.MechaQuestionImages?.append(feedback,q,'solution');
+    feedback.replaceChildren(heading,explanation);
     if(result.correct){
      button.classList.add('quiz-answer-correct');
      document.dispatchEvent(new Event('mechatraining:correct'));
      if(!alreadySolved){solved.add(q.id);progress();await refreshXP();}
-     quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);
+     finishControls();
     }else{
-     document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Richtige Antwort: '+q.options[q.correct]+'. '+(result.explanation||q.explanation||''),onConfirm:()=>{next.hidden=false;}}}));
+     document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Noch nicht richtig. Über die Joker kannst du dir Hinweise anzeigen lassen.',onConfirm:()=>{finishControls();}}}));
      button.classList.add('quiz-answer-wrong');
      options.querySelectorAll('button')[q.correct]?.classList.add('quiz-answer-correct');
-     next.hidden=false;
+     finishControls();
     }
    }catch(e){feedback.textContent=e.message;options.querySelectorAll('button').forEach(b=>b.disabled=false);}
   });options.append(button);
