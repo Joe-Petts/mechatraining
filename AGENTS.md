@@ -18,3 +18,9 @@
 - Kein neues Setup oder Zurücksetzen bestehender Konten: Administrator und weitere Benutzer sind bereits angelegt.
 - XP/Level nur dezent im Header; erwachsene Zielgruppe und seriöses Industrial-Design beachten.
 - Dokumentation in PROJECT_CONTEXT.md bei Architektur- oder Workflow-Änderungen aktuell halten.
+
+## CSS-Regeln
+- Zentrales Stylesheet der Lernplattform: `public/main.css`. Neue Styles hier einpflegen, nicht als Inline-Styles in PHP/HTML/JavaScript.
+- Komponenten- und bereichsspezifische Selektoren verwenden (z. B. `#appPanel .quiz-single-card`, `#formulaPanel ...`, `#futterPanel ...`), damit Änderungen keine fremden Module beeinflussen.
+- Eigenständige Verwaltungsseiten dürfen separate, eindeutig gekapselte Stylesheets nutzen (z. B. `public/backup.css`).
+- Bei CSS-Änderungen den Cache-Buster in der einbindenden PHP-Datei aktualisieren. Bestehende CSS-Regeln nicht ohne Sichtprüfung großflächig umstrukturieren.
