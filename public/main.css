@@ -140,6 +140,7 @@ body.formula-info-open{overflow:hidden}
 
 /* Bereichsauswahl für die Fragen */
 .quiz-area-filter{border:1px solid #345064;border-radius:10px;padding:12px 15px;margin:16px 0 22px;background:#132431}.quiz-area-filter legend{font-size:13px;font-weight:700;color:#d9e9f3;padding:0 7px}.quiz-area-options{display:flex;flex-wrap:wrap;gap:7px 16px}.quiz-area-choice{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#d7e3ed;line-height:1.35;padding:6px 0}.quiz-area-choice input{accent-color:#56b89a;width:17px;height:17px;flex-shrink:0;cursor:pointer}.quiz-area-choice input:disabled{cursor:not-allowed}#quizAreaHint{font-size:12px;color:#9db2c0;margin:8px 0 0}@media(max-width:600px){.quiz-area-options{display:grid;grid-template-columns:1fr;gap:3px}.quiz-area-filter{padding:10px 12px}}
+.quiz-input-form button {border:none; border-radius:none; background-color:#097eab; color:#fff; font-weight:bold; padding:10px 20px;}
 
 /* Lernkarten 2026: heller, konzentrierter Übungsmodus */
 body:has(#appPanel:not(.hidden)),body:has(#formulaPanel:not(.hidden)){background:#edf2f5;background-image:none;color:#243342}
