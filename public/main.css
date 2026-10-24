@@ -1,0 +1,291 @@
+/* MechaTraining – zentrale Stylesheet-Datei. Bereichsspezifische Regeln bevorzugt unter #dashboard, #appPanel, #formulaPanel, #futterPanel etc. */
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1118;color:#eaf0f5}*{box-sizing:border-box}body{margin:0}header{border-bottom:1px solid #283747;background:#121c26;padding:18px max(20px,calc((100vw - 1050px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-size:22px;font-weight:900;letter-spacing:.5px}.accent{color:#f9b340}.tag,.eyebrow{color:#91a7ba;font-size:12px;font-weight:800;letter-spacing:2px}main{max-width:1050px;margin:auto;padding:28px 20px}.intro{padding:32px 0 18px}.intro h1{font-size:clamp(32px,6vw,58px);line-height:1.12;margin:14px 0}.intro p:not(.eyebrow){color:#b5c2ce;max-width:620px}.panel{background:#14212d;border:1px solid #2c4152;border-radius:16px;padding:clamp(18px,4vw,32px);margin-top:22px;box-shadow:0 12px 35px #0003}.panel h2{margin-top:0}.hidden{display:none!important}label{display:block;font-size:14px;margin:18px 0}input{display:block;width:100%;max-width:420px;background:#0b141d;border:1px solid #405668;color:white;border-radius:8px;padding:13px;margin-top:7px;font:inherit}button{cursor:pointer;background:#f9b340;color:#18202a;border:0;border-radius:9px;padding:12px 18px;font:inherit;font-weight:800}button:hover{filter:brightness(1.08)}button:focus-visible,input:focus-visible{outline:3px solid #77bfff;outline-offset:3px}.secondary{background:#2b3c4d;color:white}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.meter{height:9px;background:#2b3c4d;border-radius:8px;overflow:hidden;margin:18px 0 26px}.meter div{height:100%;background:#f9b340;width:0;transition:width .25s}.question{border-top:1px solid #304251;padding-top:22px;margin-top:22px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.options button{background:#243849;color:#eaf0f5;text-align:left;font-weight:500;border:1px solid #3c5367}.options button:disabled{opacity:.6;cursor:default}.result{min-height:22px;color:#f9b340;font-weight:650}footer{padding:35px 0;color:#8396a7;font-size:12px}@media(max-width:600px){.options{grid-template-columns:1fr}.tag{font-size:10px}.brand{font-size:17px}}
+/* Zurückhaltender Lernfortschritt im Kopfbereich */
+.header-right{display:flex;align-items:center;gap:22px}.xp-widget{width:180px;max-width:38vw}.xp-top{display:flex;justify-content:space-between;gap:12px;color:#aebdca;font-size:11px;line-height:1.5}.xp-top span:first-child{color:#dce5ed;font-weight:650}.xp-track{height:4px;margin-top:5px;background:#31414f;border-radius:99px;overflow:hidden}.xp-track>div{width:0;height:100%;background:#9daebd;border-radius:inherit;transition:width .25s ease}@media(max-width:600px){header{flex-wrap:wrap}.header-right{flex:1;justify-content:flex-end;gap:10px}.xp-widget{width:130px}.xp-top{font-size:10px}.tag{display:none}}
+
+/* Ausklappbarer wissenschaftlicher Rechner */
+.calc-toggle{position:fixed;right:0;top:42%;z-index:60;background:#f9b340;color:#101820;border-radius:10px 0 0 10px;box-shadow:0 6px 24px #0008;padding:14px 12px;writing-mode:vertical-rl;letter-spacing:.6px}.calc-toggle span{font-size:12px}.calc-backdrop{position:fixed;inset:0;background:#0009;z-index:69}.calc-panel{position:fixed;right:0;top:0;bottom:0;width:min(440px,100vw);z-index:70;background:#101b26;border-left:1px solid #3a5062;box-shadow:-12px 0 35px #0007;padding:18px;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .22s ease,visibility .22s}.calc-panel.open{transform:translateX(0);visibility:visible}.calc-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.calc-heading strong{display:block;font-size:16px}.calc-heading small{display:block;color:#9aafc0;margin-top:4px}.calc-close{background:#2b3c4d;color:#fff;font-size:25px;padding:5px 13px}.calc-screen{margin:20px 0 12px;background:#071019;border:1px solid #405668;border-radius:12px;padding:15px;min-height:106px;text-align:right;overflow-wrap:anywhere}.calc-expression{color:#91a7ba;font-size:14px;min-height:24px}.calc-display{display:block;font-size:clamp(24px,5vw,35px);font-variant-numeric:tabular-nums;line-height:1.5}.calc-controls,.calc-keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.calc-controls{margin-bottom:8px}.calc-panel button{min-width:0;padding:13px 2px;border:1px solid #3c5367;background:#263849;color:#eaf0f5;font-size:14px;font-weight:600}.calc-controls button{font-size:12px;padding:9px 2px}.calc-keys button:nth-child(n+16){background:#1d2c39}.calc-panel .calc-equals{background:#f9b340!important;color:#15202a;border-color:#f9b340}.calc-panel .calc-warn{color:#ffc27d}.calc-hint{font-size:11px;color:#94a8b9;line-height:1.5}.calc-history-head{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #344657;padding-top:12px;margin-top:18px}.calc-history-head button{padding:6px 10px;font-size:12px}.calc-history{margin-top:8px;max-height:180px;overflow:auto}.calc-history button{display:block;width:100%;text-align:right;background:transparent;border:0;border-bottom:1px solid #293b4a;padding:9px;color:#d9e5ee}.calc-history small{display:block;color:#91a7ba;margin-bottom:3px}@media(max-width:600px){.calc-panel{padding:14px}.calc-toggle{top:auto;bottom:20%;padding:12px 8px}.calc-keys{gap:5px}.calc-panel .calc-keys button{padding:12px 1px;font-size:13px}}@media(prefers-reduced-motion:reduce){.calc-panel{transition:none}}
+
+/* Größere Schließen-Schaltfläche am oberen rechten Rechnerrand */
+.calc-panel .calc-close{min-width:46px;min-height:42px;padding:6px 14px;font-size:27px;line-height:1;flex-shrink:0}
+
+/* Separater Notizblock unterhalb des Rechners */
+.notes-toggle{position:fixed;right:0;top:calc(42% + 115px);z-index:60;background:#263b4d;color:#eaf0f5;border:1px solid #50697e;border-right:0;border-radius:10px 0 0 10px;box-shadow:0 6px 24px #0008;padding:14px 12px;writing-mode:vertical-rl;letter-spacing:.6px}.notes-toggle span{font-size:12px}.notes-panel .notes-description{color:#a9bac9;margin:22px 0 16px;font-size:14px}.notes-label{color:#d9e4ec;font-weight:650;margin:0 0 9px}.notes-panel .notes-text{display:block;width:100%;max-width:none;min-height:45vh;resize:vertical;border:1px solid #41596d;border-radius:10px;background:#0b141d;color:#eaf0f5;padding:15px;font:15px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;tab-size:4}.notes-text:focus-visible{outline:3px solid #77bfff;outline-offset:2px}.notes-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:13px;flex-wrap:wrap}.notes-actions span{font-size:12px;color:#a3b6c6}.notes-panel .notes-actions button{padding:10px 14px;font-size:12px}.notes-warning{font-size:12px;line-height:1.5;color:#91a7ba;margin-top:18px}@media(max-width:600px){.notes-toggle{top:auto;bottom:calc(20% - 112px);padding:12px 8px}.notes-panel .notes-text{min-height:50vh}}
+
+/* Notizverwaltung */
+.notes-panel .notes-title{max-width:none;margin:7px 0 17px}.notes-panel .notes-label{margin-top:13px}.notes-buttons{display:flex;gap:8px}.notes-panel #notesSave{background:#f9b340;color:#17202a;border-color:#f9b340}.notes-list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0}.notes-list-head h3{margin:0;font-size:17px}.notes-list-head button{padding:10px;font-size:12px}.notes-item{border:1px solid #3a5062;background:#172735;border-radius:10px;padding:12px;margin:10px 0}.notes-item strong{display:block;overflow-wrap:anywhere}.notes-item p{color:#9db0c0;font-size:12px;margin:7px 0}.notes-item-actions{display:flex;gap:8px}.notes-item-actions button{padding:8px 12px;font-size:12px}.notes-item-actions .notes-delete{color:#ffb4a5}.notes-empty{color:#9db0c0;font-size:14px}.notes-panel .notes-text{min-height:38vh}
+
+/* Farbpalette der kompakten Werkzeug-Tabs – zentral anpassbar */
+:root{
+ --tool-calculator-bg:#2c5878;
+ --tool-calculator-fg:#f3f8fc;
+ --tool-calculator-border:#477a9c;
+ --tool-notes-bg:#ffffff;
+ --tool-notes-fg:#243749;
+ --tool-notes-border:#cbd5df;
+ --tool-tab-shadow:0 5px 16px #0005;
+ --tool-tab-size:46px;
+ --tool-tab-gap:8px;
+}
+.calc-toggle,.notes-toggle{width:var(--tool-tab-size);height:var(--tool-tab-size);min-width:var(--tool-tab-size);min-height:var(--tool-tab-size);padding:0;display:flex;align-items:center;justify-content:center;writing-mode:horizontal-tb;letter-spacing:normal;border-radius:9px 0 0 9px;box-shadow:var(--tool-tab-shadow);transition:background-color .2s ease,filter .2s ease}
+.calc-toggle{top:42%;background:var(--tool-calculator-bg);color:var(--tool-calculator-fg);border:1px solid var(--tool-calculator-border);border-right:0}
+.notes-toggle{top:calc(42% + var(--tool-tab-size) + var(--tool-tab-gap));background:var(--tool-notes-bg);color:var(--tool-notes-fg);border:1px solid var(--tool-notes-border);border-right:0}
+.calc-toggle svg,.notes-toggle svg{display:block;flex:none}
+@media(max-width:600px){.calc-toggle{top:auto;bottom:calc(20% + var(--tool-tab-size) + var(--tool-tab-gap))}.notes-toggle{top:auto;bottom:20%}}
+
+/* Unterschiedliche Farbschemata für die ausgeklappten Werkzeugbereiche */
+:root{
+ --tool-calculator-panel-bg:#17354b;
+ --tool-calculator-panel-border:#477a9c;
+ --tool-calculator-panel-text:#eef6fc;
+ --tool-calculator-panel-muted:#b1c8d9;
+ --tool-notes-panel-bg:#ffffff;
+ --tool-notes-panel-border:#d9e1e8;
+ --tool-notes-panel-text:#243749;
+ --tool-notes-panel-muted:#617487;
+ --tool-notes-input-bg:#f5f8fb;
+ --tool-notes-card-bg:#f1f5f9;
+ --tool-notes-control-bg:#e7eef4;
+ --tool-notes-control-border:#cbd7e2;
+}
+#calcPanel{background:var(--tool-calculator-panel-bg);border-left-color:var(--tool-calculator-panel-border);color:var(--tool-calculator-panel-text)}
+#calcPanel .calc-heading small,#calcPanel .calc-hint,#calcPanel .calc-history small{color:var(--tool-calculator-panel-muted)}
+#notesPanel{background:var(--tool-notes-panel-bg);border-left-color:var(--tool-notes-panel-border);color:var(--tool-notes-panel-text);color-scheme:light}
+#notesPanel .calc-heading small,#notesPanel .notes-description,#notesPanel .notes-warning,#notesPanel .notes-empty,#notesPanel .notes-actions span,#notesPanel .notes-item p{color:var(--tool-notes-panel-muted)}
+#notesPanel .notes-label{color:var(--tool-notes-panel-text)}
+#notesPanel .notes-title,#notesPanel .notes-text{background:var(--tool-notes-input-bg);color:var(--tool-notes-panel-text);border:1px solid var(--tool-notes-control-border)}
+#notesPanel .notes-title::placeholder,#notesPanel .notes-text::placeholder{color:var(--tool-notes-panel-muted)}
+#notesPanel button{background:var(--tool-notes-control-bg);color:var(--tool-notes-panel-text);border-color:var(--tool-notes-control-border)}
+#notesPanel .calc-close{background:var(--tool-notes-control-bg);color:var(--tool-notes-panel-text)}
+#notesPanel .notes-item{background:var(--tool-notes-card-bg);border-color:var(--tool-notes-control-border)}
+#notesPanel .notes-item-actions .notes-delete{color:#a33434}
+#notesPanel .notes-actions #notesSave{background:#f9b340;color:#17202a;border-color:#f9b340}
+
+/* Startseite: sachliche, responsive Themenkacheln */
+.dashboard-title{font-size:clamp(28px,4vw,38px);margin:8px 0 24px}.topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.topic-card{display:flex;flex-direction:column;align-items:flex-start;min-height:205px;width:100%;padding:24px;text-align:left;background:#14212d;color:#eaf0f5;border:1px solid #30485b;border-radius:14px;transition:border-color .2s,transform .2s}.topic-card:not(.upcoming):hover{border-color:#f9b340;transform:translateY(-2px);filter:none}.topic-icon{font-size:32px;color:#f9b340;line-height:1.2;margin-bottom:20px}.topic-card strong{font-size:19px}.topic-card small{font-size:13px;color:#a6b7c5;margin-top:7px;font-weight:400}.topic-arrow{font-size:12px;color:#f9b340;margin-top:auto;padding-top:20px;font-weight:700}.topic-card.upcoming{cursor:default;opacity:.65}.topic-card.upcoming .topic-arrow{color:#a6b7c5}.nav-back{margin-bottom:24px}.exercise-card{display:flex;align-items:flex-start;flex-direction:column;gap:9px;width:100%;text-align:left;background:#203446;color:#eaf0f5;border:1px solid #3b5367}.exercise-card small{color:#b2c3d1;font-weight:400}.exercise-card span{color:#f9b340;font-size:13px}@media(max-width:850px){.topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.topic-grid{grid-template-columns:1fr;gap:12px}.topic-card{min-height:155px;padding:20px}.topic-icon{margin-bottom:10px}}
+
+/* Pneumatik: Modulübersicht */
+#pneuModules{display:grid;gap:12px;margin-top:20px}#pneuModules .exercise-card{min-height:100px}#pneuModules .exercise-card:hover{border-color:#f9b340}
+
+/* Interaktive AP1-Pneumatik-Simulation */
+.pneu-simulator{margin:14px 0 18px;padding:16px;background:#0c1924;border:1px solid #426079;border-radius:12px}.pneu-simulator>p:first-child{font-size:13px;color:#b4c7d5}.pneu-simulator svg{display:block;width:100%;max-width:560px;height:auto;margin:auto;color:#e4eef6}.pneu-controls{display:flex;gap:9px;flex-wrap:wrap}.pneu-controls button{background:#31536b;color:#fff;font-size:13px;padding:10px 12px}.pneu-state{font-size:13px;color:#f9b340;min-height:20px}
+
+/* Futter Admin */
+.futter-filters{display:flex;gap:12px;flex-wrap:wrap}.futter-filters input{margin:0;flex:1;min-width:210px}.futter-filters select{background:#0b141d;color:white;border:1px solid #405668;border-radius:8px;padding:12px}.futter-item{border-top:1px solid #344a5d;padding:18px 0}.futter-item h3{font-size:16px;margin:0 0 8px}.futter-meta{color:#a6b7c5;font-size:12px;overflow-wrap:anywhere}.futter-item details{margin:12px 0}.futter-item summary{cursor:pointer;color:#f9b340}.futter-actions{display:flex;gap:8px;flex-wrap:wrap}.futter-actions button{font-size:12px;padding:9px 12px}
+
+/* Formel-Modus */
+.formula-entry{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:16px 0 24px}.formula-entry span{color:#a9bac7;font-size:13px}.formula-settings{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:20px 0}.formula-settings label{display:flex;flex-direction:column;gap:8px;flex:1;min-width:175px}.formula-settings select{background:#0b141d;color:#eaf0f5;border:1px solid #456078;padding:12px;border-radius:8px}.formula-card{background:#0d1b28;border:1px solid #365269;border-radius:12px;padding:24px;margin:16px 0}.formula-card>p{color:#a5bacb}.formula-card h3{font-size:clamp(20px,4vw,30px)}.formula-options{display:grid;gap:12px;margin-top:20px}.formula-options button{white-space:normal;text-align:left;font-size:19px;padding:15px}.formula-card form{display:grid;gap:14px}.formula-card form label{display:grid;gap:8px}.formula-card input{font-size:20px;max-width:100%}#formulaFeedback{color:#f9b340;font-weight:600;min-height:24px}
+
+/* Kompakte Adminnavigation */
+.admin-toggle{width:38px;height:38px;display:grid;place-items:center;padding:0;border:1px solid #405668;border-radius:9px;background:#203343;color:#eaf0f5;font-size:20px;flex-shrink:0}.admin-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.admin-nav button{flex:1;min-width:190px}.futter-item details details{margin:12px 0 12px 16px;border-left:2px solid #344b5f;padding:6px 12px}.futter-item details summary{cursor:pointer}
+
+/* Eindeutige Futter-Statusanzeige */
+.futter-status{display:inline-flex;align-items:center;border:1px solid #637a8e;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:750;letter-spacing:.2px;background:#263849;color:#e4edf4;margin:0 0 8px}.futter-status--active{border-color:#397b63;background:#173d32;color:#baf3d5}.futter-status--disabled{border-color:#99773a;background:#47361b;color:#ffdfa0}.futter-status--archived{border-color:#667383;background:#29313a;color:#c1cbd6}.futter-status--mixed{border-color:#6487ad;background:#1c364f;color:#c3dfff}.futter-actions .futter-action-current,.futter-actions .futter-action-current:disabled{opacity:1;background:#355d51;color:#e0fff0;border:1px solid #6ab69b;cursor:default}.futter-actions .futter-action-current::before{content:'✓ ';font-weight:900}.futter-actions button.secondary{background:#283b4b;color:#e3edf5}
+
+/* Formel-Erfolgsleiter */
+.formula-climb{background:#101e2b;border:1px solid #355066;border-radius:12px;padding:15px 18px;margin:18px 0}.formula-climb-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:750;font-size:13px;color:#d6e5f0}.formula-ladder{position:relative;width:88px;height:155px;margin:10px auto 4px}.formula-ladder-rails{position:absolute;inset:4px 15px;border-left:5px solid #8095a7;border-right:5px solid #8095a7;border-radius:3px}.formula-ladder-rungs{position:absolute;inset:8px 19px;background:repeating-linear-gradient(to top,transparent 0,transparent 17px,#d2a15c 17px,#d2a15c 21px)}.formula-climber{position:absolute;left:50%;transform:translateX(-50%);bottom:10%;font-size:32px;line-height:1;transition:bottom .75s cubic-bezier(.2,.75,.25,1);filter:drop-shadow(0 2px 3px #0008)}#formulaClimbMessage{text-align:center;color:#f9b340;font-size:13px;margin:6px 0 0}@media(prefers-reduced-motion:reduce){.formula-climber{transition:none}}
+
+/* Schmaler Formel-Fortschritt links neben den Fragen */
+.brand-link{color:inherit;text-decoration:none;display:inline-flex;align-items:center}.brand-link:hover{color:#fff}.brand-link:focus-visible{outline:2px solid #77bfff;outline-offset:5px;border-radius:4px}#formulaPanel{position:relative;padding-left:clamp(90px,12vw,122px)}#formulaPanel .formula-climb{position:absolute;left:14px;top:115px;width:66px;padding:0;margin:0;border:0;background:transparent;box-shadow:none;text-align:center}.formula-climb-top{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:#aebdca}.formula-climb-track{position:relative;height:112px;width:42px;margin:8px auto 6px}.formula-climb-bar{position:absolute;top:3px;bottom:3px;left:50%;width:5px;transform:translateX(-50%);border-radius:9px;background:#34495a}.formula-climber{position:absolute;left:50%;transform:translate(-50%,50%);font-size:25px;line-height:1;bottom:8%;transition:bottom .3s ease-out;filter:none}.formula-level-bars{display:flex;flex-direction:column;gap:3px;align-items:center;max-height:140px;overflow:auto}.formula-level-mark{width:36px;height:4px;border-radius:4px;background:#42a879}#formulaClimbMessage{font-size:10px;line-height:1.25;color:#85cbaa;margin:7px 0 0}@media(max-width:540px){#formulaPanel{padding-left:75px}#formulaPanel .formula-climb{left:7px;top:135px;width:56px}.formula-climb-track{height:90px}}
+@media(prefers-reduced-motion:reduce){.formula-climber{transition:none}}
+
+/* Reduzierter Formelmodus */
+body:has(#formulaPanel:not(.hidden)){background:#111f26;background-image:linear-gradient(145deg,#102b30 0%,#0c1a24 55%,#101820 100%);background-attachment:fixed}body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border-color:#325a5a}#formulaPanel{position:relative;padding-left:clamp(75px,9vw,110px);padding-top:64px;min-height:440px}#formulaPanel .formula-climb{position:fixed;left:clamp(10px,2vw,28px);top:50%;transform:translateY(-50%);width:64px;z-index:5}#formulaPanel .formula-settings{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin:0 0 14px}#formulaPanel .formula-settings label{flex:0 1 205px;min-width:145px;gap:5px}#formulaPanel .formula-settings select{padding:9px 11px}#formulaPanel .formula-exit{position:absolute;right:18px;top:14px;width:36px;height:36px;display:grid;place-items:center;padding:0;border-radius:8px;font-size:23px;background:transparent;border:1px solid #3b6262;color:#c6e2dc}#formulaPanel .formula-restart{position:fixed;right:clamp(14px,3vw,35px);bottom:clamp(16px,3vw,30px);width:45px;height:45px;border-radius:50%;font-size:29px;line-height:1;padding:0;display:grid;place-items:center;z-index:6;box-shadow:0 3px 16px #0006}#formulaPanel .formula-card{margin-top:8px}@media(max-width:540px){#formulaPanel{padding-left:72px;padding-right:12px;padding-top:58px}#formulaPanel .formula-climb{left:6px;top:50%;width:55px}#formulaPanel .formula-settings label{flex:1 1 125px;min-width:115px}#formulaPanel .formula-settings{gap:7px}#formulaPanel .formula-restart{right:14px;bottom:15px}}@media(max-height:450px){#formulaPanel .formula-climb{top:58%}}
+
+/* Optionales Formelzeichen-Lexikon */
+.formula-card{position:relative}.formula-info{position:absolute;top:18px;right:18px;z-index:3}.formula-info summary{list-style:none;cursor:pointer;width:29px;height:29px;display:grid;place-items:center;border:1px solid #69828b;border-radius:50%;color:#c4d5dc;background:#1b3440;font-size:19px;font-weight:500;line-height:1}.formula-info summary::-webkit-details-marker{display:none}.formula-info summary:focus-visible{outline:2px solid #80c9f0;outline-offset:3px}.formula-info dl{position:absolute;top:35px;right:0;width:min(300px,70vw);max-height:55vh;overflow-y:auto;display:grid;grid-template-columns:auto 1fr;gap:9px 12px;margin:0;padding:16px;border:1px solid #4c7281;border-radius:12px;background:#152a35;color:#e6f0f4;box-shadow:0 12px 32px #0009;font-size:13px;line-height:1.4}.formula-info dt{font-weight:800;color:#ffbe51}.formula-info dd{margin:0}.formula-info[open] summary{background:#315566}
+
+/* Formeltraining 2.0: eine klare Ebene und horizontale Fortschrittsanzeige */
+body:has(#formulaPanel:not(.hidden)) main{max-width:1040px}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;box-shadow:none;border-radius:0;padding:58px 20px 112px;min-height:70vh}
+#formulaPanel .formula-settings,#formulaPanel #formulaProgress,#formulaPanel #formulaQuestion,#formulaPanel #formulaFeedback,#formulaPanel #formulaNext{max-width:720px;margin-left:auto;margin-right:auto}
+#formulaPanel .formula-card{background:transparent;border:0;border-radius:0;box-shadow:none;margin:10px 0;padding:10px 0}
+#formulaPanel .formula-card>p{margin:0 0 10px;font-size:14px}
+#formulaPanel .formula-card h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 22px;font-size:clamp(23px,3.4vw,30px);line-height:1.35}
+#formulaPanel .formula-options{gap:10px}
+#formulaPanel .formula-options button{border-radius:9px;padding:16px 18px;min-height:56px}
+#formulaPanel .formula-climb{position:fixed;top:auto;bottom:0;left:50%;right:auto;transform:translateX(-50%);display:grid;grid-template-columns:72px minmax(80px,1fr) auto;align-items:center;gap:14px;width:min(650px,100%);height:76px;margin:0;padding:9px 18px;background:#11252c;border:1px solid #34545b;border-bottom:0;border-radius:13px 13px 0 0;z-index:8;text-align:left}
+#formulaPanel .formula-climb-top{display:flex;flex-direction:column;align-items:flex-start;gap:1px;font-size:12px;white-space:nowrap}
+#formulaPanel .formula-climb-track{position:relative;width:100%;height:36px;margin:0}
+#formulaPanel .formula-climb-bar{position:absolute;left:0;right:0;top:50%;bottom:auto;transform:translateY(-50%);width:auto;height:5px}
+#formulaPanel .formula-climber{position:absolute;left:8%;top:50%;bottom:auto;transform:translate(-50%,-50%);transition:left .3s ease;font-size:26px}
+#formulaPanel .formula-level-bars{display:flex;flex-direction:row;flex-wrap:wrap;gap:3px;align-content:center;max-width:90px;max-height:46px;overflow:hidden}
+#formulaPanel .formula-level-mark{width:5px;height:18px}
+#formulaPanel #formulaClimbMessage{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);width:max-content;max-width:80vw;background:#11252c;padding:5px 9px;border-radius:6px;font-size:12px}
+#formulaPanel .formula-restart{bottom:90px}
+#formulaPanel .formula-info{position:relative;left:auto;right:auto;top:auto;display:inline-block;flex:none;font-size:initial}
+#formulaPanel .formula-info summary{width:26px;height:26px;font-size:16px;background:transparent}
+#formulaPanel .formula-info dl{position:absolute;top:34px;left:auto;right:0;width:min(315px,calc(100vw - 54px));max-height:50vh;overflow:auto;grid-template-columns:minmax(35px,auto) minmax(0,1fr);padding:13px;z-index:20;font-size:13px}
+#formulaPanel .formula-info dd{overflow-wrap:anywhere}
+@media(max-width:540px){body:has(#formulaPanel:not(.hidden)) #formulaPanel{padding:54px 14px 110px}#formulaPanel .formula-climb{top:auto;left:50%;bottom:0;width:100%;height:70px;grid-template-columns:62px minmax(60px,1fr) auto;padding:8px 12px;gap:9px;border-radius:0;border-left:0;border-right:0}#formulaPanel .formula-climb-top{font-size:11px}#formulaPanel .formula-restart{bottom:82px}#formulaPanel .formula-info dl{right:-12px}}
+@media(prefers-reduced-motion:reduce){#formulaPanel .formula-climber{transition:none}}
+
+/* Formelzeichen: zentriertes Modal statt seitlich abgeschnittenem Tooltip */
+#formulaPanel .formula-info{position:static;display:inline-flex;align-items:center}
+#formulaPanel .formula-info-trigger{display:grid;place-items:center;width:30px;height:30px;min-width:30px;padding:0;border:1px solid #7797a2;border-radius:50%;background:transparent;color:#d6e5ea;font-size:20px;font-weight:400;line-height:1}
+#formulaPanel .formula-info-trigger:hover{background:#27434c}
+.formula-info-backdrop[hidden]{display:none!important}
+.formula-info-backdrop{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(3,12,19,.76)}
+#formulaPanel .formula-info-dialog{width:min(420px,100%);max-height:min(78vh,620px);overflow-y:auto;padding:22px;background:#142934;color:#eaf2f5;border:1px solid #55727f;border-radius:14px;box-shadow:0 22px 60px #000a;font-size:15px;font-weight:400;line-height:1.5}
+#formulaPanel .formula-info-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+#formulaPanel .formula-info-heading strong{font-size:19px}
+#formulaPanel .formula-info-close{display:grid;place-items:center;width:36px;height:36px;min-width:36px;padding:0;border:1px solid #55727f;border-radius:8px;background:transparent;color:#eaf2f5;font-size:27px}
+#formulaPanel .formula-info-dialog dl{position:static;display:grid;grid-template-columns:minmax(30px,auto) minmax(0,1fr);gap:12px 16px;width:auto;max-height:none;margin:0;padding:0;background:transparent;border:0;box-shadow:none;font-size:15px}
+#formulaPanel .formula-info-dialog dt{font-weight:800;color:#ffbe51}
+#formulaPanel .formula-info-dialog dd{margin:0;overflow-wrap:anywhere}
+body.formula-info-open{overflow:hidden}
+
+/* Entfernen eines Futter-Blocks als bewusste Admin-Aktion */
+.futter-actions .futter-remove{background:transparent;color:#f0a6a6;border:1px solid #915459}.futter-actions .futter-remove:hover{background:#572b31;color:#fff}.futter-actions .futter-remove:focus-visible{outline:2px solid #ffb7b7;outline-offset:3px}
+
+/* Bereichsauswahl für die Fragen */
+.quiz-area-filter{border:1px solid #345064;border-radius:10px;padding:12px 15px;margin:16px 0 22px;background:#132431}.quiz-area-filter legend{font-size:13px;font-weight:700;color:#d9e9f3;padding:0 7px}.quiz-area-options{display:flex;flex-wrap:wrap;gap:7px 16px}.quiz-area-choice{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#d7e3ed;line-height:1.35;padding:6px 0}.quiz-area-choice input{accent-color:#56b89a;width:17px;height:17px;flex-shrink:0;cursor:pointer}.quiz-area-choice input:disabled{cursor:not-allowed}#quizAreaHint{font-size:12px;color:#9db2c0;margin:8px 0 0}@media(max-width:600px){.quiz-area-options{display:grid;grid-template-columns:1fr;gap:3px}.quiz-area-filter{padding:10px 12px}}
+
+/* Lernkarten 2026: heller, konzentrierter Übungsmodus */
+body:has(#appPanel:not(.hidden)),body:has(#formulaPanel:not(.hidden)){background:#edf2f5;background-image:none;color:#243342}
+body:has(#appPanel:not(.hidden)) header,body:has(#formulaPanel:not(.hidden)) header{background:#172634;color:#f2f7fa}
+body:has(#appPanel:not(.hidden)) #appPanel,body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;box-shadow:none;color:#243342}
+#appPanel .toolbar{align-items:center}#appPanel .toolbar h2{font-size:clamp(18px,2vw,23px);margin:5px 0}#appPanel .toolbar .eyebrow{display:none}
+#appPanel>.meter{height:5px;background:#d7e1e7;border-radius:5px;overflow:hidden}#appPanel>.meter #bar{background:#5a9b81}
+#appPanel #quiz{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;max-width:780px;margin:26px auto}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question{background:#fff;border:1px solid #dce5eb;border-radius:15px;box-shadow:0 6px 24px #21394b0d;padding:clamp(20px,4vw,34px);color:#243342}
+#appPanel #quiz h3,#appPanel #quiz strong{color:#192f3f}
+#appPanel #quiz button:not(.secondary){border-radius:9px}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;border:1px solid #dce5eb;border-radius:15px;box-shadow:0 6px 24px #21394b0d;padding:clamp(24px,4vw,38px);color:#243342}
+#formulaPanel .formula-card h3,#formulaPanel .formula-card>p{color:#243342}
+#formulaPanel .formula-options button{background:#f5f8fa;color:#203748;border:1px solid #d1dfe7}
+#formulaPanel .formula-options button:hover{background:#e4f0f4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings{color:#243342}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{background:#fff;color:#243342;border:1px solid #bdcbd4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#fff;border-color:#d3dfe5;color:#243342;box-shadow:0 -5px 20px #21394b10}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-exit{color:#294454;border-color:#bdcbd4}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel #formulaProgress{color:#587080}
+.area-sidebar-toggle{display:none;position:fixed;left:0;top:44%;z-index:60;width:42px;height:52px;border-radius:0 11px 11px 0;background:#fff;color:#263c4a;border:1px solid #d1dfe7;box-shadow:2px 4px 15px #172b3d24;font-size:23px;padding:0}
+.area-sidebar-toggle.visible{display:grid;place-items:center}
+.area-sidebar{position:fixed;left:0;top:0;bottom:0;z-index:90;width:min(350px,88vw);padding:20px;background:#fff;color:#243342;border-right:1px solid #d2dfe7;box-shadow:12px 0 35px #162b3c26;transform:translateX(-110%);transition:transform .2s ease;overflow:auto;visibility:hidden}
+.area-sidebar.open{transform:translateX(0);visibility:visible}
+.area-sidebar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;font-size:17px}
+.area-sidebar-head button{background:#edf2f5;color:#243342;border:0;border-radius:8px;padding:5px 12px;font-size:25px}
+.area-sidebar .quiz-area-filter{border:0;background:transparent;padding:0;margin:0;color:#243342}
+.area-sidebar .quiz-area-filter legend{color:#243342;font-size:14px}
+.area-sidebar .quiz-area-choice{color:#344b5a}
+.area-sidebar #quizAreaHint,.area-sidebar #formulaAreaHint{color:#627988}
+.area-sidebar .quiz-area-options{display:flex;flex-direction:column;align-items:stretch}
+.area-sidebar .quiz-area-choice{padding:10px 0;border-bottom:1px solid #edf1f4}
+@media(max-width:600px){#appPanel #quiz{margin:18px auto}#appPanel #quiz>section{padding:19px}.area-sidebar-toggle{top:42%;width:36px;height:48px}}
+@media(prefers-reduced-motion:reduce){.area-sidebar{transition:none}}
+
+/* Globales helles Minimaldesign */
+:root{color-scheme:light;background:#f8fafb;color:#233440;--ink:#233440;--muted:#647986;--line:#dce5e9;--accent:#327d6b}
+html,body{background:#f8fafb;color:var(--ink)}
+header,body:has(#appPanel:not(.hidden)) header,body:has(#formulaPanel:not(.hidden)) header{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);box-shadow:none}
+.brand-link,.brand-link:hover{color:var(--ink);border:0}.accent{color:var(--accent)}
+.panel,body:has(#appPanel:not(.hidden)) #appPanel,body:has(#formulaPanel:not(.hidden)) #formulaPanel{background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--ink)}
+h1,h2,h3{color:#1e313d}.eyebrow,.tag,footer{color:var(--muted)}
+button,.secondary{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:10px 4px;font-weight:600}
+button:hover{background:#f0f7f4;color:var(--accent);border-bottom-color:var(--accent);filter:none}
+input,select,textarea{background:#fff;color:var(--ink);border:0;border-bottom:1px solid #b9cbd3;border-radius:0}
+label{color:var(--ink)}
+.xp-top,.xp-top span:first-child{color:var(--muted)}.xp-track,.meter{background:#e2eaed}.xp-track>div,.meter div{background:var(--accent)}
+.formula-entry{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+#formulaOpen{background:transparent;color:var(--accent);border:0;border-bottom:1px solid var(--accent);border-radius:0}
+.formula-entry span{color:var(--muted)}
+.topic-grid{gap:0}.topic-card,.exercise-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.topic-card:hover,.exercise-card:hover{background:#f0f7f4;box-shadow:none;transform:none}
+.topic-card strong,.exercise-card strong{color:var(--ink)}
+.topic-arrow,.exercise-card small,.exercise-card span{color:var(--muted)}
+.options button,#formulaPanel .formula-options button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.options button:hover,#formulaPanel .formula-options button:hover{background:#edf6f2;color:var(--accent)}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question,body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;box-shadow:none}
+#formulaPanel .formula-card h3,#formulaPanel .formula-card>p{color:var(--ink)}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{background:#fff;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:none}
+#formulaPanel .formula-info-trigger{color:var(--muted);background:transparent;border-color:var(--line)}
+#formulaPanel .formula-info-dialog{background:#fff;color:var(--ink);border-color:var(--line)}
+#formulaPanel .formula-info-close{background:transparent;color:var(--ink)}
+.admin-toggle,.calc-toggle,.notes-toggle,.area-sidebar-toggle{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.area-sidebar,.calc-panel,.notes-panel{background:#fff;color:var(--ink);border-color:var(--line)}
+.calc-screen{background:#f8fafb;color:var(--ink);border-color:var(--line)}
+.calc-panel button{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0}
+.calc-panel .calc-equals{background:#e9f5ef!important;color:#245c4e;border-color:#b4d2c4}
+@media(max-width:600px){.topic-grid{grid-template-columns:1fr}.topic-card{min-height:74px}}
+
+/* Kontrastpalette: Weiß/Grau, Schwarz, Rotorange, Blau */
+:root{color-scheme:light;--ink:#111820;--muted:#394b59;--line:#a9bac7;--accent:#e34b22;--signal-blue:#145caa;--signal-orange:#e34b22;background:#f1f3f5;color:#111820}
+html,body{background:#f1f3f5;color:#111820}
+header{background:#fff;color:#111820;border-bottom:2px solid #145caa}
+.brand,.brand-link,.brand-link:hover{color:#111820}.accent{color:#e34b22}
+.panel{color:#111820}
+h1,h2,h3,.topic-card strong,.exercise-card strong{color:#111820}
+p,label,.quiz-area-choice,.topic-arrow,.exercise-card small{color:#283745}
+.eyebrow,.tag{color:#145caa}
+a{color:#145caa}
+button,.secondary{color:#145caa;border-bottom-color:#9bb7d3}
+button:hover,.topic-card:hover,.exercise-card:hover{color:#e34b22;background:#fff4ee;border-bottom-color:#e34b22}
+#formulaOpen,.formula-entry button{color:#e34b22;border-bottom-color:#e34b22}
+input,select,textarea{color:#111820;background:#fff;border-bottom-color:#8ea9bf}
+input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline-color:#145caa}
+.xp-top,.xp-top span:first-child{color:#111820}
+.xp-track,.meter{background:#d6e0e8}.xp-track>div,.meter div{background:#145caa}
+.topic-card,.exercise-card{border-bottom-color:#b2c4d0}
+#appPanel #quiz>section,#appPanel #quiz>.question,#appPanel #quiz>.quiz-question,body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-card{background:#fff;color:#111820;border-color:#c0cdd6}
+.options button,#formulaPanel .formula-options button{color:#111820;border-bottom-color:#b4c6d3}
+.options button:hover,#formulaPanel .formula-options button:hover{color:#145caa;background:#eaf2fb;border-bottom-color:#145caa}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-settings select{color:#111820}
+body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
+.formula-level-mark{background:#145caa}
+#formulaPanel .formula-restart{color:#e34b22}
+.admin-toggle,.calc-toggle,.notes-toggle,.area-sidebar-toggle{color:#145caa;border-color:#9bb7d3}
+.area-sidebar,.calc-panel,.notes-panel{background:#fff;color:#111820}
+.area-sidebar .quiz-area-choice,.area-sidebar .quiz-area-filter legend{color:#111820}
+.area-sidebar #quizAreaHint,.area-sidebar #formulaAreaHint{color:#394b59}
+.calc-panel button{color:#111820;border-bottom-color:#b4c6d3}
+.calc-panel .calc-equals{background:#145caa!important;color:#fff;border-color:#145caa}
+.futter-actions .futter-remove{color:#b43727;border-color:#d6a8a1}
+
+/* Kategoriebilder: sachlich, bildbetont, mobil responsiv */
+.topic-card:has(.topic-cover){display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:9px;padding:0 0 16px;overflow:hidden}.topic-card .topic-cover{display:block;width:100%;height:clamp(140px,17vw,215px);aspect-ratio:16/9;object-fit:cover;border-radius:5px;background:#e2e7eb}.topic-card:has(.topic-cover)>strong,.topic-card:has(.topic-cover)>.topic-arrow{margin-inline:12px}.topic-card:has(.topic-cover)>strong{font-size:18px}.topic-card:has(.topic-cover):hover .topic-cover{filter:contrast(1.04)}@media(max-width:600px){.topic-card .topic-cover{height:auto;aspect-ratio:16/9}}
+
+/* Editorial landing page */
+#dashboard .formula-entry,#dashboard>.eyebrow,#dashboard>.dashboard-title{display:none}#dashboard .topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}#dashboard .topic-card{background:#fff;min-height:330px;padding:28px;border:1px solid #d7dce0}#dashboard .topic-card strong{font-size:clamp(36px,5vw,74px);line-height:.96;letter-spacing:-.06em;text-transform:uppercase}#dashboard .topic-card .topic-icon,#dashboard .topic-card .topic-cover{display:none}#dashboard .topic-card[data-topic=pneumatik]{display:none}@media(max-width:650px){#dashboard .topic-grid{grid-template-columns:1fr}#dashboard .topic-card{min-height:230px}}
+
+/* Two-choice editorial homepage, no images */
+#dashboard{padding-top:clamp(36px,7vw,100px)}#dashboard .formula-entry{display:none}#dashboard>.eyebrow{font-size:12px;letter-spacing:.2em;color:#555}#dashboard .dashboard-title{font-size:clamp(34px,6vw,78px);line-height:1;letter-spacing:-.065em;max-width:950px;margin:14px 0 50px;font-weight:900}#dashboard .topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}#dashboard .topic-card[data-topic=metall],#dashboard .topic-card[data-topic=pneumatik]{display:none}#dashboard .topic-card{min-height:clamp(270px,31vw,420px);background:#fff;border:1px solid #d4d6d8;border-radius:0;padding:clamp(20px,3vw,36px);gap:0;transition:background .2s,color .2s}#dashboard .topic-card:hover{background:#f4f4f2;transform:none;border-color:#171717}#dashboard .topic-card .topic-icon{display:block;font-size:12px;letter-spacing:.13em;color:#555;margin:0 0 auto;font-weight:700}#dashboard .topic-card .topic-cover{display:none}#dashboard .topic-card strong{font-size:clamp(45px,6vw,92px);font-weight:950;line-height:.93;letter-spacing:-.075em;overflow-wrap:anywhere;max-width:100%;color:#111}#dashboard .topic-card .topic-arrow{margin-top:auto;padding-top:28px;color:#111;font-size:14px;font-weight:500}#dashboard .home-formula{background:#f0f0ed}@media(max-width:650px){#dashboard .topic-grid{grid-template-columns:1fr;gap:12px}#dashboard .topic-card{min-height:240px}#dashboard .dashboard-title{margin-bottom:30px}}
+
+/* Formelzeichen-Dialog: kontrastreiche Schrift auf hellem Hintergrund */
+#formulaPanel .formula-info-dialog{background:#fff;color:#111820;border-color:#c8d0d7;box-shadow:0 20px 55px #0004}#formulaPanel .formula-info-heading strong{color:#111820}#formulaPanel .formula-info-dialog dl,#formulaPanel .formula-info-dialog dd{color:#202b35}#formulaPanel .formula-info-dialog dt{color:#c74722}#formulaPanel .formula-info-close{color:#111820;border-color:#7f96a7;background:#fff}#formulaPanel .formula-info-close:hover{background:#edf1f4;color:#111820}
+
+/* Formeltraining: Einstellungen ausschließlich über die Filter-Sidebar */
+#formulaPanel .formula-settings{display:none!important}#formulaPanel #formulaNext{position:fixed;right:clamp(14px,3vw,42px);top:50%;transform:translateY(-50%);z-index:25;width:clamp(58px,6vw,82px);height:clamp(58px,6vw,82px);min-width:0;margin:0!important;padding:0;display:grid;place-items:center;border:1px solid #a8b7c2;border-radius:50%;background:#fff;color:#145caa;font-size:clamp(34px,4vw,52px);font-weight:400;line-height:1;box-shadow:0 8px 26px #102b3b20}#formulaPanel #formulaNext.hidden{display:none!important}#formulaPanel #formulaNext:hover{background:#f1f5f8;border-color:#145caa}@media(max-width:760px){#formulaPanel #formulaNext{right:12px;top:auto;bottom:24px;transform:none;width:62px;height:62px}}
+
+/* Dezenter Erfolgsroboter, ohne Interaktion zu unterbrechen */
+.success-robot-popup{position:fixed;left:50%;top:46%;z-index:190;pointer-events:none;opacity:0;transform:translate(-50%,-40%) scale(.84) rotate(-7deg);transition:opacity .16s ease,transform .3s cubic-bezier(.2,1.3,.4,1)}.success-robot-popup.is-visible{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}.success-robot-popup img{display:block;width:clamp(130px,18vw,220px);height:auto;max-height:36vh;object-fit:contain;filter:drop-shadow(0 8px 10px #0002)}@media(prefers-reduced-motion:reduce){.success-robot-popup{transition:none}}
+
+/* Einzelaufgabe und kurze Erfolgseinblendung */
+#appPanel #quiz .quiz-single-card{max-width:850px;margin:26px auto;padding:clamp(24px,5vw,54px);min-height:310px;animation:quiz-card-enter .32s cubic-bezier(.18,.8,.25,1) both}#appPanel .quiz-step{font-size:12px;letter-spacing:.16em;font-weight:750;color:#145caa;margin:0 0 22px}#appPanel .quiz-single-card h3{font-size:clamp(21px,2.5vw,30px);line-height:1.35;margin-bottom:28px}#appPanel .quiz-answer-feedback{margin-top:22px;line-height:1.5;color:#176444}#appPanel .quiz-answer-feedback p{margin:8px 0 0;color:#243342;font-weight:400}#appPanel .quiz-feedback-wrong{color:#ba4127}#appPanel .quiz-next-button{background:transparent;border:0;border-bottom:1px solid #145caa;color:#145caa;border-radius:0;padding:12px 0;font-weight:700}#appPanel .quiz-step-actions{display:flex;justify-content:flex-end}#appPanel .quiz-next-button[hidden]{display:none}#appPanel .options .quiz-answer-correct{color:#176444;border-bottom-color:#176444;background:#e7f5ed}#appPanel .options .quiz-answer-wrong{color:#ba4127;border-bottom-color:#ba4127;background:#fff0eb}.success-robot-popup{animation:none}.success-robot-plate{background:#fff;border:1px solid #e3e6e9;border-radius:20px;padding:clamp(14px,2vw,25px);box-shadow:0 18px 55px #14233238}.success-robot-popup.is-visible .success-robot-plate{animation:robot-celebrate .6s cubic-bezier(.2,1.3,.4,1) both}@keyframes quiz-card-enter{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes robot-celebrate{0%{transform:scale(.75) rotate(-12deg)}55%{transform:scale(1.09) rotate(7deg)}100%{transform:scale(1) rotate(0)}}@media(prefers-reduced-motion:reduce){#appPanel #quiz .quiz-single-card,.success-robot-popup.is-visible .success-robot-plate{animation:none}}
+
+/* Fehlerdialog mit Erklärung und OK: bleibt bis zur Bestätigung sichtbar */
+.success-robot-popup.is-dialog{inset:0;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transform:none!important;background:#10182080;z-index:300;pointer-events:auto;padding:18px;box-sizing:border-box}.success-robot-popup.is-dialog .success-robot-plate{width:min(460px,100%);max-height:calc(100dvh - 36px);overflow:auto;box-sizing:border-box;text-align:center;border-radius:14px;box-shadow:0 25px 70px #0004}.success-robot-popup.is-dialog img{width:clamp(115px,25vw,185px);height:auto;max-height:30vh;margin:0 auto}.robot-explanation h3{font-size:clamp(21px,3vw,28px);color:#111820;margin:12px 0}.robot-explanation p{color:#26333f;line-height:1.55;font-size:16px;white-space:pre-wrap;margin:12px 0 24px}.robot-explanation button{background:#145caa;color:white;border:0;border-radius:6px;font-size:16px;font-weight:700;padding:13px 24px;cursor:pointer}.robot-explanation button:hover{background:#0c467f}.success-robot-popup.is-dialog.is-visible .success-robot-plate{animation:robot-celebrate .35s ease-out both}@media(prefers-reduced-motion:reduce){.success-robot-popup.is-dialog.is-visible .success-robot-plate{animation:none}}
+
+/* Kompakter mobiler Kopfbereich: Logo führt zur Startseite, Abmelden nur als Icon */
+#exerciseBack{display:none!important}.header-logout{display:grid;place-items:center;flex:0 0 auto;width:40px;height:40px;padding:0;border:1px solid #a8b9c7;border-radius:9px;background:transparent;color:#145caa;box-shadow:none}.header-logout:hover{background:#e9eff4}.header-logout.hidden{display:none!important}header .header-right{margin-left:auto;min-width:0}#appPanel .toolbar{justify-content:flex-start}#appPanel .toolbar h2{margin:0 0 12px}@media(max-width:650px){header{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:8px;padding:12px 14px}.brand{font-size:clamp(14px,4vw,19px)!important;letter-spacing:-.04em;white-space:nowrap;min-width:0}.header-right{flex:1 1 auto;gap:8px!important;justify-content:flex-end;min-width:0}.xp-widget{width:clamp(85px,24vw,125px)!important;max-width:none;flex:0 1 125px}.xp-top{font-size:9px!important;gap:4px}.xp-track{height:4px}.header-logout{width:35px;height:35px;border-radius:8px}.header-logout svg{width:19px;height:19px}.admin-toggle{width:35px;height:35px;padding:0}main{padding:18px 14px}#appPanel{padding:18px 14px}#appPanel .toolbar h2{font-size:clamp(24px,7vw,34px)}#appPanel .toolbar{margin:0 0 14px}}
+
+/* Filter-Tab unter Rechner und Notizblock an der rechten Kante */
+.area-sidebar-toggle,.area-sidebar-toggle.visible{left:auto;right:0;top:calc(42% + 2 * (var(--tool-tab-size) + var(--tool-tab-gap)));width:var(--tool-tab-size);height:var(--tool-tab-size);border-radius:9px 0 0 9px}
+@media(max-width:600px){.area-sidebar-toggle,.area-sidebar-toggle.visible{left:auto;right:0;top:auto;bottom:calc(20% - var(--tool-tab-size) - var(--tool-tab-gap));width:var(--tool-tab-size);height:var(--tool-tab-size)}}
+
+/* Linked technical drawings in exercises and explanations */
+.question-image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem;margin:1rem 0}
+.question-image-gallery figure{margin:0;min-width:0}
+.question-image-gallery a{display:block;border:1px solid var(--border,#cbd5e1);border-radius:10px;overflow:hidden;background:#fff}
+.question-image-gallery img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain}
+.question-image-gallery figcaption{font-size:.9rem;line-height:1.45;margin-top:.35rem;opacity:.8}
+
+/* Calm, readable typography for adult learners */
+#appPanel .quiz-single-card h3{font-size:clamp(18px,1.65vw,22px);line-height:1.6;font-weight:normal;letter-spacing:-.015em;margin-bottom:22px}
+#appPanel #quiz .quiz-single-card{padding:clamp(20px,3.5vw,38px)}
+@media(max-width:600px){#appPanel .quiz-single-card h3{font-size:18px;line-height:1.5}}
+
+/* Clearly highlighted answer entry in the quiz */
+#appPanel .quiz-input-form input{background-color:#e7f5ff;border:1px solid #4e86ff;border-radius:8px;padding:12px 14px;color:var(--ink,#172c3d);font-weight:400}
+#appPanel .quiz-input-form input:focus{border-color:#2d66df;outline:2px solid #4e86ff;outline-offset:2px}
