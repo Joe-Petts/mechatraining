@@ -321,3 +321,11 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .question-editor-asset .question-editor-preview[hidden]{display:none}
 .question-editor-asset .question-editor-upload{display:none}
 .question-editor-asset .question-editor-upload-button{background:#097eab;color:#fff;border-color:#097eab}
+
+/* Quiz action bar: explicit check, skip and next controls */
+#appPanel .quiz-step-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+#appPanel .quiz-step-actions button{border:0;border-radius:0;padding:10px 20px;font-weight:700;cursor:pointer}
+#appPanel .quiz-step-actions button[type=submit]{background:#097eab;color:#fff}
+#appPanel .quiz-step-actions .quiz-skip-button{background:#e8eef2;color:#234357;border:1px solid #b8c9d3}
+#appPanel .quiz-step-actions .quiz-next-button{background:#097eab;color:#fff}
+#appPanel .quiz-step-actions button[hidden]{display:none}
