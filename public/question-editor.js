@@ -15,7 +15,7 @@
   const placement=node('select');for(const [v,t] of [['prompt','Aufgabe'],['solution','Lösung']]){const option=node('option','',t);option.value=v;placement.append(option);}placement.value=asset.placement||'prompt';
   const path=field(row,'Bildpfad',asset.path);
   const preview=node('img','question-editor-preview');preview.alt='Bildvorschau';preview.loading='lazy';
-  function updatePreview(){const value=path.value.trim();if(/^assets\\/[a-zA-Z0-9/_-]+\\.(png|jpe?g|webp|svg)$/.test(value)){preview.src=value;preview.hidden=false;}else{preview.removeAttribute('src');preview.hidden=true;}}
+   function updatePreview(){const value=path.value.trim();if(value.startsWith('assets/') && /\.(png|jpe?g|webp|svg)$/i.test(value) && !value.includes('..')){preview.src=value;preview.hidden=false;}else{preview.removeAttribute('src');preview.hidden=true;}}
   path.addEventListener('input',updatePreview);updatePreview();row.append(preview);
   const upload=node('input','question-editor-upload');upload.type='file';upload.accept='image/png,image/jpeg,image/webp';
   const uploadButton=node('button','question-editor-upload-button','Bild hochladen');uploadButton.type='button';
