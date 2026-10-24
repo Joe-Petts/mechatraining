@@ -81,7 +81,25 @@ function render(){
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
  let finished=false;
- q.options.forEach((answer,index)=>{
+ if(q.type==='numeric'||q.type==='text_input'){
+  const form=document.createElement('form');form.className='quiz-input-form';
+  const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
+  const submit=document.createElement('button');submit.type='submit';submit.textContent='Prüfen';
+  form.append(input,submit);options.append(form);
+  form.addEventListener('submit',async event=>{
+   event.preventDefault();if(finished)return;submit.disabled=true;
+   try{
+    const result=await api('answer',{question_id:q.id,answer:input.value});
+    finished=true;input.disabled=true;
+    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Richtig!':'✕ Noch nicht richtig.';
+    const explanation=document.createElement('p');explanation.textContent=result.explanation||q.explanation||'Bitte Lösung überprüfen.';
+    feedback.replaceChildren(heading,explanation);
+    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}quizTimer=setTimeout(()=>{quizIndex=(quizIndex+1)%questions.length;render();},1450);}
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation||q.explanation||'Antwort nicht richtig.',onConfirm:()=>{quizIndex=(quizIndex+1)%questions.length;render();}}}));next.hidden=false;}
+   }catch(error){feedback.textContent=error.message;submit.disabled=false;}
+  });
+ }
+ else q.options.forEach((answer,index)=>{
   const button=document.createElement('button');button.type='button';button.textContent=answer;
   button.addEventListener('click',async()=>{
    if(finished)return;
