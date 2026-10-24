@@ -71,6 +71,50 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
 
+if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $id=(string)($_GET['id']??'');
+ $stmt=$pdo->prepare('SELECT id,prompt,solution_explanation,config_json,solution_data,type,version FROM learning_questions WHERE id=?');
+ $stmt->execute([$id]);$q=$stmt->fetch(PDO::FETCH_ASSOC);
+ if(!$q)json_response(['error'=>'Aufgabe nicht gefunden.'],404);
+ $stmt=$pdo->prepare('SELECT asset_path AS path,placement,alt_text AS alt,caption FROM question_assets WHERE question_id=? ORDER BY sort_order,id');
+ $stmt->execute([$id]);$q['assets']=$stmt->fetchAll(PDO::FETCH_ASSOC);
+ $q['config']=json_decode($q['config_json'],true)?:[];
+ $q['solution']=json_decode($q['solution_data'],true)?:[];
+ unset($q['config_json'],$q['solution_data']);
+ json_response(['question'=>$q]);
+}
+if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $data=json_decode(file_get_contents('php://input'),true);
+ if(!is_array($data))json_response(['error'=>'Ungültige Daten.'],422);
+ $id=$data['id']??null;$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
+ $version=$data['version']??null;$hints=$data['hints']??[];$assets=$data['assets']??[];
+ if(!is_string($id)||!is_int($version)||$version<1||$prompt===''||mb_strlen($prompt)>5000||$explanation===''||mb_strlen($explanation)>10000||!is_array($hints)||!is_array($assets)||count($assets)>12)json_response(['error'=>'Aufgabe, Erklärung oder Medien ungültig.'],422);
+ $allowedHints=['symbols','text','book'];
+ foreach($hints as $key=>$value)if(!in_array($key,$allowedHints,true)||!is_string($value)||mb_strlen($value)>1500)json_response(['error'=>'Ungültiger Joker.'],422);
+ foreach($assets as $asset) {
+  if(!is_array($asset)||!in_array($asset['placement']??'', ['prompt','solution'],true)||!is_string($asset['path']??null)||!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg)$~',$asset['path'])||str_contains($asset['path'],'..')||mb_strlen((string)($asset['alt']??''))>250||mb_strlen((string)($asset['caption']??''))>500)json_response(['error'=>'Ungültiger Bildpfad oder Bildtext.'],422);
+  if(!is_file(__DIR__.'/'.$asset['path']))json_response(['error'=>'Bilddatei auf dem Server nicht gefunden: '.$asset['path']],422);
+ }
+ $pdo->beginTransaction();
+ try {
+  $stmt=$pdo->prepare('SELECT * FROM learning_questions WHERE id=?');$stmt->execute([$id]);$old=$stmt->fetch(PDO::FETCH_ASSOC);
+  if(!$old){$pdo->rollBack();json_response(['error'=>'Aufgabe nicht gefunden.'],404);}
+  if((int)$old['version']!==$version){$pdo->rollBack();json_response(['error'=>'Aufgabe wurde zwischenzeitlich geändert. Bitte neu laden.'],409);}
+  $config=json_decode($old['config_json'],true)?:[];
+  $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??'')];
+  $pdo->prepare('INSERT INTO question_revisions(question_id,version,snapshot_json) VALUES(?,?,?)')->execute([$id,$version,json_encode($old,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)]);
+  $stmt=$pdo->prepare('UPDATE learning_questions SET prompt=?,solution_explanation=?,config_json=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND version=?');
+  $stmt->execute([$prompt,$explanation,json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$id,$version]);
+  if($stmt->rowCount()!==1)throw new RuntimeException('Änderungskonflikt.');
+  $pdo->prepare('DELETE FROM question_assets WHERE question_id=?')->execute([$id]);
+  $insert=$pdo->prepare('INSERT INTO question_assets(question_id,asset_path,kind,alt_text,placement,caption,sort_order) VALUES(?,?,"image",?,?,?,?)');
+  foreach($assets as $i=>$asset)$insert->execute([$id,$asset['path'],(string)($asset['alt']??''),$asset['placement'],(string)($asset['caption']??''),$i]);
+  $pdo->commit();
+  json_response(['ok'=>true,'version'=>$version+1]);
+ }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Speichern fehlgeschlagen.'],500);}
+}
 if (in_array($action,['futter_list','futter_status','futter_public','futter_delete_block'],true)) {
  migrate_futter($pdo);
  if ($action==='futter_public' && $_SERVER['REQUEST_METHOD']==='GET') {
