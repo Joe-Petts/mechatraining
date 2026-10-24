@@ -315,3 +315,9 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .question-editor-form button{align-self:flex-start;padding:10px 15px;border:1px solid #9ab5c7;border-radius:6px;background:#eaf4fa;color:#123c57;cursor:pointer}
 .question-editor-form .question-editor-save{background:#097eab;color:#fff;border-color:#097eab}
 .question-editor-note,.question-editor-message{font-size:14px;line-height:1.5;color:#456578}
+
+/* Question editor image upload and preview */
+.question-editor-asset .question-editor-preview{display:block;max-width:100%;max-height:240px;object-fit:contain;object-position:left center;background:#f5f8fa;border:1px solid #d2e0e9;border-radius:6px}
+.question-editor-asset .question-editor-preview[hidden]{display:none}
+.question-editor-asset .question-editor-upload{display:none}
+.question-editor-asset .question-editor-upload-button{background:#097eab;color:#fff;border-color:#097eab}
