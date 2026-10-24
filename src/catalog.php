@@ -164,6 +164,35 @@ function import_pending_learning(PDO $db): void {
             ]]
         ]]
     ]);
+
+    import_learning_batch($db,[
+        'id'=>'bohren-schnittgeschwindigkeit-20261025',
+        'title'=>'Bohren – Schnittgeschwindigkeit',
+        'origin'=>'Freigabe im MechaTraining-Chat vom 25.10.2026',
+        'subject'=>'metall',
+        'subject_title'=>'Metallbau',
+        'modules'=>[[
+            'id'=>'bohren-test',
+            'title'=>'Bohren – Testaufgabe',
+            'questions'=>[[
+                'id'=>'ap1-metall-bohren-002',
+                'type'=>'numeric',
+                'prompt'=>'An einer Ständerbohrmaschine wird mit einem Spiralbohrer von 12 mm Durchmesser gearbeitet. Die Maschinenspindel dreht sich mit 800 U/min. Berechne die Schnittgeschwindigkeit v_c in m/min. Runde auf eine Nachkommastelle.',
+                'difficulty'=>2,
+                'solution'=>['value'=>30.2,'tolerance'=>0.05],
+                'explanation'=>'v_c = (π × d × n) / 1000 = (π × 12 × 800) / 1000 ≈ 30,159 m/min. Gerundet: 30,2 m/min.',
+                'config'=>[
+                    'unit'=>'m/min',
+                    'hints'=>[
+                        'symbols'=>'d = Bohrerdurchmesser (mm); n = Drehzahl (U/min); v_c = Schnittgeschwindigkeit (m/min).',
+                        'text'=>'Überlege, welche Strecke die äußere Schneide bei einer Umdrehung zurücklegt und wie oft sie diese Strecke pro Minute zurücklegt.',
+                        'book'=>'Tabellenbuch Metall, 50. Auflage: Schnittgeschwindigkeit, Seite 14.',
+                        'formula'=>'v_c = (π × d × n) / 1000'
+                    ]
+                ]
+            ]]
+        ]]
+    ]);
 }
 
 function catalog_modules(PDO $db): array {
