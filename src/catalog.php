@@ -140,15 +140,8 @@ function import_learning_batch(PDO $db,array $batch): int {
 
 /** Explicit approved imports only; never re-import the retired legacy catalog. */
 function import_pending_learning(PDO $db): void {
-    $path=dirname(__DIR__).'/content/ap1/metallbau.json';
-    if(!is_file($path))return;
-    $data=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
-    $modules=[];
-    foreach($data['modules']??[] as $m) {
-        $questions=array_values(array_map(static function($q){$q['type']='multiple_choice';return $q;},array_filter($m['questions']??[],static fn($q)=>($q['batch_id']??'')==='metall-bohren-berechnungen-20261022')));
-        if($questions)$modules[]=['id'=>$m['id'],'title'=>$m['title'],'questions'=>$questions];
-    }
-    if($modules)import_learning_batch($db,['id'=>'metall-bohren-berechnungen-20261022','subject'=>'metall','subject_title'=>'Metallbau','title'=>'Bohren','origin'=>'Arbeitsblätter','modules'=>$modules]);
+    // New learning content is imported only after explicit approval.
+    // Old JSON files are not runtime sources and must not repopulate SQLite.
 }
 
 function catalog_modules(PDO $db): array {
@@ -175,14 +168,14 @@ function catalog_modules(PDO $db): array {
 function reset_learning_content_once(PDO $db): void {
     migrate_catalog($db);
     $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
-    $done=$db->query("SELECT value FROM learning_system_state WHERE name='clean_reset_20261020'")->fetchColumn();
+    $done=$db->query("SELECT value FROM learning_system_state WHERE name='clean_reset_20261024'")->fetchColumn();
     if($done!==false)return;
     $db->beginTransaction();
     try {
-        foreach(['question_attempts','question_tags','question_revisions','question_assets','question_options','learning_questions','learning_modules','subjects','learning_sources','progress','futter_status','futter_events','futter_deleted_batches'] as $table) {
+        foreach(['question_attempts','question_tags','question_revisions','question_assets','question_options','learning_questions','learning_modules','subjects','learning_sources','progress','futter_status','futter_events','futter_deleted_batches','learning_imports'] as $table) {
             $db->exec("DELETE FROM ".$table);
         }
-        $db->exec("INSERT INTO learning_system_state(name,value) VALUES('clean_reset_20261020',CURRENT_TIMESTAMP)");
+        $db->exec("INSERT INTO learning_system_state(name,value) VALUES('clean_reset_20261024',CURRENT_TIMESTAMP)");
         $db->commit();
     }catch(Throwable $e){if($db->inTransaction())$db->rollBack();throw $e;}
 }
