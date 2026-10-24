@@ -281,6 +281,6 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .question-image-gallery figcaption{font-size:.9rem;line-height:1.45;margin-top:.35rem;opacity:.8}
 
 /* Calm, readable typography for adult learners */
-#appPanel .quiz-single-card h3{font-size:clamp(18px,1.65vw,22px);line-height:1.48;font-weight:650;letter-spacing:-.015em;margin-bottom:22px}
+#appPanel .quiz-single-card h3{font-size:clamp(18px,1.65vw,22px);line-height:1.6;font-weight:normal;letter-spacing:-.015em;margin-bottom:22px}
 #appPanel #quiz .quiz-single-card{padding:clamp(20px,3.5vw,38px)}
 @media(max-width:600px){#appPanel .quiz-single-card h3{font-size:18px;line-height:1.5}}
