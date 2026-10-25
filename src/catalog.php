@@ -260,6 +260,36 @@ function import_pending_learning(PDO $db): void {
       ]]
     ]);
 
+    // Upgrade the existing tool question in place; preserve its ID and uploaded assets.
+    $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
+    $key='thread_tools_mixed_v1';
+    $check=$db->prepare('SELECT 1 FROM learning_system_state WHERE name=?');$check->execute([$key]);
+    if(!$check->fetchColumn()){
+      $db->beginTransaction();
+      try{
+        $solution=['tools'=>[
+          ['names'=>['Windeisen','Gewindebohrerhalter','verstellbares Windeisen'],'correct'=>0],
+          ['names'=>['Schneideisenhalter','Schneideisenhalterung'],'correct'=>1]
+        ]];
+        $config=['uses'=>[
+          'Zum Halten und Drehen eines Gewindebohrers beim Schneiden von Innengewinden',
+          'Zum Halten und Drehen eines Schneideisens beim Schneiden von Außengewinden',
+          'Zum Festspannen eines Werkstücks beim Bohren',
+          'Zum Nachbearbeiten einer Bohrung mit einer Reibahle'
+        ]];
+        $stmt=$db->prepare("UPDATE learning_questions SET type='tool_identification',prompt=?,solution_data=?,config_json=?,solution_explanation=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND type='matching'");
+        $stmt->execute([
+          'Benenne die Werkzeuge 1 und 2. Schreibe ihre Namen selbst auf und wähle jeweils den richtigen Einsatzzweck.',
+          json_encode($solution,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),
+          json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),
+          '1: Windeisen – hält den Gewindebohrer und dient zum Schneiden von Innengewinden. 2: Schneideisenhalter – hält das Schneideisen und dient zum Schneiden von Außengewinden.',
+          'ap1-metall-gewindeschneiden-001'
+        ]);
+        if($stmt->rowCount()===1){$done=$db->prepare('INSERT INTO learning_system_state(name,value) VALUES(?,?)');$done->execute([$key,'1']);}
+        $db->commit();
+      }catch(Throwable $e){$db->rollBack();throw $e;}
+    }
+
     // One-time correction of the previously imported matching answer key.
     $fixKey = 'bohren_004_key_corrected';
     $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
