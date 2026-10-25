@@ -412,3 +412,9 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-tool-feedback .quiz-tool-status-ok{color:#176444}
 #appPanel .quiz-tool-feedback .quiz-tool-status-error{color:#b42e2e}
 #appPanel .quiz-tool-feedback .quiz-tool-solution{margin-top:12px;line-height:1.6}
+
+/* Numbered matching: use full available width, not the inherited 50% options grid. */
+#appPanel .options:has(> .quiz-matching-form){grid-template-columns:minmax(0,1fr)}
+#appPanel .options > .quiz-matching-form{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:none;min-width:0;justify-self:stretch}
+#appPanel .options > .quiz-matching-form .quiz-matching-row{width:100%;min-width:0}
+#appPanel .options > .quiz-matching-form .quiz-matching-row select{flex:1;max-width:none;min-width:0}
