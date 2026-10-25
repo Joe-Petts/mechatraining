@@ -228,12 +228,34 @@ function import_pending_learning(PDO $db): void {
         'id'=>'ap1-metall-bohren-004','type'=>'matching',
         'prompt'=>'Ordne die sechs nummerierten Stellen am Spiralbohrer den richtigen Fachbegriffen zu.',
         'difficulty'=>2,
-        'solution'=>['answers'=>['Spitzenwinkel','Nebenschneide','Spannut','Führungsfase','Hauptschneide','Querschneide']],
+        'solution'=>['answers'=>['Spitzenwinkel','Hauptschneide','Nebenschneide','Führungsfase','Spannut','Querschneide']],
         'explanation'=>'1 Spitzenwinkel: Winkel zwischen den Hauptschneiden. 2 Nebenschneide: Schneidkante am Bohrerumfang. 3 Spannut: schraubenförmige Nut für die Spanabfuhr. 4 Führungsfase: schmaler Streifen am Umfang zur Führung. 5 Hauptschneide: Schneide an der Bohrerspitze. 6 Querschneide: kurze Schneide im Zentrum.',
         'config'=>['labels'=>['Spitzenwinkel','Nebenschneide','Hauptschneide','Führungsfase','Spannut','Querschneide'],'hints'=>['text'=>'Unterscheide Seitenansicht und Stirnansicht. Die Schneiden an der Spitze und die Führungs- und Spannuten am Umfang erfüllen verschiedene Aufgaben.']],
         'assets'=>[['path'=>'assets/bohren/spiralbohrer-zuordnung-004.svg','placement'=>'prompt','alt'=>'Spiralbohrer mit sechs Nummern in Seiten- und Stirnansicht']]
       ]]]]
     ]);
+
+
+    // One-time correction of the previously imported matching answer key.
+    $fixKey = 'bohren_004_key_corrected';
+    $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
+    $state = $db->prepare('SELECT value FROM learning_system_state WHERE name=?');
+    $state->execute([$fixKey]);
+    if ($state->fetchColumn() === false) {
+        $lookup = $db->prepare('SELECT solution_data FROM learning_questions WHERE id=?');
+        $lookup->execute(['ap1-metall-bohren-004']);
+        $original = $lookup->fetchColumn();
+        if ($original !== false) {
+            $solution = json_decode((string)$original, true);
+            if (($solution['answers'] ?? []) === ['Spitzenwinkel','Nebenschneide','Spannut','Führungsfase','Hauptschneide','Querschneide']) {
+                $solution['answers'] = ['Spitzenwinkel','Hauptschneide','Nebenschneide','Führungsfase','Spannut','Querschneide'];
+                $explanation = '1 Spitzenwinkel. 2 Hauptschneide. 3 Nebenschneide. 4 Führungsfase. 5 Spannut. 6 Querschneide.';
+                $update = $db->prepare('UPDATE learning_questions SET solution_data=?, solution_explanation=? WHERE id=?');
+                $update->execute([json_encode($solution, JSON_UNESCAPED_UNICODE), $explanation, 'ap1-metall-bohren-004']);
+            }
+        }
+        $db->prepare('INSERT INTO learning_system_state(name,value) VALUES(?,CURRENT_TIMESTAMP)')->execute([$fixKey]);
+    }
 
 }
 
