@@ -89,6 +89,23 @@
    }else if(q.type==='text_input'){
     solutionInputs.accepted=field(form,'Akzeptierte Antworten (eine pro Zeile)',(q.solution?.accepted||[]).join('\\n'),3);
    }
+   if(q.type==='matching'){
+    const heading=node('h3','','Nummerierte Begriffe');form.append(heading);
+    const list=node('div','question-editor-matching-list');form.append(list);
+    const entries=[];
+    function appendTerm(value=''){
+      const row=node('div','question-editor-matching-row');
+      const number=node('strong');const input=node('input');input.value=value;input.maxLength=100;
+      const remove=node('button','','Entfernen');remove.type='button';
+      const entry={row,number,input};entries.push(entry);
+      const renumber=()=>entries.forEach((e,i)=>e.number.textContent=(i+1)+'.');
+      remove.addEventListener('click',()=>{if(entries.length<=2)return;entries.splice(entries.indexOf(entry),1);row.remove();renumber();});
+      row.append(number,input,remove);list.append(row);renumber();
+    }
+    (q.solution?.answers||[]).forEach(appendTerm);
+    const addTerm=node('button','','+ Begriff');addTerm.type='button';addTerm.addEventListener('click',()=>{if(entries.length<30)appendTerm();});form.append(addTerm);
+    solutionInputs.matching=()=>entries.map(e=>e.input.value.trim());
+   }
    const hintTitle=node('h3','','Joker (optional)');form.append(hintTitle);
    const hints=q.config?.hints||{};
    const symbols=field(form,'Formelzeichen und Bedeutungen (z. B. d = Durchmesser (mm))',hints.symbols,3);
@@ -107,7 +124,7 @@
     save.disabled=true;message.textContent='Speichere …';
     try{
      const assets=readers.map(read=>read()).filter(a=>a&&a.path);
-     const solution=q.type==='multiple_choice'?{options:solutionInputs.options.map(input=>input.value),correct:Number(solutionInputs.correct.value)}:q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:null);
+     const solution=q.type==='multiple_choice'?{options:solutionInputs.options.map(input=>input.value),correct:Number(solutionInputs.correct.value)}:q.type==='numeric'?{value:solutionInputs.value.value.replace(',','.'),tolerance:solutionInputs.tolerance.value.replace(',','.')}:(q.type==='text_input'?{accepted:solutionInputs.accepted.value.split('\\n').map(v=>v.trim()).filter(Boolean)}:q.type==='matching'?{answers:solutionInputs.matching()}:null);
      await request('admin_question_save',{id:q.id,version:q.version,prompt:prompt.value,explanation:explanation.value,solution,hints:{symbols:symbols.value,text:text.value,book:book.value,formula:formula.value},assets});
      dialog.close();location.reload();
     }catch(e){message.textContent=e.message;save.disabled=false;}
