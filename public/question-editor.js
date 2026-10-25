@@ -33,7 +33,29 @@
    }catch(e){alert(e.message);}
    finally{uploadButton.disabled=false;uploadButton.textContent='Bild hochladen';upload.value='';}
   });
-  row.append(upload,uploadButton);
+  const libraryButton=node('button','question-editor-library-button','Aus Bibliothek wählen');libraryButton.type='button';
+  libraryButton.addEventListener('click',async()=>{
+   libraryButton.disabled=true;
+   let chooser=null;
+   try{
+    const data=await request('admin_image_library');
+    chooser=node('div','question-editor-library');
+    const heading=node('strong','','Bilderbibliothek');chooser.append(heading);
+    const grid=node('div','question-editor-library-grid');
+    for(const image of data.images||[]){
+     const pick=node('button','question-editor-library-item');pick.type='button';pick.title=image.path;
+     const thumb=node('img');thumb.src=image.path;thumb.alt=image.name;thumb.loading='lazy';
+     pick.append(thumb,node('span','',image.name));
+     pick.addEventListener('click',()=>{path.value=image.path;updatePreview();chooser.remove();libraryButton.disabled=false;});
+     grid.append(pick);
+    }
+    if(!grid.childElementCount)chooser.append(node('p','','Noch keine Bilder vorhanden. Lade zunächst ein Bild hoch.'));
+    chooser.append(grid);
+    const cancel=node('button','','Schließen');cancel.type='button';cancel.addEventListener('click',()=>{chooser.remove();libraryButton.disabled=false;});chooser.append(cancel);
+    row.append(chooser);
+   }catch(error){alert(error.message);libraryButton.disabled=false;}
+  });
+  row.append(upload,uploadButton,libraryButton);
   const alt=field(row,'Alternativtext',asset.alt);
   const caption=field(row,'Bildunterschrift',asset.caption);
   const remove=node('button','question-editor-remove','Bild entfernen');remove.type='button';remove.addEventListener('click',()=>row.remove());
@@ -78,7 +100,7 @@
    const readers=[];for(const asset of q.assets||[])readers.push(assetRow(assetContainer,asset));
    const add=node('button','question-editor-add','+ Bildpfad hinzufügen');add.type='button';add.addEventListener('click',()=>readers.push(assetRow(assetContainer)));
    form.append(add);
-   const note=node('p','question-editor-note','PNG, JPG oder WebP bis 8 MB. Bild hochladen, Vorschau prüfen und anschließend Änderungen speichern.');
+   const note=node('p','question-editor-note','PNG, JPG oder WebP bis 8 MB. Vorhandene Bilder kannst du aus der Bibliothek mehrfach verwenden. Anschließend Änderungen speichern.');
    form.append(note);
    const save=node('button','question-editor-save','Änderungen speichern');save.type='button';
    save.addEventListener('click',async()=>{
