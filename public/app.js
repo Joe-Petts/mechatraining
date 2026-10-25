@@ -90,7 +90,34 @@ function render(){
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
  let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;next.textContent='Weiter →';};
- if(q.type==='numeric'||q.type==='text_input'){
+ if(q.type==='matching'){
+  const labels=q.config?.labels||[];
+  const form=document.createElement('form');form.className='quiz-matching-form';
+  const selects=[];
+  for(let i=0;i<labels.length;i++){
+   const row=document.createElement('label');row.className='quiz-matching-row';
+   const number=document.createElement('span');number.className='quiz-matching-number';number.textContent=String(i+1);
+   const select=document.createElement('select');select.required=true;select.setAttribute('aria-label','Begriff für Nummer '+(i+1));
+   const empty=document.createElement('option');empty.value='';empty.textContent='Begriff auswählen';select.append(empty);
+   for(const label of labels){const option=document.createElement('option');option.value=label;option.textContent=label;select.append(option);}
+   row.append(number,select);form.append(row);selects.push(select);
+  }
+  const check=document.createElement('button');check.type='button';check.className='quiz-check-button';check.textContent='Prüfen';check.addEventListener('click',()=>form.requestSubmit());actions.prepend(check);options.append(form);
+  form.addEventListener('submit',async event=>{
+   event.preventDefault();if(finished)return;check.disabled=true;
+   try{
+    const result=await api('answer',{question_id:q.id,answer:selects.map(select=>select.value)});
+    finished=true;selects.forEach(select=>select.disabled=true);
+    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Alle Begriffe richtig!':'✕ Noch nicht alle Zuordnungen richtig.';
+    const info=document.createElement('p');info.textContent=result.correct?'Gut gemacht!':'Nutze bei Bedarf den Texttipp. Die richtige Zuordnung wird nach der Auswertung erklärt.';
+    feedback.replaceChildren(heading,info);
+    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}}
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Die Zuordnung war noch nicht vollständig richtig. Prüfe die Lage der Schneiden und Nuten.',onConfirm:()=>{}}}));}
+    finishControls();check.hidden=true;
+   }catch(error){feedback.textContent=error.message;check.disabled=false;}
+  });
+ }
+ else if(q.type==='numeric'||q.type==='text_input'){
   const form=document.createElement('form');form.className='quiz-input-form';
   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder=q.type==='numeric'?'Zahlenwert eingeben':'Antwort eingeben';input.setAttribute('aria-label','Deine Antwort');
   const submit=document.createElement('button');submit.type='button';submit.className='quiz-check-button';submit.textContent='Prüfen';submit.addEventListener('click',()=>form.requestSubmit());
