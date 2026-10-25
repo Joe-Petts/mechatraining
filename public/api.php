@@ -178,6 +178,9 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
    $add=$pdo->prepare('INSERT INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
    foreach(array_values($options) as $i=>$option)$add->execute([$id,$i,trim($option),$i===$correct?1:0]);
   }
+  if($old['type']==='matching' && isset($solution['answers']) && is_array($solution['answers'])){
+   $explanation=implode(' · ',array_map(static fn($i,$term)=>($i+1).'. '.$term,array_keys($solution['answers']),$solution['answers']));
+  }
   $config=json_decode($old['config_json'],true)?:[];
   if($old['type']==='matching' && isset($answers))$config['labels']=$answers;
   $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??''),'formula'=>trim($hints['formula']??'')];
