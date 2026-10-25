@@ -101,7 +101,7 @@ function import_learning_batch(PDO $db,array $batch): int {
         $id=$q['id']??'';
         if(!is_string($id)||$id===''||isset($seen[$id])||empty($q['prompt'])||empty($q['type']))throw new InvalidArgumentException('Ungültige Aufgabe');
         $seen[$id]=true;
-        if(!in_array($q['type'],['multiple_choice','numeric','text_input'],true))throw new InvalidArgumentException('Unbekannter Aufgabentyp: '.$id);
+        if(!in_array($q['type'],['multiple_choice','numeric','text_input','matching'],true))throw new InvalidArgumentException('Unbekannter Aufgabentyp: '.$id);
         if($q['type']==='multiple_choice'&&(!isset($q['options'],$q['correct'])||count($q['options'])<2||!array_key_exists($q['correct'],$q['options'])))throw new InvalidArgumentException('Ungültige Auswahlfrage: '.$id);
     }
     $db->beginTransaction();
@@ -220,6 +220,21 @@ function import_pending_learning(PDO $db): void {
             ]]
         ]]
     ]);
+
+    import_learning_batch($db,[
+      'id'=>'bohren-bauteile-20261025','title'=>'Bohren – Spiralbohrer beschriften',
+      'origin'=>'Freigegebenes Berufsschul-Arbeitsblatt','subject'=>'metall','subject_title'=>'Metallbau',
+      'modules'=>[['id'=>'bohren-test','title'=>'Bohren – Testaufgabe','questions'=>[[
+        'id'=>'ap1-metall-bohren-004','type'=>'matching',
+        'prompt'=>'Ordne die sechs nummerierten Stellen am Spiralbohrer den richtigen Fachbegriffen zu.',
+        'difficulty'=>2,
+        'solution'=>['answers'=>['Spitzenwinkel','Nebenschneide','Spannut','Führungsfase','Hauptschneide','Querschneide']],
+        'explanation'=>'1 Spitzenwinkel: Winkel zwischen den Hauptschneiden. 2 Nebenschneide: Schneidkante am Bohrerumfang. 3 Spannut: schraubenförmige Nut für die Spanabfuhr. 4 Führungsfase: schmaler Streifen am Umfang zur Führung. 5 Hauptschneide: Schneide an der Bohrerspitze. 6 Querschneide: kurze Schneide im Zentrum.',
+        'config'=>['labels'=>['Spitzenwinkel','Nebenschneide','Hauptschneide','Führungsfase','Spannut','Querschneide'],'hints'=>['text'=>'Unterscheide Seitenansicht und Stirnansicht. Die Schneiden an der Spitze und die Führungs- und Spannuten am Umfang erfüllen verschiedene Aufgaben.']],
+        'assets'=>[['path'=>'assets/bohren/spiralbohrer-zuordnung-004.svg','placement'=>'prompt','alt'=>'Spiralbohrer mit sechs Nummern in Seiten- und Stirnansicht']]
+      ]]]]
+    ]);
+
 }
 
 function catalog_modules(PDO $db): array {
