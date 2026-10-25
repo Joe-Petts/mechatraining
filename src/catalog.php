@@ -193,6 +193,33 @@ function import_pending_learning(PDO $db): void {
             ]]
         ]]
     ]);
+
+    import_learning_batch($db,[
+        'id'=>'bohren-drehzahlwahl-20261025',
+        'title'=>'Bohren – Drehzahlstufe wählen',
+        'origin'=>'Freigegebene AP1-Praxisaufgabe',
+        'subject'=>'metall',
+        'subject_title'=>'Metallbau',
+        'modules'=>[[
+            'id'=>'bohren-test',
+            'title'=>'Bohren – Testaufgabe',
+            'questions'=>[[
+                'id'=>'ap1-metall-bohren-003',
+                'type'=>'multiple_choice',
+                'prompt'=>'Du möchtest mit einem Spiralbohrer von 8 mm Durchmesser in Baustahl bohren. Die vorgegebene Schnittgeschwindigkeit beträgt 25 m/min. An der Ständerbohrmaschine stehen 630, 800, 1000, 1250, 1600 und 2000 U/min zur Verfügung. Welche Drehzahl wählst du, damit die vorgegebene Schnittgeschwindigkeit möglichst gut eingehalten wird?',
+                'difficulty'=>2,
+                'options'=>['630 U/min','800 U/min','1000 U/min','1250 U/min','1600 U/min','2000 U/min'],
+                'correct'=>2,
+                'explanation'=>'n = (1000 × 25) / (π × 8) ≈ 994,7 U/min. Die verfügbare Stufe 1000 U/min liegt dem Sollwert am nächsten.',
+                'config'=>['hints'=>[
+                    'symbols'=>'d = Bohrerdurchmesser (mm); v_c = Schnittgeschwindigkeit (m/min); n = Drehzahl (U/min).',
+                    'text'=>'Berechne zunächst die theoretische Drehzahl und vergleiche sie dann mit den verfügbaren Drehzahlstufen.',
+                    'book'=>'Tabellenbuch Metall, 50. Auflage: Schnittgeschwindigkeit, Seite 14.',
+                    'formula'=>'n = (1000 × v_c) / (π × d)'
+                ]]
+            ]]
+        ]]
+    ]);
 }
 
 function catalog_modules(PDO $db): array {
