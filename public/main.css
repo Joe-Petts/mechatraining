@@ -356,3 +356,10 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 
 #appPanel .quiz-matching-row select.quiz-match-wrong{border:2px solid #b72e32;background:#fff0f0;color:#792126}
 #appPanel .quiz-matching-row select.quiz-match-correct{border:2px solid #288653;background:#effaf2;color:#175a36}
+
+/* Editable numbered matching terms in admin question editor */
+.question-editor-matching-list{display:grid;gap:8px;margin:10px 0 14px}
+.question-editor-matching-row{display:flex;align-items:center;gap:10px}
+.question-editor-matching-row strong{min-width:30px;color:#31556a}
+.question-editor-matching-row input{flex:1;min-width:0;padding:9px;border:1px solid #b6c7d1;border-radius:7px}
+.question-editor-matching-row button{flex-shrink:0}
