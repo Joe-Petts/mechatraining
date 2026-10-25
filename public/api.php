@@ -324,6 +324,20 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
         $correct=$answer===$expected;
         $matching_status=array_map(static fn($given,$wanted)=>$given===$wanted,$answer,$expected);
         break;
+      case 'tool_identification':
+        if(!is_array($answer)||!array_is_list($answer)||count($answer)!==2)json_response(['error'=>'Bitte beide Werkzeuge beantworten.'],422);
+        $items=$solution['tools']??[];
+        $normalize=static fn($s)=>mb_strtolower(trim(preg_replace('/\\s+/u',' ',(string)$s)));
+        $correct=true;$matching_status=[];
+        foreach($items as $i=>$tool){
+          $given=$answer[$i]??null;
+          if(!is_array($given)||!is_string($given['name']??null)||mb_strlen($given['name'])>120||!is_int($given['use']??null))json_response(['error'=>'Antwort ungültig.'],422);
+          $nameOk=in_array($normalize($given['name']),array_map($normalize,$tool['names']),true);
+          $useOk=$given['use']===$tool['correct'];
+          $matching_status[]=['name'=>$nameOk,'use'=>$useOk];
+          if(!$nameOk||!$useOk)$correct=false;
+        }
+        break;
       case 'text_input':
         if(!is_string($answer)||mb_strlen($answer)>500)json_response(['error'=>'Textantwort erforderlich.'],422);
         $normalize=static fn($s)=>mb_strtolower(trim(preg_replace('/\\s+/u',' ',(string)$s)));
