@@ -125,7 +125,37 @@ function render(){
  next.addEventListener('click',()=>{quizIndex=(quizIndex+1)%questions.length;render();});
  actions.append(next);
  let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;next.textContent='Weiter →';};
- if(q.type==='matching'){
+ if(q.type==='tool_identification'){
+  const form=document.createElement('form');form.className='quiz-matching-form';
+  const inputs=[];const choices=[];
+  for(let i=0;i<2;i++){
+   const row=document.createElement('div');row.className='quiz-tool-row';
+   const title=document.createElement('strong');title.textContent='Werkzeug '+(i+1);
+   const label=document.createElement('label');label.textContent='Wie heißt das Werkzeug?';
+   const input=document.createElement('input');input.type='text';input.required=true;input.autocomplete='off';input.placeholder='Werkzeugname eingeben';label.append(input);
+   const use=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent='Wofür wird es verwendet?';use.append(legend);
+   const radios=[];
+   (q.config?.uses||[]).forEach((value,j)=>{
+    const option=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='tool-use-'+i;radio.value=String(j);radio.required=true;option.append(radio,document.createTextNode(' '+value));use.append(option);radios.push(radio);
+   });
+   row.append(title,label,use);form.append(row);inputs.push(input);choices.push(radios);
+  }
+  const check=document.createElement('button');check.type='button';check.className='quiz-check-button';check.textContent='Prüfen';check.addEventListener('click',()=>form.requestSubmit());actions.prepend(check);options.append(form);
+  form.addEventListener('submit',async event=>{
+   event.preventDefault();if(finished)return;check.disabled=true;
+   try{
+    const answer=inputs.map((input,i)=>({name:input.value.trim(),use:Number(choices[i].find(r=>r.checked)?.value)}));
+    const result=await api('answer',{question_id:q.id,answer});
+    finished=true;inputs.forEach(input=>input.disabled=true);choices.flat().forEach(r=>r.disabled=true);
+    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Beide Werkzeuge richtig!':'✕ Noch nicht alles richtig.';
+    const info=document.createElement('p');info.textContent=result.correct?'Sehr gut!':'Die richtige Lösung wird im Hinweis erklärt.';
+    feedback.replaceChildren(heading,info);
+    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}finishControls();}
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation,onConfirm:()=>finishControls()}}));}
+   }catch(error){feedback.textContent=error.message;check.disabled=false;}
+  });
+ }
+ else if(q.type==='matching'){
   const labels=q.config?.labels||[];
   const form=document.createElement('form');form.className='quiz-matching-form';
   const selects=[];
