@@ -101,7 +101,7 @@ function import_learning_batch(PDO $db,array $batch): int {
         $id=$q['id']??'';
         if(!is_string($id)||$id===''||isset($seen[$id])||empty($q['prompt'])||empty($q['type']))throw new InvalidArgumentException('Ungültige Aufgabe');
         $seen[$id]=true;
-        if(!in_array($q['type'],['multiple_choice','numeric','text_input','matching'],true))throw new InvalidArgumentException('Unbekannter Aufgabentyp: '.$id);
+        if(!in_array($q['type'],['multiple_choice','numeric','text_input','matching','tool_identification'],true))throw new InvalidArgumentException('Unbekannter Aufgabentyp: '.$id);
         if($q['type']==='multiple_choice'&&(!isset($q['options'],$q['correct'])||count($q['options'])<2||!array_key_exists($q['correct'],$q['options'])))throw new InvalidArgumentException('Ungültige Auswahlfrage: '.$id);
     }
     $db->beginTransaction();
@@ -289,6 +289,33 @@ function import_pending_learning(PDO $db): void {
         $db->commit();
       }catch(Throwable $e){$db->rollBack();throw $e;}
     }
+
+    import_learning_batch($db,[
+      'id'=>'senker-werkzeuge-20261025',
+      'title'=>'Kegelsenker und Zapfensenker erkennen',
+      'origin'=>'Freigabe der Senker-Zeichnung im MechaTraining-Chat',
+      'subject'=>'metall','subject_title'=>'Metallbau',
+      'modules'=>[[
+        'id'=>'senken','title'=>'Senken',
+        'questions'=>[[
+          'id'=>'ap1-metall-senken-001',
+          'type'=>'tool_identification',
+          'prompt'=>'Benenne die Werkzeuge 1 und 2. Gib die Werkzeugnamen selbst ein und wähle jeweils den richtigen Einsatzzweck.',
+          'difficulty'=>2,
+          'solution'=>['tools'=>[
+            ['names'=>['90° Kegelkopfsenker','90°-Kegelkopfsenker','Kegelkopfsenker','90° Kegelsenker','90°-Kegelsenker','Kegelsenker'],'correct'=>0],
+            ['names'=>['Zapfensenker','Flachsenker mit Führungszapfen','Zylindersenker mit Führungszapfen'],'correct'=>1]
+          ]],
+          'explanation'=>'1: Der 90°-Kegelsenker (auch Kegelkopfsenker) erzeugt kegelförmige Senkungen für Senkkopfschrauben mit 90°-Kopf. 2: Der Zapfensenker erzeugt zylindrische, flachbodige Senkungen, beispielsweise für Zylinderkopfschrauben. Sein Führungszapfen zentriert das Werkzeug in der vorhandenen Bohrung.',
+          'config'=>['uses'=>[
+            'Eine kegelförmige 90°-Senkung für Senkkopfschrauben herstellen',
+            'Eine zylindrische, flachbodige Senkung mit Führungszapfen herstellen',
+            'Ein Innengewinde in eine Kernlochbohrung schneiden',
+            'Eine Bohrung mit einer Reibahle maßgenau fertigbearbeiten'
+          ]]
+        ]]
+      ]]
+    ]);
 
     import_learning_batch($db,[
       'id'=>'feile-bauteile-20261025',
