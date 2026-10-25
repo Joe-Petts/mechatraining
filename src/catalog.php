@@ -290,6 +290,25 @@ function import_pending_learning(PDO $db): void {
       }catch(Throwable $e){$db->rollBack();throw $e;}
     }
 
+    import_learning_batch($db,[
+      'id'=>'feile-bauteile-20261025',
+      'title'=>'Feile – Bauteile zuordnen',
+      'origin'=>'Berufsschul-Arbeitsblatt und nummerierte Feilengrafik vom 25.10.2026',
+      'subject'=>'metall','subject_title'=>'Metallbau',
+      'modules'=>[[
+        'id'=>'feilen','title'=>'Feilen',
+        'questions'=>[[
+          'id'=>'ap1-metall-feilen-001',
+          'type'=>'matching',
+          'prompt'=>'Ordne den Nummern 1 bis 5 an der Feile die richtigen Fachbegriffe zu.',
+          'difficulty'=>1,
+          'solution'=>['answers'=>['Griff','Angel','Hiebnummer','Blatt','Kopf']],
+          'explanation'=>'1 Griff: sicherer Halt. 2 Angel: verbindet das Feilenblatt mit dem Griff. 3 Hiebnummer: kennzeichnet die Feinheit des Feilenhiebs. 4 Blatt: Arbeitsbereich der Feile mit den Schneidzähnen. 5 Kopf: vorderes Ende des Feilenblatts.',
+          'config'=>['labels'=>['Griff','Angel','Hiebnummer','Blatt','Kopf'],'hints'=>['text'=>'Achte auf den Griff, den schmalen Übergang, die eingeprägte Zahl und die beiden Bereiche des Feilenblatts.']]
+        ]]
+      ]]
+    ]);
+
     // One-time correction of the previously imported matching answer key.
     $fixKey = 'bohren_004_key_corrected';
     $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
