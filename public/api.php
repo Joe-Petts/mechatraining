@@ -251,6 +251,12 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
         if(!is_numeric($raw)||!is_finite((float)$raw)||!isset($solution['value']))json_response(['error'=>'Ungültiger Zahlenwert.'],422);
         $correct=abs((float)$raw-(float)$solution['value'])<=(float)($solution['tolerance']??0.001);
         break;
+      case 'matching':
+        $expected=$solution['answers']??null;
+        if(!is_array($expected)||!is_array($answer)||count($answer)!==count($expected)||array_keys($answer)!==array_keys($expected))json_response(['error'=>'Bitte alle sechs Begriffe zuordnen.'],422);
+        foreach($answer as $value)if(!is_string($value)||mb_strlen($value)>100)json_response(['error'=>'Ungültige Zuordnung.'],422);
+        $correct=$answer===$expected;
+        break;
       case 'text_input':
         if(!is_string($answer)||mb_strlen($answer)>500)json_response(['error'=>'Textantwort erforderlich.'],422);
         $normalize=static fn($s)=>mb_strtolower(trim(preg_replace('/\\s+/u',' ',(string)$s)));
