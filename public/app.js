@@ -146,19 +146,29 @@ function render(){
    try{
     const answer=inputs.map((input,i)=>({name:input.value.trim(),use:Number(choices[i].find(r=>r.checked)?.value)}));
     const result=await api('answer',{question_id:q.id,answer});
-    finished=true;inputs.forEach(input=>input.disabled=true);choices.flat().forEach(r=>r.disabled=true);
+    const status=Array.isArray(result.matching_status)?result.matching_status:[];
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Beide Werkzeuge richtig!':'✕ Einige Antworten sind falsch.';
     const info=document.createElement('div');info.className='quiz-tool-feedback';
-    (result.matching_status||[]).forEach((status,i)=>{
-     const line=document.createElement('p');line.textContent='Werkzeug '+(i+1)+': Name '+(status.name?'✓ richtig':'✕ falsch')+' · Verwendung '+(status.use?'✓ richtig':'✕ falsch');
-     line.className=status.name&&status.use?'quiz-tool-status-ok':'quiz-tool-status-error';info.append(line);
-     inputs[i].classList.toggle('quiz-tool-input-correct',status.name);inputs[i].classList.toggle('quiz-tool-input-wrong',!status.name);
-     choices[i].forEach(radio=>radio.closest('label')?.classList.toggle('quiz-tool-choice-wrong',radio.checked&&!status.use));
+    status.forEach((item,i)=>{
+     const line=document.createElement('p');line.textContent='Werkzeug '+(i+1)+': Name '+(item.name?'✓ richtig':'✕ falsch')+' · Verwendung '+(item.use?'✓ richtig':'✕ falsch');
+     line.className=item.name&&item.use?'quiz-tool-status-ok':'quiz-tool-status-error';info.append(line);
+     inputs[i].classList.toggle('quiz-tool-input-correct',item.name);inputs[i].classList.toggle('quiz-tool-input-wrong',!item.name);
+     choices[i].forEach(radio=>radio.closest('label')?.classList.toggle('quiz-tool-choice-wrong',radio.checked&&!item.use));
+     // Correct partial answers stay in place; incorrect ones can be revised.
+     inputs[i].disabled=!!item.name;
+     choices[i].forEach(radio=>radio.disabled=!!item.use);
     });
-    if(!result.correct){const solution=document.createElement('p');solution.className='quiz-tool-solution';solution.textContent='Richtige Lösung: '+result.explanation;info.append(solution);}
     feedback.replaceChildren(heading,info);
-    if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}finishControls();}
-    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation,onConfirm:()=>finishControls()}}));}
+    if(result.correct){
+     finished=true;inputs.forEach(input=>input.disabled=true);choices.flat().forEach(r=>r.disabled=true);
+     const explanation=document.createElement('p');explanation.textContent=result.explanation;info.append(explanation);
+     document.dispatchEvent(new Event('mechatraining:correct'));
+     if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}
+     finishControls();
+    }else{
+     const retry=document.createElement('p');retry.textContent='Korrigiere die rot markierten Antworten und klicke erneut auf Prüfen.';info.append(retry);
+     check.disabled=false;
+    }
    }catch(error){feedback.textContent=error.message;check.disabled=false;}
   });
  }
