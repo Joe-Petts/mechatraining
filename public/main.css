@@ -391,3 +391,9 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-tool-identification-form .quiz-tool-row>label{max-width:520px}
 #appPanel .quiz-tool-identification-form .quiz-tool-row fieldset{display:grid;gap:10px}
 #appPanel .quiz-tool-identification-form .quiz-tool-row fieldset label{max-width:780px}
+
+#appPanel .quiz-tool-identification-form{display:flex;flex-direction:column;max-width:none;width:100%}
+#appPanel .quiz-tool-identification-form .quiz-tool-row{display:flex;flex-direction:column;width:100%;max-width:none}
+#appPanel .quiz-tool-identification-form fieldset{display:flex;flex-direction:column;width:100%;max-width:none}
+#appPanel .quiz-tool-identification-form fieldset label{display:flex;flex-direction:row;justify-content:flex-start;align-items:flex-start;width:100%;max-width:none;gap:12px;padding:10px 0;white-space:normal}
+#appPanel .quiz-tool-identification-form fieldset input[type=radio]{flex:none;width:auto;margin:4px 0 0}
