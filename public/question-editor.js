@@ -132,6 +132,55 @@
    form.append(save);
   }catch(e){message.textContent=e.message;}
  }
- window.MechaQuestionEditor={open};
+ async function create(defaultModule=''){
+  if(dialog)dialog.remove();
+  dialog=node('dialog','question-editor-dialog');dialog.setAttribute('aria-label','Neue Quiz-Aufgabe');
+  const form=node('form','question-editor-form');form.addEventListener('submit',e=>e.preventDefault());
+  form.append(node('h2','','Neue Quiz-Aufgabe'));
+  const message=node('p','question-editor-message','');
+  const close=node('button','','Schließen');close.type='button';close.addEventListener('click',()=>dialog.close());form.append(message,close);
+  dialog.append(form);document.body.append(dialog);dialog.showModal();
+  try{
+   const data=await request('admin_question_modules');
+   const moduleSelect=node('select');
+   for(const module of data.modules||[]){const option=node('option','',module.subject+' / '+module.title);option.value=module.id;moduleSelect.append(option);}
+   if(defaultModule && [...moduleSelect.options].some(o=>o.value===defaultModule))moduleSelect.value=defaultModule;
+   const moduleLabel=node('label','question-editor-field');moduleLabel.append(node('span','','Modul'),moduleSelect);form.append(moduleLabel);
+   const typeSelect=node('select');for(const [value,label] of [['multiple_choice','Auswahlfrage'],['numeric','Zahlenaufgabe'],['text_input','Texteingabe'],['matching','Nummerierte Zuordnung']]){const option=node('option','',label);option.value=value;typeSelect.append(option);}
+   const typeLabel=node('label','question-editor-field');typeLabel.append(node('span','','Aufgabentyp'),typeSelect);form.append(typeLabel);
+   const prompt=field(form,'Aufgabenstellung','',4);
+   const explanation=field(form,'Lösung und Erklärung','',3);
+   const specifics=node('div','question-editor-new-fields');form.append(specifics);
+   const controls={};
+   function rebuild(){
+    specifics.replaceChildren();
+    const type=typeSelect.value;
+    if(type==='multiple_choice'){
+     controls.options=[];for(let i=0;i<4;i++)controls.options.push(field(specifics,'Antwort '+(i+1),''));
+     const label=node('label','question-editor-field');label.append(node('span','','Richtige Antwort'));
+     controls.correct=node('select');for(let i=0;i<4;i++){const option=node('option','',String(i+1));option.value=String(i);controls.correct.append(option);}label.append(controls.correct);specifics.append(label);
+    }else if(type==='numeric'){
+     controls.value=field(specifics,'Richtiger Zahlenwert','');
+     controls.tolerance=field(specifics,'Toleranz','0');
+    }else if(type==='text_input')controls.accepted=field(specifics,'Akzeptierte Antworten (je Zeile eine)','',4);
+    else controls.answers=field(specifics,'Richtige Begriffe (je Nummer eine Zeile)','',8);
+   }
+   typeSelect.addEventListener('change',rebuild);rebuild();
+   const save=node('button','question-editor-save','Aufgabe anlegen');save.type='button';
+   save.addEventListener('click',async()=>{
+    save.disabled=true;message.textContent='Speichere …';
+    try{
+     const payload={module_id:moduleSelect.value,type:typeSelect.value,prompt:prompt.value,explanation:explanation.value};
+     if(payload.type==='multiple_choice'){payload.options=controls.options.map(x=>x.value);payload.correct=Number(controls.correct.value);}
+     if(payload.type==='numeric'){payload.value=controls.value.value.replace(',','.');payload.tolerance=controls.tolerance.value.replace(',','.');}
+     if(payload.type==='text_input')payload.accepted=controls.accepted.value.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
+     if(payload.type==='matching')payload.answers=controls.answers.value.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
+     const result=await request('admin_question_create',payload);
+     message.textContent='Angelegt: '+result.id;location.reload();
+    }catch(error){message.textContent=error.message;save.disabled=false;}
+   });form.append(save);
+  }catch(error){message.textContent=error.message;}
+ }
+ window.MechaQuestionEditor={open,create};
  document.addEventListener('click',event=>{const button=event.target.closest('[data-edit-question]');if(button){event.preventDefault();open(button.dataset.editQuestion);}});
 })();
