@@ -71,6 +71,25 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     json_response(['error'=>'Methode nicht erlaubt.'],405);
 }
 
+if ($action==='admin_image_library' && $_SERVER['REQUEST_METHOD']==='GET') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $root=realpath(__DIR__.'/assets');
+ $images=[];
+ if($root!==false){
+  $it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root,FilesystemIterator::SKIP_DOTS));
+  foreach($it as $file){
+   if(!$file->isFile()||!preg_match('/\\.(?:png|jpe?g|webp|svg)$/i',$file->getFilename()))continue;
+   $absolute=$file->getRealPath();
+   if($absolute===false||!str_starts_with($absolute,$root.DIRECTORY_SEPARATOR))continue;
+   $relative='assets/'.str_replace(DIRECTORY_SEPARATOR,'/',substr($absolute,strlen($root)+1));
+   if(!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg)$~i',$relative))continue;
+   $images[]=['path'=>$relative,'name'=>$file->getFilename()];
+   if(count($images)>=500)break;
+  }
+ }
+ usort($images,static fn($a,$b)=>strcmp($a['path'],$b['path']));
+ json_response(['images'=>$images]);
+}
 if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
  if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
  $id=(string)($_POST['question_id']??'');
