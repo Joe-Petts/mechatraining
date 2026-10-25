@@ -397,3 +397,7 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-tool-identification-form fieldset{display:flex;flex-direction:column;width:100%;max-width:none}
 #appPanel .quiz-tool-identification-form fieldset label{display:flex;flex-direction:row;justify-content:flex-start;align-items:flex-start;width:100%;max-width:none;gap:12px;padding:10px 0;white-space:normal}
 #appPanel .quiz-tool-identification-form fieldset input[type=radio]{flex:none;width:auto;margin:4px 0 0}
+
+/* Tool answers must span both columns of the parent .options grid. */
+#appPanel .options:has(> .quiz-tool-identification-form){grid-template-columns:minmax(0,1fr)}
+#appPanel .options > .quiz-tool-identification-form{grid-column:1 / -1;justify-self:stretch;min-width:0;width:100%}
