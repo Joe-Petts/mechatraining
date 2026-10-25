@@ -403,3 +403,12 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .options > .quiz-tool-identification-form{grid-column:1 / -1;justify-self:stretch;min-width:0;width:100%}
 
 #appPanel .quiz-tool-identification-form fieldset label{margin:0;padding:6px 0}
+
+#appPanel .quiz-tool-identification-form input.quiz-tool-input-correct{border:2px solid #25834c;background:#eefaf2}
+#appPanel .quiz-tool-identification-form input.quiz-tool-input-wrong{border:2px solid #bd3b37;background:#fff1f0}
+#appPanel .quiz-tool-identification-form .quiz-tool-choice-wrong{color:#b42e2e;font-weight:650}
+#appPanel .quiz-tool-feedback{display:grid;gap:5px;margin-top:12px}
+#appPanel .quiz-tool-feedback p{margin:2px 0}
+#appPanel .quiz-tool-feedback .quiz-tool-status-ok{color:#176444}
+#appPanel .quiz-tool-feedback .quiz-tool-status-error{color:#b42e2e}
+#appPanel .quiz-tool-feedback .quiz-tool-solution{margin-top:12px;line-height:1.6}
