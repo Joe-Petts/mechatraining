@@ -87,14 +87,14 @@ function showQuizOverview(){
  const list=document.createElement('div');list.className='quiz-overview-list';
  function refresh(){
   list.replaceChildren();const term=search.value.toLocaleLowerCase('de');
-  questions.forEach((q,i)=>{
-   if(!(q.id+' '+q.prompt).toLocaleLowerCase('de').includes(term))return;
+  availableAreas.forEach(area=>area.questions.forEach((q,i)=>{
+   if(!(q.id+' '+q.prompt+' '+area.title).toLocaleLowerCase('de').includes(term))return;
    const item=document.createElement('button');item.type='button';item.className='quiz-overview-item';
    const id=document.createElement('strong');id.textContent=q.id;
-   const label=document.createElement('span');label.textContent=(i+1)+'. '+q.prompt;
-   item.append(id,label);item.addEventListener('click',()=>{quizIndex=i;dialog.close();render();});
+   const label=document.createElement('span');label.textContent=area.title+' · '+(i+1)+'. '+q.prompt;
+   item.append(id,label);item.addEventListener('click',()=>{if(!activeAreaIds.has(area.id)){activeAreaIds=new Set([area.id]);document.querySelectorAll('#quizAreaOptions input').forEach(input=>input.checked=input.value===area.id);applyAreaFilter();}quizIndex=questions.findIndex(item=>item.id===q.id);dialog.close();render();});
    list.append(item);
-  });
+  }));
   if(!list.childElementCount)list.textContent='Keine passenden Aufgaben.';
  }
  search.addEventListener('input',refresh);refresh();
