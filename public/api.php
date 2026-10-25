@@ -150,6 +150,21 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
    if($old['type']==='numeric'){
     if(!isset($solutionInput['value'])||!is_numeric($solutionInput['value'])||!is_finite((float)$solutionInput['value'])||!isset($solutionInput['tolerance'])||!is_numeric($solutionInput['tolerance'])||(float)$solutionInput['tolerance']<0){$pdo->rollBack();json_response(['error'=>'Zahlenwert oder Toleranz ungültig.'],422);}
     $solution['value']=(float)$solutionInput['value'];$solution['tolerance']=(float)$solutionInput['tolerance'];
+   }elseif($old['type']==='matching'){
+    $answers=$solutionInput['answers']??null;
+    if(!is_array($answers)||!array_is_list($answers)||count($answers)<2||count($answers)>30){
+     $pdo->rollBack();json_response(['error'=>'Bitte 2 bis 30 nummerierte Begriffe eintragen.'],422);
+    }
+    foreach($answers as $term){
+     if(!is_string($term)||trim($term)===''||mb_strlen($term)>100){
+      $pdo->rollBack();json_response(['error'=>'Ungültiger Begriff.'],422);
+     }
+    }
+    $answers=array_map('trim',$answers);
+    if(count(array_unique(array_map('mb_strtolower',$answers)))!==count($answers)){
+     $pdo->rollBack();json_response(['error'=>'Jeder Begriff darf nur einmal vorkommen.'],422);
+    }
+    $solution['answers']=$answers;
    }elseif($old['type']==='text_input'){
     $accepted=$solutionInput['accepted']??null;
     if(!is_array($accepted)||!count($accepted)||count($accepted)>30||count(array_filter($accepted,fn($v)=>!is_string($v)||trim($v)===''||mb_strlen($v)>200))){$pdo->rollBack();json_response(['error'=>'Textlösungen ungültig.'],422);}
@@ -164,6 +179,7 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
    foreach(array_values($options) as $i=>$option)$add->execute([$id,$i,trim($option),$i===$correct?1:0]);
   }
   $config=json_decode($old['config_json'],true)?:[];
+  if($old['type']==='matching' && isset($answers))$config['labels']=$answers;
   $config['hints']=['symbols'=>trim($hints['symbols']??''),'text'=>trim($hints['text']??''),'book'=>trim($hints['book']??''),'formula'=>trim($hints['formula']??'')];
   $pdo->prepare('INSERT INTO question_revisions(question_id,version,snapshot_json) VALUES(?,?,?)')->execute([$id,$version,json_encode($old,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)]);
   $stmt=$pdo->prepare('UPDATE learning_questions SET prompt=?,solution_explanation=?,config_json=?,solution_data=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND version=?');
