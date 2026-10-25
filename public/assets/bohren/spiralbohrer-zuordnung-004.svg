@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 510" role="img" aria-label="Technische Darstellung eines Spiralbohrers in Seitenansicht und Stirnansicht mit sechs nummerierten Markierungen">
+<rect width="920" height="510" rx="18" fill="#f5f8fa"/>
+<g stroke="#30495a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M145 210 L188 174 L632 174 L632 246 L188 246 Z" fill="#c5d3dd"/>
+<path d="M632 174 L672 174 L672 182 L827 182 Q838 182 838 192 L838 230 Q838 240 827 240 L672 240 L672 246 L632 246 Z" fill="#dbe4ea"/>
+<path d="M145 210 L188 174 L206 210 L188 246 Z" fill="#e9f0f4"/>
+<path d="M188 174 C226 175 240 226 297 239 S370 172 425 174 S502 245 555 238 S605 183 632 186" fill="none" stroke="#557a90" stroke-width="18"/>
+<path d="M188 246 C233 245 250 180 304 182 S380 243 436 239 S518 176 565 176 S614 220 632 232" fill="none" stroke="#f7fafc" stroke-width="14"/>
+<path d="M188 174 C226 175 240 226 297 239 S370 172 425 174 S502 245 555 238 S605 183 632 186" fill="none" stroke="#253f50" stroke-width="2.5"/>
+<path d="M188 246 C233 245 250 180 304 182 S380 243 436 239 S518 176 565 176 S614 220 632 232" fill="none" stroke="#253f50" stroke-width="2.5"/>
+<path d="M145 210 L188 174 M145 210 L188 246" stroke="#173b50" stroke-width="4"/>
+<path d="M143 210 L172 209" stroke="#173b50" stroke-width="4"/>
+<path d="M145 210 L93 159 M145 210 L93 261" stroke="#0d7fa5" stroke-width="2" fill="none"/>
+<path d="M100 166 Q75 210 100 254" stroke="#0d7fa5" stroke-width="2" fill="none"/>
+<circle cx="735" cy="373" r="100" fill="#d9e5ec"/>
+<circle cx="735" cy="373" r="90" fill="#eef3f7" stroke="#476577" stroke-width="2"/>
+<path d="M735 283 C775 300 783 327 762 358 C748 376 729 373 716 363 C698 346 679 343 657 355 L647 373 C677 370 692 388 705 404 C720 422 755 425 776 406 C795 391 812 390 826 399" fill="#8aa4b4" stroke="#284d62" stroke-width="3"/>
+<path d="M735 463 C697 446 691 418 711 389 C723 372 741 370 755 384 C771 399 791 401 813 391 L823 373 C791 376 779 358 765 342 C748 321 714 320 693 339 C677 354 656 356 647 346" fill="#8aa4b4" stroke="#284d62" stroke-width="3"/>
+<path d="M671 324 L721 364 M749 383 L797 424" stroke="#0d293a" stroke-width="6"/>
+<path d="M721 364 L749 383" stroke="#0d293a" stroke-width="7"/>
+</g>
+<g fill="none" stroke="#d05b36" stroke-width="2.5" stroke-linecap="round">
+<path d="M77 119 L97 165"/><path d="M246 115 L209 190"/><path d="M375 100 L382 194"/><path d="M552 112 L544 180"/><path d="M825 292 L788 326"/><path d="M880 436 L749 383"/>
+</g>
+<g fill="#d05b36" stroke="#fff" stroke-width="3">
+<circle cx="77" cy="119" r="20"/><circle cx="246" cy="115" r="20"/><circle cx="375" cy="100" r="20"/><circle cx="552" cy="112" r="20"/><circle cx="825" cy="292" r="20"/><circle cx="880" cy="436" r="20"/>
+</g>
+<g fill="#fff" font-family="Arial,sans-serif" font-size="22" font-weight="bold" text-anchor="middle" dominant-baseline="central"><text x="77" y="119">1</text><text x="246" y="115">2</text><text x="375" y="100">3</text><text x="552" y="112">4</text><text x="825" y="292">5</text><text x="880" y="436">6</text></g>
+<g fill="#425b6a" font-family="Arial,sans-serif" font-size="16"><text x="24" y="42">Seitenansicht</text><text x="649" y="268">Stirnansicht</text></g>
+</svg>
