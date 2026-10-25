@@ -126,7 +126,7 @@ function render(){
  actions.append(next);
  let finished=false;const finishControls=()=>{skip.hidden=true;next.hidden=false;next.textContent='Weiter →';};
  if(q.type==='tool_identification'){
-  const form=document.createElement('form');form.className='quiz-matching-form';
+  const form=document.createElement('form');form.className='quiz-matching-form quiz-tool-identification-form';
   const inputs=[];const choices=[];
   for(let i=0;i<2;i++){
    const row=document.createElement('div');row.className='quiz-tool-row';
