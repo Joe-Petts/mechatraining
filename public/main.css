@@ -353,3 +353,6 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-matching-row select{flex:1;min-width:0;width:100%;padding:10px;border:1px solid #9eafb9;border-radius:7px;background:#fff;color:#193546;font-size:14px}
 #appPanel .quiz-matching-row select:disabled{opacity:.8}
 @media(max-width:650px){#appPanel .quiz-matching-form{grid-template-columns:1fr}}
+
+#appPanel .quiz-matching-row select.quiz-match-wrong{border:2px solid #b72e32;background:#fff0f0;color:#792126}
+#appPanel .quiz-matching-row select.quiz-match-correct{border:2px solid #288653;background:#effaf2;color:#175a36}
