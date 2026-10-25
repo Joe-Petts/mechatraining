@@ -48,7 +48,7 @@ function openExercise(module,back){
   input.addEventListener('change',()=>{if(input.checked)activeAreaIds.add(area.id);else activeAreaIds.delete(area.id);applyAreaFilter();});
   label.append(input,caption);root.append(label);
  });
- applyAreaFilter();showLearningView('appPanel');rememberView('appPanel',module.id||'electro');
+ applyAreaFilter();showLearningView('appPanel');adminQuizTools();rememberView('appPanel',module.id||'electro');
 }
 let loggedName='';
 function pneumaticDiagram(section){
@@ -65,6 +65,41 @@ function pneumaticDiagram(section){
 }
 
 let quizIndex=0,quizTimer=null;
+function adminQuizTools(){
+ const toolbar=document.querySelector('#appPanel .toolbar');if(!toolbar)return;
+ let tools=toolbar.querySelector('.quiz-admin-tools');
+ if(!window.mechaAdmin){if(tools)tools.remove();return;}
+ if(!tools){
+  tools=document.createElement('div');tools.className='quiz-admin-tools';
+  const add=document.createElement('button');add.type='button';add.textContent='+';add.title='Neue Quiz-Aufgabe';add.setAttribute('aria-label','Neue Quiz-Aufgabe');
+  add.addEventListener('click',()=>{const area=availableAreas.find(a=>activeAreaIds.has(a.id));const moduleId=area?.id==='electro'?'elektro:grundlagen':area?.id;window.MechaQuestionEditor?.create(moduleId);});
+  const overview=document.createElement('button');overview.type='button';overview.textContent='☷ Aufgabenübersicht';overview.addEventListener('click',()=>showQuizOverview());
+  tools.append(add,overview);toolbar.append(tools);
+ }
+}
+function showQuizOverview(){
+ const existing=document.querySelector('#quizOverviewDialog');if(existing)existing.remove();
+ const dialog=document.createElement('dialog');dialog.id='quizOverviewDialog';dialog.className='question-editor-dialog';
+ const wrap=document.createElement('div');wrap.className='quiz-overview';
+ const heading=document.createElement('h2');heading.textContent='Aufgabenübersicht';
+ const close=document.createElement('button');close.type='button';close.textContent='Schließen';close.addEventListener('click',()=>dialog.close());
+ const search=document.createElement('input');search.type='search';search.placeholder='ID oder Aufgabenstellung suchen';search.setAttribute('aria-label','Aufgaben suchen');
+ const list=document.createElement('div');list.className='quiz-overview-list';
+ function refresh(){
+  list.replaceChildren();const term=search.value.toLocaleLowerCase('de');
+  questions.forEach((q,i)=>{
+   if(!(q.id+' '+q.prompt).toLocaleLowerCase('de').includes(term))return;
+   const item=document.createElement('button');item.type='button';item.className='quiz-overview-item';
+   const id=document.createElement('strong');id.textContent=q.id;
+   const label=document.createElement('span');label.textContent=(i+1)+'. '+q.prompt;
+   item.append(id,label);item.addEventListener('click',()=>{quizIndex=i;dialog.close();render();});
+   list.append(item);
+  });
+  if(!list.childElementCount)list.textContent='Keine passenden Aufgaben.';
+ }
+ search.addEventListener('input',refresh);refresh();
+ wrap.append(heading,close,search,list);dialog.append(wrap);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();
+}
 function render(){
  clearTimeout(quizTimer);
  const root=$('quiz');root.replaceChildren();
