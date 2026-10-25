@@ -336,3 +336,12 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #appPanel .quiz-joker.quiz-joker--used{background:#e8f0f5;border-color:#7997ab}
 #appPanel .quiz-joker.quiz-joker--used summary{color:#466478}
 #appPanel .quiz-joker.quiz-joker--used summary::after{content:' ✓ genutzt';font-size:.8em;font-weight:500;margin-left:8px}
+
+/* Admin question image library */
+.question-editor-library{padding:12px;margin-top:12px;border:1px solid #aab9c5;border-radius:10px;background:#f4f7f9;color:#233849}
+.question-editor-library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;max-height:360px;overflow:auto;margin:12px 0}
+.question-editor-library-item{display:flex;flex-direction:column;gap:5px;align-items:center;min-width:0;padding:6px;border:1px solid #cad4dc;border-radius:7px;background:white;color:#233849;cursor:pointer}
+.question-editor-library-item:hover{border-color:#0781ad}
+.question-editor-library-item img{width:100%;height:90px;object-fit:contain}
+.question-editor-library-item span{font-size:11px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.question-editor-library-button{margin-left:8px}
