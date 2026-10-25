@@ -100,16 +100,17 @@ function render(){
    const select=document.createElement('select');select.required=true;select.setAttribute('aria-label','Begriff für Nummer '+(i+1));
    const empty=document.createElement('option');empty.value='';empty.textContent='Begriff auswählen';select.append(empty);
    for(const label of labels){const option=document.createElement('option');option.value=label;option.textContent=label;select.append(option);}
-   row.append(number,select);form.append(row);selects.push(select);
+   row.append(number,select);form.append(row);selects.push(select);select.addEventListener('change',()=>{select.classList.remove('quiz-match-correct','quiz-match-wrong');});
   }
   const check=document.createElement('button');check.type='button';check.className='quiz-check-button';check.textContent='Prüfen';check.addEventListener('click',()=>form.requestSubmit());actions.prepend(check);options.append(form);
   form.addEventListener('submit',async event=>{
    event.preventDefault();if(finished)return;check.disabled=true;
    try{
     const result=await api('answer',{question_id:q.id,answer:selects.map(select=>select.value)});
+    if(Array.isArray(result.matching_status)){selects.forEach((select,i)=>{select.classList.toggle('quiz-match-correct',result.matching_status[i]===true);select.classList.toggle('quiz-match-wrong',result.matching_status[i]!==true);});}
     if(result.correct){finished=true;selects.forEach(select=>select.disabled=true);}
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Alle Begriffe richtig!':'✕ Noch nicht alle Zuordnungen richtig.';
-    const info=document.createElement('p');info.textContent=result.correct?'Gut gemacht! '+result.explanation:'Noch nicht richtig. Prüfe deine Zuordnungen und versuche es erneut. Die vollständige Lösung erscheint erst nach einer richtigen Antwort.';
+    const info=document.createElement('p');info.textContent=result.correct?'Gut gemacht! '+result.explanation:'Rot markierte Zuordnungen sind falsch, grün markierte richtig. Korrigiere die roten Felder und prüfe erneut.';
     feedback.replaceChildren(heading,info);
     if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}}
     else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Die Zuordnung war noch nicht vollständig richtig. Prüfe die Lage der Schneiden und Nuten.',onConfirm:()=>{}}}));check.disabled=false;}
