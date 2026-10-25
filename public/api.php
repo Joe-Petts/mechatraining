@@ -111,6 +111,53 @@ if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
  @chmod($dest,0644);
  json_response(['ok'=>true,'path'=>'assets/uploads/'.$name]);
 }
+if ($action==='admin_question_modules' && $_SERVER['REQUEST_METHOD']==='GET') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $modules=$pdo->query("SELECT m.id,m.title,s.title AS subject FROM learning_modules m JOIN subjects s ON s.id=m.subject_id WHERE m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order")->fetchAll(PDO::FETCH_ASSOC);
+ json_response(['modules'=>$modules]);
+}
+if ($action==='admin_question_create' && $_SERVER['REQUEST_METHOD']==='POST') {
+ if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $data=json_decode(file_get_contents('php://input'),true);
+ if(!is_array($data))json_response(['error'=>'Ungültige Daten.'],422);
+ $module=(string)($data['module_id']??'');$type=(string)($data['type']??'');$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
+ if(!in_array($type,['multiple_choice','numeric','text_input','matching'],true)||$prompt===''||mb_strlen($prompt)>5000||$explanation===''||mb_strlen($explanation)>10000)json_response(['error'=>'Bitte Aufgabenstellung und Erklärung eingeben.'],422);
+ $check=$pdo->prepare("SELECT 1 FROM learning_modules WHERE id=? AND status='active'");$check->execute([$module]);
+ if(!$check->fetchColumn())json_response(['error'=>'Modul nicht gefunden.'],422);
+ $solution=[];$config=[];$options=[];
+ if($type==='multiple_choice'){
+  $options=$data['options']??[];$correct=$data['correct']??null;
+  if(!is_array($options)||count($options)<2||count($options)>8||!is_int($correct)||$correct<0||$correct>=count($options))json_response(['error'=>'Antworten ungültig.'],422);
+  foreach($options as $option)if(!is_string($option)||trim($option)===''||mb_strlen($option)>500)json_response(['error'=>'Antworten ungültig.'],422);
+ }elseif($type==='numeric'){
+  $value=$data['value']??null;$tolerance=$data['tolerance']??0;
+  if(!is_numeric($value)||!is_numeric($tolerance)||(float)$tolerance<0)json_response(['error'=>'Zahlenlösung ungültig.'],422);
+  $solution=['value'=>(float)$value,'tolerance'=>(float)$tolerance];
+ }elseif($type==='text_input'){
+  $accepted=$data['accepted']??[];
+  if(!is_array($accepted)||count($accepted)<1||count($accepted)>30)json_response(['error'=>'Textlösungen ungültig.'],422);
+  foreach($accepted as $term)if(!is_string($term)||trim($term)===''||mb_strlen($term)>200)json_response(['error'=>'Textlösungen ungültig.'],422);
+  $solution=['accepted'=>array_values(array_map('trim',$accepted))];
+ }else{
+  $answers=$data['answers']??[];
+  if(!is_array($answers)||count($answers)<2||count($answers)>30)json_response(['error'=>'Zuordnungen ungültig.'],422);
+  foreach($answers as $term)if(!is_string($term)||trim($term)===''||mb_strlen($term)>100)json_response(['error'=>'Zuordnungen ungültig.'],422);
+  $answers=array_values(array_map('trim',$answers));
+  if(count(array_unique(array_map('mb_strtolower',$answers)))!==count($answers))json_response(['error'=>'Begriffe müssen eindeutig sein.'],422);
+  $solution=['answers'=>$answers];$config=['labels'=>$answers];
+ }
+ $id='admin-'.bin2hex(random_bytes(12));
+ $pdo->beginTransaction();
+ try{
+  $stmt=$pdo->prepare("INSERT INTO learning_questions(id,module_id,type,prompt,solution_explanation,solution_data,config_json,status) VALUES(?,?,?,?,?,?,?,'active')");
+  $stmt->execute([$id,$module,$type,$prompt,$explanation,json_encode($solution,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)]);
+  if($type==='multiple_choice'){
+   $insert=$pdo->prepare('INSERT INTO question_options(question_id,option_index,text,is_correct) VALUES(?,?,?,?)');
+   foreach(array_values($options) as $i=>$option)$insert->execute([$id,$i,trim($option),$i===$correct?1:0]);
+  }
+  $pdo->commit();json_response(['ok'=>true,'id'=>$id]);
+ }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Anlegen fehlgeschlagen.'],500);}
+}
 if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
  if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
  $id=(string)($_GET['id']??'');
