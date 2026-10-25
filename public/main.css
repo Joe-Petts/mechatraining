@@ -401,3 +401,5 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 /* Tool answers must span both columns of the parent .options grid. */
 #appPanel .options:has(> .quiz-tool-identification-form){grid-template-columns:minmax(0,1fr)}
 #appPanel .options > .quiz-tool-identification-form{grid-column:1 / -1;justify-self:stretch;min-width:0;width:100%}
+
+#appPanel .quiz-tool-identification-form fieldset label{margin:0;padding:6px 0}
