@@ -384,3 +384,10 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .quiz-tool-row legend{font-weight:600;margin-bottom:8px}
 .quiz-tool-row fieldset label{display:flex;align-items:flex-start;gap:9px;line-height:1.4;cursor:pointer}
 .quiz-tool-row fieldset input{margin-top:4px}
+
+/* Tool identification: readable full-width blocks, not the generic 2-column matching grid */
+#appPanel .quiz-tool-identification-form{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;width:100%;max-width:850px}
+#appPanel .quiz-tool-identification-form .quiz-tool-row{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 0}
+#appPanel .quiz-tool-identification-form .quiz-tool-row>label{max-width:520px}
+#appPanel .quiz-tool-identification-form .quiz-tool-row fieldset{display:grid;gap:10px}
+#appPanel .quiz-tool-identification-form .quiz-tool-row fieldset label{max-width:780px}
