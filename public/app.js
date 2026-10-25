@@ -147,8 +147,15 @@ function render(){
     const answer=inputs.map((input,i)=>({name:input.value.trim(),use:Number(choices[i].find(r=>r.checked)?.value)}));
     const result=await api('answer',{question_id:q.id,answer});
     finished=true;inputs.forEach(input=>input.disabled=true);choices.flat().forEach(r=>r.disabled=true);
-    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Beide Werkzeuge richtig!':'✕ Noch nicht alles richtig.';
-    const info=document.createElement('p');info.textContent=result.correct?'Sehr gut!':'Die richtige Lösung wird im Hinweis erklärt.';
+    const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Beide Werkzeuge richtig!':'✕ Einige Antworten sind falsch.';
+    const info=document.createElement('div');info.className='quiz-tool-feedback';
+    (result.matching_status||[]).forEach((status,i)=>{
+     const line=document.createElement('p');line.textContent='Werkzeug '+(i+1)+': Name '+(status.name?'✓ richtig':'✕ falsch')+' · Verwendung '+(status.use?'✓ richtig':'✕ falsch');
+     line.className=status.name&&status.use?'quiz-tool-status-ok':'quiz-tool-status-error';info.append(line);
+     inputs[i].classList.toggle('quiz-tool-input-correct',status.name);inputs[i].classList.toggle('quiz-tool-input-wrong',!status.name);
+     choices[i].forEach(radio=>radio.closest('label')?.classList.toggle('quiz-tool-choice-wrong',radio.checked&&!status.use));
+    });
+    if(!result.correct){const solution=document.createElement('p');solution.className='quiz-tool-solution';solution.textContent='Richtige Lösung: '+result.explanation;info.append(solution);}
     feedback.replaceChildren(heading,info);
     if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}finishControls();}
     else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:result.explanation,onConfirm:()=>finishControls()}}));}
