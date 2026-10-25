@@ -363,3 +363,16 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .question-editor-matching-row strong{min-width:30px;color:#31556a}
 .question-editor-matching-row input{flex:1;min-width:0;padding:9px;border:1px solid #b6c7d1;border-radius:7px}
 .question-editor-matching-row button{flex-shrink:0}
+
+/* Quiz admin navigation */
+.quiz-admin-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
+.quiz-admin-tools button{border:1px solid #8da8b8;border-radius:8px;background:#16303f;color:#fff;padding:9px 13px;cursor:pointer}
+.quiz-admin-tools button:first-child{font-size:22px;font-weight:700;line-height:1;padding:7px 14px}
+.quiz-overview{padding:20px;min-width:min(650px,85vw);max-width:850px}
+.quiz-overview h2{margin-top:0}
+.quiz-overview input{width:100%;box-sizing:border-box;padding:12px;margin:12px 0;border-radius:8px}
+.quiz-overview-list{max-height:60vh;overflow:auto;display:grid;gap:6px}
+.quiz-overview-item{display:grid;gap:4px;text-align:left;padding:10px;border:1px solid #9eafba;border-radius:8px;cursor:pointer}
+.quiz-overview-item strong{font-size:12px;overflow-wrap:anywhere}
+.quiz-overview-item span{font-size:14px}
+@media(max-width:640px){.quiz-admin-tools{width:100%;margin-left:0}.quiz-overview{min-width:0;width:80vw;padding:14px}}
