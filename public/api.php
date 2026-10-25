@@ -269,7 +269,7 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
         break;
       case 'matching':
         $expected=$solution['answers']??null;
-        if(!is_array($expected)||!is_array($answer)||count($answer)!==count($expected)||array_keys($answer)!==array_keys($expected))json_response(['error'=>'Bitte alle sechs Begriffe zuordnen.'],422);
+        if(!is_array($expected)||!is_array($answer)||count($answer)!==count($expected)||array_keys($answer)!==array_keys($expected))json_response(['error'=>'Bitte alle '.count($expected).' Begriffe zuordnen.'],422);
         foreach($answer as $value)if(!is_string($value)||mb_strlen($value)>100)json_response(['error'=>'Ungültige Zuordnung.'],422);
         $correct=$answer===$expected;
         $matching_status=array_map(static fn($given,$wanted)=>$given===$wanted,$answer,$expected);
@@ -282,7 +282,11 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
         break;
       default:json_response(['error'=>'Aufgabentyp noch nicht unterstützt.'],422);
     }
-    $found=['id'=>$question['id'],'explanation'=>$question['solution_explanation']];
+    $explanation=$question['solution_explanation'];
+    if($question['type']==='matching' && is_array($solution['answers']??null)){
+      $explanation=implode(' · ',array_map(static fn($i,$term)=>($i+1).'. '.$term,array_keys($solution['answers']),$solution['answers']));
+    }
+    $found=['id'=>$question['id'],'explanation'=>$explanation];
     $stmt=$pdo->prepare('INSERT INTO progress(user_id,question_id,correct,attempts) VALUES(?,?,?,1) ON CONFLICT(user_id,question_id) DO UPDATE SET correct=MAX(correct,excluded.correct),attempts=attempts+1,updated_at=CURRENT_TIMESTAMP');
     $stmt->execute([$_SESSION['uid'],$found['id'],$correct]);
     json_response(['correct'=>(bool)$correct,'correct_index'=>$correctIndex,'matching_status'=>$matching_status??null,'explanation'=>$found['explanation']]);
