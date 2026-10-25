@@ -376,3 +376,11 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 .quiz-overview-item strong{font-size:12px;overflow-wrap:anywhere}
 .quiz-overview-item span{font-size:14px}
 @media(max-width:640px){.quiz-admin-tools{width:100%;margin-left:0}.quiz-overview{min-width:0;width:80vw;padding:14px}}
+
+.quiz-tool-row{display:grid;gap:12px;padding:16px 0;border-bottom:1px solid #d6dfe5}
+.quiz-tool-row>label{display:grid;gap:7px;font-weight:600}
+.quiz-tool-row>label input{padding:12px;border:1px solid #9baebc;border-radius:8px;font:inherit;width:100%;box-sizing:border-box}
+.quiz-tool-row fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
+.quiz-tool-row legend{font-weight:600;margin-bottom:8px}
+.quiz-tool-row fieldset label{display:flex;align-items:flex-start;gap:9px;line-height:1.4;cursor:pointer}
+.quiz-tool-row fieldset input{margin-top:4px}
