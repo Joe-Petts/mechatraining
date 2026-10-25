@@ -236,6 +236,30 @@ function import_pending_learning(PDO $db): void {
     ]);
 
 
+    import_learning_batch($db,[
+      'id'=>'gewindeschneiden-werkzeuge-20261025',
+      'title'=>'Werkzeuge zum Gewindeschneiden',
+      'origin'=>'Berufsschul-Arbeitsblatt',
+      'subject'=>'metall','subject_title'=>'Metallbau',
+      'modules'=>[[
+        'id'=>'gewindeschneiden','title'=>'Gewindeschneiden',
+        'questions'=>[[
+          'id'=>'ap1-metall-gewindeschneiden-001',
+          'type'=>'matching',
+          'prompt'=>'Benenne Werkzeug 1 und Werkzeug 2 und ordne jeweils den richtigen Einsatzzweck zu.',
+          'solution'=>['answers'=>[
+            'Windeisen – Innengewinde schneiden',
+            'Schneideisenhalter – Außengewinde schneiden'
+          ]],
+          'explanation'=>'Das Windeisen hält den Gewindebohrer zum Schneiden von Innengewinden. Der Schneideisenhalter hält das Schneideisen zum Schneiden von Außengewinden.',
+          'config'=>['labels'=>[
+            'Windeisen – Innengewinde schneiden',
+            'Schneideisenhalter – Außengewinde schneiden'
+          ]]
+        ]]
+      ]]
+    ]);
+
     // One-time correction of the previously imported matching answer key.
     $fixKey = 'bohren_004_key_corrected';
     $db->exec("CREATE TABLE IF NOT EXISTS learning_system_state (name TEXT PRIMARY KEY, value TEXT NOT NULL)");
