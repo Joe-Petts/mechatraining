@@ -256,6 +256,7 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
         if(!is_array($expected)||!is_array($answer)||count($answer)!==count($expected)||array_keys($answer)!==array_keys($expected))json_response(['error'=>'Bitte alle sechs Begriffe zuordnen.'],422);
         foreach($answer as $value)if(!is_string($value)||mb_strlen($value)>100)json_response(['error'=>'Ungültige Zuordnung.'],422);
         $correct=$answer===$expected;
+        $matching_status=array_map(static fn($given,$wanted)=>$given===$wanted,$answer,$expected);
         break;
       case 'text_input':
         if(!is_string($answer)||mb_strlen($answer)>500)json_response(['error'=>'Textantwort erforderlich.'],422);
@@ -268,6 +269,6 @@ if ($action==='answer' && $_SERVER['REQUEST_METHOD']==='POST') {
     $found=['id'=>$question['id'],'explanation'=>$question['solution_explanation']];
     $stmt=$pdo->prepare('INSERT INTO progress(user_id,question_id,correct,attempts) VALUES(?,?,?,1) ON CONFLICT(user_id,question_id) DO UPDATE SET correct=MAX(correct,excluded.correct),attempts=attempts+1,updated_at=CURRENT_TIMESTAMP');
     $stmt->execute([$_SESSION['uid'],$found['id'],$correct]);
-    json_response(['correct'=>(bool)$correct,'correct_index'=>$correctIndex,'explanation'=>$found['explanation']]);
+    json_response(['correct'=>(bool)$correct,'correct_index'=>$correctIndex,'matching_status'=>$matching_status??null,'explanation'=>$found['explanation']]);
 }
 json_response(['error'=>'Unbekannte Aktion.'],404);
