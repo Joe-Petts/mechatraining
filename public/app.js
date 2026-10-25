@@ -107,13 +107,13 @@ function render(){
    event.preventDefault();if(finished)return;check.disabled=true;
    try{
     const result=await api('answer',{question_id:q.id,answer:selects.map(select=>select.value)});
-    finished=true;selects.forEach(select=>select.disabled=true);
+    if(result.correct){finished=true;selects.forEach(select=>select.disabled=true);}
     const heading=document.createElement('strong');heading.textContent=result.correct?'✓ Alle Begriffe richtig!':'✕ Noch nicht alle Zuordnungen richtig.';
-    const info=document.createElement('p');info.textContent=result.correct?'Gut gemacht! '+result.explanation:'Erklärung: '+result.explanation;
+    const info=document.createElement('p');info.textContent=result.correct?'Gut gemacht! '+result.explanation:'Noch nicht richtig. Prüfe deine Zuordnungen und versuche es erneut. Die vollständige Lösung erscheint erst nach einer richtigen Antwort.';
     feedback.replaceChildren(heading,info);
     if(result.correct){document.dispatchEvent(new Event('mechatraining:correct'));if(!solved.has(q.id)){solved.add(q.id);progress();await refreshXP();}}
-    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Die Zuordnung war noch nicht vollständig richtig. Prüfe die Lage der Schneiden und Nuten.',onConfirm:()=>{}}}));}
-    finishControls();check.hidden=true;
+    else{document.dispatchEvent(new CustomEvent('mechatraining:wrong',{detail:{explanation:'Die Zuordnung war noch nicht vollständig richtig. Prüfe die Lage der Schneiden und Nuten.',onConfirm:()=>{}}}));check.disabled=false;}
+    if(result.correct){finishControls();check.hidden=true;}
    }catch(error){feedback.textContent=error.message;check.disabled=false;}
   });
  }
