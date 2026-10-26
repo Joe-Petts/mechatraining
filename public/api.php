@@ -43,6 +43,17 @@ if ($action==='create_user' && $_SERVER['REQUEST_METHOD']==='POST') {
     catch(PDOException $e) { json_response(['error'=>'Benutzername bereits vergeben oder Datenbankfehler.'],409); }
     json_response(['ok'=>true],201);
 }
+if ($action==='admin_reset_password' && $_SERVER['REQUEST_METHOD']==='POST') {
+    if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
+    $data=json_decode(file_get_contents('php://input'),true) ?: [];
+    $id=filter_var($data['user_id']??null,FILTER_VALIDATE_INT,['options'=>['min_range'=>1]]);
+    $pass=$data['password']??null;
+    if (!$id || !is_string($pass) || strlen($pass)<4 || strlen($pass)>256) json_response(['error'=>'Benutzer auswählen und Passwort mit 4 bis 256 Zeichen eingeben.'],422);
+    $stmt=$pdo->prepare('UPDATE users SET password_hash=? WHERE id=?');
+    $stmt->execute([password_hash($pass,PASSWORD_DEFAULT),$id]);
+    if (!$stmt->rowCount()) json_response(['error'=>'Benutzer nicht gefunden.'],404);
+    json_response(['ok'=>true]);
+}
 if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
     try { migrate_notes($pdo); } catch(Throwable $e) { json_response(['error'=>'Notizspeicher nicht verfügbar.'],503); }
     $uid=(int)$_SESSION['uid'];
