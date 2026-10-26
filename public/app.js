@@ -253,7 +253,25 @@ $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginEr
 $('logout').addEventListener('click',async()=>{try{await api('logout',{});clearView();location.reload();}catch(e){alert(e.message);}});
 api('session').then(r=>{if(r.user)return signedIn(r.user,r.csrf);$('loginPanel').classList.remove('hidden');}).catch(e=>{$('loginPanel').classList.remove('hidden');$('loginError').textContent=e.message;});
 
-async function loadUsers(){const data=await api('users');const list=$('usersList');list.replaceChildren();data.users.forEach(user=>{const li=document.createElement('li');li.textContent=user.username+' ('+(user.role==='admin'?'Administrator':'Lernender')+')';list.append(li);});}
+async function loadUsers(){
+ const data=await api('users');const list=$('usersList');list.replaceChildren();
+ data.users.forEach(user=>{
+  const li=document.createElement('li');
+  const label=document.createElement('span');label.textContent=user.username+' ('+(user.role==='admin'?'Administrator':'Lernender')+') ';
+  const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent='Passwort zurücksetzen';
+  button.addEventListener('click',()=>{
+   const existing=li.querySelector('form');if(existing){existing.remove();return;}
+   const form=document.createElement('form');
+   const input=document.createElement('input');input.type='password';input.required=true;input.minLength=4;input.maxLength=256;input.autocomplete='new-password';input.placeholder='Neues Passwort (mind. 4 Zeichen)';input.setAttribute('aria-label','Neues Passwort für '+user.username);
+   const save=document.createElement('button');save.type='submit';save.textContent='Speichern';
+   const msg=document.createElement('span');msg.setAttribute('role','status');
+   form.append(input,save,msg);
+   form.addEventListener('submit',async e=>{e.preventDefault();try{await api('admin_reset_password',{user_id:user.id,password:input.value});msg.textContent='Passwort geändert.';input.value='';}catch(err){msg.textContent=err.message;}});
+   li.append(form);input.focus();
+  });
+  li.append(label,button);list.append(li);
+ });
+}
 $('createUserForm').addEventListener('submit',async e=>{e.preventDefault();const form=new FormData(e.currentTarget);$('adminMessage').textContent='';try{await api('create_user',{username:form.get('username'),password:form.get('password')});$('adminMessage').textContent='Benutzer erfolgreich angelegt.';e.currentTarget.reset();await loadUsers();}catch(err){$('adminMessage').textContent=err.message;}});
 
 // Navigation: Lernbereiche → Themenübungen → Aufgabe
