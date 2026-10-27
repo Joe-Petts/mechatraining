@@ -1,0 +1,39 @@
+(() => {
+'use strict';
+const $=id=>document.getElementById(id), model=MechaCircuitModel;
+let state=model.initial(), index=0, free=false, flags={}, complete=false;
+const tasks=[
+ {id:'ap1-self-hold-start-001',title:'1 · Einschalten und halten',text:'Drücke S1 und lasse ihn wieder los. Die Spule K1 soll danach angezogen bleiben.',test:()=>flags.started&&flags.released&&state.k&&!state.start,explain:'K1 (13–14) schließt parallel zu S1. Dadurch bleibt der Spulenstrom nach dem Loslassen erhalten.'},
+ {id:'ap1-self-hold-stop-002',title:'2 · Sicher unterbrechen',text:'Betätige S0 und lasse ihn los. K1 und H1 sollen ausgeschaltet bleiben.',test:()=>flags.stopped&&flags.stopReleased&&!state.k&&!state.stop,explain:'S0 unterbricht den gemeinsamen Strompfad. K1 fällt ab, sein Haltekontakt öffnet. Das Loslassen von S0 allein startet nicht neu.'},
+ {id:'ap1-self-hold-power-003',title:'3 · Spannungsausfall',text:'Starte mit S1. Schalte anschließend die Versorgung aus und wieder ein, ohne S1 dabei zu halten. K1 muss aus bleiben.',test:()=>flags.running&&flags.powerOff&&flags.powerRestored&&!state.k&&!state.start,explain:'Beim Spannungsausfall fällt K1 ab. Der offene Haltekontakt verhindert nach Spannungsrückkehr einen selbsttätigen Wiederanlauf.'},
+ {id:'ap1-self-hold-measure-004',title:'4 · Spannung an der Spule',text:'Schalte K1 mit S1 ein. Miss dann mit dem Messgerät die Spannung zwischen A1 und A2 und trage den Wert ein.',input:true,test:()=>state.k&&flags.measured&&Number($('clValue').value.replace(',','.'))===24,explain:'Bei angezogenem K1 liegt A1 an +24 V und A2 an 0 V: U = 24 V.'},
+ {id:'ap1-self-hold-fault-005',title:'5 · Fehler: hält nicht',text:'Ein Fehler ist eingebaut. Teste S1 und lasse ihn los. Warum leuchtet H1 nur während des Drückens?',fault:'hold',choices:['Haltekontakt K1 (13–14) unterbrochen','Sicherung F1 unterbrochen','Kein Fehler vorhanden'],correct:0,test:()=>flags.started&&flags.released,explain:'Die Spule zieht über S1 an. Nach dem Loslassen fehlt der parallele Haltepfad über K1 (13–14), deshalb fällt K1 ab.'},
+ {id:'ap1-self-hold-fuse-006',title:'6 · Fehler durch Messen finden',text:'S1 bewirkt nichts. Miss vor und hinter F1. Welche Ursache passt zu deinen Messwerten?',fault:'fuse',choices:['Haltekontakt K1 (13–14) unterbrochen','Sicherung F1 unterbrochen','S0 wird dauerhaft gedrückt'],correct:1,test:()=>flags.supply&&flags.afterFuse,explain:'Vor F1 liegen 24 V, dahinter 0 V gegen A2. Die Versorgung ist vorhanden, aber F1 ist unterbrochen.'}
+];
+function draw(){const r=model.readings(state);for(const [id,on] of [['clSupplyWire',r.supply],['clFuseWire',r.afterFuse],['clStopWire',r.afterStop],['clCoilWire',r.coil],['clLampWire',state.k],['clCoil',state.k],['clLamp',state.k]])$(id).classList.toggle('cl-live',!!on);
+ $('clStartBlade').setAttribute('d',state.start?'M110 310V260':'M110 310L85 266');$('clStopBlade').setAttribute('d',state.stop?'M170 190L145 150':'M170 190V150');$('clHoldBlade').setAttribute('d',state.k&&state.fault!=='hold'?'M290 310V260':'M290 310L265 266');$('clLampBlade').setAttribute('d',state.k?'M450 280V230':'M450 280L425 236');
+ // Keep hidden faults visually indistinguishable: diagnosis uses behavior and measurements.
+ $('clPower').textContent=state.power?'24 V EIN':'24 V AUS';$('clPower').setAttribute('aria-pressed',String(state.power));
+ $('clStart').classList.toggle('cl-pressed',state.start);$('clStop').classList.toggle('cl-pressed',state.stop);
+ $('clState').textContent=`K1: ${state.k?'angezogen':'abgefallen'} · H1: ${state.k?'leuchtet':'aus'} · S1: ${state.start?'gedrückt':'losgelassen'} · S0: ${state.stop?'gedrückt':'losgelassen'}`;
+ $('clMeter').textContent=r[$('clProbe').value]+' V';
+}
+function update(patch){state=model.step(state,patch);if(state.start&&state.k)flags.started=true;if(patch.start===false&&flags.started)flags.released=true;if(state.stop)flags.stopped=true;if(patch.stop===false&&flags.stopped)flags.stopReleased=true;if(state.k)flags.running=true;if(patch.power===false&&flags.running)flags.powerOff=true;if(patch.power===true&&flags.powerOff)flags.powerRestored=true;draw();}
+function bindHold(id,key){const el=$(id);let pointer=null,keyHeld=false;
+ el.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();el.focus();pointer=e.pointerId;el.setPointerCapture(pointer);update({[key]:true});});
+ const release=()=>{pointer=null;keyHeld=false;update({[key]:false});};
+ el.addEventListener('pointerup',release);el.addEventListener('pointercancel',release);el.addEventListener('lostpointercapture',()=>{if(pointer!==null)release();});
+ el.addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='Enter'){e.preventDefault();if(!keyHeld){keyHeld=true;update({[key]:true});}}});el.addEventListener('keyup',e=>{if(e.code==='Space'||e.code==='Enter'){e.preventDefault();release();}});el.addEventListener('blur',release);
+}
+bindHold('clStart','start');bindHold('clStop','stop');window.addEventListener('blur',()=>update({start:false,stop:false}));document.addEventListener('visibilitychange',()=>{if(document.hidden)update({start:false,stop:false});});
+$('clPower').addEventListener('click',()=>update({power:!state.power}));
+$('clProbe').addEventListener('change',()=>{flags[$('clProbe').value]=true;if($('clProbe').value==='coil'&&state.k)flags.measured=true;draw();});
+// A click also measures the initially selected point.
+$('clMeter').parentElement.addEventListener('toggle',()=>{if($('clMeter').parentElement.open){flags[$('clProbe').value]=true;if($('clProbe').value==='coil'&&state.k)flags.measured=true;}});
+function load(){complete=false;flags={};const t=tasks[index];state=model.initial(t.fault||'none');if(index===1&&!free)state=model.step(state,{start:true});if(index===1&&!free)state=model.step(state,{start:false});$('clProgress').textContent=free?'FREIES EXPERIMENTIEREN':`ÜBUNG ${index+1} / ${tasks.length}`;$('clTitle').textContent=free?'Schaltungslabor':t.title;$('clTask').textContent=free?'Bediene die Schaltung und vergleiche ihr Verhalten mit und ohne Fehler.':t.text;$('clAnswer').replaceChildren();$('clFeedback').textContent='';$('clNext').hidden=true;$('clCheck').hidden=free;$('clCheck').disabled=false;$('clFaultBox').hidden=!free;
+ if(free){state=model.initial($('clFault').value);}else if(t.input){const l=document.createElement('label');l.textContent='Spulenspannung in Volt';const input=document.createElement('input');input.id='clValue';input.inputMode='decimal';input.autocomplete='off';l.append(input);$('clAnswer').append(l);}else if(t.choices){const select=document.createElement('select');select.id='clChoice';select.setAttribute('aria-label','Fehlerursache');select.add(new Option('Ursache auswählen …',''));t.choices.forEach((c,i)=>select.add(new Option(c,String(i))));$('clAnswer').append(select);}
+ draw();}
+$('clCheck').addEventListener('click',()=>{const t=tasks[index];const ok=t.test()&&(!t.choices||$('clChoice').value===String(t.correct));$('clFeedback').textContent=ok?'Richtig. '+t.explain:'Noch nicht richtig. '+t.explain+' Führe den beschriebenen Versuch aus und prüfe erneut.';if(ok){complete=true;$('clCheck').disabled=true;$('clNext').hidden=false;$('clNext').textContent=index===tasks.length-1?'Abschließen':'Weiter →';}});
+$('clNext').addEventListener('click',()=>{if(!complete)return;if(index===tasks.length-1){$('clProgress').textContent='6 / 6 ÜBUNGEN ABGESCHLOSSEN';$('clTitle').textContent='Selbsthaltung verstanden';$('clTask').textContent='Du hast Einschalten, Stoppen, Spannungsausfall, Messen und zwei Fehlerfälle geübt. Du kannst jetzt frei experimentieren oder neu starten.';$('clAnswer').replaceChildren();$('clNext').hidden=true;$('clCheck').hidden=true;return;}index++;load();});
+$('clReset').addEventListener('click',()=>{index=0;free=false;load();});$('clFree').addEventListener('click',()=>{free=true;load();});$('clFault').addEventListener('change',load);load();
+})();

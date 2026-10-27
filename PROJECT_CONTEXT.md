@@ -235,3 +235,11 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - 2026-10-25: Admin-Quiz-Werkzeuge: Plus-Schaltfläche in Quizansicht öffnet Erstellformular für Multiple Choice, Zahlen-, Text- und Zuordnungsaufgaben mit Modulwahl; SQLite erzeugt stabile `admin-`-IDs. Admin-Aufgabenübersicht durchsucht verfügbare Quizmodule nach ID/Text und springt direkt zur Aufgabe. API-Aktionen `admin_question_modules` und `admin_question_create` sind admin-geschützt. Bestehende Lernstände bleiben unangetastet.
 
 - 2026-10-25: Aufgabe `ap1-metall-gewindeschneiden-001` verwendet nun den gemischten Typ `tool_identification`: zwei freie Werkzeugnamen und je eine Multiple-Choice-Auswahl zum Einsatzzweck. Einmalige SQLite-Migration ändert nur Typ, Prompt, Lösung und Konfiguration der bestehenden Aufgabe; ID, hochgeladene Medien, Fortschritte und Konten bleiben erhalten. API wertet beide Teilantworten serverseitig aus.
+
+
+
+## Aktive Selbsthalteschaltung (2026-10-27)
+- Angemeldete Nutzer öffnen `public/schaltung.php` über den neuen Startseiten-Link. Vanilla JS und SVG, keine externen Abhängigkeiten. Spiel-ID `ap1-self-hold-v1`, Priorität 8.
+- Ideales 24-V-DC-Modell mit S0-Öffner, S1-Schließer, K1-Selbsthaltung und separatem Meldezweig H1. Sechs stabile Übungs-IDs im Client: Einschalten, Stoppen, Spannungsausfall, Spulenspannung und zwei Fehlerdiagnosen; zusätzlich freies Experimentieren.
+- Messpunkte gegen A2/0 V; Orange kennzeichnet Spannungspotenzial, nicht Stromfluss. Keine Simulation von Motorleistung oder Kontaktverzögerungen.
+- Eigenständiges Training mit clientseitiger Auswertung ohne XP oder dauerhafte Fortschrittsspeicherung; keine Quiz-Katalogimporte und keine Änderungen an Nutzerdaten. Touch- und Tastaturtaster werden bei Fokusverlust losgelassen. Styles gekapselt in main.css.
