@@ -243,3 +243,10 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Ideales 24-V-DC-Modell mit S0-Öffner, S1-Schließer, K1-Selbsthaltung und separatem Meldezweig H1. Sechs stabile Übungs-IDs im Client: Einschalten, Stoppen, Spannungsausfall, Spulenspannung und zwei Fehlerdiagnosen; zusätzlich freies Experimentieren.
 - Messpunkte gegen A2/0 V; Orange kennzeichnet Spannungspotenzial, nicht Stromfluss. Keine Simulation von Motorleistung oder Kontaktverzögerungen.
 - Eigenständiges Training mit clientseitiger Auswertung ohne XP oder dauerhafte Fortschrittsspeicherung; keine Quiz-Katalogimporte und keine Änderungen an Nutzerdaten. Touch- und Tastaturtaster werden bei Fokusverlust losgelassen. Styles gekapselt in main.css.
+
+
+## Geführter Schaltungs-Lernweg (2026-10-27)
+- Der Einstieg in die aktive Schaltung stellt Bauteile einzeln vor: Versorgung, Leitungen, F1, S0, S1, K1-Spule, Haltekontakt, Meldekontakt und H1; anschließend Spannungsmessung und Zusammenspiel.
+- 11 Lernkarten und vier eingeschobene Verständnisfragen führen zu den bestehenden sechs praktischen Übungen (21 Schritte). Blaue SVG-Umrandung markiert das aktuell erklärte Bauteil; orange Potenzialanzeige bleibt unabhängig davon erhalten.
+- Kein automatischer Wechsel: Lernkarten werden ausdrücklich bestätigt, Verständnisfragen und Praxisaufgaben geprüft. Zurück und Auswahl bereits erreichter Schritte ermöglichen Wiederholung; freies Experimentieren hat eine Rückkehr zum aktuellen Lernschritt. Wiederbesuchte Aufgaben werden erneut bearbeitet, Schaltzustand wird passend zurückgesetzt.
+- Vorhandene Praxis-IDs bleiben erhalten. Neue stabile learn-/check-IDs; weiterhin clientseitiges Training ohne XP oder Datenbankänderung. Mobil steht die Lernanweisung vor der Schaltung.
