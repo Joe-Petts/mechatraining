@@ -5,8 +5,8 @@
  if (!isset($_SESSION['uid'])) { header('Location: ./'); exit; }
  header('Cache-Control: no-store');
 ?><!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aktive Schaltung · MechaTraining</title><link rel="stylesheet" href="main.css?v=21"></head>
-<body id="circuitPage"><header><a class="brand brand-link" href="./">⚙ MECHATRAINING</a><a href="./">← Lernbereiche</a></header>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aktive Schaltung · MechaTraining</title><link rel="stylesheet" href="main.css?v=22"></head>
+<body id="circuitPage"><header><a class="brand brand-link" href="./">⚙ MECHATRAINING</a><a href="schaltungen.php">← Schaltung</a></header>
 <main id="circuitLab" data-game-id="ap1-self-hold-v1" data-priority="8">
 <p class="cl-eyebrow">ELEKTROTECHNIK / AP1 / 24 V DC</p><h1>Schalten. Beobachten. Verstehen.</h1><p>Schritt für Schritt: Bauteile kennenlernen, Wissen festigen und anschließend selbst schalten.</p>
 <div class="cl-layout"><section class="cl-board" aria-label="Schaltung"><div class="cl-controls"><button id="clPower" type="button" aria-pressed="true">24 V EIN</button><button id="clStart" type="button">S1 · Start halten</button><button id="clStop" type="button">S0 · Stopp halten</button></div><p class="cl-hint">Taster gedrückt halten, dann loslassen. Tastatur: Tab wählen, Leertaste oder Enter halten.</p>

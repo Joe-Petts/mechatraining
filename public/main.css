@@ -430,3 +430,40 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #circuitLab #clTitle:focus{outline:none}
 #circuitLab #clPrevious,#circuitLab #clResume{background:#fff;color:#145c7c;margin-right:8px}
 @media(max-width:760px){#circuitLab .cl-work{grid-row:1}#circuitLab .cl-board{grid-row:2}}
+
+/* Circuit area and independent symbol learning course. */
+#symbolCourse{max-width:1100px;margin:auto;padding:32px 24px;color:#172c3d}
+#symbolCourse h1{font-size:clamp(28px,4vw,44px);letter-spacing:-.04em;line-height:1.15}
+#symbolCourse .sc-eyebrow{font-size:12px;letter-spacing:.12em;font-weight:700;color:#456377}
+#symbolCourse .sc-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:30px}
+#symbolCourse .sc-module{display:block;background:#fff;border:1px solid #b9cbd7;border-radius:12px;padding:28px;color:#193c53;text-decoration:none;line-height:1.6}
+#symbolCourse .sc-module:hover{border-color:#2169a0;background:#f5faff}
+#symbolCourse .sc-module>span{font-size:12px;letter-spacing:.1em}
+#symbolCourse .sc-card{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.4fr);gap:30px;background:white;border:1px solid #b9cbd7;border-radius:12px;padding:28px;margin:20px 0}
+#symbolCourse .sc-drawing{align-self:start;background:#eef5fa;border:1px solid #cedde7;border-radius:10px;padding:20px;position:sticky;top:20px}
+#symbolCourse svg{display:block;width:100%;height:auto;fill:none;stroke:#18394e;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+#symbolCourse svg text{fill:#18394e;stroke:none;text-anchor:middle;font:26px system-ui,sans-serif}
+#symbolCourse svg .sc-dot{fill:#18394e}
+#symbolCourse .sc-copy{min-width:0;line-height:1.7}
+#symbolCourse .sc-copy h2{font-size:25px;line-height:1.3;margin:8px 0 22px}
+#symbolCourse .sc-copy h3{font-size:15px;margin:18px 0 4px;color:#205d87}
+#symbolCourse .sc-copy p{margin:5px 0 14px}
+#symbolCourse .sc-remember{border-left:4px solid #d78327;padding:12px 16px;background:#fff6e8}
+#symbolCourse .sc-toolbar{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:24px 0}
+#symbolCourse .sc-toolbar label{flex:1;min-width:min(260px,100%);font-size:14px}
+#symbolCourse select{display:block;width:100%;margin-top:8px;padding:12px;background:white;color:#173b53;border:1px solid #9bb4c5;border-radius:6px;font:inherit}
+#symbolCourse button,#symbolCourse .sc-link{display:inline-block;border:1px solid #145c7c;border-radius:6px;background:#145c7c;color:white;min-height:44px;padding:11px 16px;font:inherit;cursor:pointer;text-decoration:none;box-sizing:border-box}
+#symbolCourse button:disabled{opacity:.5;cursor:default}
+#symbolCourse #scBack,#symbolCourse #scRestart{background:white;color:#145c7c}
+#symbolCourse .sc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+#symbolCourse #scQuiz fieldset{border:0;padding:0;margin:0 0 18px;min-width:0}
+#symbolCourse #scQuiz legend{font-weight:650;margin-bottom:16px}
+#symbolCourse #scOptions{display:grid;gap:10px}
+#symbolCourse #scOptions label{display:flex;align-items:flex-start;gap:12px;padding:12px;background:#f2f7fb;border:1px solid #b8cbd9;border-radius:8px;cursor:pointer}
+#symbolCourse #scOptions input{width:auto;flex:none;margin:7px 0 0;accent-color:#145c7c}
+#symbolCourse .sc-note{font-size:13px;color:#506b7b;line-height:1.6}
+#symbolCourse [hidden]{display:none!important}
+#symbolCourse :is(button,select,a,input):focus-visible{outline:3px solid #dc872b;outline-offset:3px}
+#symbolCourse #scTitle:focus{outline:none}
+#symbolCourse #scComplete{grid-template-columns:1fr}
+@media(max-width:700px){#symbolCourse{padding:20px 14px}#symbolCourse .sc-modules,#symbolCourse .sc-card{grid-template-columns:1fr;gap:20px}#symbolCourse .sc-card{padding:18px}#symbolCourse .sc-drawing{position:static;padding:8px;width:100%;box-sizing:border-box}#symbolCourse svg{max-height:170px}#symbolCourse .sc-copy h2{font-size:23px}}
