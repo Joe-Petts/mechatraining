@@ -140,6 +140,8 @@ function import_learning_batch(PDO $db,array $batch): int {
 
 /** Explicit approved imports only; never re-import the retired legacy catalog. */
 function import_pending_learning(PDO $db): void {
+    $spsBatch = json_decode((string)file_get_contents(dirname(__DIR__).'/content/ap1/sps-20261028.json'), true, 512, JSON_THROW_ON_ERROR);
+    import_learning_batch($db, $spsBatch);
     import_learning_batch($db,[
         'id'=>'test-bohren-20261024',
         'title'=>'Erste Testaufgabe – Bohren',

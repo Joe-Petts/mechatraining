@@ -1,0 +1,399 @@
+{
+  "id": "sps-ap1-grundlagen-20261028",
+  "title": "SPS AP1 – Grundlagen, Logik, Zeiten und Zähler (16 Aufgaben)",
+  "origin": "Eigene AP1-Übungen auf Nutzerauftrag vom 28.10.2026; Zeitglieder/Zähler fachlich geprüft anhand Siemens S7-1200 Systemhandbuch V4.7 (12/2024), Kapitel 9.2 und IEC-Zähler. Keine offiziellen Prüfungsaufgaben.",
+  "created_at": "2026-10-28T08:21:24.017Z",
+  "subject": "elektro",
+  "subject_title": "Elektrotechnik",
+  "modules": [
+    {
+      "id": "sps-grundlagen",
+      "title": "SPS · Signale und Programmablauf",
+      "questions": [
+        {
+          "id": "ap1-sps-signale-001",
+          "type": "matching",
+          "prompt": "Ordne zu: 1 = Starttaster meldet an die SPS; 2 = SPS schaltet eine Meldeleuchte; 3 = Programm speichert einen internen Zustand.",
+          "difficulty": 1,
+          "exam_part": "AP1",
+          "solution": {
+            "answers": [
+              "Eingang",
+              "Ausgang",
+              "Merker"
+            ]
+          },
+          "explanation": "1 Eingang: Die SPS liest das Tastersignal. 2 Ausgang: Die SPS gibt den Schaltbefehl an die Leuchte aus. 3 Merker: Ein interner Speicher hält einen logischen Zustand. Merksatz: Eingänge melden, das Programm verarbeitet, Ausgänge wirken.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "E/I = Eingang; A/Q = Ausgang; M = Merker.",
+              "text": "Betrachte die Signalrichtung jeweils aus Sicht der SPS.",
+              "formula": "Sensor → Eingang → Programm → Ausgang → Aktor",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, Signalverarbeitung und Prozessabbild. Seitenzahl abhängig von der Ausgabe."
+            },
+            "labels": [
+              "Merker",
+              "Ausgang",
+              "Eingang"
+            ]
+          }
+        },
+        {
+          "id": "ap1-sps-adresse-001",
+          "type": "text_input",
+          "prompt": "Bei byteweiser Bitadressierung bezeichnet E2.5 einen digitalen Eingang. Welche Bitadresse folgt direkt auf E2.7? Nutze die Schreibweise E… .",
+          "difficulty": 1,
+          "exam_part": "AP1",
+          "solution": {
+            "accepted": [
+              "E3.0",
+              "E 3.0",
+              "%E3.0"
+            ]
+          },
+          "explanation": "Ein Byte enthält acht Bits mit den Nummern 0 bis 7. Nach E2.7 beginnt das nächste Byte mit E3.0. Der typische Fehler E2.8 überschreitet den Bitbereich.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "E = Eingang; Zahl vor dem Punkt = Byte; Zahl danach = Bit.",
+              "text": "Zähle die Bitnummern ab null.",
+              "formula": "8 Bit = 1 Byte",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, Signalverarbeitung und Prozessabbild. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-oeffner-001",
+          "type": "numeric",
+          "prompt": "Ein Stopptaster ist als Öffner an 24 V verdrahtet. Der Eingang E0.1 ist bei geschlossenem Kontakt 1. Welchen Signalwert liest die SPS beim gedrückten Stopptaster? Gib 0 oder 1 ein.",
+          "difficulty": 1,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 0,
+            "tolerance": 0
+          },
+          "explanation": "Beim Drücken öffnet der Kontakt. Dadurch liegt am Eingang kein 24-V-Signal mehr an: E0.1 = 0. Ein Öffnerkontakt ist nicht automatisch eine Negation im Programm: Verdrahtung und logische Abfrage müssen getrennt betrachtet werden.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "1 = Signal vorhanden; 0 = Signal nicht vorhanden.",
+              "text": "Überlege zuerst, ob der reale Kontakt beim Drücken öffnet oder schließt.",
+              "formula": "Kontakt offen → Eingang 0 (unter den gegebenen Bedingungen)",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, Signalverarbeitung und Prozessabbild. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-zyklus-001",
+          "type": "matching",
+          "prompt": "Ordne die drei Schritte eines vereinfachten zyklischen SPS-Modells zu: 1 = Eingangszustände übernehmen; 2 = Anweisungen anhand dieser Zustände bearbeiten; 3 = berechnete Ausgangszustände an die Hardware übertragen. Direkte Peripheriezugriffe und Interrupts werden nicht betrachtet.",
+          "difficulty": 1,
+          "exam_part": "AP1",
+          "solution": {
+            "answers": [
+              "Eingangsprozessabbild aktualisieren",
+              "Anwenderprogramm ausführen",
+              "Ausgänge aktualisieren"
+            ]
+          },
+          "explanation": "Das vereinfachte Modell liest Eingänge, verarbeitet das Programm und aktualisiert Ausgänge. Das Eingangsprozessabbild bleibt während dieser Programmbearbeitung gleich. Reale CPUs können Zyklusgrenzen anders darstellen; unmittelbare Peripheriezugriffe und Interrupts sind hier ausdrücklich ausgeschlossen.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "PAE = Prozessabbild der Eingänge; PAA = Prozessabbild der Ausgänge.",
+              "text": "Unterscheide Einlesen, Verarbeiten und Ausgeben.",
+              "formula": "Eingabe → Verarbeitung → Ausgabe",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, Signalverarbeitung und Prozessabbild. Seitenzahl abhängig von der Ausgabe."
+            },
+            "labels": [
+              "Ausgänge aktualisieren",
+              "Anwenderprogramm ausführen",
+              "Eingangsprozessabbild aktualisieren"
+            ]
+          }
+        },
+        {
+          "id": "ap1-sps-prozessabbild-001",
+          "type": "multiple_choice",
+          "prompt": "Das Eingangsprozessabbild enthält E0.0 = 0. Während der anschließenden Programmbearbeitung wechselt der reale Eingang auf 1. Das Programm liest ausschließlich das unveränderte Prozessabbild. Welchen Wert sieht eine spätere Abfrage von E0.0 in derselben Bearbeitung?",
+          "difficulty": 1,
+          "exam_part": "AP1",
+          "solution": {
+            "correct": 1
+          },
+          "explanation": "Die Abfrage sieht weiterhin 0, weil sie das zuvor gespeicherte Prozessabbild liest. Erst beim nächsten Aktualisieren wird der neue Hardwarezustand übernommen. Eine direkte Peripherieabfrage wäre ein anderer, hier ausgeschlossener Zugriff.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "E0.0 = Eingangsbit; Prozessabbild = gespeicherte Signalzustände.",
+              "text": "Woher bezieht die Anweisung ihren Wert: Hardware oder gespeichertes Abbild?",
+              "formula": "Programmwert = zuletzt übernommener Eingangswert",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, Signalverarbeitung und Prozessabbild. Seitenzahl abhängig von der Ausgabe."
+            }
+          },
+          "options": [
+            "1, sofort nach dem Hardwarewechsel",
+            "0, bis das Prozessabbild aktualisiert wird",
+            "Abwechselnd 0 und 1",
+            "Der Wert ist immer undefiniert"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": "sps-logik",
+      "title": "SPS · Logik und Selbsthaltung",
+      "questions": [
+        {
+          "id": "ap1-sps-und-001",
+          "type": "text_input",
+          "prompt": "Für eine Freigabe gilt Q = A UND B. Gib die vier Ausgangswerte für (A,B) = (0,0), (0,1), (1,0), (1,1) in genau dieser Reihenfolge als vierstellige Bitfolge ein.",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "accepted": [
+              "0001",
+              "0 0 0 1",
+              "0,0,0,1",
+              "0;0;0;1"
+            ]
+          },
+          "explanation": "Die Ergebnisse sind 0, 0, 0, 1. UND wird nur dann 1, wenn beide Bedingungen 1 sind. Typischer Fehler: Schon eine erfüllte Bedingung genügen zu lassen – das wäre ODER.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "A, B = binäre Eingänge; Q = Ergebnis.",
+              "text": "Prüfe für jede Zeile, ob beide Eingänge gleichzeitig 1 sind.",
+              "formula": "Q = A ∧ B",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-oder-001",
+          "type": "numeric",
+          "prompt": "Eine Meldeleuchte wird mit Q = A ODER B angesteuert. Beide Eingänge sind 1. Welchen Wert hat Q? Gib 0 oder 1 ein.",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 1,
+            "tolerance": 0
+          },
+          "explanation": "Q = 1, weil bei ODER mindestens eine Bedingung erfüllt sein muss. Auch zwei erfüllte Bedingungen ergeben 1. Anders beim exklusiven ODER (XOR): Dort wären zwei Einsen das Ergebnis 0.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "ODER = inklusive Verknüpfung; XOR = exklusives ODER.",
+              "text": "Das normale ODER bedeutet mindestens eine Bedingung, nicht genau eine.",
+              "formula": "Q = A ∨ B",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-verriegelung-001",
+          "type": "numeric",
+          "prompt": "Für eine Übungsanlage gilt Q = Start UND Bereit UND NICHT Stoerung. Gegeben: Start = 1, Bereit = 1, Stoerung = 1. Bestimme Q (0 oder 1).",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 0,
+            "tolerance": 0
+          },
+          "explanation": "NICHT Stoerung = NICHT 1 = 0. Damit folgt Q = 1 UND 1 UND 0 = 0. Die Störung sperrt den Start. Merksatz: Bei UND genügt eine 0 zum Sperren.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "Stoerung = 1 bedeutet Störung vorhanden; ¬ = NICHT.",
+              "text": "Werte zuerst die Negation aus.",
+              "formula": "Q = Start ∧ Bereit ∧ ¬Stoerung",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-selbsthaltung-001",
+          "type": "numeric",
+          "prompt": "Im vereinfachten Selbsthaltemodell gilt M_neu = Stop_OK UND (Start ODER M_alt). Nach dem Loslassen von Start gilt: Stop_OK = 1, Start = 0, M_alt = 1. Berechne M_neu (0 oder 1).",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 1,
+            "tolerance": 0
+          },
+          "explanation": "Zuerst die Klammer: 0 ODER 1 = 1. Danach 1 UND 1 = 1. Der gespeicherte alte Zustand hält die Freigabe trotz losgelassenem Starttaster aufrecht. Ohne Rückführung M_alt gäbe es keine Selbsthaltung.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "M_alt = bisheriger Zustand; M_neu = neuer Zustand; Stop_OK = 1 bei unbetätigtem Stopptaster.",
+              "text": "Setze den bisherigen Speicherzustand in die Klammer ein.",
+              "formula": "M_neu = Stop_OK ∧ (Start ∨ M_alt)",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-stopvorrang-001",
+          "type": "numeric",
+          "prompt": "Es gilt M_neu = Stop_OK UND (Start ODER M_alt). Start und Stop werden gleichzeitig gedrückt: Start = 1, Stop_OK = 0, M_alt = 1. Welchen Wert erhält M_neu?",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 0,
+            "tolerance": 0
+          },
+          "explanation": "Die Klammer ergibt 1, aber Stop_OK = 0 sperrt die gesamte Verknüpfung: M_neu = 0. Stop hat dadurch Vorrang. Diese normale Programmlogik allein ist keine sicherheitsgerichtete Not-Halt-Funktion.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "Stop_OK = 0 bei gedrücktem Stop; Start = 1 bei gedrücktem Start.",
+              "text": "Der Faktor vor der Klammer beeinflusst das gesamte Ergebnis.",
+              "formula": "0 ∧ X = 0",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-fehler-001",
+          "type": "multiple_choice",
+          "prompt": "Eine Übungsanlage soll nur bei Bereit = 1 starten. Programmiert wurde Q = Start ODER Bereit. Bei Start = 0 und Bereit = 1 läuft sie bereits. Welche Korrektur erfüllt die Forderung, dass Start und Bereit gleichzeitig 1 sein müssen?",
+          "difficulty": 2,
+          "exam_part": "AP1",
+          "solution": {
+            "correct": 2
+          },
+          "explanation": "Richtig ist Q = Start UND Bereit. Die bisherige ODER-Verknüpfung lässt bereits das Bereit-Signal allein genügen. Prüfe die Korrektur mit Start = 0: 0 UND 1 = 0; erst 1 UND 1 = 1 schaltet ein.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "Start = Startsignal; Bereit = Betriebsbereitschaft.",
+              "text": "Suche die Verknüpfung, bei der beide Bedingungen nötig sind.",
+              "formula": "Freigabe nur bei beiden Bedingungen → UND",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, binäre Verknüpfungen und Speicher. Seitenzahl abhängig von der Ausgabe."
+            }
+          },
+          "options": [
+            "Q = NICHT Start",
+            "Q = Start ODER NICHT Bereit",
+            "Q = Start UND Bereit",
+            "Q = Bereit"
+          ],
+          "correct": 2
+        }
+      ]
+    },
+    {
+      "id": "sps-zeiten",
+      "title": "SPS · Zeiten und Zähler",
+      "questions": [
+        {
+          "id": "ap1-sps-ton-001",
+          "type": "numeric",
+          "prompt": "Eine nicht speichernde Einschaltverzögerung TON hat PT = 4 s. IN wechselt bei t = 2 s von 0 auf 1 und bleibt 1. Zu welchem Zeitpunkt t wird Q im idealen Zeitmodell erstmals 1? Antworte in Sekunden; Zyklusverzögerungen werden vernachlässigt.",
+          "difficulty": 3,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 6,
+            "tolerance": 0
+          },
+          "explanation": "Die Verzögerung beginnt mit dem Einschalten von IN bei 2 s. Nach weiteren 4 s wird Q = 1: t = 2 s + 4 s = 6 s. PT ist die Wartezeit, nicht der absolute Zeitpunkt.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "TON = Einschaltverzögerung; IN = Eingang; PT = vorgegebene Zeit; Q = Ausgang.",
+              "text": "Addiere die Wartezeit zum Einschaltzeitpunkt.",
+              "formula": "t_ein = t_Start + PT",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, IEC-Zeitglieder und Zähler. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-ton-reset-001",
+          "type": "numeric",
+          "prompt": "Ein TON hat PT = 5 s. IN ist zunächst 3 s lang 1, dann 1 s lang 0 und anschließend wieder 1. Wie viele Sekunden muss IN ab dem zweiten Einschalten ununterbrochen 1 bleiben, bis Q = 1 wird? Ideales Zeitmodell.",
+          "difficulty": 3,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 5,
+            "tolerance": 0
+          },
+          "explanation": "Ein nicht speichernder TON setzt die abgelaufene Zeit bei IN = 0 zurück. Die ersten 3 s zählen deshalb nicht mehr. Nach dem zweiten Einschalten müssen erneut volle 5 s vergehen. Nicht mit einem speichernden Zeitakkumulator verwechseln.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "ET = abgelaufene Zeit; PT = Sollzeit.",
+              "text": "Bleibt beim normalen TON die erste Teilzeit nach IN = 0 erhalten?",
+              "formula": "IN = 0 → ET = 0; erneuter Start → volle PT",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, IEC-Zeitglieder und Zähler. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-tof-001",
+          "type": "numeric",
+          "prompt": "Ein TOF mit PT = 3 s hat bei IN = 1 bereits Q = 1. IN fällt bei t = 8 s auf 0 und bleibt 0. Zu welchem Zeitpunkt t wird Q im idealen Zeitmodell 0? Antworte in Sekunden.",
+          "difficulty": 3,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 11,
+            "tolerance": 0
+          },
+          "explanation": "Die Ausschaltverzögerung beginnt beim Abfallen von IN. Q bleibt noch 3 s eingeschaltet und wird bei t = 8 s + 3 s = 11 s ausgeschaltet. Typische Anwendung: Nachlauf einer Lüftung.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "TOF = Ausschaltverzögerung; PT = Nachlaufzeit.",
+              "text": "Beim TOF wird das Ausschalten verzögert.",
+              "formula": "t_aus = t_Abfall + PT",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, IEC-Zeitglieder und Zähler. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-zaehler-001",
+          "type": "numeric",
+          "prompt": "Ein CTU startet mit CV = 0; R bleibt 0. Am Zähleingang CU wird nacheinander 0, 1, 1, 0, 1, 0, 1 beobachtet. Wie groß ist CV danach? Jeder Signalwechsel wird erfasst.",
+          "difficulty": 3,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 3,
+            "tolerance": 0
+          },
+          "explanation": "Gezählt werden nur Übergänge von 0 auf 1: beim zweiten, fünften und siebten Wert. Das ergibt CV = 3. Die zweimal hintereinander beobachtete 1 erzeugt keinen zweiten Zählimpuls.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "CTU = Vorwärtszähler; CU = Zähleingang; CV = Zählwert; R = Rücksetzen.",
+              "text": "Markiere nur die steigenden Flanken.",
+              "formula": "CV_neu = CV_alt + Anzahl der 0→1-Flanken",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, IEC-Zeitglieder und Zähler. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        },
+        {
+          "id": "ap1-sps-zaehlziel-001",
+          "type": "numeric",
+          "prompt": "Ein CTU hat PV = 6 und CV = 8; R = 0. Welchen Signalwert hat der Zählerausgang Q? Gib 0 oder 1 ein.",
+          "difficulty": 3,
+          "exam_part": "AP1",
+          "solution": {
+            "value": 1,
+            "tolerance": 0
+          },
+          "explanation": "Q = 1, weil CV größer oder gleich PV ist: 8 ≥ 6. Q wird nicht automatisch wieder 0, nur weil der Zählwert das Ziel überschreitet. Häufiger Fehler: auf Gleichheit statt auf größer oder gleich prüfen.",
+          "config": {
+            "show_solution": true,
+            "hints": {
+              "symbols": "PV = vorgegebener Zählwert; CV = aktueller Zählwert.",
+              "text": "Das Zählziel ist eine erreichte Schwelle.",
+              "formula": "Q = (CV ≥ PV)",
+              "book": "Tabellenbuch Mechatronik: Stichwort SPS, IEC-Zeitglieder und Zähler. Seitenzahl abhängig von der Ausgabe."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
