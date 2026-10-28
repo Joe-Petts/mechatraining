@@ -3,7 +3,7 @@
  let dialog=null;
  async function request(action,data,id){
   const session=await fetch('api.php?action=session',{credentials:'same-origin'}).then(r=>r.json());
-  if(session.user?.role!=='admin')throw Error('Nur Administratoren.');
+  if(!['admin','editor'].includes(session.user?.role))throw Error('Nur Administratoren.');
   const url='api.php?action='+action+(id?'&id='+encodeURIComponent(id):'');
   const response=await fetch(url,{method:data?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf||''},body:data?JSON.stringify(data):undefined});
   const result=await response.json();if(!response.ok)throw Error(result.error||'Fehler');return result;
