@@ -7,6 +7,7 @@ try { $pdo=db(); migrate($pdo); }
 catch(Throwable $e) { json_response(['error'=>'Datenbank nicht verfügbar.'],503); }
 reset_learning_content_once($pdo);import_pending_learning($pdo);
 $action=$_GET['action'] ?? '';
+if(isset($_SESSION['uid'])){$st=$pdo->prepare('SELECT role FROM users WHERE id=?');$st->execute([(int)$_SESSION['uid']]);$role=$st->fetchColumn();if($role===false){$_SESSION=[];session_destroy();json_response(['error'=>'Konto nicht vorhanden.'],401);}$_SESSION['role']=$role;}
 if ($action==='session') json_response(['user'=>isset($_SESSION['uid'])?['name'=>$_SESSION['name'],'role'=>$_SESSION['role']]:null,'csrf'=>$_SESSION['csrf']??null]);
 if ($action==='login' && $_SERVER['REQUEST_METHOD']==='POST') {
     $data=json_decode(file_get_contents('php://input'),true) ?: [];
@@ -33,6 +34,21 @@ if ($action==='change_password' && $_SERVER['REQUEST_METHOD']==='POST') {
 if ($action==='users' && $_SERVER['REQUEST_METHOD']==='GET') {
     if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
     json_response(['users'=>$pdo->query('SELECT id,username,role,created_at FROM users ORDER BY id')->fetchAll()]);
+}
+if ($action==='set_user_role' && $_SERVER['REQUEST_METHOD']==='POST') {
+ if($_SESSION['role']!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ $data=json_decode(file_get_contents('php://input'),true)?:[];
+ $id=filter_var($data['user_id']??null,FILTER_VALIDATE_INT,['options'=>['min_range'=>1]]);
+ $role=$data['role']??null;
+ if(!$id||!in_array($role,['admin','editor','student'],true))json_response(['error'=>'Ungültige Rolle.'],422);
+ if($id===(int)$_SESSION['uid']&&$role!=='admin')json_response(['error'=>'Eigene Adminrolle geschützt.'],403);
+ $pdo->beginTransaction();
+ try{$st=$pdo->prepare('SELECT role FROM users WHERE id=?');$st->execute([$id]);$old=$st->fetchColumn();
+ if($old===false){$pdo->rollBack();json_response(['error'=>'Benutzer nicht gefunden.'],404);}
+ if($old==='admin'&&$role!=='admin'&&(int)$pdo->query("SELECT COUNT(*) FROM users WHERE role='admin'")->fetchColumn()<=1){$pdo->rollBack();json_response(['error'=>'Letzter Administrator geschützt.'],409);}
+ $st=$pdo->prepare('UPDATE users SET role=? WHERE id=?');$st->execute([$role,$id]);$pdo->commit();
+ }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Rollenänderung fehlgeschlagen.'],500);}
+ json_response(['ok'=>true]);
 }
 if ($action==='create_user' && $_SERVER['REQUEST_METHOD']==='POST') {
     if ($_SESSION['role']!=='admin') json_response(['error'=>'Keine Berechtigung.'],403);
@@ -83,7 +99,7 @@ if (in_array($action,['notes_list','notes_save','notes_delete'],true)) {
 }
 
 if ($action==='admin_image_library' && $_SERVER['REQUEST_METHOD']==='GET') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $root=realpath(__DIR__.'/assets');
  $images=[];
  if($root!==false){
@@ -102,7 +118,7 @@ if ($action==='admin_image_library' && $_SERVER['REQUEST_METHOD']==='GET') {
  json_response(['images'=>$images]);
 }
 if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $id=(string)($_POST['question_id']??'');
  $check=$pdo->prepare('SELECT 1 FROM learning_questions WHERE id=?');$check->execute([$id]);
  if(!$check->fetchColumn())json_response(['error'=>'Aufgabe nicht gefunden.'],404);
@@ -123,12 +139,12 @@ if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
  json_response(['ok'=>true,'path'=>'assets/uploads/'.$name]);
 }
 if ($action==='admin_question_modules' && $_SERVER['REQUEST_METHOD']==='GET') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $modules=$pdo->query("SELECT m.id,m.title,s.title AS subject FROM learning_modules m JOIN subjects s ON s.id=m.subject_id WHERE m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order")->fetchAll(PDO::FETCH_ASSOC);
  json_response(['modules'=>$modules]);
 }
 if ($action==='admin_question_create' && $_SERVER['REQUEST_METHOD']==='POST') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $data=json_decode(file_get_contents('php://input'),true);
  if(!is_array($data))json_response(['error'=>'Ungültige Daten.'],422);
  $module=(string)($data['module_id']??'');$type=(string)($data['type']??'');$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
@@ -170,7 +186,7 @@ if ($action==='admin_question_create' && $_SERVER['REQUEST_METHOD']==='POST') {
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Anlegen fehlgeschlagen.'],500);}
 }
 if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $id=(string)($_GET['id']??'');
  $stmt=$pdo->prepare('SELECT id,prompt,solution_explanation,config_json,solution_data,type,version FROM learning_questions WHERE id=?');
  $stmt->execute([$id]);$q=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -185,7 +201,7 @@ if ($action==='admin_question_get' && $_SERVER['REQUEST_METHOD']==='GET') {
  json_response(['question'=>$q]);
 }
 if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
- if(($_SESSION['role']??'')!=='admin')json_response(['error'=>'Keine Berechtigung.'],403);
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $data=json_decode(file_get_contents('php://input'),true);
  if(!is_array($data))json_response(['error'=>'Ungültige Daten.'],422);
  $id=$data['id']??null;$prompt=trim((string)($data['prompt']??''));$explanation=trim((string)($data['explanation']??''));
