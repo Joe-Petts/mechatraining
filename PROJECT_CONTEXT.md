@@ -282,3 +282,8 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Nach der Anmeldung zeigt `public/index.php` die Auswahl **Wissensbank** (`wissen.php`) und **Training** (bisheriges Dashboard).
 - `public/app.js` steuert die Navigation und das Logo zurück zur Auswahl; `public/main.css` enthält die responsive Gestaltung.
 - Bestehende Trainingsbereiche, Benutzerkonten und Lernfortschritte bleiben unverändert.
+
+## Wissensbank: Rich-Text-Editor (2026-10-30)
+- `public/wissen.php` nutzt einen lokal integrierten Contenteditable-Editor für Fett/Kursiv/Unterstreichen, Überschriften, Absätze und Listen, ohne externe API/CDN.
+- `knowledge_entries.body_format` wird additiv ergänzt (`plain` für Bestandsdaten, `html` für neue Bearbeitungen). HTML wird beim Speichern serverseitig auf erlaubte Elemente ohne Attribute reduziert.
+- Vorhandene Quizimporte bleiben im Klartextformat lesbar; neue Rich-Text-Einträge werden formatiert angezeigt.
