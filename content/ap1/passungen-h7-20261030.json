@@ -1,0 +1,145 @@
+{
+  "id": "passungen-h7-20261030",
+  "title": "ISO-Passungen – H7",
+  "origin": "Foto Tabellenbuch Metall S. 94, 30.10.2026",
+  "subject": "metall",
+  "subject_title": "Metallbau",
+  "modules": [
+    {
+      "id": "passungen-h7",
+      "title": "Bohrungen und Passungen – H7",
+      "questions": [
+        {
+          "id": "ap1-metall-passung-h7-001",
+          "type": "multiple_choice",
+          "prompt": "Was bedeutet H bei H7?",
+          "options": [
+            "Das obere Abmaß ist immer 0.",
+            "Die Bohrung hat das untere Abmaß EI = 0.",
+            "Die Welle hat das untere Abmaß 0."
+          ],
+          "correct": 1,
+          "difficulty": 1,
+          "explanation": "Die Bohrung hat das untere Abmaß EI = 0. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-002",
+          "type": "multiple_choice",
+          "prompt": "Welche Passungsart liegt sicher vor, wenn das kleinste Bohrungsmaß größer als das größte Wellenmaß ist?",
+          "options": [
+            "Übermaßpassung",
+            "Übergangspassung",
+            "Spielpassung"
+          ],
+          "correct": 2,
+          "difficulty": 1,
+          "explanation": "Es bleibt stets positives Spiel. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-003",
+          "type": "multiple_choice",
+          "prompt": "Was kennzeichnet eine Übergangspassung?",
+          "options": [
+            "Immer Spiel",
+            "Immer Übermaß",
+            "Spiel oder Übermaß"
+          ],
+          "correct": 2,
+          "difficulty": 1,
+          "explanation": "Je nach Istmaß entsteht Spiel oder Übermaß. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-004",
+          "type": "multiple_choice",
+          "prompt": "Was kennzeichnet eine Übermaßpassung?",
+          "options": [
+            "Die Welle ist immer größer als die Bohrung.",
+            "Die Bohrung ist immer größer.",
+            "Beide Maße sind immer gleich."
+          ],
+          "correct": 0,
+          "difficulty": 1,
+          "explanation": "Die Welle ist auch im ungünstigsten Fall größer als die Bohrung. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-005",
+          "type": "multiple_choice",
+          "prompt": "Welche typische Passungsart ergibt H7/g6?",
+          "options": [
+            "Spielpassung",
+            "Übermaßpassung",
+            "Übergangspassung"
+          ],
+          "correct": 0,
+          "difficulty": 2,
+          "explanation": "Die Welle g liegt unter der Nulllinie, die H-Bohrung beginnt bei 0. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-006",
+          "type": "multiple_choice",
+          "prompt": "Welche typische Passungsart ergibt H7/k6?",
+          "options": [
+            "Übermaßpassung",
+            "Übergangspassung",
+            "Spielpassung"
+          ],
+          "correct": 1,
+          "difficulty": 2,
+          "explanation": "Die Toleranzfelder können sich überlappen. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-007",
+          "type": "multiple_choice",
+          "prompt": "Welche typische Passungsart ergibt H7/p6?",
+          "options": [
+            "Spielpassung",
+            "Übergangspassung",
+            "Übermaßpassung"
+          ],
+          "correct": 2,
+          "difficulty": 2,
+          "explanation": "Die Welle liegt oberhalb des Bohrungstoleranzfelds. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-008",
+          "type": "multiple_choice",
+          "prompt": "Was bedeutet die Zahl 7 in H7?",
+          "options": [
+            "7 mm Toleranz",
+            "Toleranzgrad IT7",
+            "7 µm für jeden Nenndurchmesser"
+          ],
+          "correct": 1,
+          "difficulty": 2,
+          "explanation": "IT7 bezeichnet den Toleranzgrad, nicht 7 mm oder 7 µm. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-009",
+          "type": "multiple_choice",
+          "prompt": "Welches Mindestmaß hat eine Bohrung Ø20 H7?",
+          "options": [
+            "19,979 mm",
+            "20,000 mm",
+            "20,021 mm"
+          ],
+          "correct": 1,
+          "difficulty": 2,
+          "explanation": "Bei H ist EI = 0, also beträgt das Mindestmaß 20,000 mm. Tabellenbuch Metall, S. 94 (H7)."
+        },
+        {
+          "id": "ap1-metall-passung-h7-010",
+          "type": "multiple_choice",
+          "prompt": "Wo liest du die H7-Toleranzwerte für den Nenndurchmesser ab?",
+          "options": [
+            "In der H7-Spalte auf Seite 94",
+            "Aus der Wellenlänge",
+            "Aus dem Werkstoffgewicht"
+          ],
+          "correct": 0,
+          "difficulty": 2,
+          "explanation": "Im Tabellenbuch Metall, Seite 94: Nennmaßbereich auswählen, H7-Spalte ablesen. Tabellenbuch Metall, S. 94 (H7)."
+        }
+      ]
+    }
+  ]
+}
