@@ -138,6 +138,22 @@ if ($action==='admin_question_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
  @chmod($dest,0644);
  json_response(['ok'=>true,'path'=>'assets/uploads/'.$name]);
 }
+if ($action==='admin_document_upload' && $_SERVER['REQUEST_METHOD']==='POST') {
+ if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
+ $id=(string)($_POST['question_id']??'');
+ $check=$pdo->prepare('SELECT 1 FROM learning_questions WHERE id=?');$check->execute([$id]);
+ if(!$check->fetchColumn())json_response(['error'=>'Aufgabe nicht gefunden.'],404);
+ $file=$_FILES['document']??null;
+ if(!is_array($file)||($file['error']??UPLOAD_ERR_NO_FILE)!==UPLOAD_ERR_OK||!is_uploaded_file($file['tmp_name']))json_response(['error'=>'Dokument-Upload fehlgeschlagen.'],422);
+ if($file['size']<1||$file['size']>10*1024*1024)json_response(['error'=>'PDF darf maximal 10 MB groß sein.'],422);
+ if((new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name'])!=='application/pdf'||file_get_contents($file['tmp_name'],false,null,0,5)!=='%PDF-')json_response(['error'=>'Nur gültige PDF-Dateien erlaubt.'],422);
+ $dir=__DIR__.'/assets/uploads';
+ if(!is_dir($dir)&&!mkdir($dir,0755,true)&&!is_dir($dir))json_response(['error'=>'Upload-Verzeichnis nicht verfügbar.'],500);
+ $name='document-'.bin2hex(random_bytes(16)).'.pdf';
+ if(!move_uploaded_file($file['tmp_name'],$dir.'/'.$name))json_response(['error'=>'Dokument konnte nicht gespeichert werden.'],500);
+ @chmod($dir.'/'.$name,0644);
+ json_response(['ok'=>true,'path'=>'assets/uploads/'.$name]);
+}
 if ($action==='admin_question_modules' && $_SERVER['REQUEST_METHOD']==='GET') {
  if(!in_array($_SESSION['role']??'', ['admin','editor'],true))json_response(['error'=>'Keine Berechtigung.'],403);
  $modules=$pdo->query("SELECT m.id,m.title,s.title AS subject FROM learning_modules m JOIN subjects s ON s.id=m.subject_id WHERE m.status='active' AND s.status='active' ORDER BY s.sort_order,m.sort_order")->fetchAll(PDO::FETCH_ASSOC);
@@ -210,7 +226,7 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
  $allowedHints=['symbols','text','book','formula'];
  foreach($hints as $key=>$value)if(!in_array($key,$allowedHints,true)||!is_string($value)||mb_strlen($value)>1500)json_response(['error'=>'Ungültiger Joker.'],422);
  foreach($assets as $asset) {
-  if(!is_array($asset)||!in_array($asset['placement']??'', ['prompt','solution'],true)||!is_string($asset['path']??null)||!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg)$~',$asset['path'])||str_contains($asset['path'],'..')||mb_strlen((string)($asset['alt']??''))>250||mb_strlen((string)($asset['caption']??''))>500)json_response(['error'=>'Ungültiger Bildpfad oder Bildtext.'],422);
+  if(!is_array($asset)||!in_array($asset['placement']??'', ['prompt','solution'],true)||!is_string($asset['path']??null)||!preg_match('~^assets/[a-zA-Z0-9/_-]+\\.(?:png|jpg|jpeg|webp|svg|pdf)$~',$asset['path'])||str_contains($asset['path'],'..')||mb_strlen((string)($asset['alt']??''))>250||mb_strlen((string)($asset['caption']??''))>500)json_response(['error'=>'Ungültiger Dateipfad oder Beschreibung.'],422);
   if(!is_file(__DIR__.'/'.$asset['path']))json_response(['error'=>'Bilddatei auf dem Server nicht gefunden: '.$asset['path']],422);
  }
  $pdo->beginTransaction();
@@ -263,8 +279,8 @@ if ($action==='admin_question_save' && $_SERVER['REQUEST_METHOD']==='POST') {
   $stmt->execute([$prompt,$explanation,json_encode($config,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),json_encode($solution,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$id,$version]);
   if($stmt->rowCount()!==1)throw new RuntimeException('Änderungskonflikt.');
   $pdo->prepare('DELETE FROM question_assets WHERE question_id=?')->execute([$id]);
-  $insert=$pdo->prepare('INSERT INTO question_assets(question_id,asset_path,kind,alt_text,placement,caption,sort_order) VALUES(?,?,"image",?,?,?,?)');
-  foreach($assets as $i=>$asset)$insert->execute([$id,$asset['path'],(string)($asset['alt']??''),$asset['placement'],(string)($asset['caption']??''),$i]);
+  $insert=$pdo->prepare('INSERT INTO question_assets(question_id,asset_path,kind,alt_text,placement,caption,sort_order) VALUES(?,?,?,?,?,?,?)');
+  foreach($assets as $i=>$asset)$insert->execute([$id,$asset['path'],str_ends_with($asset['path'],'.pdf')?'document':'image',(string)($asset['alt']??''),$asset['placement'],(string)($asset['caption']??''),$i]);
   $pdo->commit();
   json_response(['ok'=>true,'version'=>$version+1]);
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();json_response(['error'=>'Speichern fehlgeschlagen.'],500);}
