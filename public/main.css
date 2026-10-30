@@ -516,3 +516,5 @@ body:has(#formulaPanel:not(.hidden)) #formulaPanel .formula-climb{color:#111820}
 #spsCourse :is(button,input,a):focus-visible{outline:3px solid #db8b20;outline-offset:3px}
 #spsCourse #slTitle:focus{outline:none}
 @media(max-width:760px){#spsCourse{padding:22px 14px}#spsCourse .sl-layout{grid-template-columns:minmax(0,1fr);gap:18px}#spsCourse .sl-nav ol{max-height:190px;overflow:auto}#spsCourse .sl-nav{padding:16px}#spsLearnPage header .brand{font-size:19px}}
+
+#appPanel .question-document-link{display:inline-flex;align-items:center;gap:8px;margin:12px 0;padding:11px 16px;border:1px solid #a9c8d8;border-radius:8px;background:#eaf4fa;color:#135477;font-weight:700;text-decoration:none;max-width:100%;overflow-wrap:anywhere}#appPanel .question-document-link:hover{background:#d9ecf7}
