@@ -13,7 +13,7 @@
  function assetRow(parent,asset={}){
   const row=node('div','question-editor-asset');
   const placement=node('select');for(const [v,t] of [['prompt','Aufgabe'],['solution','Lösung']]){const option=node('option','',t);option.value=v;placement.append(option);}placement.value=asset.placement||'prompt';
-  const path=field(row,'Bildpfad',asset.path);
+  const path=field(row,'Dateipfad',asset.path);
   const preview=node('img','question-editor-preview');preview.alt='Bildvorschau';preview.loading='lazy';
    function updatePreview(){const value=path.value.trim();if(value.startsWith('assets/') && /\.(png|jpe?g|webp|svg)$/i.test(value) && !value.includes('..')){preview.src=value;preview.hidden=false;}else{preview.removeAttribute('src');preview.hidden=true;}}
   path.addEventListener('input',updatePreview);updatePreview();row.append(preview);
@@ -56,7 +56,18 @@
    }catch(error){alert(error.message);libraryButton.disabled=false;}
   });
   row.append(upload,uploadButton,libraryButton);
-  const alt=field(row,'Alternativtext',asset.alt);
+  const pdfUpload=node('input','question-editor-upload');pdfUpload.type='file';pdfUpload.accept='application/pdf';
+  const pdfButton=node('button','question-editor-upload-button','PDF hochladen');pdfButton.type='button';pdfButton.addEventListener('click',()=>pdfUpload.click());
+  pdfUpload.addEventListener('change',async()=>{
+   const file=pdfUpload.files?.[0];if(!file)return;pdfButton.disabled=true;
+   try{const session=await fetch('api.php?action=session',{credentials:'same-origin'}).then(r=>r.json());
+    const data=new FormData();data.append('question_id',window.currentEditedQuestionId);data.append('document',file);
+    const response=await fetch('api.php?action=admin_document_upload',{method:'POST',credentials:'same-origin',headers:{'X-CSRF-Token':session.csrf||''},body:data});
+    const result=await response.json();if(!response.ok)throw Error(result.error||'Upload fehlgeschlagen');path.value=result.path;updatePreview();
+   }catch(e){alert(e.message);}finally{pdfButton.disabled=false;pdfUpload.value='';}
+  });
+  row.append(pdfUpload,pdfButton);
+  const alt=field(row,'Alternativtext / Dokumenttitel',asset.alt);
   const caption=field(row,'Bildunterschrift',asset.caption);
   const remove=node('button','question-editor-remove','Bild entfernen');remove.type='button';remove.addEventListener('click',()=>row.remove());
   row.prepend(placement);row.append(remove);parent.append(row);
@@ -112,12 +123,12 @@
    const text=field(form,'Texttipp',hints.text,3);
    const book=field(form,'Buchtipp (nur mit überprüfter Seitenangabe)',hints.book,2);
    const formula=field(form,'Formel-Joker (wird nur auf Wunsch eingeblendet)',hints.formula|| (q.id==='ap1-metall-bohren-test-001'?'n = (1000 × v_c) / (π × d)':''),3);
-   const assetTitle=node('h3','','Bilder');form.append(assetTitle);
+   const assetTitle=node('h3','','Bilder und PDF-Dokumente');form.append(assetTitle);
    const assetContainer=node('div','question-editor-assets');form.append(assetContainer);
    const readers=[];for(const asset of q.assets||[])readers.push(assetRow(assetContainer,asset));
-   const add=node('button','question-editor-add','+ Bildpfad hinzufügen');add.type='button';add.addEventListener('click',()=>readers.push(assetRow(assetContainer)));
+   const add=node('button','question-editor-add','+ Bild oder Dokument hinzufügen');add.type='button';add.addEventListener('click',()=>readers.push(assetRow(assetContainer)));
    form.append(add);
-   const note=node('p','question-editor-note','PNG, JPG oder WebP bis 8 MB. Vorhandene Bilder kannst du aus der Bibliothek mehrfach verwenden. Anschließend Änderungen speichern.');
+   const note=node('p','question-editor-note','PNG, JPG oder WebP bis 8 MB; PDF bis 10 MB. Vorhandene Bilder kannst du aus der Bibliothek mehrfach verwenden. Anschließend Änderungen speichern.');
    form.append(note);
    const save=node('button','question-editor-save','Änderungen speichern');save.type='button';
    save.addEventListener('click',async()=>{
