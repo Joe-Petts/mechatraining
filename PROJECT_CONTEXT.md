@@ -277,3 +277,8 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Herkunft: eigene Inhalte auf direkten Nutzerauftrag, 28.10.2026. Fachliche Basis für Zeiten/Zähler wie im SPS-Aufgabenpaket: Siemens S7-1200 IEC-Zeit- und Zählerdokumentation. Kein Arbeitsblatt-Import; Lernweg im Quellcode gepflegt, nicht als zusätzlicher Futter-Fragenblock.
 - Validierung: PHP-/JavaScript-Syntax und DOM-Interaktionstests für zwölf Lektionen, Wiederholungsversuche, Abschluss, Zustandsspeicherung sowie alle Signal-/Zeit-/Zählermodelle erfolgreich.
 - Browserprüfung: alle zwölf Lektionen in Chromium beantwortet; Abschluss und Wiederaufnahme geprüft; Desktop (1280 px) und Mobilansicht (390 px) ohne horizontalen Überlauf, Screenshots visuell geprüft.
+
+## Zweigeteilte Startseite (2026-10-30)
+- Nach der Anmeldung zeigt `public/index.php` die Auswahl **Wissensbank** (`wissen.php`) und **Training** (bisheriges Dashboard).
+- `public/app.js` steuert die Navigation und das Logo zurück zur Auswahl; `public/main.css` enthält die responsive Gestaltung.
+- Bestehende Trainingsbereiche, Benutzerkonten und Lernfortschritte bleiben unverändert.
