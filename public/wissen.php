@@ -41,9 +41,9 @@ function node(PDO $db,string $title,?int $parent=null):int {
 }
 $roots=['elektro'=>'Elektrotechnik','metall'=>'Metalltechnik','pneu'=>'Pneumatik','sps'=>'SPS'];
 foreach($roots as $key=>$title)node($pdo,$title);
-$modules=$pdo->query("SELECT m.id,m.title,m.subject_id FROM learning_modules m")->fetchAll();
+$modules=$pdo->query("SELECT m.id,m.title,m.subject_id FROM learning_modules m WHERE m.status='active'")->fetchAll();
 foreach($modules as $m){$subject=$roots[$m['subject_id']]??ucfirst((string)$m['subject_id']);$root=node($pdo,$subject);node($pdo,$m['title'],$root);}
-$questions=$pdo->query("SELECT q.id,q.title,q.prompt,q.solution_explanation,q.exam_part,m.title AS module_title,m.subject_id FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id")->fetchAll();
+$questions=$pdo->query("SELECT q.id,q.title,q.prompt,q.solution_explanation,q.exam_part,m.title AS module_title,m.subject_id FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id WHERE q.status='active' AND m.status='active'")->fetchAll();
 $insert=$pdo->prepare("INSERT OR IGNORE INTO knowledge_entries(node_id,title,body,ap1,ap2,origin_question_id) VALUES(?,?,?,?,?,?)");
 foreach($questions as $q){$root=node($pdo,$roots[$q['subject_id']]??ucfirst((string)$q['subject_id']));$n=node($pdo,$q['module_title'],$root);$title=trim($q['title'])?:mb_substr($q['prompt'],0,100);$body=$q['prompt'].($q['solution_explanation']?"\n\nErklärung: ".$q['solution_explanation']:'');$insert->execute([$n,$title,$body,str_contains(strtoupper($q['exam_part']),'AP1')?1:0,str_contains(strtoupper($q['exam_part']),'AP2')?1:0,$q['id']]);}
 if(!isset($_SESSION['uid'])){http_response_code(401);exit('Bitte zuerst auf MechaTraining anmelden.');}
@@ -64,8 +64,16 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
  echo json_encode(['ok'=>true,'id'=>$id]);exit;
  }catch(Throwable $e){http_response_code(422);exit(json_encode(['error'=>$e->getMessage()]));}
 }
+// Keep archived SPS knowledge and IDs in SQLite, but hide them from the visible tree.
+$hiddenSpsModules=$pdo->query("SELECT DISTINCT m.title FROM learning_modules m WHERE m.id IN ('elektro:sps-grundlagen','elektro:sps-logik','elektro:sps-zeiten') AND m.status='archived'")->fetchAll(PDO::FETCH_COLUMN);
 $nodes=$pdo->query('SELECT * FROM knowledge_nodes ORDER BY sort_order,title')->fetchAll();
-$entries=$pdo->query('SELECT * FROM knowledge_entries ORDER BY title')->fetchAll();
+$hiddenNodeIds=[];
+foreach($nodes as $n){
+ if(($n['title']==='SPS' && $n['parent_id']===null) || in_array($n['title'],$hiddenSpsModules,true))$hiddenNodeIds[]=(int)$n['id'];
+}
+$nodes=array_values(array_filter($nodes,static fn($n)=>!in_array((int)$n['id'],$hiddenNodeIds,true)));
+$entries=$pdo->query("SELECT k.* FROM knowledge_entries k LEFT JOIN learning_questions q ON q.id=k.origin_question_id WHERE (k.origin_question_id IS NULL OR q.id IS NULL OR q.status='active') ORDER BY k.title")->fetchAll();
+$entries=array_values(array_filter($entries,static fn($e)=>!in_array((int)$e['node_id'],$hiddenNodeIds,true)));
 $assets=$pdo->query('SELECT id,entry_id,original_name FROM knowledge_attachments')->fetchAll();
 $csrf=htmlspecialchars($_SESSION['csrf']??'',ENT_QUOTES);
 ?><!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wissensbank – MechaTraining</title><style>
