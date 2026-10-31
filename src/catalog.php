@@ -143,6 +143,13 @@ function import_pending_learning(PDO $db): void {
     import_learning_batch($db, json_decode((string)file_get_contents(dirname(__DIR__).'/content/ap1/passungen-h7-20261030.json'), true, 512, JSON_THROW_ON_ERROR));
     $spsBatch = json_decode((string)file_get_contents(dirname(__DIR__).'/content/ap1/sps-20261028.json'), true, 512, JSON_THROW_ON_ERROR);
     import_learning_batch($db, $spsBatch);
+    // SPS question material is on hold pending reviewed teaching material.
+    // Archive, never delete: stable IDs, attempts, revisions and XP remain intact.
+    // Run after the idempotent import so fresh and existing databases behave alike.
+    $archiveSps=$db->prepare("UPDATE learning_questions SET status='archived',updated_at=CURRENT_TIMESTAMP WHERE id LIKE 'ap1-sps-%' AND status IN ('active','draft','disabled')");
+    $archiveSps->execute();
+    $archiveSpsModules=$db->prepare("UPDATE learning_modules SET status='archived' WHERE id IN ('elektro:sps-grundlagen','elektro:sps-logik','elektro:sps-zeiten') AND status='active'");
+    $archiveSpsModules->execute();
     import_learning_batch($db,[
         'id'=>'test-bohren-20261024',
         'title'=>'Erste Testaufgabe – Bohren',
