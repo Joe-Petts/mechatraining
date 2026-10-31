@@ -68,7 +68,6 @@ jobs:
           set net:reconnect-interval-base 3
           set net:reconnect-interval-max 10
           set net:timeout 20
-          set net:connect-interval 10
           debug 3
           set xfer:use-temp-file yes
           mirror --reverse --verbose=1 --parallel=1 --no-perms \
