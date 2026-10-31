@@ -287,3 +287,8 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - `public/wissen.php` nutzt einen lokal integrierten Contenteditable-Editor für Fett/Kursiv/Unterstreichen, Überschriften, Absätze und Listen, ohne externe API/CDN.
 - `knowledge_entries.body_format` wird additiv ergänzt (`plain` für Bestandsdaten, `html` für neue Bearbeitungen). HTML wird beim Speichern serverseitig auf erlaubte Elemente ohne Attribute reduziert.
 - Vorhandene Quizimporte bleiben im Klartextformat lesbar; neue Rich-Text-Einträge werden formatiert angezeigt.
+
+## SPS-Aufgaben vorläufig archiviert (2026-10-31)
+- Auf ausdrücklichen Wunsch sind die 16 Quiz-Aufgaben aus `sps-ap1-grundlagen-20261028` in `src/catalog.php` beim Katalogimport idempotent auf `archived` gestellt; die drei SPS-Quizmodule ebenfalls. Kein Löschen aus SQLite, keine Wiederverwendung der IDs und keine Veränderung von Versuchen, XP oder Benutzerkonten.
+- Die eigenständige Einführung `SPS lernen` bleibt unverändert. Vor allem sämtliche Bohren-, Spiralbohrer-Beschriftungs- und Werkzeugzuordnungsaufgaben bleiben vollständig erhalten.
+- Weitere Datenbankbereinigung erst nach Sichtung des Bestands und gesonderter Auswahl; keine pauschale Löschung.
