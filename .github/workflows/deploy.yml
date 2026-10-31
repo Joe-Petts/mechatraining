@@ -64,10 +64,13 @@ jobs:
           set ftp:ssl-force true
           set ftp:ssl-protect-data true
           set ssl:verify-certificate yes
-          set net:max-retries 5
-          set net:reconnect-interval-base 5
+          set net:max-retries 3
+          set net:reconnect-interval-base 3
+          set net:reconnect-interval-max 10
+          set net:timeout 20
+          set net:connect-interval 10
+          debug 3
           set xfer:use-temp-file yes
-          set net:timeout 25
           mirror --reverse --verbose=1 --parallel=1 --no-perms \
             --exclude-glob .git/ \
             --exclude-glob .github/ \
