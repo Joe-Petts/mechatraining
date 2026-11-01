@@ -5,6 +5,7 @@
 - Keine Geheimnisse, Benutzerdateien, SQLite-Datenbanken oder Backups committen.
 - Datenbankmigrationen additiv; bestehende Benutzer, Aufgaben-IDs und Fortschritte erhalten.
 - Aufgaben-IDs sind stabil und eindeutig; neue Fragen erhalten neue IDs.
+- Neue Datenbankinhalte erhalten dauerhaft `created_at` und `updated_at` (UTC, ISO-kompatibel), für eine spätere Timeline. Historische Zeitpunkte niemals erfinden; vorhandene Zeitstempel erhalten.
 - Keine öffentlichen Registrierungen. Passwörter nur mit password_hash/password_verify.
 - SQL immer mit Prepared Statements; HTML-Ausgabe escapen; CSRF bei Änderungen; sichere Sessions.
 - AP1 zuerst, AP2 strukturell vorbereitet. Mobilgeräte und Tastaturbedienung berücksichtigen.
