@@ -292,3 +292,8 @@ Neue additive Tabellen in `src/catalog.php`: `subjects`, `learning_modules`, `le
 - Auf ausdrücklichen Wunsch sind die 16 Quiz-Aufgaben aus `sps-ap1-grundlagen-20261028` in `src/catalog.php` beim Katalogimport idempotent auf `archived` gestellt; die drei SPS-Quizmodule ebenfalls. Kein Löschen aus SQLite, keine Wiederverwendung der IDs und keine Veränderung von Versuchen, XP oder Benutzerkonten.
 - Die eigenständige Einführung `SPS lernen` bleibt unverändert. Vor allem sämtliche Bohren-, Spiralbohrer-Beschriftungs- und Werkzeugzuordnungsaufgaben bleiben vollständig erhalten.
 - Weitere Datenbankbereinigung erst nach Sichtung des Bestands und gesonderter Auswahl; keine pauschale Löschung.
+
+## Zeitstempel für die Wissensbank (2026-11-01)
+- `knowledge_entries` speichert bereits `created_at` und `updated_at`; für `knowledge_nodes` und `knowledge_attachments` werden diese Felder bei bestehenden Datenbanken additiv ergänzt.
+- Neue Themen und Anhänge setzen beide Zeitstempel unmittelbar beim Anlegen; Änderungen an Wissenseinträgen aktualisieren `updated_at`. SQLite `CURRENT_TIMESTAMP` verwendet UTC.
+- Fehlende Alt-Zeitstempel werden mit dem Zeitpunkt der Migration befüllt, nicht als tatsächliches historisches Erstellungsdatum interpretiert. Vorhandene Werte werden nicht überschrieben. Timeline-Indizes für Einträge und Themen sind vorhanden.
