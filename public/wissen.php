@@ -7,6 +7,19 @@ $pdo=db(); migrate($pdo); migrate_catalog($pdo);
 $pdo->exec("CREATE TABLE IF NOT EXISTS knowledge_nodes (id INTEGER PRIMARY KEY AUTOINCREMENT,parent_id INTEGER REFERENCES knowledge_nodes(id),title TEXT NOT NULL,sort_order INTEGER NOT NULL DEFAULT 0, UNIQUE(parent_id,title))");
 $pdo->exec("CREATE TABLE IF NOT EXISTS knowledge_entries (id INTEGER PRIMARY KEY AUTOINCREMENT,node_id INTEGER NOT NULL REFERENCES knowledge_nodes(id),title TEXT NOT NULL,body TEXT NOT NULL DEFAULT '',ap1 INTEGER NOT NULL DEFAULT 0,ap2 INTEGER NOT NULL DEFAULT 0,book TEXT NOT NULL DEFAULT '',page TEXT NOT NULL DEFAULT '',origin_question_id TEXT UNIQUE,author_id INTEGER REFERENCES users(id),created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
 $pdo->exec("CREATE TABLE IF NOT EXISTS knowledge_attachments (id INTEGER PRIMARY KEY AUTOINCREMENT,entry_id INTEGER NOT NULL REFERENCES knowledge_entries(id),stored_name TEXT NOT NULL,original_name TEXT NOT NULL,mime TEXT NOT NULL,size INTEGER NOT NULL)");
+// All knowledge records carry creation and modification timestamps for a future timeline.
+// Existing entry timestamps are retained; historical dates are never fabricated.
+foreach(['knowledge_nodes','knowledge_entries','knowledge_attachments'] as $table){
+ $cols=$pdo->query("PRAGMA table_info(".$table.")")->fetchAll(PDO::FETCH_COLUMN,1);
+ foreach(['created_at','updated_at'] as $field){
+  if(!in_array($field,$cols,true))$pdo->exec("ALTER TABLE ".$table." ADD COLUMN ".$field." TEXT");
+ }
+ // Only fill genuinely missing timestamps; SQLite has no historical event log to recover.
+ $pdo->exec("UPDATE ".$table." SET created_at=CURRENT_TIMESTAMP WHERE created_at IS NULL OR created_at=''");
+ $pdo->exec("UPDATE ".$table." SET updated_at=created_at WHERE updated_at IS NULL OR updated_at=''");
+}
+$pdo->exec("CREATE INDEX IF NOT EXISTS idx_knowledge_entries_timeline ON knowledge_entries(created_at,id)");
+$pdo->exec("CREATE INDEX IF NOT EXISTS idx_knowledge_nodes_timeline ON knowledge_nodes(created_at,id)");
 // Backwards-compatible: imported questions remain plain text.
 $knowledgeColumns=$pdo->query("PRAGMA table_info(knowledge_entries)")->fetchAll(PDO::FETCH_ASSOC);
 if(!in_array('body_format',array_column($knowledgeColumns,'name'),true))$pdo->exec("ALTER TABLE knowledge_entries ADD COLUMN body_format TEXT NOT NULL DEFAULT 'plain'");
