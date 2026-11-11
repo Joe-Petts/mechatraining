@@ -1,0 +1,12 @@
+<?php
+// Idempotenter AP1-Wissensbankimport. Keine bestehenden Einträge überschreiben.
+$threadRoot = node($pdo, 'Metalltechnik');
+$threadNode = node($pdo, 'Gewindeschneiden', $threadRoot);
+$threadId = 'reference:metric-coarse-thread-20261111';
+$threadHtml = "<h2>Metrische ISO-Regelgewinde – Kernlochbohrer</h2><p>Übliche Bohrdurchmesser für schneidende Innengewinde. Alle Maße in mm.</p><table><thead><tr><th>Gewinde</th><th>Nenndurchmesser</th><th>Steigung</th><th>Kernlochbohrer</th></tr></thead><tbody><tr><td>M2</td><td>2 mm</td><td>0,4 mm</td><td>1,6 mm</td></tr><tr><td>M2,5</td><td>2,5 mm</td><td>0,45 mm</td><td>2,05 mm</td></tr><tr><td>M3</td><td>3 mm</td><td>0,5 mm</td><td>2,5 mm</td></tr><tr><td>M4</td><td>4 mm</td><td>0,7 mm</td><td>3,3 mm</td></tr><tr><td>M5</td><td>5 mm</td><td>0,8 mm</td><td>4,2 mm</td></tr><tr><td>M6</td><td>6 mm</td><td>1 mm</td><td>5 mm</td></tr><tr><td>M8</td><td>8 mm</td><td>1,25 mm</td><td>6,8 mm</td></tr><tr><td>M10</td><td>10 mm</td><td>1,5 mm</td><td>8,5 mm</td></tr><tr><td>M12</td><td>12 mm</td><td>1,75 mm</td><td>10,2 mm</td></tr><tr><td>M14</td><td>14 mm</td><td>2 mm</td><td>12 mm</td></tr><tr><td>M16</td><td>16 mm</td><td>2 mm</td><td>14 mm</td></tr><tr><td>M18</td><td>18 mm</td><td>2,5 mm</td><td>15,5 mm</td></tr><tr><td>M20</td><td>20 mm</td><td>2,5 mm</td><td>17,5 mm</td></tr><tr><td>M22</td><td>22 mm</td><td>2,5 mm</td><td>19,5 mm</td></tr><tr><td>M24</td><td>24 mm</td><td>3 mm</td><td>21 mm</td></tr><tr><td>M27</td><td>27 mm</td><td>3 mm</td><td>24 mm</td></tr><tr><td>M30</td><td>30 mm</td><td>3,5 mm</td><td>26,5 mm</td></tr></tbody></table><p><strong>Faustformel:</strong> Kernlochdurchmesser ≈ Nenndurchmesser − Steigung. Beispiel M10: 10 − 1,5 = 8,5 mm.</p><p>Bei Feingewinden, Gewindeformen oder besonderen Werkstoffen gelten andere Werte. Im Zweifel Tabellenbuch und Werkzeugherstellerangaben beachten.</p>";
+$threadCheck = $pdo->prepare('SELECT id FROM knowledge_entries WHERE origin_question_id = ?');
+$threadCheck->execute([$threadId]);
+if (!$threadCheck->fetchColumn()) {
+    $threadInsert = $pdo->prepare("INSERT OR IGNORE INTO knowledge_entries(node_id,title,body,ap1,ap2,origin_question_id,body_format,created_at,updated_at) VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)");
+    $threadInsert->execute([$threadNode,'Metrische Regelgewinde – Durchmesser und Kernlochbohrer',$threadHtml,1,0,$threadId,'html']);
+}
