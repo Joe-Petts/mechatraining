@@ -56,6 +56,7 @@ $roots=['elektro'=>'Elektrotechnik','metall'=>'Metalltechnik','pneu'=>'Pneumatik
 foreach($roots as $key=>$title)node($pdo,$title);
 $modules=$pdo->query("SELECT m.id,m.title,m.subject_id FROM learning_modules m WHERE m.status='active'")->fetchAll();
 foreach($modules as $m){$subject=$roots[$m['subject_id']]??ucfirst((string)$m['subject_id']);$root=node($pdo,$subject);node($pdo,$m['title'],$root);}
+require dirname(__DIR__).'/src/thread_reference.php';
 $questions=$pdo->query("SELECT q.id,q.title,q.prompt,q.solution_explanation,q.exam_part,m.title AS module_title,m.subject_id FROM learning_questions q JOIN learning_modules m ON m.id=q.module_id WHERE q.status='active' AND m.status='active'")->fetchAll();
 $insert=$pdo->prepare("INSERT OR IGNORE INTO knowledge_entries(node_id,title,body,ap1,ap2,origin_question_id) VALUES(?,?,?,?,?,?)");
 foreach($questions as $q){$root=node($pdo,$roots[$q['subject_id']]??ucfirst((string)$q['subject_id']));$n=node($pdo,$q['module_title'],$root);$title=trim($q['title'])?:mb_substr($q['prompt'],0,100);$body=$q['prompt'].($q['solution_explanation']?"\n\nErklärung: ".$q['solution_explanation']:'');$insert->execute([$n,$title,$body,str_contains(strtoupper($q['exam_part']),'AP1')?1:0,str_contains(strtoupper($q['exam_part']),'AP2')?1:0,$q['id']]);}
